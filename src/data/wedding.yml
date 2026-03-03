@@ -1,0 +1,148 @@
+site:
+  pageTitle: "[TITULO_DE_LA_INVITACION]"
+  baseUrl: "[URL_PAGES]"
+  meta:
+    description: "[DESCRIPCION]"
+    ogImage: "/media/og/og.jpg"
+
+couple:
+  person1:
+    name: "[NOMBRE_1]"
+  person2:
+    name: "[NOMBRE_2]"
+  displayName: "[NOMBRE_1] & [NOMBRE_2]"
+  slug: "juli-y-lucio"
+
+locale:
+  language: "es-AR"
+  timeZone: "America/Argentina/Cordoba"
+
+sections:
+  countdown:
+    enabled: true
+  ceremony:
+    enabled: true
+  celebration:
+    enabled: true
+  story:
+    enabled: true
+  socials:
+    enabled: true
+  gifts:
+    enabled: true
+  dressCode:
+    enabled: true
+  rsvp:
+    enabled: true
+  calendar:
+    enabled: true
+  playlist:
+    enabled: true
+  usefulInfo:
+    enabled: true
+
+hero:
+  enabled: true
+  title: "¡Nos casamos!"
+  subtitle: "[NOMBRE_1] & [NOMBRE_2]"
+  dateDisplay: "[FECHA_LARGA]"
+  city: "[CIUDAD, Argentina]"
+  backgroundImage: "/media/hero/bg.jpg"
+
+countdown:
+  target: "2026-06-21T21:00:00Z"
+  heading: "Cuenta regresiva"
+  note: "¡Falta muy poco!"
+  targetSource: "celebration"
+
+events:
+  ceremony:
+    enabled: true
+    kindLabel: "Ceremonia Civil"
+    datetime: "2026-06-21T18:00:00Z"
+    timeDisplay: "18:00 hs"
+    venueName: "[NOMBRE LUGAR CEREMONIA]"
+    addressLines:
+      - "[LINEA1]"
+      - "[LINEA2]"
+    mapsUrl: "[GOOGLE_MAPS_URL]"
+  celebration:
+    enabled: true
+    kindLabel: "Fiesta"
+    datetime: "2026-06-21T21:00:00Z"
+    timeDisplay: "21:00 hs"
+    venueName: "[NOMBRE LUGAR FIESTA]"
+    addressLines:
+      - "[LINEA1]"
+      - "[LINEA2]"
+    mapsUrl: "[GOOGLE_MAPS_URL]"
+
+story:
+  heading: "Nuestra historia"
+  subheading: "Nosotros"
+  sentence: "[UNA FRASE CORTA QUE RESUMA SU HISTORIA]"
+  photos:
+    - src: "/media/couple/01.jpg"
+      alt: "Foto 1"
+    - src: "/media/couple/02.jpg"
+      alt: "Foto 2"
+    - src: "/media/couple/03.jpg"
+      alt: "Foto 3"
+    - src: "/media/couple/04.jpg"
+      alt: "Foto 4"
+
+socials:
+  items:
+    - label: "Instagram"
+      handle: "@juliylucio"
+      url: "https://instagram.com"
+
+gifts:
+  heading: "Regalos"
+  body: "Lo más importante es tu presencia, pero si deseás hacernos un regalo podés ayudarnos con nuestra luna de miel."
+  buttonLabel: "Ver datos bancarios"
+  bank:
+    enabled: true
+    holderName: "[TITULAR]"
+    bankName: "[BANCO]"
+    alias: "[ALIAS]"
+    cbu: "[CBU]"
+    cuit: "[CUIT]"
+
+dressCode:
+  title: "Dress Code"
+  tag: "Formal – Elegante"
+  body: "Te esperamos con tu mejor look para celebrar juntos."
+
+rsvp:
+  mode: "texto" # "texto" | "link"
+  text: "Por favor confirmá tu asistencia antes del [FECHA]."
+  url: "[RSVP_URL]"
+  deadline: "2026-05-01"
+
+calendar:
+  mode: "single" # "single" | "two"
+  googleCalendar:
+    enabled: true
+  ics:
+    enabled: true
+    fileNameSingle: "boda.ics"
+    fileNameCeremony: "ceremonia.ics"
+    fileNameCelebration: "celebracion.ics"
+
+playlist:
+  heading: "Armemos la playlist juntos"
+  body: "Agregá esas canciones que no pueden faltar en la fiesta."
+  spotifyUrl: "[SPOTIFY_COLLAB_URL]"
+
+usefulInfo:
+  title: "Info útil"
+  items:
+    - enabled: true
+      icon: "lucide:clock"
+      title: "Duración"
+      description: "La fiesta se extenderá hasta el amanecer."
+    - enabled: true
+      icon: "lucide:parking-circle"
+      title: "Estacionamiento"
+      description: "Hay estacionamiento gratuito en el lugar."

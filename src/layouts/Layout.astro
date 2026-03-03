@@ -1,17 +1,20 @@
 ---
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
-const { title } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es-AR">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
+        {description && <meta name="description" content={description} />}
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     </head>
     <body>
         <noscript>

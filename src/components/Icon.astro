@@ -1,0 +1,17 @@
+---
+export interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = "" } = Astro.props;
+---
+<iconify-icon icon={name} class={className} aria-hidden="true"></iconify-icon>
+
+<style>
+  iconify-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+  }
+</style>
