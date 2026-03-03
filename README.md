@@ -16,11 +16,11 @@ Para desarrollar y ver tu proyecto funcionando en tu propia PC:
 
 | Comando                   | Acción                                           |
 | :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`                 | Starts local dev server at `localhost:4321`      |
-| `bun build`               | Build your production site to `./dist/`          |
-| `bun preview`             | Preview your build locally, before deploying     |
-| `bun astro ...`           | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help`     | Get help using the Astro CLI                     |
+| `bun install`             | Instala todas las dependencias requeridas        |
+| `bun dev`                 | Inicia el servidor de desarrollo local en `localhost:4321` |
+| `bun build`               | Compila la versión de producción estática en `./dist/` |
+| `bun preview`             | Previsualiza tu compilación localmente antes de desplegar |
+| `bun astro ...`           | Ejecuta comandos CLI como `astro add`, `astro check` |
+| `bun astro -- --help`     | Obtiene ayuda para usar el CLI de Astro          |
 
 Este repositorio ha sido configurado especialmente para tener soporte total en **GitHub Pages** de manera nativa sin usar runtime de servidor, incluyendo redirecciones y carga de CDN.
