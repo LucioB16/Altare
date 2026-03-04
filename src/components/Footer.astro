@@ -1,52 +1,45 @@
-<footer
-    class="border-t px-6 py-16"
-    style="
-        border-color: var(--color-secondary);
-        background-color: var(--color-primary);
-        color: var(--color-background);
-    "
->
-    <div
-        class="mx-auto flex max-w-5xl flex-col items-center gap-8 text-center md:flex-row md:items-end md:justify-between md:text-left"
-    >
-        <div>
-            <p
-                class="text-xs uppercase tracking-[0.6em]"
-                style="color: var(--color-secondary);"
-            >
-                Template
-            </p>
-            <div
-                class="font-display text-[clamp(3rem,7vw,5rem)] uppercase leading-none"
-                style="color: var(--color-background);"
-            >
-                Said Yes
-            </div>
-        </div>
-        <div
-            class="text-sm font-semibold uppercase tracking-[0.35em]"
-            style="color: var(--color-secondary);"
-        >
-            Made with love — see you on the dance floor 💍
-        </div>
-    </div>
-</footer>
+---
+import { getWeddingData } from "../data/weddingData";
+import Icon from "./Icon.astro";
 
-<style>
-    .scrolling-text {
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-    }
-    .scrolling-text .rail {
-        display: flex;
-    }
-    .scrolling-text .rail h4 {
-        white-space: nowrap;
-        font-size: 100px;
-        font-weight: 900;
-        letter-spacing: ls(120);
-        line-height: 1em;
-        margin: 0 30px 0 0;
-    }
-</style>
+const { couple } = getWeddingData();
+---
+
+<footer
+    class="relative py-24 px-6 overflow-hidden flex flex-col items-center justify-center text-center"
+    style="background-color: var(--color-primary); color: var(--color-secondary);"
+>
+    <!-- Decorative Leaves above -->
+    <div class="flex gap-4 mb-6 text-white text-xl opacity-50">
+        <Icon name="lucide:leaf" class="-rotate-45" />
+        <Icon name="lucide:sprout" />
+        <Icon name="lucide:leaf" class="rotate-45" />
+    </div>
+
+    <!-- Main Message -->
+    <h2 class="text-4xl md:text-5xl lg:text-[64px] mb-8 font-normal tracking-wide" style="font-family: var(--font-display);">
+        ¡Gracias por acompañarnos!
+    </h2>
+
+    <!-- Couple Name with solid white hearts -->
+    <div class="flex items-center gap-4 text-2xl md:text-3xl mb-16" style="font-family: var(--font-display);">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+          <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+        </svg>
+        
+        <span>{couple.displayName}</span>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+          <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+        </svg>
+    </div>
+
+    <!-- Return to top button -->
+    <button
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        class="uppercase tracking-[0.25em] text-sm md:text-base font-semibold text-white/90 hover:text-white transition-opacity"
+        style="font-family: var(--font-sans);"
+    >
+        Volver al inicio
+    </button>
+</footer>
