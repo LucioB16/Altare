@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Config Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5A7156;
+            --primary-light: #6d8a68;
+            --bg: #FAF9F6;
+            --bg-alt: #EEF0EC;
+            --text: #333;
+            --text-light: #666;
+            --border: #ddd;
+            --accent: #BDA588;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            background: var(--primary);
+            color: white;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+
+        /* Progress */
+        .progress-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .progress-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
+        .progress-dot.done {
+            background: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 6rem;
+        }
+
+        /* Steps */
+        .step {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .step .desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Form Elements */
+        .field {
+            margin-bottom: 1.5rem;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .field .hint {
+            font-size: 0.78rem;
+            color: #999;
+            margin-top: 0.3rem;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 500px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Toggle */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-row span {
+            font-size: 0.9rem;
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle.on {
+            background: var(--primary);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle.on::after {
+            transform: translateX(20px);
+        }
+
+        /* Dynamic items */
+        .dynamic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .dynamic-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .dynamic-item .row {
+            gap: 0.75rem;
+        }
+
+        .dynamic-item .field {
+            margin-bottom: 0.75rem;
+        }
+
+        .dynamic-item .field:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-add {
+            background: none;
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add:hover {
+            border-color: var(--primary);
+            background: var(--bg-alt);
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #c44;
+            font-size: 0.8rem;
+            cursor: pointer;
+            float: right;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-prev {
+            background: var(--bg-alt);
+            color: var(--text);
+        }
+
+        .btn-prev:hover {
+            background: #dde0da;
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+        }
+
+        .btn-next:hover {
+            background: var(--primary-light);
+        }
+
+        /* Output */
+        .output-area {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .output-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-download {
+            background: var(--primary);
+            color: white;
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-download:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-copy {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-copy:hover {
+            background: var(--bg-alt);
+        }
+
+        /* Instructions */
+        .instructions {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .instructions h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        .instructions ol {
+            padding-left: 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .instructions li {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .instructions li strong {
+            color: var(--text);
+        }
+
+        .instructions code {
+            background: var(--bg-alt);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .instructions img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>💍 Wedding Config Builder</h1>
+        <p>Configurá tu invitación de boda en minutos</p>
+    </div>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="container">
+        <!-- Step 1: Couple -->
+        <div class="step active" data-step="0">
+            <p class="step-label">Paso 1 de 8</p>
+            <h2>La Pareja</h2>
+            <p class="desc">Los datos básicos de los novios.</p>
+
+            <div class="row">
+                <div class="field">
+                    <label>Nombre Persona 1</label>
+                    <input type="text" id="p1Name" value="Julieta" placeholder="Ej: María">
+                </div>
+                <div class="field">
+                    <label>Nombre Persona 2</label>
+                    <input type="text" id="p2Name" value="Lucio" placeholder="Ej: Juan">
+                </div>
+            </div>
+            <div class="field">
+                <label>Nombre para mostrar</label>
+                <input type="text" id="displayName" value="Julieta & Lucio" placeholder="Ej: María & Juan">
+                <p class="hint">Así aparecerá en la portada y el footer.</p>
+            </div>
+            <div class="field">
+                <label>Título de la página</label>
+                <input type="text" id="pageTitle" value="Nuestra Boda | Juli & Lucio"
+                    placeholder="Ej: Nuestra Boda | María & Juan">
+            </div>
+            <div class="field">
+                <label>Descripción (meta)</label>
+                <input type="text" id="metaDesc"
+                    value="Estás invitado a celebrar con nosotros este momento tan especial.">
+            </div>
+        </div>
+
+        <!-- Step 2: Hero -->
+        <div class="step" data-step="1">
+            <p class="step-label">Paso 2 de 8</p>
+            <h2>Portada</h2>
+            <p class="desc">La primera pantalla que verán los invitados.</p>
+
+            <div class="field">
+                <label>Título</label>
+                <input type="text" id="heroTitle" value="¡Nos casamos!">
+            </div>
+            <div class="field">
+                <label>Subtítulo (nombres)</label>
+                <input type="text" id="heroSubtitle" value="Julieta & Lucio">
+            </div>
+            <div class="field">
+                <label>Fecha para mostrar</label>
+                <input type="text" id="heroDate" value="21 de Junio de 2026" placeholder="Ej: 15 de Marzo de 2025">
+            </div>
+            <div class="field">
+                <label>Ciudad</label>
+                <input type="text" id="heroCity" value="Córdoba, Argentina">
+            </div>
+        </div>
+
+        <!-- Step 3: Events -->
+        <div class="step" data-step="2">
+            <p class="step-label">Paso 3 de 8</p>
+            <h2>Ceremonia y Fiesta</h2>
+            <p class="desc">Los detalles de los eventos.</p>
+
+            <div class="toggle-row">
+                <span>Mostrar sección Ceremonia</span>
+                <div class="toggle on" data-field="ceremonyEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div id="ceremonyFields">
+                <div class="field">
+                    <label>Tipo de ceremonia</label>
+                    <input type="text" id="ceremonyLabel" value="Ceremonia Civil">
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <label>Hora (texto)</label>
+                        <input type="text" id="ceremonyTime" value="18:00 hs">
+                    </div>
+                    <div class="field">
+                        <label>Fecha y hora (ISO)</label>
+                        <input type="text" id="ceremonyDatetime" value="2026-06-21T18:00:00Z">
+                        <p class="hint">Formato: YYYY-MM-DDTHH:MM:SSZ</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Nombre del lugar</label>
+                    <input type="text" id="ceremonyVenue" value="Registro Civil Central">
+                </div>
+                <div class="field">
+                    <label>Dirección (una línea por renglón)</label>
+                    <textarea id="ceremonyAddress">Chacabuco 737
+Nueva Córdoba</textarea>
+                </div>
+                <div class="field">
+                    <label>URL Google Maps</label>
+                    <input type="text" id="ceremonyMaps" value="https://maps.app.goo.gl/">
+                </div>
+            </div>
+
+            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+            <div class="toggle-row">
+                <span>Mostrar sección Fiesta</span>
+                <div class="toggle on" data-field="celebrationEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div id="celebrationFields">
+                <div class="field">
+                    <label>Tipo de evento</label>
+                    <input type="text" id="celebrationLabel" value="Fiesta">
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <label>Hora (texto)</label>
+                        <input type="text" id="celebrationTime" value="21:00 hs">
+                    </div>
+                    <div class="field">
+                        <label>Fecha y hora (ISO)</label>
+                        <input type="text" id="celebrationDatetime" value="2026-06-21T21:00:00Z">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Nombre del lugar</label>
+                    <input type="text" id="celebrationVenue" value="Estancia La Paz">
+                </div>
+                <div class="field">
+                    <label>Dirección</label>
+                    <textarea id="celebrationAddress">Ruta E66 Km 41
+Ascochinga, Córdoba</textarea>
+                </div>
+                <div class="field">
+                    <label>URL Google Maps</label>
+                    <input type="text" id="celebrationMaps" value="https://maps.app.goo.gl/">
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Story -->
+        <div class="step" data-step="3">
+            <p class="step-label">Paso 4 de 8</p>
+            <h2>Nuestra Historia</h2>
+            <p class="desc">Contá la historia de la pareja (1–4 fotos).</p>
+
+            <div class="toggle-row">
+                <span>Mostrar sección</span>
+                <div class="toggle on" data-field="storyEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div class="field">
+                <label>Subtítulo</label>
+                <input type="text" id="storySubheading" value="Nosotros" placeholder="Ej: Nosotros">
+            </div>
+            <div class="field">
+                <label>Título</label>
+                <input type="text" id="storyHeading" value="Nuestra historia">
+            </div>
+            <div class="field">
+                <label>Texto</label>
+                <textarea id="storySentence"
+                    rows="3">Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</textarea>
+            </div>
+            <div class="field">
+                <label>Fotos (nombres de archivo, 1–4)</label>
+                <p class="hint">Subí tus fotos a <code>public/media/couple/</code> y listá los nombres acá, uno por
+                    línea.</p>
+                <textarea id="storyPhotos" rows="4">01.jpg
+02.jpg
+03.jpg
+04.jpg</textarea>
+            </div>
+        </div>
+
+        <!-- Step 5: Gifts & DressCode -->
+        <div class="step" data-step="4">
+            <p class="step-label">Paso 5 de 8</p>
+            <h2>Regalos y Dress Code</h2>
+            <p class="desc">Datos bancarios y código de vestimenta.</p>
+
+            <div class="toggle-row">
+                <span>Mostrar sección Regalos</span>
+                <div class="toggle on" data-field="giftsEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div class="field">
+                <label>Título</label>
+                <input type="text" id="giftsHeading" value="Regalos">
+            </div>
+            <div class="field">
+                <label>Texto</label>
+                <textarea
+                    id="giftsBody">Lo más importante es tu presencia, pero si deseás hacernos un regalo podés ayudarnos con nuestra luna de miel.</textarea>
+            </div>
+            <div class="toggle-row">
+                <span>Mostrar datos bancarios</span>
+                <div class="toggle on" data-field="bankEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div id="bankFields">
+                <div class="field">
+                    <label>Texto del botón</label>
+                    <input type="text" id="giftsButtonLabel" value="Ver datos bancarios">
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <label>Titular</label>
+                        <input type="text" id="bankHolder" value="NOMBRE APELLIDO">
+                    </div>
+                    <div class="field">
+                        <label>Banco</label>
+                        <input type="text" id="bankName" value="Banco Galicia">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Alias</label>
+                    <input type="text" id="bankAlias" value="MI.ALIAS">
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <label>CBU/CVU</label>
+                        <input type="text" id="bankCbu" value="0000000000000000000000">
+                    </div>
+                    <div class="field">
+                        <label>CUIT/CUIL</label>
+                        <input type="text" id="bankCuit" value="20-00000000-0">
+                    </div>
+                </div>
+            </div>
+
+            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+            <div class="toggle-row">
+                <span>Mostrar sección Dress Code</span>
+                <div class="toggle on" data-field="dressCodeEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div class="field">
+                <label>Título</label>
+                <input type="text" id="dcTitle" value="Dress Code">
+            </div>
+            <div class="field">
+                <label>Etiqueta</label>
+                <input type="text" id="dcTag" value="Formal – Elegante">
+            </div>
+            <div class="field">
+                <label>Texto</label>
+                <input type="text" id="dcBody" value="Te esperamos con tu mejor look para celebrar juntos.">
+            </div>
+            <div class="toggle-row">
+                <span>Mostrar disclaimer colores novia</span>
+                <div class="toggle on" data-field="brideDisclaimerEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div class="field">
+                <label>Texto disclaimer</label>
+                <input type="text" id="brideDisclaimerText"
+                    value="Como es tradición, los colores blancos, o similares, estarán reservados para la novia.">
+            </div>
+        </div>
+
+        <!-- Step 6: RSVP -->
+        <div class="step" data-step="5">
+            <p class="step-label">Paso 6 de 8</p>
+            <h2>Confirmación de asistencia</h2>
+            <p class="desc">Configurá cómo los invitados confirman.</p>
+
+            <div class="toggle-row">
+                <span>Mostrar sección</span>
+                <div class="toggle on" data-field="rsvpEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div class="field">
+                <label>Texto</label>
+                <textarea id="rsvpText">Por favor confirmá tu asistencia antes del 1 de Mayo.</textarea>
+            </div>
+            <div class="field">
+                <label>Fecha límite</label>
+                <input type="date" id="rsvpDeadline" value="2026-05-01">
+            </div>
+            <div class="toggle-row">
+                <span>Mostrar botón con link de confirmación</span>
+                <div class="toggle" data-field="rsvpLinkEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div id="rsvpLinkFields">
+                <div class="field">
+                    <label>URL del enlace</label>
+                    <input type="text" id="rsvpUrl" value="https://wa.me/123456789"
+                        placeholder="URL de formulario o WhatsApp">
+                </div>
+                <div class="field">
+                    <label>Texto del botón</label>
+                    <input type="text" id="rsvpLabel" value="CONFIRMAR ASISTENCIA">
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7: Extras -->
+        <div class="step" data-step="6">
+            <p class="step-label">Paso 7 de 8</p>
+            <h2>Extras</h2>
+            <p class="desc">Redes sociales, playlist e info útil.</p>
+
+            <div class="toggle-row">
+                <span>Mostrar sección Redes Sociales</span>
+                <div class="toggle on" data-field="socialsEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div class="field">
+                <label>Texto redes</label>
+                <textarea
+                    id="socialsBody">Además, antes del casamiento, recibirás un link donde podrás subir todas tus fotos y videos.</textarea>
+            </div>
+            <div class="field">
+                <label>URL Instagram</label>
+                <input type="text" id="socialUrl" value="https://instagram.com"
+                    placeholder="URL de Instagram o red social">
+            </div>
+            <div class="field">
+                <label>Handle</label>
+                <input type="text" id="socialHandle" value="@tuboda" placeholder="Ej: @miboda2025">
+            </div>
+
+            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+            <div class="toggle-row">
+                <span>Mostrar sección Playlist</span>
+                <div class="toggle on" data-field="playlistEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div class="field">
+                <label>Título playlist</label>
+                <input type="text" id="playlistHeading" value="Armemos la playlist juntos">
+            </div>
+            <div class="field">
+                <label>Texto playlist</label>
+                <input type="text" id="playlistBody" value="Agregá esas canciones que no pueden faltar en la fiesta.">
+            </div>
+            <div class="field">
+                <label>URL Spotify Playlist</label>
+                <input type="text" id="playlistUrl" value="https://open.spotify.com/playlist/">
+            </div>
+
+            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+            <div class="toggle-row">
+                <span>Mostrar sección Info Útil</span>
+                <div class="toggle on" data-field="usefulInfoEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <p class="step-label" style="margin-top:1rem">Cards de Info Útil</p>
+            <div class="dynamic-list" id="infoItems">
+                <div class="dynamic-item">
+                    <div class="row">
+                        <div class="field"><label>Ícono</label><input type="text" class="infoIcon" value="lucide:clock">
+                            <p class="hint"><a href="https://icon-sets.iconify.design/" target="_blank">Ver íconos</a>
+                            </p>
+                        </div>
+                        <div class="field"><label>Título</label><input type="text" class="infoTitle" value="Duración">
+                        </div>
+                    </div>
+                    <div class="field"><label>Descripción</label><input type="text" class="infoDesc"
+                            value="La fiesta se extenderá hasta el amanecer."></div>
+                </div>
+                <div class="dynamic-item">
+                    <div class="row">
+                        <div class="field"><label>Ícono</label><input type="text" class="infoIcon"
+                                value="lucide:parking-circle"></div>
+                        <div class="field"><label>Título</label><input type="text" class="infoTitle"
+                                value="Estacionamiento"></div>
+                    </div>
+                    <div class="field"><label>Descripción</label><input type="text" class="infoDesc"
+                            value="Hay estacionamiento privado y vigilado gratuito en el lugar."></div>
+                </div>
+            </div>
+            <button class="btn-add" onclick="addInfoItem()" style="margin-top:1rem; width:100%;">+ Agregar card</button>
+        </div>
+
+        <!-- Step 8: Output -->
+        <div class="step" data-step="7">
+            <p class="step-label">Paso 8 de 8</p>
+            <h2>¡Listo! Tu configuración</h2>
+            <p class="desc">Descargá el archivo y seguí las instrucciones de abajo.</p>
+
+            <div class="output-area" id="yamlOutput"></div>
+            <div class="output-actions">
+                <button class="btn-download" onclick="downloadYaml()">⬇ Descargar wedding.yml</button>
+                <button class="btn-copy" onclick="copyYaml()">📋 Copiar al portapapeles</button>
+            </div>
+
+            <div class="instructions">
+                <h3>📋 Instrucciones para subir tu configuración</h3>
+                <ol>
+                    <li>Si todavía no creaste tu repo, andá al <a
+                            href="https://github.com/LucioB16/juli-y-lucio-wedding" target="_blank">repositorio
+                            template</a> y hacé click en <strong>"Use this template"</strong> → <strong>"Create a new
+                            repository"</strong>.</li>
+                    <li>En tu nuevo repo, andá a <strong>Settings → Pages</strong> y en "Source" elegí <strong>"GitHub
+                            Actions"</strong>.</li>
+                    <li>Navegá a la carpeta <code>src/data/</code> en tu repo y hacé click en
+                        <strong><code>wedding.yml</code></strong>.</li>
+                    <li>Hacé click en el ícono de <strong>lápiz (✏️)</strong> arriba a la derecha para editar.</li>
+                    <li><strong>Seleccioná todo</strong> el contenido (Ctrl+A) y <strong>pegá</strong> el YAML que
+                        descargaste o copiaste.</li>
+                    <li>Abajo, hacé click en <strong>"Commit changes"</strong> → <strong>"Commit directly to main
+                            branch"</strong> → <strong>"Commit changes"</strong>.</li>
+                    <li>Subí tus fotos a <code>public/media/couple/</code> y <code>public/media/hero/</code> usando la
+                        misma mecánica (drag & drop en GitHub).</li>
+                    <li>¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos minutos. 🎉</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav">
+            <button class="btn btn-prev" id="btnPrev" onclick="prevStep()" style="display:none">← Anterior</button>
+            <button class="btn btn-next" id="btnNext" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        const TOTAL_STEPS = 8;
+        let currentStep = 0;
+        const toggleState = {
+            ceremonyEnabled: true,
+            celebrationEnabled: true,
+            storyEnabled: true,
+            giftsEnabled: true,
+            bankEnabled: true,
+            dressCodeEnabled: true,
+            brideDisclaimerEnabled: true,
+            rsvpEnabled: true,
+            rsvpLinkEnabled: false,
+            socialsEnabled: true,
+            playlistEnabled: true,
+            usefulInfoEnabled: true,
+        };
+
+        // Init progress dots
+        const bar = document.getElementById('progressBar');
+        for (let i = 0; i < TOTAL_STEPS; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'progress-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToStep(i);
+            bar.appendChild(dot);
+        }
+
+        function updateUI() {
+            document.querySelectorAll('.step').forEach((el, i) => {
+                el.classList.toggle('active', i === currentStep);
+            });
+            document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentStep);
+                dot.classList.toggle('done', i < currentStep);
+            });
+            document.getElementById('btnPrev').style.display = currentStep === 0 ? 'none' : '';
+            const btnNext = document.getElementById('btnNext');
+            if (currentStep === TOTAL_STEPS - 1) {
+                btnNext.style.display = 'none';
+            } else {
+                btnNext.style.display = '';
+                btnNext.textContent = 'Siguiente →';
+            }
+
+            if (currentStep === TOTAL_STEPS - 1) generateYaml();
+        }
+
+        function nextStep() { if (currentStep < TOTAL_STEPS - 1) { currentStep++; updateUI(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+        function prevStep() { if (currentStep > 0) { currentStep--; updateUI(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+        function goToStep(i) { currentStep = i; updateUI(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        function toggleSwitch(el) {
+            const field = el.dataset.field;
+            toggleState[field] = !toggleState[field];
+            el.classList.toggle('on', toggleState[field]);
+        }
+
+        function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
+
+        function addInfoItem() {
+            const list = document.getElementById('infoItems');
+            const item = document.createElement('div');
+            item.className = 'dynamic-item';
+            item.innerHTML = `
+        <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
+        <div class="row">
+          <div class="field"><label>Ícono</label><input type="text" class="infoIcon" value="lucide:info"></div>
+          <div class="field"><label>Título</label><input type="text" class="infoTitle" value=""></div>
+        </div>
+        <div class="field"><label>Descripción</label><input type="text" class="infoDesc" value=""></div>
+      `;
+            list.appendChild(item);
+        }
+
+        function esc(s) { return s.includes(':') || s.includes('"') || s.includes("'") || s.includes('#') || s.includes('{') || s.includes('[') ? `"${s.replace(/"/g, '\\"')}"` : `"${s}"`; }
+
+        function generateYaml() {
+            const slug = v('displayName').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const basePath = '/' + slug + '/';
+            const photos = v('storyPhotos').split('\n').filter(l => l.trim());
+            const infoItems = document.getElementById('infoItems').querySelectorAll('.dynamic-item');
+
+            let y = '';
+            y += `site:\n`;
+            y += `  pageTitle: ${esc(v('pageTitle'))}\n`;
+            y += `  baseUrl: "https://YOUR_USERNAME.github.io/${slug}/"\n`;
+            y += `  meta:\n`;
+            y += `    description: ${esc(v('metaDesc'))}\n`;
+            y += `    ogImage: "${basePath}media/og/og.jpg"\n`;
+            y += `\n`;
+
+            y += `couple:\n`;
+            y += `  person1:\n    name: ${esc(v('p1Name'))}\n`;
+            y += `  person2:\n    name: ${esc(v('p2Name'))}\n`;
+            y += `  displayName: ${esc(v('displayName'))}\n`;
+            y += `  slug: "${slug}"\n`;
+            y += `\n`;
+
+            y += `locale:\n  language: "es-AR"\n  timeZone: "America/Argentina/Buenos_Aires"\n\n`;
+
+            y += `sections:\n`;
+            y += `  countdown:\n    enabled: true\n`;
+            y += `  ceremony:\n    enabled: ${toggleState.ceremonyEnabled}\n`;
+            y += `  celebration:\n    enabled: ${toggleState.celebrationEnabled}\n`;
+            y += `  story:\n    enabled: ${toggleState.storyEnabled}\n`;
+            y += `  socials:\n    enabled: ${toggleState.socialsEnabled}\n`;
+            y += `  gifts:\n    enabled: ${toggleState.giftsEnabled}\n`;
+            y += `  dressCode:\n    enabled: ${toggleState.dressCodeEnabled}\n`;
+            y += `  rsvp:\n    enabled: ${toggleState.rsvpEnabled}\n`;
+            y += `  calendar:\n    enabled: true\n`;
+            y += `  playlist:\n    enabled: ${toggleState.playlistEnabled}\n`;
+            y += `  usefulInfo:\n    enabled: ${toggleState.usefulInfoEnabled}\n`;
+            y += `\n`;
+
+            y += `hero:\n`;
+            y += `  enabled: true\n`;
+            y += `  title: ${esc(v('heroTitle'))}\n`;
+            y += `  subtitle: ${esc(v('heroSubtitle'))}\n`;
+            y += `  dateDisplay: ${esc(v('heroDate'))}\n`;
+            y += `  city: ${esc(v('heroCity'))}\n`;
+            y += `  backgroundImage: "${basePath}media/hero/bg.jpg"\n`;
+            y += `\n`;
+
+            y += `countdown:\n`;
+            y += `  target: "${v('celebrationDatetime')}"\n`;
+            y += `  heading: "Cuenta regresiva"\n`;
+            y += `  note: "¡Falta muy poco!"\n`;
+            y += `  targetSource: "celebration"\n`;
+            y += `\n`;
+
+            y += `events:\n`;
+            y += `  ceremony:\n`;
+            y += `    enabled: ${toggleState.ceremonyEnabled}\n`;
+            y += `    kindLabel: ${esc(v('ceremonyLabel'))}\n`;
+            y += `    datetime: "${v('ceremonyDatetime')}"\n`;
+            y += `    timeDisplay: ${esc(v('ceremonyTime'))}\n`;
+            y += `    venueName: ${esc(v('ceremonyVenue'))}\n`;
+            y += `    addressLines:\n`;
+            v('ceremonyAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            y += `    mapsUrl: "${v('ceremonyMaps')}"\n`;
+            y += `  celebration:\n`;
+            y += `    enabled: ${toggleState.celebrationEnabled}\n`;
+            y += `    kindLabel: ${esc(v('celebrationLabel'))}\n`;
+            y += `    datetime: "${v('celebrationDatetime')}"\n`;
+            y += `    timeDisplay: ${esc(v('celebrationTime'))}\n`;
+            y += `    venueName: ${esc(v('celebrationVenue'))}\n`;
+            y += `    addressLines:\n`;
+            v('celebrationAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            y += `    mapsUrl: "${v('celebrationMaps')}"\n`;
+            y += `\n`;
+
+            y += `story:\n`;
+            y += `  heading: ${esc(v('storyHeading'))}\n`;
+            y += `  subheading: ${esc(v('storySubheading'))}\n`;
+            y += `  sentence: ${esc(v('storySentence'))}\n`;
+            y += `  photos:\n`;
+            photos.forEach((p, i) => {
+                y += `    - src: "${basePath}media/couple/${p.trim()}"\n`;
+                y += `      alt: "Foto ${i + 1}"\n`;
+            });
+            y += `\n`;
+
+            y += `socials:\n`;
+            y += `  heading: "Redes Sociales"\n`;
+            y += `  body: ${esc(v('socialsBody'))}\n`;
+            y += `  items:\n`;
+            y += `    - label: "Instagram"\n`;
+            y += `      handle: ${esc(v('socialHandle'))}\n`;
+            y += `      url: "${v('socialUrl')}"\n`;
+            y += `\n`;
+
+            y += `gifts:\n`;
+            y += `  heading: ${esc(v('giftsHeading'))}\n`;
+            y += `  body: ${esc(v('giftsBody'))}\n`;
+            y += `  buttonLabel: ${esc(v('giftsButtonLabel'))}\n`;
+            y += `  bank:\n`;
+            y += `    enabled: ${toggleState.bankEnabled}\n`;
+            y += `    holderName: ${esc(v('bankHolder'))}\n`;
+            y += `    bankName: ${esc(v('bankName'))}\n`;
+            y += `    alias: ${esc(v('bankAlias'))}\n`;
+            y += `    cbu: "${v('bankCbu')}"\n`;
+            y += `    cuit: "${v('bankCuit')}"\n`;
+            y += `\n`;
+
+            y += `dressCode:\n`;
+            y += `  title: ${esc(v('dcTitle'))}\n`;
+            y += `  tag: ${esc(v('dcTag'))}\n`;
+            y += `  body: ${esc(v('dcBody'))}\n`;
+            y += `  brideDisclaimer:\n`;
+            y += `    enabled: ${toggleState.brideDisclaimerEnabled}\n`;
+            y += `    text: ${esc(v('brideDisclaimerText'))}\n`;
+            y += `\n`;
+
+            y += `rsvp:\n`;
+            y += `  text: ${esc(v('rsvpText'))}\n`;
+            y += `  deadline: "${v('rsvpDeadline')}"\n`;
+            y += `  link:\n`;
+            y += `    enabled: ${toggleState.rsvpLinkEnabled}\n`;
+            y += `    url: "${v('rsvpUrl')}"\n`;
+            y += `    label: ${esc(v('rsvpLabel'))}\n`;
+            y += `\n`;
+
+            y += `calendar:\n`;
+            y += `  mode: "single"\n`;
+            y += `  googleCalendar:\n    enabled: true\n`;
+            y += `  ics:\n    enabled: true\n`;
+            y += `    fileNameSingle: "boda.ics"\n`;
+            y += `    fileNameCeremony: "ceremonia.ics"\n`;
+            y += `    fileNameCelebration: "celebracion.ics"\n`;
+            y += `\n`;
+
+            y += `playlist:\n`;
+            y += `  heading: ${esc(v('playlistHeading'))}\n`;
+            y += `  body: ${esc(v('playlistBody'))}\n`;
+            y += `  spotifyUrl: "${v('playlistUrl')}"\n`;
+            y += `\n`;
+
+            y += `usefulInfo:\n`;
+            y += `  title: "Info útil"\n`;
+            y += `  items:\n`;
+            infoItems.forEach(item => {
+                const icon = item.querySelector('.infoIcon')?.value || 'lucide:info';
+                const title = item.querySelector('.infoTitle')?.value || '';
+                const desc = item.querySelector('.infoDesc')?.value || '';
+                y += `    - enabled: true\n`;
+                y += `      icon: "${icon}"\n`;
+                y += `      title: ${esc(title)}\n`;
+                y += `      description: ${esc(desc)}\n`;
+            });
+
+            document.getElementById('yamlOutput').textContent = y;
+            window._generatedYaml = y;
+        }
+
+        function downloadYaml() {
+            const blob = new Blob([window._generatedYaml], { type: 'text/yaml' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'wedding.yml';
+            a.click();
+        }
+
+        function copyYaml() {
+            navigator.clipboard.writeText(window._generatedYaml).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '✓ ¡Copiado!';
+                setTimeout(() => { btn.textContent = '📋 Copiar al portapapeles'; }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>
