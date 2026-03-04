@@ -17,10 +17,31 @@ import UsefulInfo from "../components/UsefulInfo.astro";
 const data = getWeddingData();
 ---
 
-<Layout title={data.site.pageTitle} description={data.site.meta.description} ogImage={data.site.meta.ogImage}>
+<Layout
+  title={data.site.pageTitle}
+  description={data.site.meta.description}
+  ogImage={data.site.meta.ogImage}
+>
   {data.hero.enabled && <Hero />}
   {data.sections.countdown.enabled && <Count />}
-  {data.events.ceremony.enabled && <Ceremony />}
+  {
+    data.events.religiousCeremony?.enabled && (
+      <Ceremony
+        eventKey="religiousCeremony"
+        dividerType="flower"
+        bgClass="bg-white"
+      />
+    )
+  }
+  {
+    data.events.ceremony.enabled && (
+      <Ceremony
+        eventKey="ceremony"
+        dividerType="small"
+        bgClass="bg-[#EEF0EC]"
+      />
+    )
+  }
   {data.events.celebration.enabled && <Celebration />}
   {data.sections.story.enabled && <Story />}
   {data.sections.socials.enabled && <Socials />}

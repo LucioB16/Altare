@@ -2,11 +2,11 @@
 
 Una invitación de boda digital, elegante y 100% configurable. Desplegá tu propio sitio en minutos, sin saber programar.
 
-![Preview](https://img.shields.io/badge/demo-ver%20ejemplo-5A7156?style=for-the-badge)
+🔗 **[Ver demo en vivo](https://luciob16.github.io/juli-y-lucio-wedding/)**
 
 ---
 
-## 🚀 Crear tu invitación en 3 pasos
+## 🚀 Crear tu invitación en 4 pasos
 
 ### Paso 1: Crear tu repositorio
 
@@ -24,32 +24,33 @@ Usá nuestro **Config Builder** para generar tu archivo de configuración sin to
 
 El Config Builder te guía paso a paso para configurar:
 - 👫 Nombres de la pareja
+- � Fechas y horarios con selectores visuales
+- ⛪ Ceremonia religiosa (opcional) y civil
+- 🎉 Fiesta / celebración
 - 📸 Fotos de portada e historia (1–4 fotos)
-- 📅 Fecha, hora y lugar de ceremonia y fiesta
-- 🎁 Regalos y datos bancarios
-- 👔 Código de vestimenta
-- ✉️ Confirmación de asistencia (RSVP)
+- 🎁 Regalos y datos bancarios (con opción de ocultar)
+- 👔 Código de vestimenta (con aviso colores novia configurable)
+- ✉️ Confirmación de asistencia con link opcional
 - 🎵 Link a playlist de Spotify
 - 📱 Redes sociales
-- ℹ️ Cards de información útil
+- ℹ️ Cards de información útil (agregar cuantas quieras)
 
 Al final genera un archivo `wedding.yml` que descargás o copiás.
 
-### Paso 3: Subir la configuración a tu repo
+### Paso 3: Subir la configuración y las fotos
 
+**Configuración:**
 1. Andá a tu repositorio en GitHub
-2. Navegá a la carpeta `src/data/`
-3. Hacé click en `wedding.yml`
-4. Click en el ícono de **lápiz ✏️** (arriba a la derecha)
-5. Seleccioná todo (Ctrl+A) y pegá el contenido generado
-6. Click en **"Commit changes"** → **"Commit directly to main"** → **"Commit changes"**
+2. Navegá a `src/data/` → click en `wedding.yml` → click en el **lápiz ✏️**
+3. Seleccioná todo (Ctrl+A) y pegá el contenido generado
+4. Click en **"Commit changes"** → **"Commit directly to main"** → **"Commit changes"**
 
-### Paso 3b: Subir tus fotos
+**Fotos (arrastrá los archivos en GitHub):**
+- `public/media/hero/` → tu foto de bienvenida como **`bg.jpg`**
+- `public/media/couple/` → tus fotos de historia con los nombres que te indicó el Config Builder (ej: `01.jpg`, `02.jpg`, etc.)
+- `public/media/og/` → la imagen que se ve al compartir el link en WhatsApp/redes como **`og.jpg`** (1200×630px recomendado)
 
-1. Navegá a `public/media/hero/` y subí tu foto de portada como `bg.jpg`
-2. Navegá a `public/media/couple/` y subí tus fotos (hasta 4) como `01.jpg`, `02.jpg`, etc.
-
-> 💡 **Tip:** Podés arrastrar archivos directamente a la carpeta en GitHub para subirlos.
+> 💡 **Tip:** Podés arrastrar archivos directamente a la carpeta en GitHub para subirlos sin necesidad de usar Git.
 
 ### Paso 4: Activar GitHub Pages
 
@@ -65,10 +66,12 @@ Al final genera un archivo `wedding.yml` que descargás o copiás.
 - 🎨 **Diseño premium** — Tipografía elegante, SVGs artesanales, scroll-snap entre secciones
 - ⚙️ **100% configurable** — Todo se edita desde un solo archivo YAML
 - 🔒 **Sin servidor** — Se despliega gratis en GitHub Pages
-- 🧩 **Secciones modulares** — Activá o desactivá cualquier sección desde la config
+- 🧩 **Secciones modulares** — Activá o desactivá cualquier sección
+- ⛪ **Ceremonia religiosa** — Sección opcional, idéntica en formato a la civil
 - 🖼️ **Galería inteligente** — 1 a 4 fotos con layout automático
 - 🏦 **Datos bancarios** — Con toggle para mostrar/ocultar
-- 📊 **Cuenta regresiva** — Actualización en tiempo real hasta el gran día
+- 📊 **Cuenta regresiva** — Actualización en tiempo real
+- 🔧 **Config Builder** — Herramienta visual para generar la configuración sin código
 
 ---
 
@@ -77,25 +80,17 @@ Al final genera un archivo `wedding.yml` que descargás o copiás.
 Si sos desarrollador y querés personalizar el diseño:
 
 ```bash
-# Clonar
 git clone https://github.com/TU_USUARIO/TU_REPO.git
 cd TU_REPO
-
-# Instalar dependencias
 npm install
-
-# Modo desarrollo
 npm run dev
-
-# Build para producción
-npm run build
 ```
 
 ### Estructura del proyecto
 
 ```
 src/
-├── components/      # Componentes Astro (Hero, Story, RSVP, etc.)
+├── components/      # Componentes Astro (Hero, Ceremony, RSVP, etc.)
 ├── data/
 │   ├── wedding.yml  # ← Tu configuración va acá
 │   └── weddingData.ts
@@ -104,17 +99,24 @@ src/
 └── styles/
 public/
 ├── media/
-│   ├── hero/        # Foto de portada (bg.jpg)
+│   ├── hero/        # Foto de bienvenida (bg.jpg)
 │   ├── couple/      # Fotos historia (01.jpg, 02.jpg, ...)
-│   └── og/          # Imagen Open Graph
-└── config-builder/  # Herramienta de configuración
+│   └── og/          # Imagen para redes sociales (og.jpg)
+└── config-builder/  # Herramienta de configuración visual
 ```
 
 ---
 
-## 📄 Licencia
+## � Créditos y licencia
 
-MIT — Usalo como quieras, incluso para fines comerciales.
+Este proyecto está basado en [**SaidYes**](https://github.com/roicort/saidyes) por [@roicort](https://github.com/roicort), distribuido bajo la licencia **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+
+Este fork mantiene la misma licencia. Podés usar, modificar y distribuir este código siempre que:
+- Mantengas la atribución al proyecto original
+- Distribuyas tus modificaciones bajo la misma licencia AGPL-3.0
+- Si lo usás en un servicio de red, proporciones acceso al código fuente
+
+📄 Ver [LICENSE](LICENSE) para más detalles.
 
 ---
 

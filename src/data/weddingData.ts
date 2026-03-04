@@ -54,6 +54,15 @@ export interface WeddingData {
       addressLines: string[];
       mapsUrl: string;
     };
+    religiousCeremony?: {
+      enabled: boolean;
+      kindLabel: string;
+      datetime: string;
+      timeDisplay: string;
+      venueName: string;
+      addressLines: string[];
+      mapsUrl: string;
+    };
   };
   story: {
     heading: string;

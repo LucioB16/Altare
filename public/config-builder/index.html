@@ -20,7 +20,6 @@
             --border: #ddd;
             --accent: #BDA588;
             --radius: 12px;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
         * {
@@ -36,7 +35,6 @@
             min-height: 100vh;
         }
 
-        /* Header */
         .header {
             text-align: center;
             padding: 3rem 1.5rem 2rem;
@@ -56,7 +54,6 @@
             font-size: 0.95rem;
         }
 
-        /* Progress */
         .progress-bar {
             display: flex;
             justify-content: center;
@@ -87,14 +84,12 @@
             background: var(--accent);
         }
 
-        /* Container */
         .container {
             max-width: 700px;
             margin: 0 auto;
             padding: 2rem 1.5rem 6rem;
         }
 
-        /* Steps */
         .step {
             display: none;
             animation: fadeIn 0.35s ease;
@@ -138,7 +133,6 @@
             margin-bottom: 2rem;
         }
 
-        /* Form Elements */
         .field {
             margin-bottom: 1.5rem;
         }
@@ -195,7 +189,43 @@
             }
         }
 
-        /* Toggle */
+        /* File picker styling */
+        .file-picker {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .file-picker input[type="file"] {
+            display: none;
+        }
+
+        .file-picker-btn {
+            padding: 0.6rem 1.2rem;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .file-picker-btn:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .file-picker-name {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         .toggle-row {
             display: flex;
             align-items: center;
@@ -219,6 +249,7 @@
             border-radius: 12px;
             cursor: pointer;
             transition: background 0.3s;
+            flex-shrink: 0;
         }
 
         .toggle.on {
@@ -241,7 +272,6 @@
             transform: translateX(20px);
         }
 
-        /* Dynamic items */
         .dynamic-list {
             display: flex;
             flex-direction: column;
@@ -294,7 +324,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Navigation */
         .nav {
             display: flex;
             justify-content: space-between;
@@ -333,7 +362,6 @@
             background: var(--primary-light);
         }
 
-        /* Output */
         .output-area {
             background: #1e1e1e;
             color: #d4d4d4;
@@ -389,7 +417,6 @@
             background: var(--bg-alt);
         }
 
-        /* Instructions */
         .instructions {
             background: white;
             border: 1px solid var(--border);
@@ -430,11 +457,20 @@
             font-size: 0.85em;
         }
 
-        .instructions img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin: 0.5rem 0;
+        .separator {
+            margin: 2rem 0;
+            border: none;
+            border-top: 1px solid var(--border);
+        }
+
+        .tz-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
             border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            background: white;
         }
     </style>
 </head>
@@ -444,345 +480,283 @@
         <h1>💍 Wedding Config Builder</h1>
         <p>Configurá tu invitación de boda en minutos</p>
     </div>
-
     <div class="progress-bar" id="progressBar"></div>
-
     <div class="container">
-        <!-- Step 1: Couple -->
+
+        <!-- ============ STEP 1: Couple ============ -->
         <div class="step active" data-step="0">
-            <p class="step-label">Paso 1 de 8</p>
+            <p class="step-label">Paso 1 de 9</p>
             <h2>La Pareja</h2>
             <p class="desc">Los datos básicos de los novios.</p>
-
             <div class="row">
-                <div class="field">
-                    <label>Nombre Persona 1</label>
-                    <input type="text" id="p1Name" value="Julieta" placeholder="Ej: María">
-                </div>
-                <div class="field">
-                    <label>Nombre Persona 2</label>
-                    <input type="text" id="p2Name" value="Lucio" placeholder="Ej: Juan">
-                </div>
+                <div class="field"><label>Nombre Persona 1</label><input type="text" id="p1Name" value="Julieta"
+                        placeholder="Ej: María"></div>
+                <div class="field"><label>Nombre Persona 2</label><input type="text" id="p2Name" value="Lucio"
+                        placeholder="Ej: Juan"></div>
             </div>
             <div class="field">
                 <label>Nombre para mostrar</label>
                 <input type="text" id="displayName" value="Julieta & Lucio" placeholder="Ej: María & Juan">
                 <p class="hint">Así aparecerá en la portada y el footer.</p>
             </div>
-            <div class="field">
-                <label>Título de la página</label>
-                <input type="text" id="pageTitle" value="Nuestra Boda | Juli & Lucio"
-                    placeholder="Ej: Nuestra Boda | María & Juan">
-            </div>
-            <div class="field">
-                <label>Descripción (meta)</label>
-                <input type="text" id="metaDesc"
-                    value="Estás invitado a celebrar con nosotros este momento tan especial.">
-            </div>
+            <div class="field"><label>Título de la página</label><input type="text" id="pageTitle"
+                    value="Nuestra Boda | Juli & Lucio"></div>
+            <div class="field"><label>Descripción (meta)</label><input type="text" id="metaDesc"
+                    value="Estás invitado a celebrar con nosotros este momento tan especial."></div>
         </div>
 
-        <!-- Step 2: Hero -->
+        <!-- ============ STEP 2: Portada ============ -->
         <div class="step" data-step="1">
-            <p class="step-label">Paso 2 de 8</p>
-            <h2>Portada</h2>
-            <p class="desc">La primera pantalla que verán los invitados.</p>
-
+            <p class="step-label">Paso 2 de 9</p>
+            <h2>Pantalla de bienvenida</h2>
+            <p class="desc">La primera pantalla que verán los invitados al abrir la invitación.</p>
+            <div class="field"><label>Título</label><input type="text" id="heroTitle" value="¡Nos casamos!"></div>
+            <div class="field"><label>Subtítulo (nombres)</label><input type="text" id="heroSubtitle"
+                    value="Julieta & Lucio"></div>
+            <div class="field"><label>Fecha para mostrar (texto libre)</label><input type="text" id="heroDate"
+                    value="21 de Junio de 2026" placeholder="Ej: 15 de Marzo de 2025"></div>
+            <div class="field"><label>Ciudad</label><input type="text" id="heroCity" value="Córdoba, Argentina"></div>
             <div class="field">
-                <label>Título</label>
-                <input type="text" id="heroTitle" value="¡Nos casamos!">
-            </div>
-            <div class="field">
-                <label>Subtítulo (nombres)</label>
-                <input type="text" id="heroSubtitle" value="Julieta & Lucio">
-            </div>
-            <div class="field">
-                <label>Fecha para mostrar</label>
-                <input type="text" id="heroDate" value="21 de Junio de 2026" placeholder="Ej: 15 de Marzo de 2025">
-            </div>
-            <div class="field">
-                <label>Ciudad</label>
-                <input type="text" id="heroCity" value="Córdoba, Argentina">
+                <label>Foto de fondo</label>
+                <div class="file-picker">
+                    <label class="file-picker-btn" for="heroBgFile">Seleccionar imagen</label>
+                    <input type="file" id="heroBgFile" accept="image/*" onchange="onFileSelected(this, 'heroBgName')">
+                    <span class="file-picker-name" id="heroBgName">bg.jpg</span>
+                </div>
+                <p class="hint">Subí este archivo a <code>public/media/hero/</code> en tu repositorio. Se renombrará
+                    automáticamente a <code>bg.jpg</code>.</p>
             </div>
         </div>
 
-        <!-- Step 3: Events -->
+        <!-- ============ STEP 3: Events ============ -->
         <div class="step" data-step="2">
-            <p class="step-label">Paso 3 de 8</p>
-            <h2>Ceremonia y Fiesta</h2>
-            <p class="desc">Los detalles de los eventos.</p>
+            <p class="step-label">Paso 3 de 9</p>
+            <h2>Ceremonias y Fiesta</h2>
+            <p class="desc">Los detalles de los eventos. Podés activar o desactivar cada uno.</p>
 
+            <!-- Zona horaria -->
+            <div class="field">
+                <label>Zona horaria de los eventos</label>
+                <select id="eventTimezone" class="tz-select">
+                    <option value="America/Argentina/Buenos_Aires">Argentina (Buenos Aires)</option>
+                    <option value="America/Argentina/Cordoba" selected>Argentina (Córdoba)</option>
+                    <option value="America/Montevideo">Uruguay (Montevideo)</option>
+                    <option value="America/Santiago">Chile (Santiago)</option>
+                    <option value="America/Bogota">Colombia (Bogotá)</option>
+                    <option value="America/Lima">Perú (Lima)</option>
+                    <option value="America/Mexico_City">México (CDMX)</option>
+                    <option value="America/New_York">Estados Unidos (Este)</option>
+                    <option value="America/Los_Angeles">Estados Unidos (Oeste)</option>
+                    <option value="Europe/Madrid">España (Madrid)</option>
+                    <option value="Europe/London">Reino Unido (Londres)</option>
+                </select>
+            </div>
+
+            <hr class="separator">
+
+            <!-- Religious ceremony -->
             <div class="toggle-row">
-                <span>Mostrar sección Ceremonia</span>
+                <span>Ceremonia Religiosa</span>
+                <div class="toggle" data-field="religiousEnabled" onclick="toggleSwitch(this)"></div>
+            </div>
+            <div id="religiousFields" style="display:none">
+                <div class="field"><label>Tipo</label><input type="text" id="religiousLabel"
+                        value="Ceremonia Religiosa"></div>
+                <div class="row">
+                    <div class="field"><label>Fecha</label><input type="date" id="religiousDate" value="2026-06-21">
+                    </div>
+                    <div class="field"><label>Hora</label><input type="time" id="religiousTime" value="17:00"></div>
+                </div>
+                <div class="field"><label>Nombre del lugar</label><input type="text" id="religiousVenue"
+                        value="Parroquia Sagrado Corazón"></div>
+                <div class="field"><label>Dirección (una línea por renglón)</label><textarea id="religiousAddress">Av. Hipólito Yrigoyen 100
+Córdoba Capital</textarea></div>
+                <div class="field"><label>URL Google Maps</label><input type="text" id="religiousMaps"
+                        value="https://maps.app.goo.gl/"></div>
+            </div>
+
+            <hr class="separator">
+
+            <!-- Civil ceremony -->
+            <div class="toggle-row">
+                <span>Ceremonia Civil</span>
                 <div class="toggle on" data-field="ceremonyEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="ceremonyFields">
-                <div class="field">
-                    <label>Tipo de ceremonia</label>
-                    <input type="text" id="ceremonyLabel" value="Ceremonia Civil">
+                <div class="field"><label>Tipo</label><input type="text" id="ceremonyLabel" value="Ceremonia Civil">
                 </div>
                 <div class="row">
-                    <div class="field">
-                        <label>Hora (texto)</label>
-                        <input type="text" id="ceremonyTime" value="18:00 hs">
+                    <div class="field"><label>Fecha</label><input type="date" id="ceremonyDate" value="2026-06-21">
                     </div>
-                    <div class="field">
-                        <label>Fecha y hora (ISO)</label>
-                        <input type="text" id="ceremonyDatetime" value="2026-06-21T18:00:00Z">
-                        <p class="hint">Formato: YYYY-MM-DDTHH:MM:SSZ</p>
-                    </div>
+                    <div class="field"><label>Hora</label><input type="time" id="ceremonyTime" value="18:00"></div>
                 </div>
-                <div class="field">
-                    <label>Nombre del lugar</label>
-                    <input type="text" id="ceremonyVenue" value="Registro Civil Central">
-                </div>
-                <div class="field">
-                    <label>Dirección (una línea por renglón)</label>
-                    <textarea id="ceremonyAddress">Chacabuco 737
-Nueva Córdoba</textarea>
-                </div>
-                <div class="field">
-                    <label>URL Google Maps</label>
-                    <input type="text" id="ceremonyMaps" value="https://maps.app.goo.gl/">
-                </div>
+                <div class="field"><label>Nombre del lugar</label><input type="text" id="ceremonyVenue"
+                        value="Registro Civil Central"></div>
+                <div class="field"><label>Dirección (una línea por renglón)</label><textarea id="ceremonyAddress">Chacabuco 737
+Nueva Córdoba</textarea></div>
+                <div class="field"><label>URL Google Maps</label><input type="text" id="ceremonyMaps"
+                        value="https://maps.app.goo.gl/"></div>
             </div>
 
-            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+            <hr class="separator">
 
+            <!-- Celebration -->
             <div class="toggle-row">
-                <span>Mostrar sección Fiesta</span>
+                <span>Fiesta / Celebración</span>
                 <div class="toggle on" data-field="celebrationEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="celebrationFields">
-                <div class="field">
-                    <label>Tipo de evento</label>
-                    <input type="text" id="celebrationLabel" value="Fiesta">
+                <div class="field"><label>Tipo de evento</label><input type="text" id="celebrationLabel" value="Fiesta">
                 </div>
                 <div class="row">
-                    <div class="field">
-                        <label>Hora (texto)</label>
-                        <input type="text" id="celebrationTime" value="21:00 hs">
+                    <div class="field"><label>Fecha</label><input type="date" id="celebrationDate" value="2026-06-21">
                     </div>
-                    <div class="field">
-                        <label>Fecha y hora (ISO)</label>
-                        <input type="text" id="celebrationDatetime" value="2026-06-21T21:00:00Z">
-                    </div>
+                    <div class="field"><label>Hora</label><input type="time" id="celebrationTime" value="21:00"></div>
                 </div>
-                <div class="field">
-                    <label>Nombre del lugar</label>
-                    <input type="text" id="celebrationVenue" value="Estancia La Paz">
-                </div>
-                <div class="field">
-                    <label>Dirección</label>
-                    <textarea id="celebrationAddress">Ruta E66 Km 41
-Ascochinga, Córdoba</textarea>
-                </div>
-                <div class="field">
-                    <label>URL Google Maps</label>
-                    <input type="text" id="celebrationMaps" value="https://maps.app.goo.gl/">
-                </div>
+                <div class="field"><label>Nombre del lugar</label><input type="text" id="celebrationVenue"
+                        value="Estancia La Paz"></div>
+                <div class="field"><label>Dirección</label><textarea id="celebrationAddress">Ruta E66 Km 41
+Ascochinga, Córdoba</textarea></div>
+                <div class="field"><label>URL Google Maps</label><input type="text" id="celebrationMaps"
+                        value="https://maps.app.goo.gl/"></div>
             </div>
         </div>
 
-        <!-- Step 4: Story -->
+        <!-- ============ STEP 4: Story ============ -->
         <div class="step" data-step="3">
-            <p class="step-label">Paso 4 de 8</p>
+            <p class="step-label">Paso 4 de 9</p>
             <h2>Nuestra Historia</h2>
-            <p class="desc">Contá la historia de la pareja (1–4 fotos).</p>
-
+            <p class="desc">Contá la historia de la pareja con texto y hasta 4 fotos.</p>
             <div class="toggle-row">
                 <span>Mostrar sección</span>
                 <div class="toggle on" data-field="storyEnabled" onclick="toggleSwitch(this)"></div>
             </div>
-            <div class="field">
-                <label>Subtítulo</label>
-                <input type="text" id="storySubheading" value="Nosotros" placeholder="Ej: Nosotros">
-            </div>
-            <div class="field">
-                <label>Título</label>
-                <input type="text" id="storyHeading" value="Nuestra historia">
-            </div>
-            <div class="field">
-                <label>Texto</label>
-                <textarea id="storySentence"
+            <div class="field"><label>Subtítulo</label><input type="text" id="storySubheading" value="Nosotros"></div>
+            <div class="field"><label>Título</label><input type="text" id="storyHeading" value="Nuestra historia"></div>
+            <div class="field"><label>Texto</label><textarea id="storySentence"
                     rows="3">Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</textarea>
             </div>
-            <div class="field">
-                <label>Fotos (nombres de archivo, 1–4)</label>
-                <p class="hint">Subí tus fotos a <code>public/media/couple/</code> y listá los nombres acá, uno por
-                    línea.</p>
-                <textarea id="storyPhotos" rows="4">01.jpg
-02.jpg
-03.jpg
-04.jpg</textarea>
+
+            <p class="step-label" style="margin-top:1rem">Fotos (1–4)</p>
+            <p class="hint" style="margin-bottom:1rem">Seleccioná tus fotos para establecer los nombres de archivo.
+                Después subí las fotos a la carpeta <code>public/media/couple/</code> en tu repositorio con esos mismos
+                nombres.</p>
+            <div class="dynamic-list" id="photoItems">
+                <div class="dynamic-item">
+                    <div class="file-picker">
+                        <label class="file-picker-btn">Seleccionar foto</label>
+                        <input type="file" accept="image/*" onchange="onPhotoSelected(this)" style="display:none">
+                        <span class="file-picker-name photoFileName">01.jpg</span>
+                    </div>
+                </div>
             </div>
+            <button class="btn-add" onclick="addPhoto()" style="margin-top:1rem; width:100%;">+ Agregar foto</button>
         </div>
 
-        <!-- Step 5: Gifts & DressCode -->
+        <!-- ============ STEP 5: Gifts & DressCode ============ -->
         <div class="step" data-step="4">
-            <p class="step-label">Paso 5 de 8</p>
+            <p class="step-label">Paso 5 de 9</p>
             <h2>Regalos y Dress Code</h2>
             <p class="desc">Datos bancarios y código de vestimenta.</p>
 
-            <div class="toggle-row">
-                <span>Mostrar sección Regalos</span>
+            <div class="toggle-row"><span>Mostrar sección Regalos</span>
                 <div class="toggle on" data-field="giftsEnabled" onclick="toggleSwitch(this)"></div>
             </div>
-            <div class="field">
-                <label>Título</label>
-                <input type="text" id="giftsHeading" value="Regalos">
-            </div>
-            <div class="field">
-                <label>Texto</label>
-                <textarea
+            <div class="field"><label>Título</label><input type="text" id="giftsHeading" value="Regalos"></div>
+            <div class="field"><label>Texto</label><textarea
                     id="giftsBody">Lo más importante es tu presencia, pero si deseás hacernos un regalo podés ayudarnos con nuestra luna de miel.</textarea>
             </div>
-            <div class="toggle-row">
-                <span>Mostrar datos bancarios</span>
+            <div class="toggle-row"><span>Mostrar datos bancarios</span>
                 <div class="toggle on" data-field="bankEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="bankFields">
-                <div class="field">
-                    <label>Texto del botón</label>
-                    <input type="text" id="giftsButtonLabel" value="Ver datos bancarios">
-                </div>
+                <div class="field"><label>Texto del botón</label><input type="text" id="giftsButtonLabel"
+                        value="Ver datos bancarios"></div>
                 <div class="row">
-                    <div class="field">
-                        <label>Titular</label>
-                        <input type="text" id="bankHolder" value="NOMBRE APELLIDO">
+                    <div class="field"><label>Titular</label><input type="text" id="bankHolder" value="NOMBRE APELLIDO">
                     </div>
-                    <div class="field">
-                        <label>Banco</label>
-                        <input type="text" id="bankName" value="Banco Galicia">
-                    </div>
+                    <div class="field"><label>Banco</label><input type="text" id="bankName" value="Banco Galicia"></div>
                 </div>
-                <div class="field">
-                    <label>Alias</label>
-                    <input type="text" id="bankAlias" value="MI.ALIAS">
-                </div>
+                <div class="field"><label>Alias</label><input type="text" id="bankAlias" value="MI.ALIAS"></div>
                 <div class="row">
-                    <div class="field">
-                        <label>CBU/CVU</label>
-                        <input type="text" id="bankCbu" value="0000000000000000000000">
-                    </div>
-                    <div class="field">
-                        <label>CUIT/CUIL</label>
-                        <input type="text" id="bankCuit" value="20-00000000-0">
+                    <div class="field"><label>CBU/CVU</label><input type="text" id="bankCbu"
+                            value="0000000000000000000000"></div>
+                    <div class="field"><label>CUIT/CUIL</label><input type="text" id="bankCuit" value="20-00000000-0">
                     </div>
                 </div>
             </div>
 
-            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+            <hr class="separator">
 
-            <div class="toggle-row">
-                <span>Mostrar sección Dress Code</span>
+            <div class="toggle-row"><span>Mostrar sección Dress Code</span>
                 <div class="toggle on" data-field="dressCodeEnabled" onclick="toggleSwitch(this)"></div>
             </div>
-            <div class="field">
-                <label>Título</label>
-                <input type="text" id="dcTitle" value="Dress Code">
-            </div>
-            <div class="field">
-                <label>Etiqueta</label>
-                <input type="text" id="dcTag" value="Formal – Elegante">
-            </div>
-            <div class="field">
-                <label>Texto</label>
-                <input type="text" id="dcBody" value="Te esperamos con tu mejor look para celebrar juntos.">
-            </div>
-            <div class="toggle-row">
-                <span>Mostrar disclaimer colores novia</span>
+            <div class="field"><label>Título</label><input type="text" id="dcTitle" value="Dress Code"></div>
+            <div class="field"><label>Etiqueta</label><input type="text" id="dcTag" value="Formal – Elegante"></div>
+            <div class="field"><label>Texto</label><input type="text" id="dcBody"
+                    value="Te esperamos con tu mejor look para celebrar juntos."></div>
+            <div class="toggle-row"><span>Mostrar aviso colores novia</span>
                 <div class="toggle on" data-field="brideDisclaimerEnabled" onclick="toggleSwitch(this)"></div>
             </div>
-            <div class="field">
-                <label>Texto disclaimer</label>
-                <input type="text" id="brideDisclaimerText"
+            <div class="field"><label>Texto del aviso</label><input type="text" id="brideDisclaimerText"
                     value="Como es tradición, los colores blancos, o similares, estarán reservados para la novia.">
             </div>
         </div>
 
-        <!-- Step 6: RSVP -->
+        <!-- ============ STEP 6: RSVP ============ -->
         <div class="step" data-step="5">
-            <p class="step-label">Paso 6 de 8</p>
+            <p class="step-label">Paso 6 de 9</p>
             <h2>Confirmación de asistencia</h2>
             <p class="desc">Configurá cómo los invitados confirman.</p>
-
-            <div class="toggle-row">
-                <span>Mostrar sección</span>
+            <div class="toggle-row"><span>Mostrar sección</span>
                 <div class="toggle on" data-field="rsvpEnabled" onclick="toggleSwitch(this)"></div>
             </div>
-            <div class="field">
-                <label>Texto</label>
-                <textarea id="rsvpText">Por favor confirmá tu asistencia antes del 1 de Mayo.</textarea>
-            </div>
-            <div class="field">
-                <label>Fecha límite</label>
-                <input type="date" id="rsvpDeadline" value="2026-05-01">
-            </div>
-            <div class="toggle-row">
-                <span>Mostrar botón con link de confirmación</span>
+            <div class="field"><label>Texto</label><textarea
+                    id="rsvpText">Por favor confirmá tu asistencia antes del 1 de Mayo.</textarea></div>
+            <div class="field"><label>Fecha límite</label><input type="date" id="rsvpDeadline" value="2026-05-01"></div>
+            <div class="toggle-row"><span>Mostrar botón con link de confirmación</span>
                 <div class="toggle" data-field="rsvpLinkEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="rsvpLinkFields">
-                <div class="field">
-                    <label>URL del enlace</label>
-                    <input type="text" id="rsvpUrl" value="https://wa.me/123456789"
-                        placeholder="URL de formulario o WhatsApp">
-                </div>
-                <div class="field">
-                    <label>Texto del botón</label>
-                    <input type="text" id="rsvpLabel" value="CONFIRMAR ASISTENCIA">
-                </div>
+                <div class="field"><label>URL del enlace</label><input type="text" id="rsvpUrl"
+                        value="https://wa.me/123456789" placeholder="URL de formulario o WhatsApp"></div>
+                <div class="field"><label>Texto del botón</label><input type="text" id="rsvpLabel"
+                        value="CONFIRMAR ASISTENCIA"></div>
             </div>
         </div>
 
-        <!-- Step 7: Extras -->
+        <!-- ============ STEP 7: Extras ============ -->
         <div class="step" data-step="6">
-            <p class="step-label">Paso 7 de 8</p>
+            <p class="step-label">Paso 7 de 9</p>
             <h2>Extras</h2>
             <p class="desc">Redes sociales, playlist e info útil.</p>
 
-            <div class="toggle-row">
-                <span>Mostrar sección Redes Sociales</span>
+            <div class="toggle-row"><span>Mostrar sección Redes Sociales</span>
                 <div class="toggle on" data-field="socialsEnabled" onclick="toggleSwitch(this)"></div>
             </div>
-            <div class="field">
-                <label>Texto redes</label>
-                <textarea
+            <div class="field"><label>Texto redes</label><textarea
                     id="socialsBody">Además, antes del casamiento, recibirás un link donde podrás subir todas tus fotos y videos.</textarea>
             </div>
-            <div class="field">
-                <label>URL Instagram</label>
-                <input type="text" id="socialUrl" value="https://instagram.com"
-                    placeholder="URL de Instagram o red social">
-            </div>
-            <div class="field">
-                <label>Handle</label>
-                <input type="text" id="socialHandle" value="@tuboda" placeholder="Ej: @miboda2025">
-            </div>
+            <div class="field"><label>URL Instagram</label><input type="text" id="socialUrl"
+                    value="https://instagram.com"></div>
+            <div class="field"><label>Handle</label><input type="text" id="socialHandle" value="@tuboda"
+                    placeholder="Ej: @miboda2025"></div>
 
-            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+            <hr class="separator">
 
-            <div class="toggle-row">
-                <span>Mostrar sección Playlist</span>
+            <div class="toggle-row"><span>Mostrar sección Playlist</span>
                 <div class="toggle on" data-field="playlistEnabled" onclick="toggleSwitch(this)"></div>
             </div>
-            <div class="field">
-                <label>Título playlist</label>
-                <input type="text" id="playlistHeading" value="Armemos la playlist juntos">
-            </div>
-            <div class="field">
-                <label>Texto playlist</label>
-                <input type="text" id="playlistBody" value="Agregá esas canciones que no pueden faltar en la fiesta.">
-            </div>
-            <div class="field">
-                <label>URL Spotify Playlist</label>
-                <input type="text" id="playlistUrl" value="https://open.spotify.com/playlist/">
-            </div>
+            <div class="field"><label>Título playlist</label><input type="text" id="playlistHeading"
+                    value="Armemos la playlist juntos"></div>
+            <div class="field"><label>Texto playlist</label><input type="text" id="playlistBody"
+                    value="Agregá esas canciones que no pueden faltar en la fiesta."></div>
+            <div class="field"><label>URL Spotify Playlist</label><input type="text" id="playlistUrl"
+                    value="https://open.spotify.com/playlist/"></div>
 
-            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+            <hr class="separator">
 
-            <div class="toggle-row">
-                <span>Mostrar sección Info Útil</span>
+            <div class="toggle-row"><span>Mostrar sección Info Útil</span>
                 <div class="toggle on" data-field="usefulInfoEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <p class="step-label" style="margin-top:1rem">Cards de Info Útil</p>
@@ -813,11 +787,30 @@ Ascochinga, Córdoba</textarea>
             <button class="btn-add" onclick="addInfoItem()" style="margin-top:1rem; width:100%;">+ Agregar card</button>
         </div>
 
-        <!-- Step 8: Output -->
+        <!-- ============ STEP 8: Open Graph ============ -->
         <div class="step" data-step="7">
-            <p class="step-label">Paso 8 de 8</p>
+            <p class="step-label">Paso 8 de 9</p>
+            <h2>Imagen para compartir</h2>
+            <p class="desc">Cuando alguien comparta el link de tu invitación en WhatsApp, Instagram u otras redes, se va
+                a mostrar esta imagen como vista previa. Es lo primero que van a ver tus invitados cuando les llegue el
+                link.</p>
+            <div class="field">
+                <label>Imagen para redes / WhatsApp</label>
+                <div class="file-picker">
+                    <label class="file-picker-btn" for="ogFile">Seleccionar imagen</label>
+                    <input type="file" id="ogFile" accept="image/*" onchange="onFileSelected(this, 'ogFileName')">
+                    <span class="file-picker-name" id="ogFileName">og.jpg</span>
+                </div>
+                <p class="hint">Subí este archivo a <code>public/media/og/</code> con el nombre <code>og.jpg</code>.
+                    Tamaño recomendado: 1200×630px.</p>
+            </div>
+        </div>
+
+        <!-- ============ STEP 9: Output ============ -->
+        <div class="step" data-step="8">
+            <p class="step-label">Paso 9 de 9</p>
             <h2>¡Listo! Tu configuración</h2>
-            <p class="desc">Descargá el archivo y seguí las instrucciones de abajo.</p>
+            <p class="desc">Descargá el archivo y seguí las instrucciones.</p>
 
             <div class="output-area" id="yamlOutput"></div>
             <div class="output-actions">
@@ -826,7 +819,7 @@ Ascochinga, Córdoba</textarea>
             </div>
 
             <div class="instructions">
-                <h3>📋 Instrucciones para subir tu configuración</h3>
+                <h3>📋 Instrucciones para publicar tu invitación</h3>
                 <ol>
                     <li>Si todavía no creaste tu repo, andá al <a
                             href="https://github.com/LucioB16/juli-y-lucio-wedding" target="_blank">repositorio
@@ -834,16 +827,21 @@ Ascochinga, Córdoba</textarea>
                             repository"</strong>.</li>
                     <li>En tu nuevo repo, andá a <strong>Settings → Pages</strong> y en "Source" elegí <strong>"GitHub
                             Actions"</strong>.</li>
-                    <li>Navegá a la carpeta <code>src/data/</code> en tu repo y hacé click en
-                        <strong><code>wedding.yml</code></strong>.</li>
-                    <li>Hacé click en el ícono de <strong>lápiz (✏️)</strong> arriba a la derecha para editar.</li>
-                    <li><strong>Seleccioná todo</strong> el contenido (Ctrl+A) y <strong>pegá</strong> el YAML que
-                        descargaste o copiaste.</li>
-                    <li>Abajo, hacé click en <strong>"Commit changes"</strong> → <strong>"Commit directly to main
-                            branch"</strong> → <strong>"Commit changes"</strong>.</li>
-                    <li>Subí tus fotos a <code>public/media/couple/</code> y <code>public/media/hero/</code> usando la
-                        misma mecánica (drag & drop en GitHub).</li>
-                    <li>¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos minutos. 🎉</li>
+                    <li>Navegá a <code>src/data/</code> → click en <code>wedding.yml</code> → click en el <strong>lápiz
+                            ✏️</strong> → Seleccioná todo (Ctrl+A) → Pegá tu YAML → <strong>"Commit changes"</strong>.
+                    </li>
+                    <li><strong>Subí tus fotos</strong> arrastrándolas a las carpetas correspondientes en GitHub:
+                        <ul style="margin-top:0.5rem; list-style: disc; padding-left:1.2rem;">
+                            <li><strong>Foto de bienvenida:</strong> subí tu imagen como <code>bg.jpg</code> a
+                                <code>public/media/hero/</code></li>
+                            <li><strong>Fotos de historia:</strong> subí tus fotos con los nombres indicados a
+                                <code>public/media/couple/</code></li>
+                            <li><strong>Imagen para redes:</strong> subí tu imagen como <code>og.jpg</code> a
+                                <code>public/media/og/</code></li>
+                        </ul>
+                    </li>
+                    <li>¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos minutos en
+                        <code>https://TU_USUARIO.github.io/TU_REPO/</code> 🎉</li>
                 </ol>
             </div>
         </div>
@@ -856,9 +854,10 @@ Ascochinga, Córdoba</textarea>
     </div>
 
     <script>
-        const TOTAL_STEPS = 8;
+        const TOTAL_STEPS = 9;
         let currentStep = 0;
         const toggleState = {
+            religiousEnabled: false,
             ceremonyEnabled: true,
             celebrationEnabled: true,
             storyEnabled: true,
@@ -883,21 +882,17 @@ Ascochinga, Córdoba</textarea>
         }
 
         function updateUI() {
-            document.querySelectorAll('.step').forEach((el, i) => {
-                el.classList.toggle('active', i === currentStep);
-            });
+            document.querySelectorAll('.step').forEach((el, i) => el.classList.toggle('active', i === currentStep));
             document.querySelectorAll('.progress-dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentStep);
                 dot.classList.toggle('done', i < currentStep);
             });
             document.getElementById('btnPrev').style.display = currentStep === 0 ? 'none' : '';
             const btnNext = document.getElementById('btnNext');
-            if (currentStep === TOTAL_STEPS - 1) {
-                btnNext.style.display = 'none';
-            } else {
-                btnNext.style.display = '';
-                btnNext.textContent = 'Siguiente →';
-            }
+            btnNext.style.display = currentStep === TOTAL_STEPS - 1 ? 'none' : '';
+
+            // Toggle field visibility
+            document.getElementById('religiousFields').style.display = toggleState.religiousEnabled ? '' : 'none';
 
             if (currentStep === TOTAL_STEPS - 1) generateYaml();
         }
@@ -910,9 +905,54 @@ Ascochinga, Córdoba</textarea>
             const field = el.dataset.field;
             toggleState[field] = !toggleState[field];
             el.classList.toggle('on', toggleState[field]);
+            // Show/hide religious fields
+            if (field === 'religiousEnabled') {
+                document.getElementById('religiousFields').style.display = toggleState[field] ? '' : 'none';
+            }
         }
 
         function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
+
+        // File picker helpers
+        function onFileSelected(input, displayId) {
+            const name = input.files[0]?.name || '';
+            document.getElementById(displayId).textContent = name || 'Ningún archivo';
+            // Wire the click
+        }
+        // Make file picker buttons trigger file inputs
+        document.querySelectorAll('.file-picker-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const input = btn.parentElement.querySelector('input[type="file"]');
+                if (input) input.click();
+            });
+        });
+
+        function onPhotoSelected(input) {
+            const name = input.files[0]?.name || '';
+            const nameEl = input.parentElement.querySelector('.photoFileName');
+            if (nameEl) nameEl.textContent = name || 'Sin archivo';
+        }
+
+        let photoCounter = 1;
+        function addPhoto() {
+            if (document.querySelectorAll('#photoItems .dynamic-item').length >= 4) return alert('Máximo 4 fotos.');
+            photoCounter++;
+            const item = document.createElement('div');
+            item.className = 'dynamic-item';
+            const pad = String(photoCounter).padStart(2, '0');
+            item.innerHTML = `
+        <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
+        <div class="file-picker">
+          <label class="file-picker-btn">Seleccionar foto</label>
+          <input type="file" accept="image/*" onchange="onPhotoSelected(this)" style="display:none">
+          <span class="file-picker-name photoFileName">${pad}.jpg</span>
+        </div>`;
+            document.getElementById('photoItems').appendChild(item);
+            // Wire click
+            item.querySelector('.file-picker-btn').addEventListener('click', () => {
+                item.querySelector('input[type="file"]').click();
+            });
+        }
 
         function addInfoItem() {
             const list = document.getElementById('infoItems');
@@ -924,17 +964,29 @@ Ascochinga, Córdoba</textarea>
           <div class="field"><label>Ícono</label><input type="text" class="infoIcon" value="lucide:info"></div>
           <div class="field"><label>Título</label><input type="text" class="infoTitle" value=""></div>
         </div>
-        <div class="field"><label>Descripción</label><input type="text" class="infoDesc" value=""></div>
-      `;
+        <div class="field"><label>Descripción</label><input type="text" class="infoDesc" value=""></div>`;
             list.appendChild(item);
         }
 
-        function esc(s) { return s.includes(':') || s.includes('"') || s.includes("'") || s.includes('#') || s.includes('{') || s.includes('[') ? `"${s.replace(/"/g, '\\"')}"` : `"${s}"`; }
+        function esc(s) { return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`; }
+
+        // Build ISO datetime from date + time + timezone
+        function buildDatetime(dateId, timeId) {
+            const d = v(dateId);
+            const t = v(timeId);
+            if (!d || !t) return '';
+            return `${d}T${t}:00`;
+        }
+
+        function buildTimeDisplay(timeId) {
+            return v(timeId) ? v(timeId).replace(/^0/, '') + ' hs' : '';
+        }
 
         function generateYaml() {
             const slug = v('displayName').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
             const basePath = '/' + slug + '/';
-            const photos = v('storyPhotos').split('\n').filter(l => l.trim());
+            const tz = v('eventTimezone');
+            const photoEls = document.querySelectorAll('#photoItems .dynamic-item');
             const infoItems = document.getElementById('infoItems').querySelectorAll('.dynamic-item');
 
             let y = '';
@@ -943,17 +995,15 @@ Ascochinga, Córdoba</textarea>
             y += `  baseUrl: "https://YOUR_USERNAME.github.io/${slug}/"\n`;
             y += `  meta:\n`;
             y += `    description: ${esc(v('metaDesc'))}\n`;
-            y += `    ogImage: "${basePath}media/og/og.jpg"\n`;
-            y += `\n`;
+            y += `    ogImage: "${basePath}media/og/og.jpg"\n\n`;
 
             y += `couple:\n`;
             y += `  person1:\n    name: ${esc(v('p1Name'))}\n`;
             y += `  person2:\n    name: ${esc(v('p2Name'))}\n`;
             y += `  displayName: ${esc(v('displayName'))}\n`;
-            y += `  slug: "${slug}"\n`;
-            y += `\n`;
+            y += `  slug: "${slug}"\n\n`;
 
-            y += `locale:\n  language: "es-AR"\n  timeZone: "America/Argentina/Buenos_Aires"\n\n`;
+            y += `locale:\n  language: "es-AR"\n  timeZone: "${tz}"\n\n`;
 
             y += `sections:\n`;
             y += `  countdown:\n    enabled: true\n`;
@@ -966,8 +1016,7 @@ Ascochinga, Córdoba</textarea>
             y += `  rsvp:\n    enabled: ${toggleState.rsvpEnabled}\n`;
             y += `  calendar:\n    enabled: true\n`;
             y += `  playlist:\n    enabled: ${toggleState.playlistEnabled}\n`;
-            y += `  usefulInfo:\n    enabled: ${toggleState.usefulInfoEnabled}\n`;
-            y += `\n`;
+            y += `  usefulInfo:\n    enabled: ${toggleState.usefulInfoEnabled}\n\n`;
 
             y += `hero:\n`;
             y += `  enabled: true\n`;
@@ -975,114 +1024,88 @@ Ascochinga, Córdoba</textarea>
             y += `  subtitle: ${esc(v('heroSubtitle'))}\n`;
             y += `  dateDisplay: ${esc(v('heroDate'))}\n`;
             y += `  city: ${esc(v('heroCity'))}\n`;
-            y += `  backgroundImage: "${basePath}media/hero/bg.jpg"\n`;
-            y += `\n`;
+            y += `  backgroundImage: "${basePath}media/hero/bg.jpg"\n\n`;
 
             y += `countdown:\n`;
-            y += `  target: "${v('celebrationDatetime')}"\n`;
+            y += `  target: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
             y += `  heading: "Cuenta regresiva"\n`;
             y += `  note: "¡Falta muy poco!"\n`;
-            y += `  targetSource: "celebration"\n`;
-            y += `\n`;
+            y += `  targetSource: "celebration"\n\n`;
 
             y += `events:\n`;
+
+            // Religious ceremony
+            y += `  religiousCeremony:\n`;
+            y += `    enabled: ${toggleState.religiousEnabled}\n`;
+            y += `    kindLabel: ${esc(v('religiousLabel') || 'Ceremonia Religiosa')}\n`;
+            y += `    datetime: "${buildDatetime('religiousDate', 'religiousTime')}"\n`;
+            y += `    timeDisplay: "${buildTimeDisplay('religiousTime')}"\n`;
+            y += `    venueName: ${esc(v('religiousVenue'))}\n`;
+            y += `    addressLines:\n`;
+            (v('religiousAddress') || '').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            y += `    mapsUrl: "${v('religiousMaps')}"\n`;
+
+            // Civil ceremony
             y += `  ceremony:\n`;
             y += `    enabled: ${toggleState.ceremonyEnabled}\n`;
             y += `    kindLabel: ${esc(v('ceremonyLabel'))}\n`;
-            y += `    datetime: "${v('ceremonyDatetime')}"\n`;
-            y += `    timeDisplay: ${esc(v('ceremonyTime'))}\n`;
+            y += `    datetime: "${buildDatetime('ceremonyDate', 'ceremonyTime')}"\n`;
+            y += `    timeDisplay: "${buildTimeDisplay('ceremonyTime')}"\n`;
             y += `    venueName: ${esc(v('ceremonyVenue'))}\n`;
             y += `    addressLines:\n`;
             v('ceremonyAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
             y += `    mapsUrl: "${v('ceremonyMaps')}"\n`;
+
+            // Celebration
             y += `  celebration:\n`;
             y += `    enabled: ${toggleState.celebrationEnabled}\n`;
             y += `    kindLabel: ${esc(v('celebrationLabel'))}\n`;
-            y += `    datetime: "${v('celebrationDatetime')}"\n`;
-            y += `    timeDisplay: ${esc(v('celebrationTime'))}\n`;
+            y += `    datetime: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
+            y += `    timeDisplay: "${buildTimeDisplay('celebrationTime')}"\n`;
             y += `    venueName: ${esc(v('celebrationVenue'))}\n`;
             y += `    addressLines:\n`;
             v('celebrationAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
-            y += `    mapsUrl: "${v('celebrationMaps')}"\n`;
-            y += `\n`;
+            y += `    mapsUrl: "${v('celebrationMaps')}"\n\n`;
 
             y += `story:\n`;
             y += `  heading: ${esc(v('storyHeading'))}\n`;
             y += `  subheading: ${esc(v('storySubheading'))}\n`;
             y += `  sentence: ${esc(v('storySentence'))}\n`;
             y += `  photos:\n`;
-            photos.forEach((p, i) => {
-                y += `    - src: "${basePath}media/couple/${p.trim()}"\n`;
+            photoEls.forEach((el, i) => {
+                const fileName = el.querySelector('.photoFileName')?.textContent?.trim() || `${String(i + 1).padStart(2, '0')}.jpg`;
+                y += `    - src: "${basePath}media/couple/${fileName}"\n`;
                 y += `      alt: "Foto ${i + 1}"\n`;
             });
             y += `\n`;
 
-            y += `socials:\n`;
-            y += `  heading: "Redes Sociales"\n`;
+            y += `socials:\n  heading: "Redes Sociales"\n`;
             y += `  body: ${esc(v('socialsBody'))}\n`;
-            y += `  items:\n`;
-            y += `    - label: "Instagram"\n`;
-            y += `      handle: ${esc(v('socialHandle'))}\n`;
-            y += `      url: "${v('socialUrl')}"\n`;
-            y += `\n`;
+            y += `  items:\n    - label: "Instagram"\n      handle: ${esc(v('socialHandle'))}\n      url: "${v('socialUrl')}"\n\n`;
 
-            y += `gifts:\n`;
-            y += `  heading: ${esc(v('giftsHeading'))}\n`;
-            y += `  body: ${esc(v('giftsBody'))}\n`;
+            y += `gifts:\n  heading: ${esc(v('giftsHeading'))}\n  body: ${esc(v('giftsBody'))}\n`;
             y += `  buttonLabel: ${esc(v('giftsButtonLabel'))}\n`;
-            y += `  bank:\n`;
-            y += `    enabled: ${toggleState.bankEnabled}\n`;
-            y += `    holderName: ${esc(v('bankHolder'))}\n`;
-            y += `    bankName: ${esc(v('bankName'))}\n`;
-            y += `    alias: ${esc(v('bankAlias'))}\n`;
-            y += `    cbu: "${v('bankCbu')}"\n`;
-            y += `    cuit: "${v('bankCuit')}"\n`;
-            y += `\n`;
+            y += `  bank:\n    enabled: ${toggleState.bankEnabled}\n`;
+            y += `    holderName: ${esc(v('bankHolder'))}\n    bankName: ${esc(v('bankName'))}\n`;
+            y += `    alias: ${esc(v('bankAlias'))}\n    cbu: "${v('bankCbu')}"\n    cuit: "${v('bankCuit')}"\n\n`;
 
-            y += `dressCode:\n`;
-            y += `  title: ${esc(v('dcTitle'))}\n`;
-            y += `  tag: ${esc(v('dcTag'))}\n`;
-            y += `  body: ${esc(v('dcBody'))}\n`;
-            y += `  brideDisclaimer:\n`;
-            y += `    enabled: ${toggleState.brideDisclaimerEnabled}\n`;
-            y += `    text: ${esc(v('brideDisclaimerText'))}\n`;
-            y += `\n`;
+            y += `dressCode:\n  title: ${esc(v('dcTitle'))}\n  tag: ${esc(v('dcTag'))}\n  body: ${esc(v('dcBody'))}\n`;
+            y += `  brideDisclaimer:\n    enabled: ${toggleState.brideDisclaimerEnabled}\n    text: ${esc(v('brideDisclaimerText'))}\n\n`;
 
-            y += `rsvp:\n`;
-            y += `  text: ${esc(v('rsvpText'))}\n`;
-            y += `  deadline: "${v('rsvpDeadline')}"\n`;
-            y += `  link:\n`;
-            y += `    enabled: ${toggleState.rsvpLinkEnabled}\n`;
-            y += `    url: "${v('rsvpUrl')}"\n`;
-            y += `    label: ${esc(v('rsvpLabel'))}\n`;
-            y += `\n`;
+            y += `rsvp:\n  text: ${esc(v('rsvpText'))}\n  deadline: "${v('rsvpDeadline')}"\n`;
+            y += `  link:\n    enabled: ${toggleState.rsvpLinkEnabled}\n    url: "${v('rsvpUrl')}"\n    label: ${esc(v('rsvpLabel'))}\n\n`;
 
-            y += `calendar:\n`;
-            y += `  mode: "single"\n`;
-            y += `  googleCalendar:\n    enabled: true\n`;
-            y += `  ics:\n    enabled: true\n`;
-            y += `    fileNameSingle: "boda.ics"\n`;
-            y += `    fileNameCeremony: "ceremonia.ics"\n`;
-            y += `    fileNameCelebration: "celebracion.ics"\n`;
-            y += `\n`;
+            y += `calendar:\n  mode: "single"\n  googleCalendar:\n    enabled: true\n  ics:\n    enabled: true\n`;
+            y += `    fileNameSingle: "boda.ics"\n    fileNameCeremony: "ceremonia.ics"\n    fileNameCelebration: "celebracion.ics"\n\n`;
 
-            y += `playlist:\n`;
-            y += `  heading: ${esc(v('playlistHeading'))}\n`;
-            y += `  body: ${esc(v('playlistBody'))}\n`;
-            y += `  spotifyUrl: "${v('playlistUrl')}"\n`;
-            y += `\n`;
+            y += `playlist:\n  heading: ${esc(v('playlistHeading'))}\n  body: ${esc(v('playlistBody'))}\n  spotifyUrl: "${v('playlistUrl')}"\n\n`;
 
-            y += `usefulInfo:\n`;
-            y += `  title: "Info útil"\n`;
-            y += `  items:\n`;
+            y += `usefulInfo:\n  title: "Info útil"\n  items:\n`;
             infoItems.forEach(item => {
-                const icon = item.querySelector('.infoIcon')?.value || 'lucide:info';
-                const title = item.querySelector('.infoTitle')?.value || '';
-                const desc = item.querySelector('.infoDesc')?.value || '';
                 y += `    - enabled: true\n`;
-                y += `      icon: "${icon}"\n`;
-                y += `      title: ${esc(title)}\n`;
-                y += `      description: ${esc(desc)}\n`;
+                y += `      icon: "${item.querySelector('.infoIcon')?.value || 'lucide:info'}"\n`;
+                y += `      title: ${esc(item.querySelector('.infoTitle')?.value || '')}\n`;
+                y += `      description: ${esc(item.querySelector('.infoDesc')?.value || '')}\n`;
             });
 
             document.getElementById('yamlOutput').textContent = y;
