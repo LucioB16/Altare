@@ -362,6 +362,64 @@
             background: var(--primary-light);
         }
 
+        /* OG Mock */
+        .og-mock {
+            max-width: 360px;
+            margin: 1.5rem auto 0;
+            border: 1px solid #dcf8c6;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #e1ecc8;
+            /* WhatsApp incoming message light green */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .og-mock-img {
+            width: 100%;
+            height: 180px;
+            background-color: #cbd5e1;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #71717a;
+            font-size: 0.8rem;
+        }
+
+        .og-mock-content {
+            padding: 0.6rem 0.8rem;
+            background: #f0fdf4;
+        }
+
+        .og-mock-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .og-mock-desc {
+            font-size: 0.8rem;
+            color: #555;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .og-mock-domain {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.3rem;
+            text-transform: lowercase;
+        }
+
         .output-area {
             background: #1e1e1e;
             color: #d4d4d4;
@@ -538,17 +596,24 @@
             <div class="field">
                 <label>Zona horaria de los eventos</label>
                 <select id="eventTimezone" class="tz-select">
-                    <option value="America/Argentina/Buenos_Aires">Argentina (Buenos Aires)</option>
-                    <option value="America/Argentina/Cordoba" selected>Argentina (Córdoba)</option>
-                    <option value="America/Montevideo">Uruguay (Montevideo)</option>
-                    <option value="America/Santiago">Chile (Santiago)</option>
-                    <option value="America/Bogota">Colombia (Bogotá)</option>
-                    <option value="America/Lima">Perú (Lima)</option>
-                    <option value="America/Mexico_City">México (CDMX)</option>
-                    <option value="America/New_York">Estados Unidos (Este)</option>
-                    <option value="America/Los_Angeles">Estados Unidos (Oeste)</option>
-                    <option value="Europe/Madrid">España (Madrid)</option>
-                    <option value="Europe/London">Reino Unido (Londres)</option>
+                    <option value="America/Argentina/Buenos_Aires">UTC-3 Argentina (Buenos Aires)</option>
+                    <option value="America/Argentina/Cordoba" selected>UTC-3 Argentina (Córdoba)</option>
+                    <option value="America/Montevideo">UTC-3 Uruguay (Montevideo)</option>
+                    <option value="America/Asuncion">UTC-4 Paraguay (Asunción)</option>
+                    <option value="America/Santiago">UTC-4 Chile (Santiago)</option>
+                    <option value="America/Caracas">UTC-4 Venezuela (Caracas)</option>
+                    <option value="America/Bogota">UTC-5 Colombia (Bogotá)</option>
+                    <option value="America/Lima">UTC-5 Perú (Lima)</option>
+                    <option value="America/Guayaquil">UTC-5 Ecuador (Guayaquil)</option>
+                    <option value="America/Mexico_City">UTC-6 México (CDMX)</option>
+                    <option value="America/Costa_Rica">UTC-6 Costa Rica (San José)</option>
+                    <option value="America/New_York">UTC-5 Estados Unidos (Este)</option>
+                    <option value="America/Chicago">UTC-6 Estados Unidos (Central)</option>
+                    <option value="America/Denver">UTC-7 Estados Unidos (Montaña)</option>
+                    <option value="America/Los_Angeles">UTC-8 Estados Unidos (Oeste)</option>
+                    <option value="Europe/Madrid">UTC+1 España (Madrid)</option>
+                    <option value="Europe/London">UTC+0 Reino Unido (Londres)</option>
+                    <option value="UTC">UTC Tiempo Universal Coordinado</option>
                 </select>
             </div>
 
@@ -760,6 +825,10 @@ Ascochinga, Córdoba</textarea></div>
                 <div class="toggle on" data-field="usefulInfoEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <p class="step-label" style="margin-top:1rem">Cards de Info Útil</p>
+            <p class="desc" style="margin-bottom:1rem">Para cambiar el ícono, buscá en <a
+                    href="https://icon-sets.iconify.design/lucide/" target="_blank"
+                    style="color:var(--primary); font-weight:600;">Lucide Icons</a> y copiá el nombre. Asegurate de
+                anteponerle "lucide:". Ejemplo: si el ícono se llama "camera", escribí <code>lucide:camera</code>.</p>
             <div class="dynamic-list" id="infoItems">
                 <div class="dynamic-item">
                     <div class="row">
@@ -793,17 +862,29 @@ Ascochinga, Córdoba</textarea></div>
             <p class="step-label">Paso 8 de 9</p>
             <h2>Imagen para compartir</h2>
             <p class="desc">Cuando alguien comparta el link de tu invitación en WhatsApp, Instagram u otras redes, se va
-                a mostrar esta imagen como vista previa. Es lo primero que van a ver tus invitados cuando les llegue el
-                link.</p>
+                a mostrar esta tarjeta como vista previa. El título y la descripción vienen del Paso 1.</p>
             <div class="field">
                 <label>Imagen para redes / WhatsApp</label>
                 <div class="file-picker">
                     <label class="file-picker-btn" for="ogFile">Seleccionar imagen</label>
-                    <input type="file" id="ogFile" accept="image/*" onchange="onFileSelected(this, 'ogFileName')">
+                    <input type="file" id="ogFile" accept="image/*"
+                        onchange="onFileSelected(this, 'ogFileName'); updateOgPreview();">
                     <span class="file-picker-name" id="ogFileName">og.jpg</span>
                 </div>
                 <p class="hint">Subí este archivo a <code>public/media/og/</code> con el nombre <code>og.jpg</code>.
                     Tamaño recomendado: 1200×630px.</p>
+            </div>
+
+            <div class="og-mock">
+                <div class="og-mock-img" id="ogMockImg">
+                    <span>Sin imagen seleccionada</span>
+                </div>
+                <div class="og-mock-content">
+                    <div class="og-mock-title" id="ogMockTitle">Nuestra Boda | Juli & Lucio</div>
+                    <div class="og-mock-desc" id="ogMockDesc">Estás invitado a celebrar con nosotros este momento tan
+                        especial.</div>
+                    <div class="og-mock-domain" id="ogMockDomain">luciob16.github.io</div>
+                </div>
             </div>
         </div>
 
@@ -844,8 +925,10 @@ Ascochinga, Córdoba</textarea></div>
                             </li>
                         </ul>
                     </li>
-                    <li>¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos minutos en
-                        <code>https://TU_USUARIO.github.io/TU_REPO/</code> 🎉
+                    <li style="margin-top:0.5rem;">¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos
+                        minutos en
+                        <code>https://TU_USUARIO.github.io/TU_REPO/</code> 🎉<br>
+                        <em>Nota: la URL final se forma con tu usuario y el nombre que le pusiste al repositorio.</em>
                     </li>
                 </ol>
             </div>
@@ -899,6 +982,7 @@ Ascochinga, Córdoba</textarea></div>
             // Toggle field visibility
             document.getElementById('religiousFields').style.display = toggleState.religiousEnabled ? '' : 'none';
 
+            if (currentStep === 7) updateOgPreview(); // Update mock on step 8
             if (currentStep === TOTAL_STEPS - 1) generateYaml();
         }
 
@@ -987,6 +1071,25 @@ Ascochinga, Córdoba</textarea></div>
             return v(timeId) ? v(timeId).replace(/^0/, '') + ' hs' : '';
         }
 
+        function updateOgPreview() {
+            document.getElementById('ogMockTitle').textContent = v('pageTitle') || 'Título de la invitación';
+            document.getElementById('ogMockDesc').textContent = v('metaDesc') || 'Descripción de la invitación';
+
+            const fileInput = document.getElementById('ogFile');
+            const mockImg = document.getElementById('ogMockImg');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    mockImg.style.backgroundImage = `url(${e.target.result})`;
+                    mockImg.textContent = '';
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                mockImg.style.backgroundImage = 'none';
+                mockImg.textContent = 'Elegí una foto arriba 👆';
+            }
+        }
+
         function generateYaml() {
             const slug = v('displayName').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
             const basePath = '/' + slug + '/';
@@ -1029,7 +1132,9 @@ Ascochinga, Córdoba</textarea></div>
             y += `  subtitle: ${esc(v('heroSubtitle'))}\n`;
             y += `  dateDisplay: ${esc(v('heroDate'))}\n`;
             y += `  city: ${esc(v('heroCity'))}\n`;
-            y += `  backgroundImage: "${basePath}media/hero/bg.jpg"\n\n`;
+
+            const heroFileName = document.getElementById('heroBgName').textContent === 'Ningún archivo' ? 'bg.jpg' : document.getElementById('heroBgName').textContent;
+            y += `  backgroundImage: "${basePath}media/hero/${heroFileName}"\n\n`;
 
             y += `countdown:\n`;
             y += `  target: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
@@ -1075,10 +1180,23 @@ Ascochinga, Córdoba</textarea></div>
             y += `story:\n`;
             y += `  heading: ${esc(v('storyHeading'))}\n`;
             y += `  subheading: ${esc(v('storySubheading'))}\n`;
-            y += `  sentence: ${esc(v('storySentence'))}\n`;
+            // Handles multiline text
+            const storyText = v('storySentence');
+            if (storyText.includes('\n')) {
+                y += `  sentence: |\n`;
+                storyText.split('\n').forEach(line => {
+                    y += `    ${line}\n`;
+                });
+            } else {
+                y += `  sentence: ${esc(storyText)}\n`;
+            }
+
             y += `  photos:\n`;
             photoEls.forEach((el, i) => {
-                const fileName = el.querySelector('.photoFileName')?.textContent?.trim() || `${String(i + 1).padStart(2, '0')}.jpg`;
+                let fileName = el.querySelector('.photoFileName')?.textContent?.trim();
+                if (!fileName || fileName === 'Sin archivo') {
+                    fileName = `${String(i + 1).padStart(2, '0')}.jpg`;
+                }
                 y += `    - src: "${basePath}media/couple/${fileName}"\n`;
                 y += `      alt: "Foto ${i + 1}"\n`;
             });
@@ -1097,7 +1215,17 @@ Ascochinga, Córdoba</textarea></div>
             y += `dressCode:\n  title: ${esc(v('dcTitle'))}\n  tag: ${esc(v('dcTag'))}\n  body: ${esc(v('dcBody'))}\n`;
             y += `  brideDisclaimer:\n    enabled: ${toggleState.brideDisclaimerEnabled}\n    text: ${esc(v('brideDisclaimerText'))}\n\n`;
 
-            y += `rsvp:\n  text: ${esc(v('rsvpText'))}\n  deadline: "${v('rsvpDeadline')}"\n`;
+            // RSVP text multiline support
+            const rsvpText = v('rsvpText');
+            if (rsvpText.includes('\n')) {
+                y += `rsvp:\n  text: |\n`;
+                rsvpText.split('\n').forEach(line => {
+                    y += `    ${line}\n`;
+                });
+            } else {
+                y += `rsvp:\n  text: ${esc(rsvpText)}\n`;
+            }
+            y += `  deadline: "${v('rsvpDeadline')}"\n`;
             y += `  link:\n    enabled: ${toggleState.rsvpLinkEnabled}\n    url: "${v('rsvpUrl')}"\n    label: ${esc(v('rsvpLabel'))}\n\n`;
 
             y += `calendar:\n  mode: "single"\n  googleCalendar:\n    enabled: true\n  ics:\n    enabled: true\n`;

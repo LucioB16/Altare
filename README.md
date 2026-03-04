@@ -19,7 +19,12 @@ Hacé click en el botón de abajo para crear una copia del template en tu cuenta
 > 
 > Elegí un nombre corto y sin espacios como `mi-boda` o `boda-maria-y-juan`. Dejá el repo como **público**.
 
-### Paso 2: Configurar tu invitación
+### Paso 2: Activar GitHub Pages
+
+1. Andá a **Settings** → **Pages** en tu repositorio
+2. En **"Source"**, elegí **"GitHub Actions"**
+
+### Paso 3: Configurar tu invitación
 
 Usá nuestro **Config Builder** para generar tu archivo de configuración sin tocar código:
 
@@ -27,7 +32,7 @@ Usá nuestro **Config Builder** para generar tu archivo de configuración sin to
 
 El Config Builder te guía paso a paso para configurar:
 - 👫 Nombres de la pareja
-- � Fechas y horarios con selectores visuales
+- 📅 Fechas y horarios con selectores visuales
 - ⛪ Ceremonia religiosa (opcional) y civil
 - 🎉 Fiesta / celebración
 - 📸 Fotos de portada e historia (1–4 fotos)
@@ -40,7 +45,7 @@ El Config Builder te guía paso a paso para configurar:
 
 Al final genera un archivo `wedding.yml` que descargás o copiás.
 
-### Paso 3: Subir la configuración y las fotos
+### Paso 4: Subir la configuración y las fotos
 
 **Configuración:**
 1. Andá a tu repositorio en GitHub
@@ -55,11 +60,7 @@ Al final genera un archivo `wedding.yml` que descargás o copiás.
 
 > 💡 **Tip:** Podés arrastrar archivos directamente a la carpeta en GitHub para subirlos sin necesidad de usar Git.
 
-### Paso 4: Activar GitHub Pages
-
-1. Andá a **Settings** → **Pages** en tu repositorio
-2. En **"Source"**, elegí **"GitHub Actions"**
-3. ¡Listo! En unos minutos tu sitio estará disponible en `https://TU_USUARIO.github.io/TU_REPO/`
+¡Listo! En unos minutos tu sitio estará disponible en `https://TU_USUARIO.github.io/TU_REPO/`
 
 > 💡 La URL de tu invitación se forma con tu **nombre de usuario de GitHub** + el **nombre del repositorio** que elegiste al hacer click en "Use this template". Por ejemplo, si tu usuario es `mariaj` y nombraste tu repo `mi-boda`, tu invitación va a estar en `https://mariaj.github.io/mi-boda/`.
 
