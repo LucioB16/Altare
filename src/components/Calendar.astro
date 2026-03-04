@@ -3,52 +3,96 @@ import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 
 const { calendar, events } = getWeddingData();
-const ceremonyStart = events.ceremony.datetime.replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
-const ceremonyEnd = new Date(new Date(events.ceremony.datetime).getTime() + 2 * 60 * 60 * 1000).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+const ceremonyStart = events.ceremony.datetime
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}Z$/, "Z");
+const ceremonyEnd = new Date(
+    new Date(events.ceremony.datetime).getTime() + 2 * 60 * 60 * 1000,
+)
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}Z$/, "Z");
 
-const celebStart = events.celebration.datetime.replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
-const celebEnd = new Date(new Date(events.celebration.datetime).getTime() + 6 * 60 * 60 * 1000).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+const celebStart = events.celebration.datetime
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}Z$/, "Z");
+const celebEnd = new Date(
+    new Date(events.celebration.datetime).getTime() + 6 * 60 * 60 * 1000,
+)
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}Z$/, "Z");
 
-// Funciones helpers para crear URLs de Google Calendar
-const createGCalUrl = (text: string, dates: string, details: string, location: string) => {
+const createGCalUrl = (
+    text: string,
+    dates: string,
+    details: string,
+    location: string,
+) => {
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(text)}&dates=${dates}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
 };
 
 const singleGCalUrl = createGCalUrl(
-    "Nuestra Boda", 
-    `${ceremonyStart}/${celebEnd}`, 
-    "¡Los esperamos para celebrar!", 
-    events.celebration.venueName
+    "Nuestra Boda",
+    `${ceremonyStart}/${celebEnd}`,
+    "¡Los esperamos para celebrar!",
+    events.celebration.venueName,
 );
+import Divider from "./Divider.astro";
+import SectionIcon from "./SectionIcon.astro";
 ---
 
-<section class="section" style="background-color: var(--color-background-alt, #f9fafb)">
-    <div class="section__inner container mx-auto px-4 py-16 text-center max-w-2xl flex flex-col items-center">
-        <div class="text-5xl text-primary mb-6">
-            <Icon name="lucide:calendar-heart" />
-        </div>
-        <h2 class="text-3xl font-bold mb-8">Agendá la fecha</h2>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            {calendar.googleCalendar.enabled && (
-                <a 
-                    href={singleGCalUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors"
-                >
-                    <Icon name="lucide:calendar-check" />
-                    Google Calendar
-                </a>
-            )}
-            
-            {/* Fallback to ICS file structure if needed, keeping it simple array for now */}
-            {calendar.ics.enabled && (
-                <a href="#" class="flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors">
-                    <Icon name="lucide:apple" />
-                    Apple / Outlook
-                </a>
-            )}
+<Divider type="small" />
+<section class="section py-24 bg-white">
+    <div class="section__inner container mx-auto px-6 text-center max-w-5xl">
+        <SectionIcon name="calendar" />
+
+        <p
+            class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4"
+        >
+            Agendá la fecha
+        </p>
+
+        <h2
+            class="text-4xl md:text-5xl font-display text-primary tracking-wide mb-10"
+            style="font-family: var(--font-display);"
+        >
+            Calendarios
+        </h2>
+
+        <div
+            class="border border-gray-200 bg-[#F8F7F4] p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center"
+        >
+            <div class="flex flex-col sm:flex-row gap-4 justify-center w-full">
+                {
+                    calendar.googleCalendar.enabled && (
+                        <a
+                            href={singleGCalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center justify-center gap-3 bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors w-full sm:w-auto"
+                        >
+                            <Icon
+                                name="lucide:calendar-check"
+                                class="text-lg"
+                            />
+                            <span>GOOGLE CALENDAR</span>
+                        </a>
+                    )
+                }
+
+                {
+                    calendar.ics.enabled && (
+                        <a
+                            href="#"
+                            class="flex items-center justify-center gap-3 border border-primary text-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-primary hover:text-white transition-colors w-full sm:w-auto"
+                        >
+                            <Icon name="lucide:apple" class="text-lg" />
+                            <span>APPLE / OUTLOOK</span>
+                        </a>
+                    )
+                }
+            </div>
         </div>
     </div>
 </section>

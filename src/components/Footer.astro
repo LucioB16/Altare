@@ -10,27 +10,84 @@ const { couple } = getWeddingData();
     style="background-color: var(--color-primary); color: var(--color-secondary);"
 >
     <!-- Decorative Leaves above -->
-    <div class="flex gap-4 mb-6 text-white text-xl opacity-50">
-        <Icon name="lucide:leaf" class="-rotate-45" />
-        <Icon name="lucide:sprout" />
-        <Icon name="lucide:leaf" class="rotate-45" />
+    <div class="flex justify-center mb-6 opacity-60">
+        <svg viewBox="0 0 30 40" class="w-8 h-10 mx-auto" fill="none">
+            <path
+                d="M15 38 Q16 25 15 12"
+                stroke="#FFFFFF"
+                stroke-width="0.7"
+                stroke-linecap="round"
+                opacity="0.8"></path>
+            <path
+                d="M15 12 Q10 8 12 3 Q15 6 15 12"
+                stroke="#FFFFFF"
+                stroke-width="0.6"
+                fill="none"
+                opacity="0.9"></path>
+            <path
+                d="M15 12 Q20 8 18 3 Q15 6 15 12"
+                stroke="#FFFFFF"
+                stroke-width="0.6"
+                fill="none"
+                opacity="0.9"></path>
+            <path
+                d="M15 12 Q8 10 6 6 Q12 8 15 12"
+                stroke="#FFFFFF"
+                stroke-width="0.6"
+                fill="none"
+                opacity="0.85"></path>
+            <path
+                d="M15 12 Q22 10 24 6 Q18 8 15 12"
+                stroke="#FFFFFF"
+                stroke-width="0.6"
+                fill="none"
+                opacity="0.85"></path>
+            <circle cx="15" cy="12" r="1.5" fill="#FFFFFF" opacity="0.6"
+            ></circle>
+            <path
+                d="M15 28 Q10 26 9 21 Q12 24 15 27"
+                stroke="#FFFFFF"
+                stroke-width="0.5"
+                fill="none"
+                opacity="0.6"></path>
+        </svg>
     </div>
 
     <!-- Main Message -->
-    <h2 class="text-4xl md:text-5xl lg:text-[64px] mb-8 font-normal tracking-wide" style="font-family: var(--font-display);">
+    <h2
+        class="text-4xl md:text-5xl lg:text-[64px] mb-8 font-normal tracking-wide"
+        style="font-family: var(--font-display);"
+    >
         ¡Gracias por acompañarnos!
     </h2>
 
     <!-- Couple Name with solid white hearts -->
-    <div class="flex items-center gap-4 text-2xl md:text-3xl mb-16" style="font-family: var(--font-display);">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
-          <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+    <div
+        class="flex items-center gap-4 text-2xl md:text-3xl mb-16"
+        style="font-family: var(--font-display);"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="w-6 h-6 text-white"
+        >
+            <path
+                d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+            ></path>
         </svg>
-        
+
         <span>{couple.displayName}</span>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
-          <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="w-6 h-6 text-white"
+        >
+            <path
+                d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+            ></path>
         </svg>
     </div>
 

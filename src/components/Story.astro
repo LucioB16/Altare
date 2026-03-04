@@ -1,51 +1,107 @@
 ---
 import { getWeddingData } from "../data/weddingData";
+import Divider from "./Divider.astro";
+import SectionIcon from "./SectionIcon.astro";
 
 const { story } = getWeddingData();
-const photo = story.photos[0]; // Take the first photo as the main story photo
+const photos = story.photos || [];
+const photoCount = Math.min(photos.length, 4);
 ---
 
-<section
-    class="py-24 px-6"
-    style="background-color: var(--color-background); color: var(--color-secondary);"
->
-    <div
-        class="mx-auto flex max-w-6xl flex-col gap-12 md:flex-row md:items-center"
-    >
-        <div class="md:w-7/12 space-y-6">
-            <p
-                class="text-sm uppercase tracking-[0.35em] font-(--font-sans)"
-                style="color: var(--color-primary); opacity: 0.7;"
-            >
-                {story.subheading}
-            </p>
-            <h2
-                class="text-4xl sm:text-5xl tracking-tight font-(--font-display)"
-                style="color: var(--color-primary);"
-            >
-                {story.heading}
-            </h2>
-            <p
-                class="text-lg leading-relaxed whitespace-pre-line font-(--font-sans)"
-                style="color: var(--color-primary); opacity: 0.8;"
-            >
-                {story.sentence}
-            </p>
-        </div>
+<Divider type="large" />
+<section class="section py-24 bg-white">
+    <div class="section__inner container mx-auto px-6 max-w-5xl text-center">
+        <SectionIcon name="story" />
 
-        <div class="md:w-5/12">
-            <div class="relative">
-                <div class="relative rounded-4xl border p-4 backdrop-blur">
-                    {photo && (
-                        <img
-                            src={photo.src}
-                            alt={photo.alt}
-                            class="h-full w-full rounded-3xl object-cover"
-                            loading="lazy"
-                        />
-                    )}
+        <p
+            class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4"
+        >
+            {story.subheading}
+        </p>
+
+        <h2
+            class="text-4xl md:text-5xl font-display text-primary tracking-wide mb-10"
+            style="font-family: var(--font-display);"
+        >
+            {story.heading}
+        </h2>
+
+        {/* Photo grid */}
+        {
+            photoCount > 0 && (
+                <div class:list={["story-grid", `story-grid--${photoCount}`]}>
+                    {photos.slice(0, 4).map((photo: any) => (
+                        <div class="story-grid__item">
+                            <img
+                                src={photo.src}
+                                alt={photo.alt}
+                                class="w-full h-full object-cover"
+                                loading="lazy"
+                            />
+                        </div>
+                    ))}
                 </div>
-            </div>
-        </div>
+            )
+        }
+
+        {
+            story.sentence && (
+                <p
+                    class="text-gray-600 leading-relaxed font-sans mt-10 max-w-2xl mx-auto italic"
+                    style="font-family: var(--font-display);"
+                >
+                    {story.sentence}
+                </p>
+            )
+        }
     </div>
 </section>
+
+<style>
+    .story-grid {
+        display: grid;
+        gap: 6px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .story-grid__item {
+        overflow: hidden;
+        aspect-ratio: 1;
+    }
+
+    .story-grid__item img {
+        transition: transform 0.4s ease;
+    }
+
+    .story-grid__item:hover img {
+        transform: scale(1.03);
+    }
+
+    /* 1 photo: single full-width */
+    .story-grid--1 {
+        grid-template-columns: 1fr;
+    }
+    .story-grid--1 .story-grid__item {
+        aspect-ratio: 4/3;
+    }
+
+    /* 2 photos: side by side */
+    .story-grid--2 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* 3 photos: first one large, two small below */
+    .story-grid--3 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .story-grid--3 .story-grid__item:first-child {
+        grid-column: 1 / -1;
+        aspect-ratio: 16/9;
+    }
+
+    /* 4 photos: 2x2 grid */
+    .story-grid--4 {
+        grid-template-columns: 1fr 1fr;
+    }
+</style>

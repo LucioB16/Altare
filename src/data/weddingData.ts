@@ -62,6 +62,8 @@ export interface WeddingData {
     photos: { src: string; alt: string }[];
   };
   socials: {
+    heading?: string;
+    body?: string;
     items: { label: string; handle: string; url: string }[];
   };
   gifts: {
@@ -81,12 +83,19 @@ export interface WeddingData {
     title: string;
     tag: string;
     body: string;
+    brideDisclaimer?: {
+      enabled: boolean;
+      text?: string;
+    };
   };
   rsvp: {
-    mode: "texto" | "link";
     text: string;
-    url: string;
     deadline?: string;
+    link?: {
+      enabled: boolean;
+      url?: string;
+      label?: string;
+    };
   };
   calendar: {
     mode: "single" | "two";

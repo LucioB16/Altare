@@ -1,77 +1,83 @@
 ---
 import { getWeddingData } from "../data/weddingData";
+import Icon from "./Icon.astro";
 const { hero } = getWeddingData();
 ---
 
 <section
     id="hero"
-    class="hero relative overflow-hidden [&_.section__inner]:max-w-none [&_.section__inner]:p-0"
+    class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center text-center px-6"
     style={`
-        ${hero.backgroundImage ? `background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("${hero.backgroundImage}");` : ''}
+        scroll-snap-align: start;
+        ${hero.backgroundImage ? `background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.6)), url("${hero.backgroundImage}");` : ""}
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: var(--color-primary);
+        background-color: var(--color-background);
     `}
 >
-    <div class="w-full px-6 py-20 md:py-28 lg:py-36">
-        <div
-            class="mx-auto flex w-full max-w-6xl flex-col gap-12 md:flex-row md:items-end"
+    <!-- Content container -->
+    <div
+        class="hero-content z-10 flex flex-col items-center justify-center space-y-6 md:space-y-8 mt-12 opacity-0"
+    >
+        <p
+            class="text-sm md:text-base tracking-[0.4em] font-sans uppercase text-gray-700"
         >
-            <div class="space-y-6 text-left md:max-w-3xl">
-                <p
-                    class="text-xs uppercase tracking-[0.65em]"
-                    style="color: var(--color-background); opacity: 0.9;"
-                >
-                    {hero.subtitle}
-                </p>
-                <h1
-                    class="font-display text-[clamp(3.5rem,8vw,6.5rem)] uppercase leading-[0.88] tracking-tight drop-shadow-md"
-                    id="hero-heading"
-                    data-hero-title={hero.title}
-                    style="color: var(--color-background);"
-                >
-                    {hero.title}
-                </h1>
-            </div>
+            {hero.title}
+        </p>
 
-            <div class="text-left md:text-right">
-                <p
-                    class="font-display text-4xl uppercase tracking-[0.2em]"
-                    style="color: var(--color-background);"
-                >
-                    {hero.dateDisplay}
-                </p>
-                <p
-                    class="mt-4 text-sm font-semibold uppercase tracking-[0.35em]"
-                    style="color: var(--color-background); opacity: 0.9;"
-                >
-                    {hero.city}
-                </p>
-            </div>
+        <h1
+            class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-normal text-primary drop-shadow-sm"
+            style="font-family: var(--font-display);"
+            id="hero-heading"
+        >
+            {hero.subtitle}
+        </h1>
+
+        <div class="space-y-3 mt-4 text-gray-700">
+            <p
+                class="text-xl md:text-2xl"
+                style="font-family: var(--font-display);"
+            >
+                {hero.dateDisplay}
+            </p>
+            <p
+                class="text-xs md:text-sm tracking-[0.2em] uppercase font-sans opacity-90"
+            >
+                {hero.city}
+            </p>
         </div>
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <div
+        class="scroll-indicator absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-0"
+    >
+        <Icon
+            name="lucide:arrow-down"
+            class="text-2xl text-gray-600 opacity-70"
+        />
     </div>
 </section>
 
 <script>
     import gsap from "gsap";
-    import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
-    gsap.registerPlugin(ScrambleTextPlugin);
 
     requestAnimationFrame(() => {
-        const heading = document.querySelector("#hero-heading");
-        if (!heading) return;
-        const targetText =
-            heading.dataset.heroTitle ?? heading.textContent ?? "";
-        gsap.to(heading, {
-            scrambleText: {
-                text: targetText,
-                revealDelay: 0.2,
-                tweenLength: true,
-            },
-            ease: "power2.inOut",
-            overwrite: "auto",
-            duration: 1,
+        // Smooth elegant fade in for the hero content
+        gsap.to(".hero-content", {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.3,
+        });
+
+        gsap.to(".scroll-indicator", {
+            opacity: 1,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 1.2,
         });
     });
 </script>

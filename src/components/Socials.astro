@@ -3,24 +3,53 @@ import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 
 const { socials } = getWeddingData();
+import Divider from "./Divider.astro";
+import SectionIcon from "./SectionIcon.astro";
 ---
 
-<section class="section bg-gray-50">
-    <div class="section__inner container mx-auto px-4 py-16 text-center">
-        <h2 class="text-3xl font-bold mb-8">Compartí con nosotros</h2>
-        <div class="flex flex-wrap justify-center gap-6">
-            {socials.items.map((item) => (
-                <a 
-                    href={item.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm hover:shadow-md transition-shadow"
-                >
-                    <Icon name="lucide:instagram" class="text-xl text-primary" />
-                    <span class="font-medium text-gray-800">{item.handle}</span>
-                </a>
-            ))}
+<Divider type="small" />
+<section class="section py-24 bg-[#F8F7F4]">
+    <div class="section__inner container mx-auto px-6 text-center max-w-5xl">
+        <SectionIcon name="info" />
+
+        <p
+            class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4"
+        >
+            Compartí con nosotros
+        </p>
+
+        <h2
+            class="text-4xl md:text-5xl font-display text-primary tracking-wide mb-10"
+            style="font-family: var(--font-display);"
+        >
+            {socials.heading || "Redes Sociales"}
+        </h2>
+
+        <div
+            class="border border-gray-200 bg-white p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center"
+        >
+            {
+                socials.body && (
+                    <p class="text-gray-600 font-sans italic mb-8">
+                        {socials.body}
+                    </p>
+                )
+            }
+            <div class="flex flex-wrap justify-center gap-6 w-full">
+                {
+                    socials.items.map((item) => (
+                        <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="w-full sm:w-auto flex items-center justify-center gap-3 bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors"
+                        >
+                            <Icon name="lucide:instagram" class="text-xl" />
+                            <span>VER EN INSTAGRAM</span>
+                        </a>
+                    ))
+                }
+            </div>
         </div>
-        <p class="mt-8 text-gray-500 text-sm">Usá nuestro hashtag en tus fotos y videos</p>
     </div>
 </section>

@@ -41,6 +41,10 @@
         @apply antialiased;
     }
 
+    html {
+        scroll-snap-type: y mandatory;
+    }
+
     body {
         font-family: var(--font-sans);
         background-color: var(--color-background);
@@ -59,13 +63,18 @@
 
 @layer components {
     .section {
-        min-height: 100vh;
+        min-height: auto;
         padding: var(--section-padding);
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
+        scroll-snap-align: start;
+    }
+
+    footer {
+        scroll-snap-align: start;
     }
 
     .section__inner {

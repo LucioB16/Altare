@@ -83,9 +83,17 @@ story:
   sentence: "Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre. Las risas, los viajes y los mates compartidos nos trajeron hasta acá."
   photos:
     - src: "/juli-y-lucio-wedding/media/couple/01.jpg"
-      alt: "Foto tu y yo"
+      alt: "Foto juntos 1"
+    - src: "/juli-y-lucio-wedding/media/couple/02.jpg"
+      alt: "Foto juntos 2"
+    - src: "/juli-y-lucio-wedding/media/couple/03.jpg"
+      alt: "Foto juntos 3"
+    - src: "/juli-y-lucio-wedding/media/couple/04.jpg"
+      alt: "Foto juntos 4"
 
 socials:
+  heading: "Redes Sociales"
+  body: "Además, antes del casamiento, recibirás un link donde podrás subir todas tus fotos y videos del evento para compartirlos con nosotros y no perdernos nada de ese día."
   items:
     - label: "Instagram"
       handle: "@juliylucio_boda"
@@ -107,12 +115,17 @@ dressCode:
   title: "Dress Code"
   tag: "Formal – Elegante"
   body: "Te esperamos con tu mejor look para celebrar juntos."
+  brideDisclaimer:
+    enabled: true
+    text: "Como es tradición, los colores blancos, o similares, estarán reservados para la novia."
 
 rsvp:
-  mode: "texto" # "texto" | "link"
   text: "Por favor confirmá tu asistencia antes del 1 de Mayo."
-  url: "https://wa.me/123456789"
   deadline: "2026-05-01"
+  link:
+    enabled: false
+    url: "https://wa.me/123456789"
+    label: "CONFIRMAR ASISTENCIA"
 
 calendar:
   mode: "single" # "single" | "two"

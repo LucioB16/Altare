@@ -3,39 +3,46 @@ import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 
 const { gifts } = getWeddingData();
+import Divider from "./Divider.astro";
+import SectionIcon from "./SectionIcon.astro";
 ---
 
-<section class="section">
-    <div class="section__inner container mx-auto px-4 py-16 text-center max-w-2xl">
-        <div class="text-5xl text-primary mb-6 flex justify-center">
-            <Icon name="lucide:gift" />
-        </div>
-        <h2 class="text-3xl font-bold mb-4">{gifts.heading}</h2>
-        <p class="text-lg text-gray-600 mb-8">{gifts.body}</p>
+<Divider type="flower" />
+<section class="section py-24 bg-[#F8F7F4]">
+  <div class="section__inner container mx-auto px-6 text-center max-w-5xl">
+
+    <SectionIcon name="gifts" />
+
+    <p class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4">
+        Tu presencia es nuestro regalo
+    </p>
+
+    <h2 class="text-4xl md:text-5xl font-display text-primary tracking-wide mb-10" style="font-family: var(--font-display);">
+        {gifts.heading}
+    </h2>
+
+    <div class="border border-gray-200 bg-white p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center">
+        <p class="text-gray-600 leading-relaxed font-sans mb-10">
+            {gifts.body}
+        </p>
         
         {gifts.bank.enabled && (
-            <div x-data="{ open: false }">
-                <button 
-                    @click="open = true"
-                    class="inline-block border-2 border-primary text-primary font-bold py-3 px-8 rounded-full hover:bg-primary hover:text-white transition-colors"
-                >
-                    {gifts.buttonLabel}
-                </button>
-
-                <!-- Modal naive implementation, considering Astro SSG -> best to use simple CSS/JS or Alpine. 
-                     For simplicity we will render the bank details directly inline but styled as a card -->
-                <div class="mt-8 bg-gray-50 p-6 rounded-2xl text-left shadow-inner max-w-md mx-auto">
-                    <p class="mb-2"><span class="font-semibold">Titular:</span> {gifts.bank.holderName}</p>
-                    <p class="mb-2"><span class="font-semibold">Banco:</span> {gifts.bank.bankName}</p>
-                    <p class="mb-2 flex justify-between items-center group">
-                        <span><span class="font-semibold">Alias:</span> <span id="bank-alias">{gifts.bank.alias}</span></span>
-                    </p>
-                    <p class="mb-2 flex justify-between items-center group">
-                        <span><span class="font-semibold">CBU/CVU:</span> <span id="bank-cbu">{gifts.bank.cbu}</span></span>
-                    </p>
-                    <p class="mb-2"><span class="font-semibold">CUIT/CUIL:</span> {gifts.bank.cuit}</p>
-                </div>
+            <div class="w-full flex inset-0 justify-center">
+                <!-- Using a simple details/summary tag instead of AlpineJS to keep it vanilla HTML and easy -->
+                <details class="w-full max-w-md cursor-pointer group">
+                    <summary class="bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors list-none text-center">
+                        {gifts.buttonLabel}
+                    </summary>
+                    <div class="mt-6 bg-[#F8F7F4] p-6 text-left border border-gray-100 text-sm text-gray-700">
+                        <p class="mb-3"><span class="font-semibold text-primary">Titular:</span> {gifts.bank.holderName}</p>
+                        <p class="mb-3"><span class="font-semibold text-primary">Banco:</span> {gifts.bank.bankName}</p>
+                        <p class="mb-3"><span class="font-semibold text-primary">Alias:</span> {gifts.bank.alias}</p>
+                        <p class="mb-3"><span class="font-semibold text-primary">CBU/CVU:</span> {gifts.bank.cbu}</p>
+                        <p class="mb-0"><span class="font-semibold text-primary">CUIT/CUIL:</span> {gifts.bank.cuit}</p>
+                    </div>
+                </details>
             </div>
         )}
     </div>
+  </div>
 </section>
