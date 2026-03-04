@@ -76,6 +76,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
@@ -100,13 +102,18 @@ jobs:
           # URL without trailing slash
           URL="${PAGE_URL%/}"
           
-          # Replace Demo Link
-          # Badge markdown: [![Ver Demo en Vivo](...)](https://old-url.com/)
-          sed -i -E "s|(\[![^]]+\]\([^)]+\)\])\([^)]+\)|\1($URL/)|g" README.md
+          if [ -z "$URL" ]; then
+            echo "URL is empty, skipping README update."
+            exit 0
+          fi
           
-          # Replace Config Builder Link (adds /config-builder/ to the end)
-          # Badge markdown: [![Abrir Config Builder](...)](https://old-url.com/config-builder/)
-          sed -i -E "s|(\[![^]]+\]\([^)]+\)\])\([^)]+/config-builder/?\)|\1($URL/config-builder/)|g" README.md
+          # Replace Demo Link specifically searching for "Demo" in the badge text
+          # Badge markdown: [![Ver Demo en Vivo](...)](https://old-url.com/)
+          sed -i -E "s|(\[!\[[^]]*Demo[^]]*\]\([^)]+\)\])\([^)]+\)|\1($URL/)|gi" README.md
+          
+          # Replace Config Builder Link specifically searching for "Config Builder" in the badge text
+          # Badge markdown: [![Abrir Config Builder](...)](...)
+          sed -i -E "s|(\[!\[[^]]*Config Builder[^]]*\]\([^)]+\)\])\([^)]+\)|\1($URL/config-builder/)|gi" README.md
           
           # Check if there are changes
           if git diff --quiet README.md; then

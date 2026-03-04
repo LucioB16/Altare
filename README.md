@@ -12,7 +12,7 @@ Una invitación de boda digital, elegante y 100% configurable. Desplegá tu prop
 
 Hacé click en el botón de abajo para crear una copia del template en tu cuenta de GitHub:
 
-[![Use this template](https://img.shields.io/badge/Usar_este_template-238636?style=for-the-badge&logo=github&logoColor=white)](/)
+[![Use this template](https://img.shields.io/badge/Usar_este_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
 
 > 💡 **Nota importante:** El nombre que le pongas al repositorio determinará el link (URL) final de tu invitación. 
 > Por ejemplo, si tu usuario de GitHub es `mariaj` y elegís el nombre `mi-boda` para el repo, tu invitación quedará en: `https://mariaj.github.io/mi-boda/`
@@ -28,7 +28,7 @@ Hacé click en el botón de abajo para crear una copia del template en tu cuenta
 
 Usá nuestro **Config Builder** para generar tu archivo de configuración sin tocar código:
 
-[![Abrir Config Builder](https://img.shields.io/badge/🔧_Abrir_Config_Builder-5A7156?style=for-the-badge&logoColor=white)](/)
+[![Abrir Config Builder](https://img.shields.io/badge/🔧_Abrir_Config_Builder-5A7156?style=for-the-badge&logoColor=white)](https://luciob16.github.io/Altare/config-builder/)
 
 El Config Builder te guía paso a paso para configurar:
 - 👫 Nombres de la pareja
