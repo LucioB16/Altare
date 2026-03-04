@@ -272,6 +272,131 @@
             transform: translateX(20px);
         }
 
+        /* Story Mock Preview */
+        .story-mock {
+            margin-top: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .story-mock-header {
+            background: #f1f5f9;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #64748b;
+            border-bottom: 1px solid var(--border);
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .story-mock-header::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            box-shadow: 16px 0 0 #cbd5e1, 32px 0 0 #cbd5e1;
+            margin-right: auto;
+        }
+
+        .story-mock-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .story-mock-body {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .story-mock-content,
+            .story-mock-gallery {
+                flex: 1;
+            }
+        }
+
+        .story-mock-content {
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .story-mock-content {
+                text-align: left;
+                padding-right: 1.5rem;
+            }
+        }
+
+        .story-mock-subheading {
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-mock-heading {
+            font-size: 1.75rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .story-mock-text {
+            font-size: 0.95rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .story-mock-gallery {
+            display: grid;
+            gap: 8px;
+            grid-template-columns: 1fr;
+        }
+
+        .story-mock-gallery.count-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .story-mock-gallery.count-3,
+        .story-mock-gallery.count-4 {
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: 150px;
+        }
+
+        .story-mock-img {
+            width: 100%;
+            height: 200px;
+            background-color: #f1f5f9;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .story-mock-gallery.count-3 .story-mock-img,
+        .story-mock-gallery.count-4 .story-mock-img {
+            height: 100%;
+        }
+
+        .story-mock-gallery.count-3 .story-mock-img:first-child {
+            grid-column: span 2;
+            height: 200px;
+        }
+
         .dynamic-list {
             display: flex;
             flex-direction: column;
@@ -702,11 +827,11 @@ Ascochinga, Córdoba</textarea></div>
                 <div class="toggle on" data-field="storyEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="storyFields">
-                <div class="field"><label>Subtítulo</label><input type="text" id="storySubheading" value="Nosotros">
-                </div>
-                <div class="field"><label>Título</label><input type="text" id="storyHeading" value="Nuestra historia">
-                </div>
-                <div class="field"><label>Texto</label><textarea id="storySentence"
+                <div class="field"><label>Subtítulo</label><input type="text" id="storySubheading" value="Nosotros"
+                        oninput="updateStoryPreview()"></div>
+                <div class="field"><label>Título</label><input type="text" id="storyHeading" value="Nuestra historia"
+                        oninput="updateStoryPreview()"></div>
+                <div class="field"><label>Texto</label><textarea id="storySentence" oninput="updateStoryPreview()"
                         rows="3">Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</textarea>
                 </div>
 
@@ -719,14 +844,34 @@ Ascochinga, Córdoba</textarea></div>
                     <div class="dynamic-item">
                         <div class="file-picker">
                             <label class="file-picker-btn" for="photoFile01">Seleccionar foto</label>
-                            <input type="file" id="photoFile01" accept="image/*" onchange="onPhotoSelected(this)"
-                                style="display:none">
+                            <input type="file" id="photoFile01" accept="image/*"
+                                onchange="onPhotoSelected(this); updateStoryPreview();" style="display:none">
                             <span class="file-picker-name photoFileName">01.jpg</span>
                         </div>
                     </div>
                 </div>
-                <button class="btn-add" onclick="addPhoto()" style="margin-top:1rem; width:100%;">+ Agregar
+                <button class="btn-add" onclick="addPhoto(); updateStoryPreview();"
+                    style="margin-top:1rem; width:100%;">+ Agregar
                     foto</button>
+
+                <!-- Story Mock Preview -->
+                <div class="story-mock">
+                    <div class="story-mock-header">
+                        <span>Preview en vivo</span>
+                    </div>
+                    <div class="story-mock-body">
+                        <div class="story-mock-content">
+                            <div class="story-mock-subheading" id="storyMockSubheading">Nosotros</div>
+                            <div class="story-mock-heading" id="storyMockHeading">Nuestra historia</div>
+                            <div class="story-mock-text" id="storyMockText">Hace 5 años cruzamos miradas por primera vez
+                                en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</div>
+                        </div>
+                        <div class="story-mock-gallery count-1" id="storyMockGallery">
+                            <div class="story-mock-img" id="storyMockImg1">Foto 1</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -1073,10 +1218,10 @@ Ascochinga, Córdoba</textarea></div>
             const pad = String(photoCounter).padStart(2, '0');
             const fileId = 'photoFile' + pad;
             item.innerHTML = `
-        <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
+        <button class="btn-remove" onclick="this.parentElement.remove(); updateStoryPreview();">✕ Quitar</button>
         <div class="file-picker">
           <label class="file-picker-btn" for="${fileId}">Seleccionar foto</label>
-          <input type="file" id="${fileId}" accept="image/*" onchange="onPhotoSelected(this)" style="display:none">
+          <input type="file" id="${fileId}" accept="image/*" onchange="onPhotoSelected(this); updateStoryPreview();" style="display:none">
           <span class="file-picker-name photoFileName">${pad}.jpg</span>
         </div>`;
             document.getElementById('photoItems').appendChild(item);
@@ -1127,6 +1272,37 @@ Ascochinga, Córdoba</textarea></div>
                 mockImg.style.backgroundImage = 'none';
                 mockImg.textContent = 'Elegí una foto arriba 👆';
             }
+        }
+
+        function updateStoryPreview() {
+            document.getElementById('storyMockSubheading').textContent = v('storySubheading') || 'Subtítulo';
+            document.getElementById('storyMockHeading').textContent = v('storyHeading') || 'Título';
+            document.getElementById('storyMockText').textContent = v('storySentence') || 'Texto descriptivo...';
+
+            const gallery = document.getElementById('storyMockGallery');
+            gallery.innerHTML = '';
+
+            const inputs = document.querySelectorAll('#photoItems input[type="file"]');
+            gallery.className = 'story-mock-gallery count-' + inputs.length;
+
+            inputs.forEach((input, index) => {
+                const imgDiv = document.createElement('div');
+                imgDiv.className = 'story-mock-img';
+
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imgDiv.style.backgroundImage = `url(${e.target.result})`;
+                        imgDiv.style.border = 'none';
+                        imgDiv.textContent = '';
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    imgDiv.textContent = 'Foto ' + (index + 1);
+                }
+
+                gallery.appendChild(imgDiv);
+            });
         }
 
         function generateYaml() {
