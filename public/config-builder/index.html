@@ -557,10 +557,6 @@
                 <input type="text" id="displayName" value="Julieta & Lucio" placeholder="Ej: María & Juan">
                 <p class="hint">Así aparecerá en la portada y el footer.</p>
             </div>
-            <div class="field"><label>Título de la página</label><input type="text" id="pageTitle"
-                    value="Nuestra Boda | Juli & Lucio"></div>
-            <div class="field"><label>Descripción (meta)</label><input type="text" id="metaDesc"
-                    value="Estás invitado a celebrar con nosotros este momento tan especial."></div>
         </div>
 
         <!-- ============ STEP 2: Portada ============ -->
@@ -870,8 +866,17 @@ Ascochinga, Córdoba</textarea></div>
         <div class="step" data-step="7">
             <p class="step-label">Paso 8 de 9</p>
             <h2>Imagen para compartir</h2>
-            <p class="desc">Cuando alguien comparta el link de tu invitación en WhatsApp, Instagram u otras redes, se va
-                a mostrar esta tarjeta como vista previa. El título y la descripción vienen del Paso 1.</p>
+            <p class="desc">Configurá cómo se va a ver el link de tu invitación cuando lo compartas por WhatsApp u otras
+                redes.</p>
+
+            <div class="field"><label>Título del link</label><input type="text" id="pageTitle"
+                    value="Nuestra Boda | Juli & Lucio" oninput="updateOgPreview()">
+                <p class="hint">También será el nombre de la pestaña en el navegador.</p>
+            </div>
+            <div class="field"><label>Descripción corta</label><input type="text" id="metaDesc"
+                    value="Estás invitado a celebrar con nosotros este momento tan especial."
+                    oninput="updateOgPreview()"></div>
+
             <div class="field">
                 <label>Imagen para redes / WhatsApp</label>
                 <div class="file-picker">
