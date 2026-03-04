@@ -1020,15 +1020,7 @@ Ascochinga, Córdoba</textarea></div>
         function onFileSelected(input, displayId) {
             const name = input.files[0]?.name || '';
             document.getElementById(displayId).textContent = name || 'Ningún archivo';
-            // Wire the click
         }
-        // Make file picker buttons trigger file inputs
-        document.querySelectorAll('.file-picker-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const input = btn.parentElement.querySelector('input[type="file"]');
-                if (input) input.click();
-            });
-        });
 
         function onPhotoSelected(input) {
             const name = input.files[0]?.name || '';
@@ -1043,18 +1035,15 @@ Ascochinga, Córdoba</textarea></div>
             const item = document.createElement('div');
             item.className = 'dynamic-item';
             const pad = String(photoCounter).padStart(2, '0');
+            const fileId = 'photoFile' + pad;
             item.innerHTML = `
         <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
         <div class="file-picker">
-          <label class="file-picker-btn">Seleccionar foto</label>
-          <input type="file" accept="image/*" onchange="onPhotoSelected(this)" style="display:none">
+          <label class="file-picker-btn" for="${fileId}">Seleccionar foto</label>
+          <input type="file" id="${fileId}" accept="image/*" onchange="onPhotoSelected(this)" style="display:none">
           <span class="file-picker-name photoFileName">${pad}.jpg</span>
         </div>`;
             document.getElementById('photoItems').appendChild(item);
-            // Wire click
-            item.querySelector('.file-picker-btn').addEventListener('click', () => {
-                item.querySelector('input[type="file"]').click();
-            });
         }
 
         function addInfoItem() {
@@ -1112,12 +1101,20 @@ Ascochinga, Córdoba</textarea></div>
             const infoItems = document.getElementById('infoItems').querySelectorAll('.dynamic-item');
 
             let y = '';
+
+            const ogFileNameDisplay = document.getElementById('ogFileName').textContent;
+            let ogFileNameExt = 'jpg';
+            if (ogFileNameDisplay !== 'og.jpg' && ogFileNameDisplay !== 'Ningún archivo') {
+                const parts = ogFileNameDisplay.split('.');
+                if (parts.length > 1) ogFileNameExt = parts.pop().toLowerCase();
+            }
+
             y += `site:\n`;
             y += `  pageTitle: ${esc(v('pageTitle'))}\n`;
             y += `  baseUrl: "https://YOUR_USERNAME.github.io/${slug}/"\n`;
             y += `  meta:\n`;
             y += `    description: ${esc(v('metaDesc'))}\n`;
-            y += `    ogImage: "${basePath}media/og/og.jpg"\n\n`;
+            y += `    ogImage: "${basePath}media/og/og.${ogFileNameExt}"\n\n`;
 
             y += `couple:\n`;
             y += `  person1:\n    name: ${esc(v('p1Name'))}\n`;
