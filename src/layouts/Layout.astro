@@ -1,13 +1,14 @@
 ---
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
+import { resolveAssetPath } from "../utils/resolveAssetPath";
 const { title, description, ogImage } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
 const cleanBase = base.endsWith("/") ? base : base + "/";
-const cleanOgImage = ogImage?.startsWith("/") ? ogImage.slice(1) : ogImage;
-const ogImageUrl = ogImage
-    ? new URL(cleanBase + cleanOgImage, Astro.site || Astro.url).toString()
+const ogImagePath = resolveAssetPath(ogImage, base);
+const ogImageUrl = ogImagePath
+    ? new URL(ogImagePath, Astro.site || Astro.url).toString()
     : undefined;
 ---
 

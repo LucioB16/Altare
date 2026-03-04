@@ -14,7 +14,6 @@ export interface WeddingData {
     person1: { name: string };
     person2: { name: string };
     displayName: string;
-    slug?: string;
   };
   locale: {
     language: string;

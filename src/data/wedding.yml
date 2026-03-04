@@ -10,7 +10,6 @@ couple:
   person2:
     name: "Lucio"
   displayName: "Julieta & Lucio"
-  slug: "juli-y-lucio"
 
 locale:
   language: "es-AR"
@@ -46,7 +45,7 @@ hero:
   subtitle: "Julieta & Lucio"
   dateDisplay: "21 de Junio de 2026"
   city: "Córdoba, Argentina"
-  backgroundImage: "/Altare/media/hero/bg.jpg"
+  backgroundImage: "/media/hero/bg.jpg"
 
 countdown:
   target: "2026-06-21T21:00:00Z"
@@ -91,13 +90,13 @@ story:
   subheading: "Nosotros"
   sentence: "Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre. Las risas, los viajes y los mates compartidos nos trajeron hasta acá."
   photos:
-    - src: "/Altare/media/couple/01.jpg"
+    - src: "/media/couple/01.jpg"
       alt: "Foto juntos 1"
-    - src: "/Altare/media/couple/02.jpg"
+    - src: "/media/couple/02.jpg"
       alt: "Foto juntos 2"
-    - src: "/Altare/media/couple/03.jpg"
+    - src: "/media/couple/03.jpg"
       alt: "Foto juntos 3"
-    - src: "/Altare/media/couple/04.jpg"
+    - src: "/media/couple/04.jpg"
       alt: "Foto juntos 4"
 
 socials:

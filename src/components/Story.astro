@@ -1,5 +1,6 @@
 ---
 import { getWeddingData } from "../data/weddingData";
+import { resolveAssetPath } from "../utils/resolveAssetPath";
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
 
@@ -33,7 +34,7 @@ const photoCount = Math.min(photos.length, 4);
                     {photos.slice(0, 4).map((photo: any) => (
                         <div class="story-grid__item">
                             <img
-                                src={photo.src}
+                                src={resolveAssetPath(photo.src)}
                                 alt={photo.alt}
                                 class="w-full h-full object-cover"
                                 loading="lazy"

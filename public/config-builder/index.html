@@ -272,6 +272,121 @@
             transform: translateX(20px);
         }
 
+        /* Hero Mock Preview */
+        .hero-mock {
+            margin-top: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .hero-mock-header {
+            background: #f1f5f9;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #64748b;
+            border-bottom: 1px solid var(--border);
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-mock-header::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            box-shadow: 16px 0 0 #cbd5e1, 32px 0 0 #cbd5e1;
+            margin-right: auto;
+        }
+
+        .hero-mock-body {
+            padding: 1.25rem;
+            background: white;
+        }
+
+        .hero-mock-screen {
+            position: relative;
+            width: min(100%, 320px);
+            aspect-ratio: 9 / 16;
+            margin: 0 auto;
+            border-radius: 22px;
+            overflow: hidden;
+            padding: 1.5rem 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #eef0ec;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+        }
+
+        .hero-mock-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            max-width: 260px;
+        }
+
+        .hero-mock-title {
+            font-size: 0.72rem;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-mock-subtitle {
+            font-size: clamp(2rem, 9vw, 3rem);
+            line-height: 1;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
+        }
+
+        .hero-mock-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            color: #374151;
+        }
+
+        .hero-mock-date {
+            font-size: 1.05rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-mock-city {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.9;
+        }
+
+        .hero-mock-scroll {
+            position: absolute;
+            left: 50%;
+            bottom: 1rem;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #4b5563;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
         /* Story Mock Preview */
         .story-mock {
             margin-top: 1.5rem;
@@ -687,21 +802,43 @@
             <p class="step-label">Paso 2 de 9</p>
             <h2>Pantalla de bienvenida</h2>
             <p class="desc">La primera pantalla que verán los invitados al abrir la invitación.</p>
-            <div class="field"><label>Título</label><input type="text" id="heroTitle" value="¡Nos casamos!"></div>
+            <div class="field"><label>Título</label><input type="text" id="heroTitle" value="¡Nos casamos!"
+                    oninput="updateHeroPreview()"></div>
             <div class="field"><label>Subtítulo (nombres)</label><input type="text" id="heroSubtitle"
-                    value="Julieta & Lucio"></div>
+                    value="Julieta & Lucio" oninput="updateHeroPreview()"></div>
             <div class="field"><label>Fecha para mostrar (texto libre)</label><input type="text" id="heroDate"
-                    value="21 de Junio de 2026" placeholder="Ej: 15 de Marzo de 2025"></div>
-            <div class="field"><label>Ciudad</label><input type="text" id="heroCity" value="Córdoba, Argentina"></div>
+                    value="21 de Junio de 2026" placeholder="Ej: 15 de Marzo de 2025"
+                    oninput="updateHeroPreview()"></div>
+            <div class="field"><label>Ciudad</label><input type="text" id="heroCity" value="Córdoba, Argentina"
+                    oninput="updateHeroPreview()"></div>
             <div class="field">
                 <label>Foto de fondo</label>
                 <div class="file-picker">
                     <label class="file-picker-btn" for="heroBgFile">Seleccionar imagen</label>
-                    <input type="file" id="heroBgFile" accept="image/*" onchange="onFileSelected(this, 'heroBgName')">
+                    <input type="file" id="heroBgFile" accept="image/*"
+                        onchange="onFileSelected(this, 'heroBgName'); updateHeroPreview();">
                     <span class="file-picker-name" id="heroBgName">bg.jpg</span>
                 </div>
                 <p class="hint">Subí este archivo a <code>public/media/hero/</code> en tu repositorio. Se renombrará
                     automáticamente a <code>bg.jpg</code>.</p>
+            </div>
+            <div class="hero-mock">
+                <div class="hero-mock-header">
+                    <span>Preview portada</span>
+                </div>
+                <div class="hero-mock-body">
+                    <div class="hero-mock-screen" id="heroMockScreen">
+                        <div class="hero-mock-content">
+                            <div class="hero-mock-title" id="heroMockTitle">¡Nos casamos!</div>
+                            <div class="hero-mock-subtitle" id="heroMockSubtitle">Julieta & Lucio</div>
+                            <div class="hero-mock-meta">
+                                <div class="hero-mock-date" id="heroMockDate">21 de Junio de 2026</div>
+                                <div class="hero-mock-city" id="heroMockCity">Córdoba, Argentina</div>
+                            </div>
+                        </div>
+                        <div class="hero-mock-scroll">↓</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -834,7 +971,8 @@ Ascochinga, Córdoba</textarea></div>
                 </div>
 
                 <p class="step-label" style="margin-top:1rem">Fotos (1–4)</p>
-                <p class="hint" style="margin-bottom:1rem">Seleccioná tus fotos para establecer los nombres de archivo.
+                <p class="hint" style="margin-bottom:1rem">La primera foto es obligatoria. Las otras son opcionales.
+                    Seleccioná tus fotos para establecer los nombres de archivo.
                     Después subí las fotos a la carpeta <code>public/media/couple/</code> en tu repositorio con esos
                     mismos
                     nombres.</p>
@@ -1123,7 +1261,8 @@ Ascochinga, Córdoba</textarea></div>
                     <li style="margin-top:0.5rem;">¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos
                         minutos en
                         <code>https://TU_USUARIO.github.io/TU_REPO/</code> 🎉<br>
-                        <em>Nota: la URL final se forma con tu usuario y el nombre que le pusiste al repositorio.</em>
+                        <em>Nota: la URL final se forma con tu usuario y el nombre que le pusiste al repositorio. El
+                            nombre para mostrar de la pareja no cambia esa URL.</em>
                     </li>
                 </ol>
             </div>
@@ -1183,6 +1322,7 @@ Ascochinga, Córdoba</textarea></div>
                 }
             });
 
+            if (currentStep === 1) updateHeroPreview(); // Update mock on step 2
             if (currentStep === 7) updateOgPreview(); // Update mock on step 8
             if (currentStep === TOTAL_STEPS - 1) generateYaml();
         }
@@ -1300,6 +1440,27 @@ Ascochinga, Córdoba</textarea></div>
             }
         }
 
+        function updateHeroPreview() {
+            document.getElementById('heroMockTitle').textContent = v('heroTitle') || 'Título';
+            document.getElementById('heroMockSubtitle').textContent = v('heroSubtitle') || 'Nombre de la pareja';
+            document.getElementById('heroMockDate').textContent = v('heroDate') || 'Fecha';
+            document.getElementById('heroMockCity').textContent = v('heroCity') || 'Ciudad';
+
+            const fileInput = document.getElementById('heroBgFile');
+            const mockScreen = document.getElementById('heroMockScreen');
+            const overlay = 'linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6))';
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    mockScreen.style.backgroundImage = `${overlay}, url(${e.target.result})`;
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                mockScreen.style.backgroundImage = overlay;
+            }
+        }
+
         function updateStoryPreview() {
             document.getElementById('storyMockSubheading').textContent = v('storySubheading') || 'Subtítulo';
             document.getElementById('storyMockHeading').textContent = v('storyHeading') || 'Título';
@@ -1333,8 +1494,6 @@ Ascochinga, Córdoba</textarea></div>
         }
 
         function generateYaml() {
-            const slug = v('displayName').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-            const basePath = '/' + slug + '/';
             const tz = v('eventTimezone');
             const photoEls = document.querySelectorAll('#photoItems .dynamic-item');
             const infoItems = document.getElementById('infoItems').querySelectorAll('.dynamic-item');
@@ -1357,8 +1516,7 @@ Ascochinga, Córdoba</textarea></div>
             y += `couple:\n`;
             y += `  person1:\n    name: ${esc(v('p1Name'))}\n`;
             y += `  person2:\n    name: ${esc(v('p2Name'))}\n`;
-            y += `  displayName: ${esc(v('displayName'))}\n`;
-            y += `  slug: "${slug}"\n\n`;
+            y += `  displayName: ${esc(v('displayName'))}\n\n`;
 
             y += `locale:\n  language: "es-AR"\n  timeZone: "${tz}"\n\n`;
 
@@ -1383,7 +1541,7 @@ Ascochinga, Córdoba</textarea></div>
             y += `  city: ${esc(v('heroCity'))}\n`;
 
             const heroFileName = document.getElementById('heroBgName').textContent === 'Ningún archivo' ? 'bg.jpg' : document.getElementById('heroBgName').textContent;
-            y += `  backgroundImage: "${basePath}media/hero/${heroFileName}"\n\n`;
+            y += `  backgroundImage: "/media/hero/${heroFileName}"\n\n`;
 
             y += `countdown:\n`;
             y += `  target: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
@@ -1446,7 +1604,7 @@ Ascochinga, Córdoba</textarea></div>
                 if (!fileName || fileName === 'Sin archivo') {
                     fileName = `${String(i + 1).padStart(2, '0')}.jpg`;
                 }
-                y += `    - src: "${basePath}media/couple/${fileName}"\n`;
+                y += `    - src: "/media/couple/${fileName}"\n`;
                 y += `      alt: "Foto ${i + 1}"\n`;
             });
             y += `\n`;
@@ -1509,6 +1667,9 @@ Ascochinga, Córdoba</textarea></div>
                 setTimeout(() => { btn.textContent = '📋 Copiar al portapapeles'; }, 2000);
             });
         }
+
+        updateHeroPreview();
+        updateStoryPreview();
     </script>
 </body>
 

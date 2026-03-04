@@ -1,7 +1,9 @@
 ---
 import { getWeddingData } from "../data/weddingData";
+import { resolveAssetPath } from "../utils/resolveAssetPath";
 import Icon from "./Icon.astro";
 const { hero } = getWeddingData();
+const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
 ---
 
 <section
@@ -9,7 +11,7 @@ const { hero } = getWeddingData();
     class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center text-center px-6"
     style={`
         scroll-snap-align: start;
-        ${hero.backgroundImage ? `background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.6)), url("${hero.backgroundImage}");` : ""}
+        ${backgroundImageUrl ? `background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.6)), url("${backgroundImageUrl}");` : ""}
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
