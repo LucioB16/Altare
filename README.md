@@ -14,7 +14,10 @@ Hacé click en el botón de abajo para crear una copia del template en tu cuenta
 
 [![Use this template](https://img.shields.io/badge/Usar_este_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
 
-> Elegí un nombre como `mi-boda` o `boda-maria-y-juan`. Dejá el repo como **público**.
+> 💡 **Nota importante:** El nombre que le pongas al repositorio determinará el link (URL) final de tu invitación. 
+> Por ejemplo, si tu usuario de GitHub es `mariaj` y elegís el nombre `mi-boda` para el repo, tu invitación quedará en: `https://mariaj.github.io/mi-boda/`
+> 
+> Elegí un nombre corto y sin espacios como `mi-boda` o `boda-maria-y-juan`. Dejá el repo como **público**.
 
 ### Paso 2: Configurar tu invitación
 
