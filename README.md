@@ -47,16 +47,25 @@ Al final genera un archivo `wedding.yml` que descargás o copiás.
 
 ### Paso 4: Subir la configuración y las fotos
 
-**Configuración:**
-1. Andá a tu repositorio en GitHub
-2. Navegá a `src/data/` → click en `wedding.yml` → click en el **lápiz ✏️**
-3. Seleccioná todo (Ctrl+A) y pegá el contenido generado
-4. Click en **"Commit changes"** → **"Commit directly to main"** → **"Commit changes"**
+> 💡 **Importante:** cuando creás tu repo con **Use this template**, este mismo instructivo también queda en tu repo.
+
+**Accesos rápidos (hacé click desde tu repo):**
+- [Abrir `wedding.yml`](./src/data/wedding.yml)
+- [Abrir carpeta de portada (`public/media/hero/`)](./public/media/hero/)
+- [Abrir carpeta de historia (`public/media/couple/`)](./public/media/couple/)
+- [Abrir carpeta de imagen para WhatsApp/redes (`public/media/og/`)](./public/media/og/)
+
+**Configuración (`wedding.yml`):**
+1. Entrá al link de `wedding.yml` de arriba.
+2. Hacé click en el **lápiz ✏️**.
+3. Reemplazá el contenido con el YAML que te generó el Config Builder.
+4. Hacé click en **Commit changes**.
+5. Si GitHub no te deja commit directo por reglas, elegí **Create a new branch** y después **Create pull request**.
 
 **Fotos (arrastrá los archivos en GitHub):**
-- `public/media/hero/` → subí acá el archivo que seleccionaste en el Config Builder para la portada
-- `public/media/couple/` → tus fotos de historia con los nombres que te indicó el Config Builder (ej: `01.jpg`, `02.jpg`, etc.)
-- `public/media/og/` → subí acá el archivo que seleccionaste en el Config Builder para WhatsApp/redes (1200×630px recomendado)
+- `public/media/hero/` → subí la foto de portada que seleccionaste en el Config Builder
+- `public/media/couple/` → subí las fotos de historia con los mismos nombres que seleccionaste en el Config Builder
+- `public/media/og/` → subí la imagen para WhatsApp/redes que seleccionaste en el Config Builder (1200×630px recomendado)
 
 > 💡 **Tip:** Podés arrastrar archivos directamente a la carpeta en GitHub para subirlos sin necesidad de usar Git.
 
