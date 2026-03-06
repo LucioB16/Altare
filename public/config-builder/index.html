@@ -1012,8 +1012,8 @@
 
 <body>
     <div class="header">
-        <h1>💍 Wedding Config Builder</h1>
-        <p>Configurá tu invitación de boda en minutos</p>
+        <h1>Ã°Å¸â€™Â Wedding Config Builder</h1>
+        <p>ConfigurÃƒÂ¡ tu invitaciÃƒÂ³n de boda en minutos</p>
     </div>
     <div class="progress-bar" id="progressBar"></div>
     <div class="container">
@@ -1022,24 +1022,33 @@
         <div class="step active" data-step="0">
             <p class="step-label">Paso 1 de 9</p>
                         <h2>La Pareja</h2>
-            <p class="desc">Los datos básicos de los novios.</p>
+            <p class="desc">Los datos bÃƒÂ¡sicos de los novios.</p>
+
+            <div class="field">
+                <label id="siteLanguageLabel">Idioma del sitio</label>
+                <select id="siteLanguage" onchange="onBuilderLanguageChange(this.value)">
+                    <option value="en">English</option>
+                    <option value="es">EspaÃƒÂ±ol</option>
+                </select>
+                <p class="hint" id="siteLanguageHint">Este idioma se guarda en <code>site.language</code> y define el idioma final del sitio.</p>
+            </div>
 
             <p class="step-label" style="margin-top:1rem">Tema visual</p>
-            <p class="desc" style="margin-bottom:1rem">Elegí la estética general de tu invitación. Solo cambia estilo visual: colores, tipografías y ornamentos.</p>
+            <p class="desc" style="margin-bottom:1rem">ElegÃƒÂ­ la estÃƒÂ©tica general de tu invitaciÃƒÂ³n. Solo cambia estilo visual: colores, tipografÃƒÂ­as y ornamentos.</p>
             <div id="themeGrid" class="theme-grid"></div>
             <div id="themeMeta" class="theme-meta"></div>
             <hr class="separator">
 
             <div class="row">
                 <div class="field"><label>Nombre Persona 1</label><input type="text" id="p1Name" value="Julieta"
-                        placeholder="Ej: María"></div>
+                        placeholder="Ej: MarÃƒÂ­a"></div>
                 <div class="field"><label>Nombre Persona 2</label><input type="text" id="p2Name" value="Lucio"
                         placeholder="Ej: Juan"></div>
             </div>
             <div class="field">
                 <label>Nombre para mostrar</label>
-                <input type="text" id="displayName" value="Julieta & Lucio" placeholder="Ej: María & Juan">
-                <p class="hint">Así aparecerá en la portada y el footer.</p>
+                <input type="text" id="displayName" value="Julieta & Lucio" placeholder="Ej: MarÃƒÂ­a & Juan">
+                <p class="hint">AsÃƒÂ­ aparecerÃƒÂ¡ en la portada y el footer.</p>
             </div>
         </div>
 
@@ -1047,15 +1056,15 @@
         <div class="step" data-step="1">
             <p class="step-label">Paso 2 de 9</p>
             <h2>Pantalla de bienvenida</h2>
-            <p class="desc">La primera pantalla que verán los invitados al abrir la invitación.</p>
-            <div class="field"><label>Título</label><input type="text" id="heroTitle" value="¡Nos casamos!"
+            <p class="desc">La primera pantalla que verÃƒÂ¡n los invitados al abrir la invitaciÃƒÂ³n.</p>
+            <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="heroTitle" value="Ã‚Â¡Nos casamos!"
                     oninput="updateHeroPreview()"></div>
-            <div class="field"><label>Subtítulo (nombres)</label><input type="text" id="heroSubtitle"
+            <div class="field"><label>SubtÃƒÂ­tulo (nombres)</label><input type="text" id="heroSubtitle"
                     value="Julieta & Lucio" oninput="updateHeroPreview()"></div>
             <div class="field"><label>Fecha para mostrar (texto libre)</label><input type="text" id="heroDate"
                     value="21 de Junio de 2026" placeholder="Ej: 15 de Marzo de 2025"
                     oninput="updateHeroPreview()"></div>
-            <div class="field"><label>Ciudad</label><input type="text" id="heroCity" value="Córdoba, Argentina"
+            <div class="field"><label>Ciudad</label><input type="text" id="heroCity" value="CÃƒÂ³rdoba, Argentina"
                     oninput="updateHeroPreview()"></div>
             <div class="field">
                 <label>Foto de fondo</label>
@@ -1065,7 +1074,7 @@
                         onchange="onFileSelected(this, 'heroBgName'); updateHeroPreview();">
                     <span class="file-picker-name" id="heroBgName">bg.jpg</span>
                 </div>
-                <p class="hint">Subí a esta carpeta el archivo que seleccionaste en el Config Builder.
+                <p class="hint">SubÃƒÂ­ a esta carpeta el archivo que seleccionaste en el Config Builder.
                 </p>
             </div>
             <div class="hero-mock">
@@ -1075,14 +1084,14 @@
                 <div class="hero-mock-body">
                     <div class="hero-mock-screen" id="heroMockScreen">
                         <div class="hero-mock-content">
-                            <div class="hero-mock-title" id="heroMockTitle">¡Nos casamos!</div>
+                            <div class="hero-mock-title" id="heroMockTitle">Ã‚Â¡Nos casamos!</div>
                             <div class="hero-mock-subtitle" id="heroMockSubtitle">Julieta & Lucio</div>
                             <div class="hero-mock-meta">
                                 <div class="hero-mock-date" id="heroMockDate">21 de Junio de 2026</div>
-                                <div class="hero-mock-city" id="heroMockCity">Córdoba, Argentina</div>
+                                <div class="hero-mock-city" id="heroMockCity">CÃƒÂ³rdoba, Argentina</div>
                             </div>
                         </div>
-                        <div class="hero-mock-scroll">↓</div>
+                        <div class="hero-mock-scroll">Ã¢â€ â€œ</div>
                     </div>
                 </div>
             </div>
@@ -1092,15 +1101,15 @@
         <div class="step" data-step="2">
             <p class="step-label">Paso 3 de 9</p>
             <h2>Ceremonias y Fiesta</h2>
-            <p class="desc">Los detalles de los eventos. Podés activar o desactivar cada uno.</p>
+            <p class="desc">Los detalles de los eventos. PodÃƒÂ©s activar o desactivar cada uno.</p>
 
             <!-- Zona horaria -->
             <div class="field">
                 <label>Zona horaria de los eventos</label>
                 <select id="eventTimezone" class="tz-select" data-default-tz="America/Buenos_Aires">
-                    <option value="America/Buenos_Aires">Cargando zonas horarias…</option>
+                    <option value="America/Buenos_Aires">Cargando zonas horariasÃ¢â‚¬Â¦</option>
                 </select>
-                <p class="hint">Mostramos una opción por huso horario (UTC) con una región/ciudad de referencia.</p>
+                <p class="hint">Mostramos una opciÃƒÂ³n por huso horario (UTC) con una regiÃƒÂ³n/ciudad de referencia.</p>
             </div>
 
             <hr class="separator">
@@ -1119,9 +1128,9 @@
                     <div class="field"><label>Hora</label><input type="time" id="religiousTime" value="17:00"></div>
                 </div>
                 <div class="field"><label>Nombre del lugar</label><input type="text" id="religiousVenue"
-                        value="Parroquia Sagrado Corazón"></div>
-                <div class="field"><label>Dirección (una línea por renglón)</label><textarea id="religiousAddress">Av. Hipólito Yrigoyen 100
-Córdoba Capital</textarea></div>
+                        value="Parroquia Sagrado CorazÃƒÂ³n"></div>
+                <div class="field"><label>DirecciÃƒÂ³n (una lÃƒÂ­nea por renglÃƒÂ³n)</label><textarea id="religiousAddress">Av. HipÃƒÂ³lito Yrigoyen 100
+CÃƒÂ³rdoba Capital</textarea></div>
                 <div class="field"><label>URL Google Maps</label><input type="text" id="religiousMaps"
                         value="https://maps.app.goo.gl/"></div>
             </div>
@@ -1143,8 +1152,8 @@ Córdoba Capital</textarea></div>
                 </div>
                 <div class="field"><label>Nombre del lugar</label><input type="text" id="ceremonyVenue"
                         value="Registro Civil Central"></div>
-                <div class="field"><label>Dirección (una línea por renglón)</label><textarea id="ceremonyAddress">Chacabuco 737
-Nueva Córdoba</textarea></div>
+                <div class="field"><label>DirecciÃƒÂ³n (una lÃƒÂ­nea por renglÃƒÂ³n)</label><textarea id="ceremonyAddress">Chacabuco 737
+Nueva CÃƒÂ³rdoba</textarea></div>
                 <div class="field"><label>URL Google Maps</label><input type="text" id="ceremonyMaps"
                         value="https://maps.app.goo.gl/"></div>
             </div>
@@ -1153,7 +1162,7 @@ Nueva Córdoba</textarea></div>
 
             <!-- Celebration -->
             <div class="toggle-row">
-                <span>Fiesta / Celebración</span>
+                <span>Fiesta / CelebraciÃƒÂ³n</span>
                 <div class="toggle on" data-field="celebrationEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="celebrationFields">
@@ -1166,38 +1175,38 @@ Nueva Córdoba</textarea></div>
                 </div>
                 <div class="field"><label>Nombre del lugar</label><input type="text" id="celebrationVenue"
                         value="Estancia La Paz"></div>
-                <div class="field"><label>Dirección</label><textarea id="celebrationAddress">Ruta E66 Km 41
-Ascochinga, Córdoba</textarea></div>
+                <div class="field"><label>DirecciÃƒÂ³n</label><textarea id="celebrationAddress">Ruta E66 Km 41
+Ascochinga, CÃƒÂ³rdoba</textarea></div>
                 <div class="field"><label>URL Google Maps</label><input type="text" id="celebrationMaps"
                         value="https://maps.app.goo.gl/"></div>
             </div>
-            <p class="hint" style="margin-top:1rem">Debés habilitar al menos un evento para continuar.
-                En la página generada, la descarga para Google Calendar, Outlook o iOS va a crear 1, 2 o 3 archivos
-                según cuántos eventos tengas habilitados.</p>
+            <p class="hint" style="margin-top:1rem">DebÃƒÂ©s habilitar al menos un evento para continuar.
+                En la pÃƒÂ¡gina generada, la descarga para Google Calendar, Outlook o iOS va a crear 1, 2 o 3 archivos
+                segÃƒÂºn cuÃƒÂ¡ntos eventos tengas habilitados.</p>
         </div>
 
         <!-- ============ STEP 4: Story ============ -->
         <div class="step" data-step="3">
             <p class="step-label">Paso 4 de 9</p>
             <h2>Nuestra Historia</h2>
-            <p class="desc">Contá la historia de la pareja con texto y hasta 4 fotos.</p>
+            <p class="desc">ContÃƒÂ¡ la historia de la pareja con texto y hasta 4 fotos.</p>
             <div class="toggle-row">
-                <span>Mostrar sección</span>
+                <span>Mostrar secciÃƒÂ³n</span>
                 <div class="toggle on" data-field="storyEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="storyFields">
-                <div class="field"><label>Subtítulo</label><input type="text" id="storySubheading" value="Nosotros"
+                <div class="field"><label>SubtÃƒÂ­tulo</label><input type="text" id="storySubheading" value="Nosotros"
                         oninput="updateStoryPreview()"></div>
-                <div class="field"><label>Título</label><input type="text" id="storyHeading" value="Nuestra historia"
+                <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="storyHeading" value="Nuestra historia"
                         oninput="updateStoryPreview()"></div>
                 <div class="field"><label>Texto</label><textarea id="storySentence" oninput="updateStoryPreview()"
-                        rows="3">Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</textarea>
+                        rows="3">Hace 5 aÃƒÂ±os cruzamos miradas por primera vez en aquel viaje, y desde ese dÃƒÂ­a supimos que querÃƒÂ­amos caminar juntos para siempre.</textarea>
                 </div>
 
-                <p class="step-label" style="margin-top:1rem">Fotos (1–4)</p>
+                <p class="step-label" style="margin-top:1rem">Fotos (1Ã¢â‚¬â€œ4)</p>
                 <p class="hint" style="margin-bottom:1rem">La primera foto es obligatoria. Las otras son opcionales.
-                    Seleccioná tus fotos para establecer los nombres de archivo.
-                    Después subí las fotos a la carpeta <code>public/media/couple/</code> en tu repositorio con esos
+                    SeleccionÃƒÂ¡ tus fotos para establecer los nombres de archivo.
+                    DespuÃƒÂ©s subÃƒÂ­ las fotos a la carpeta <code>public/media/couple/</code> en tu repositorio con esos
                     mismos
                     nombres.</p>
                 <div class="dynamic-list" id="photoItems">
@@ -1238,8 +1247,8 @@ Ascochinga, Córdoba</textarea></div>
                         <div class="story-mock-gallery count-1" id="storyMockGallery">
                             <div class="story-mock-img" id="storyMockImg1">01.jpg</div>
                         </div>
-                        <div class="story-mock-text" id="storyMockText">Hace 5 años cruzamos miradas por primera vez en
-                            aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</div>
+                        <div class="story-mock-text" id="storyMockText">Hace 5 aÃƒÂ±os cruzamos miradas por primera vez en
+                            aquel viaje, y desde ese dÃƒÂ­a supimos que querÃƒÂ­amos caminar juntos para siempre.</div>
                     </div>
                 </div>
 
@@ -1250,22 +1259,22 @@ Ascochinga, Córdoba</textarea></div>
         <div class="step" data-step="4">
             <p class="step-label">Paso 5 de 9</p>
             <h2>Regalos y Dress Code</h2>
-            <p class="desc">Datos bancarios y código de vestimenta.</p>
+            <p class="desc">Datos bancarios y cÃƒÂ³digo de vestimenta.</p>
 
-            <div class="toggle-row"><span>Mostrar sección Regalos</span>
+            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Regalos</span>
                 <div class="toggle on" data-field="giftsEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="giftsFields">
-                <div class="field"><label>Título</label><input type="text" id="giftsHeading" value="Regalos"></div>
+                <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="giftsHeading" value="Regalos"></div>
                 <div class="field"><label>Texto</label><textarea
-                        id="giftsBody">Lo más importante es tu presencia, pero si deseás hacernos un regalo podés ayudarnos con nuestra luna de miel.</textarea>
+                        id="giftsBody">Lo mÃƒÂ¡s importante es tu presencia, pero si deseÃƒÂ¡s hacernos un regalo podÃƒÂ©s ayudarnos con nuestra luna de miel.</textarea>
                 </div>
             </div>
             <div class="toggle-row"><span>Mostrar datos bancarios</span>
                 <div class="toggle on" data-field="bankEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="bankFields">
-                <div class="field"><label>Texto del botón</label><input type="text" id="giftsButtonLabel"
+                <div class="field"><label>Texto del botÃƒÂ³n</label><input type="text" id="giftsButtonLabel"
                         value="Ver datos bancarios"></div>
                 <div class="row">
                     <div class="field"><label>Titular</label><input type="text" id="bankHolder" value="NOMBRE APELLIDO">
@@ -1283,12 +1292,12 @@ Ascochinga, Córdoba</textarea></div>
 
             <hr class="separator">
 
-            <div class="toggle-row"><span>Mostrar sección Dress Code</span>
+            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Dress Code</span>
                 <div class="toggle on" data-field="dressCodeEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="dressCodeFields">
-                <div class="field"><label>Título</label><input type="text" id="dcTitle" value="Dress Code"></div>
-                <div class="field"><label>Etiqueta</label><input type="text" id="dcTag" value="Formal – Elegante"></div>
+                <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="dcTitle" value="Dress Code"></div>
+                <div class="field"><label>Etiqueta</label><input type="text" id="dcTag" value="Formal Ã¢â‚¬â€œ Elegante"></div>
                 <div class="field"><label>Texto</label><input type="text" id="dcBody"
                         value="Te esperamos con tu mejor look para celebrar juntos."></div>
             </div>
@@ -1297,7 +1306,7 @@ Ascochinga, Córdoba</textarea></div>
             </div>
             <div id="brideDisclaimerFields">
                 <div class="field"><label>Texto del aviso</label><input type="text" id="brideDisclaimerText"
-                        value="Como es tradición, los colores blancos, o similares, estarán reservados para la novia.">
+                        value="Como es tradiciÃƒÂ³n, los colores blancos, o similares, estarÃƒÂ¡n reservados para la novia.">
                 </div>
             </div>
         </div>
@@ -1305,23 +1314,23 @@ Ascochinga, Córdoba</textarea></div>
         <!-- ============ STEP 6: RSVP ============ -->
         <div class="step" data-step="5">
             <p class="step-label">Paso 6 de 9</p>
-            <h2>Confirmación de asistencia</h2>
-            <p class="desc">Configurá cómo los invitados confirman.</p>
-            <div class="toggle-row"><span>Mostrar sección</span>
+            <h2>ConfirmaciÃƒÂ³n de asistencia</h2>
+            <p class="desc">ConfigurÃƒÂ¡ cÃƒÂ³mo los invitados confirman.</p>
+            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n</span>
                 <div class="toggle on" data-field="rsvpEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="rsvpFields">
                 <div class="field"><label>Texto</label><textarea
-                        id="rsvpText">Por favor confirmá tu asistencia antes del 1 de Mayo.</textarea></div>
-                <div class="field"><label>Fecha límite</label><input type="date" id="rsvpDeadline" value="2026-05-01">
+                        id="rsvpText">Por favor confirmÃƒÂ¡ tu asistencia antes del 1 de Mayo.</textarea></div>
+                <div class="field"><label>Fecha lÃƒÂ­mite</label><input type="date" id="rsvpDeadline" value="2026-05-01">
                 </div>
-                <div class="toggle-row"><span>Mostrar botón con link de confirmación</span>
+                <div class="toggle-row"><span>Mostrar botÃƒÂ³n con link de confirmaciÃƒÂ³n</span>
                     <div class="toggle" data-field="rsvpLinkEnabled" onclick="toggleSwitch(this)"></div>
                 </div>
                 <div id="rsvpLinkFields" style="display:none">
                     <div class="field"><label>URL del enlace</label><input type="text" id="rsvpUrl"
                             value="https://wa.me/123456789" placeholder="URL de formulario o WhatsApp"></div>
-                    <div class="field"><label>Texto del botón</label><input type="text" id="rsvpLabel"
+                    <div class="field"><label>Texto del botÃƒÂ³n</label><input type="text" id="rsvpLabel"
                             value="CONFIRMAR ASISTENCIA"></div>
                 </div>
             </div>
@@ -1331,14 +1340,14 @@ Ascochinga, Córdoba</textarea></div>
         <div class="step" data-step="6">
             <p class="step-label">Paso 7 de 9</p>
             <h2>Extras</h2>
-            <p class="desc">Redes sociales, playlist e info útil.</p>
+            <p class="desc">Redes sociales, playlist e info ÃƒÂºtil.</p>
 
-            <div class="toggle-row"><span>Mostrar sección Redes Sociales</span>
+            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Redes Sociales</span>
                 <div class="toggle on" data-field="socialsEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="socialsFields">
                 <div class="field"><label>Texto redes</label><textarea
-                        id="socialsBody">Además, antes del casamiento, recibirás un link donde podrás subir todas tus fotos y videos.</textarea>
+                        id="socialsBody">AdemÃƒÂ¡s, antes del casamiento, recibirÃƒÂ¡s un link donde podrÃƒÂ¡s subir todas tus fotos y videos.</textarea>
                 </div>
                 <div class="field"><label>URL Instagram</label><input type="text" id="socialUrl"
                         value="https://instagram.com"></div>
@@ -1348,55 +1357,55 @@ Ascochinga, Córdoba</textarea></div>
 
             <hr class="separator">
 
-            <div class="toggle-row"><span>Mostrar sección Playlist</span>
+            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Playlist</span>
                 <div class="toggle on" data-field="playlistEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="playlistFields">
-                <div class="field"><label>Título playlist</label><input type="text" id="playlistHeading"
+                <div class="field"><label>TÃƒÂ­tulo playlist</label><input type="text" id="playlistHeading"
                         value="Armemos la playlist juntos"></div>
                 <div class="field"><label>Texto playlist</label><input type="text" id="playlistBody"
-                        value="Agregá esas canciones que no pueden faltar en la fiesta."></div>
+                        value="AgregÃƒÂ¡ esas canciones que no pueden faltar en la fiesta."></div>
                 <div class="field"><label>URL Spotify Playlist</label><input type="text" id="playlistUrl"
                         value="https://open.spotify.com/playlist/"></div>
             </div>
 
             <hr class="separator">
 
-            <div class="toggle-row"><span>Mostrar sección Info Útil</span>
+            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Info ÃƒÅ¡til</span>
                 <div class="toggle on" data-field="usefulInfoEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="usefulInfoFields">
-                <p class="step-label" style="margin-top:1rem">Cards de Info Útil</p>
-                <p class="desc" style="margin-bottom:1rem">Para cambiar el ícono, buscá en <a
+                <p class="step-label" style="margin-top:1rem">Cards de Info ÃƒÅ¡til</p>
+                <p class="desc" style="margin-bottom:1rem">Para cambiar el ÃƒÂ­cono, buscÃƒÂ¡ en <a
                         href="https://icon-sets.iconify.design/lucide/" target="_blank"
-                        style="color:var(--primary); font-weight:600;">Lucide Icons</a> y copiá el nombre. Asegurate de
-                    anteponerle "lucide:". Ejemplo: si el ícono se llama "camera", escribí <code>lucide:camera</code>.
+                        style="color:var(--primary); font-weight:600;">Lucide Icons</a> y copiÃƒÂ¡ el nombre. Asegurate de
+                    anteponerle "lucide:". Ejemplo: si el ÃƒÂ­cono se llama "camera", escribÃƒÂ­ <code>lucide:camera</code>.
                 </p>
                 <div class="dynamic-list" id="infoItems">
                     <div class="dynamic-item">
                         <div class="row">
-                            <div class="field"><label>Ícono</label><input type="text" class="infoIcon"
+                            <div class="field"><label>ÃƒÂcono</label><input type="text" class="infoIcon"
                                     value="lucide:clock">
                                 <p class="hint"><a href="https://icon-sets.iconify.design/" target="_blank">Ver
-                                        íconos</a>
+                                        ÃƒÂ­conos</a>
                                 </p>
                             </div>
-                            <div class="field"><label>Título</label><input type="text" class="infoTitle"
-                                    value="Duración">
+                            <div class="field"><label>TÃƒÂ­tulo</label><input type="text" class="infoTitle"
+                                    value="DuraciÃƒÂ³n">
                             </div>
                         </div>
-                        <div class="field"><label>Descripción</label><input type="text" class="infoDesc"
-                                value="La fiesta se extenderá hasta el amanecer."></div>
+                        <div class="field"><label>DescripciÃƒÂ³n</label><input type="text" class="infoDesc"
+                                value="La fiesta se extenderÃƒÂ¡ hasta el amanecer."></div>
                     </div>
                     <div class="dynamic-item">
-                        <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
+                        <button class="btn-remove" onclick="this.parentElement.remove()">Ã¢Å“â€¢ Quitar</button>
                         <div class="row">
-                            <div class="field"><label>Ícono</label><input type="text" class="infoIcon"
+                            <div class="field"><label>ÃƒÂcono</label><input type="text" class="infoIcon"
                                     value="lucide:parking-circle"></div>
-                            <div class="field"><label>Título</label><input type="text" class="infoTitle"
+                            <div class="field"><label>TÃƒÂ­tulo</label><input type="text" class="infoTitle"
                                     value="Estacionamiento"></div>
                         </div>
-                        <div class="field"><label>Descripción</label><input type="text" class="infoDesc"
+                        <div class="field"><label>DescripciÃƒÂ³n</label><input type="text" class="infoDesc"
                                 value="Hay estacionamiento privado y vigilado gratuito en el lugar."></div>
                     </div>
                 </div>
@@ -1409,15 +1418,15 @@ Ascochinga, Córdoba</textarea></div>
         <div class="step" data-step="7">
             <p class="step-label">Paso 8 de 9</p>
             <h2>Imagen para compartir</h2>
-            <p class="desc">Configurá cómo se va a ver el link de tu invitación cuando lo compartas por WhatsApp u otras
+            <p class="desc">ConfigurÃƒÂ¡ cÃƒÂ³mo se va a ver el link de tu invitaciÃƒÂ³n cuando lo compartas por WhatsApp u otras
                 redes.</p>
 
-            <div class="field"><label>Título del link</label><input type="text" id="pageTitle"
+            <div class="field"><label>TÃƒÂ­tulo del link</label><input type="text" id="pageTitle"
                     value="Nuestra Boda | Juli & Lucio" oninput="updateOgPreview()">
-                <p class="hint">También será el nombre de la pestaña en el navegador.</p>
+                <p class="hint">TambiÃƒÂ©n serÃƒÂ¡ el nombre de la pestaÃƒÂ±a en el navegador.</p>
             </div>
-            <div class="field"><label>Descripción corta</label><input type="text" id="metaDesc"
-                    value="Estás invitado a celebrar con nosotros este momento tan especial."
+            <div class="field"><label>DescripciÃƒÂ³n corta</label><input type="text" id="metaDesc"
+                    value="EstÃƒÂ¡s invitado a celebrar con nosotros este momento tan especial."
                     oninput="updateOgPreview()"></div>
 
             <div class="field">
@@ -1428,8 +1437,8 @@ Ascochinga, Córdoba</textarea></div>
                         onchange="onFileSelected(this, 'ogFileName'); updateOgPreview();">
                     <span class="file-picker-name" id="ogFileName">og.jpg</span>
                 </div>
-                <p class="hint">Subí a esta carpeta el archivo que seleccionaste en el Config Builder.
-                    Tamaño recomendado: 1200×630px.</p>
+                <p class="hint">SubÃƒÂ­ a esta carpeta el archivo que seleccionaste en el Config Builder.
+                    TamaÃƒÂ±o recomendado: 1200Ãƒâ€”630px.</p>
             </div>
 
             <div class="og-mock">
@@ -1438,7 +1447,7 @@ Ascochinga, Córdoba</textarea></div>
                 </div>
                 <div class="og-mock-content">
                     <div class="og-mock-title" id="ogMockTitle">Nuestra Boda | Juli & Lucio</div>
-                    <div class="og-mock-desc" id="ogMockDesc">Estás invitado a celebrar con nosotros este momento tan
+                    <div class="og-mock-desc" id="ogMockDesc">EstÃƒÂ¡s invitado a celebrar con nosotros este momento tan
                         especial.</div>
                     <div class="og-mock-domain" id="ogMockDomain">tuusuario.github.io/tu-repo</div>
                 </div>
@@ -1448,43 +1457,43 @@ Ascochinga, Córdoba</textarea></div>
         <!-- ============ STEP 9: Output ============ -->
         <div class="step" data-step="8">
             <p class="step-label">Paso 9 de 9</p>
-            <h2>¡Listo! Tu configuración</h2>
-            <p class="desc">Descargá el archivo y seguí las instrucciones.</p>
+            <h2>Ã‚Â¡Listo! Tu configuraciÃƒÂ³n</h2>
+            <p class="desc">DescargÃƒÂ¡ el archivo y seguÃƒÂ­ las instrucciones.</p>
 
             <div class="output-area" id="yamlOutput"></div>
             <div class="output-actions">
-                <button class="btn-download" onclick="downloadYaml()">⬇ Descargar wedding.yml</button>
-                <button class="btn-copy" onclick="copyYaml()">📋 Copiar al portapapeles</button>
+                <button class="btn-download" onclick="downloadYaml()">Ã¢Â¬â€¡ Descargar wedding.yml</button>
+                <button class="btn-copy" onclick="copyYaml()">Ã°Å¸â€œâ€¹ Copiar al portapapeles</button>
             </div>
 
             <div class="instructions">
-                <h3>📋 Instrucciones para publicar tu invitación</h3>
+                <h3>Ã°Å¸â€œâ€¹ Instrucciones para publicar tu invitaciÃƒÂ³n</h3>
                 <ol>
-                    <li>Si todavía no creaste tu repo, andá al <a href="https://github.com/LucioB16/Altare"
+                    <li>Si todavÃƒÂ­a no creaste tu repo, andÃƒÂ¡ al <a href="https://github.com/LucioB16/Altare"
                             target="_blank">repositorio
-                            template</a> y hacé click en <strong>"Use this template"</strong> → <strong>"Create a new
+                            template</a> y hacÃƒÂ© click en <strong>"Use this template"</strong> Ã¢â€ â€™ <strong>"Create a new
                             repository"</strong>.</li>
-                    <li>En tu nuevo repo, andá a <strong>Settings → Pages</strong> y en "Source" elegí <strong>"GitHub
+                    <li>En tu nuevo repo, andÃƒÂ¡ a <strong>Settings Ã¢â€ â€™ Pages</strong> y en "Source" elegÃƒÂ­ <strong>"GitHub
                             Actions"</strong>.</li>
-                    <li>Navegá a <code>src/data/</code> → click en <code>wedding.yml</code> → click en el <strong>lápiz
-                            ✏️</strong> → Seleccioná todo (Ctrl+A) → Pegá tu YAML → <strong>"Commit changes"</strong>.
+                    <li>NavegÃƒÂ¡ a <code>src/data/</code> Ã¢â€ â€™ click en <code>wedding.yml</code> Ã¢â€ â€™ click en el <strong>lÃƒÂ¡piz
+                            Ã¢Å“ÂÃ¯Â¸Â</strong> Ã¢â€ â€™ SeleccionÃƒÂ¡ todo (Ctrl+A) Ã¢â€ â€™ PegÃƒÂ¡ tu YAML Ã¢â€ â€™ <strong>"Commit changes"</strong>.
                     </li>
-                    <li><strong>Subí tus fotos</strong> arrastrándolas a las carpetas correspondientes en GitHub:
+                    <li><strong>SubÃƒÂ­ tus fotos</strong> arrastrÃƒÂ¡ndolas a las carpetas correspondientes en GitHub:
                         <ul style="margin-top:0.5rem; list-style: disc; padding-left:1.2rem;">
-                            <li><strong>Foto de bienvenida:</strong> subí el archivo que seleccionaste en el Config Builder a
+                            <li><strong>Foto de bienvenida:</strong> subÃƒÂ­ el archivo que seleccionaste en el Config Builder a
                                 <code>public/media/hero/</code>
                             </li>
-                            <li><strong>Fotos de historia:</strong> subí tus fotos con los nombres indicados a
+                            <li><strong>Fotos de historia:</strong> subÃƒÂ­ tus fotos con los nombres indicados a
                                 <code>public/media/couple/</code>
                             </li>
-                            <li><strong>Imagen para redes:</strong> subí el archivo que seleccionaste en el Config Builder a
+                            <li><strong>Imagen para redes:</strong> subÃƒÂ­ el archivo que seleccionaste en el Config Builder a
                                 <code>public/media/og/</code>
                             </li>
                         </ul>
                     </li>
-                    <li style="margin-top:0.5rem;">¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos
+                    <li style="margin-top:0.5rem;">Ã‚Â¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos
                         minutos en
-                        <code>https://TU_USUARIO.github.io/TU_REPO/</code> 🎉<br>
+                        <code>https://TU_USUARIO.github.io/TU_REPO/</code> Ã°Å¸Å½â€°<br>
                         <em>Nota: la URL final se forma con tu usuario y el nombre que le pusiste al repositorio. El
                             nombre para mostrar de la pareja no cambia esa URL.</em>
                     </li>
@@ -1494,16 +1503,22 @@ Ascochinga, Córdoba</textarea></div>
 
         <!-- Navigation -->
         <div class="nav">
-            <button class="btn btn-prev" id="btnPrev" onclick="prevStep()" style="display:none">← Anterior</button>
-            <button class="btn btn-next" id="btnNext" onclick="nextStep()">Siguiente →</button>
+            <button class="btn btn-prev" id="btnPrev" onclick="prevStep()" style="display:none">Ã¢â€ Â Anterior</button>
+            <button class="btn btn-next" id="btnNext" onclick="nextStep()">Siguiente Ã¢â€ â€™</button>
         </div>
     </div>
 
     <script src="./theme-runtime.js"></script>
     <script>
         const TOTAL_STEPS = 9;
+        const BUILDER_LOCALE_STORAGE_KEY = "altare_builder_locale";
+        const FALLBACK_BUILDER_LOCALE = "en";
+
         let currentStep = 0;
         let selectedThemeId = "jardin-clasico";
+        let selectedLanguage = FALLBACK_BUILDER_LOCALE;
+        let builderMessages = null;
+
         const toggleState = {
             religiousEnabled: false,
             ceremonyEnabled: true,
@@ -1519,6 +1534,414 @@ Ascochinga, Córdoba</textarea></div>
             playlistEnabled: true,
             usefulInfoEnabled: true,
         };
+
+        function getByPath(obj, path) {
+            return path.split('.').reduce((acc, segment) => {
+                if (!acc || typeof acc !== 'object') return undefined;
+                return acc[segment];
+            }, obj);
+        }
+
+        function interpolate(template, params) {
+            if (typeof template !== 'string' || !params) return template;
+            return template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+                const value = params[key];
+                return value === undefined ? '' : String(value);
+            });
+        }
+
+        function t(key, fallback = key, params) {
+            const value = builderMessages ? getByPath(builderMessages, key) : undefined;
+            if (typeof value !== 'string') {
+                return interpolate(fallback, params);
+            }
+            return interpolate(value, params);
+        }
+
+        function contentDefault(path, fallback = '') {
+            return t(`contentDefaults.${path}`, fallback);
+        }
+
+        function detectInitialBuilderLocale() {
+            const fromQuery = new URLSearchParams(window.location.search).get('lang');
+            const fromStorage = localStorage.getItem(BUILDER_LOCALE_STORAGE_KEY);
+            return (fromQuery || fromStorage || FALLBACK_BUILDER_LOCALE).toLowerCase();
+        }
+
+        async function loadBuilderMessages(localeCode) {
+            const normalized = localeCode === 'es' ? 'es' : 'en';
+            try {
+                const response = await fetch(`./i18n/${normalized}.json`, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`Locale fetch failed: ${response.status}`);
+                }
+
+                builderMessages = await response.json();
+                selectedLanguage = normalized;
+            } catch (_) {
+                if (normalized !== FALLBACK_BUILDER_LOCALE) {
+                    return loadBuilderMessages(FALLBACK_BUILDER_LOCALE);
+                }
+
+                builderMessages = null;
+                selectedLanguage = FALLBACK_BUILDER_LOCALE;
+            }
+
+            localStorage.setItem(BUILDER_LOCALE_STORAGE_KEY, selectedLanguage);
+            const langSelect = document.getElementById('siteLanguage');
+            if (langSelect) {
+                langSelect.value = selectedLanguage;
+            }
+
+            window.BuilderI18n = {
+                t: (key, fallback, params) => t(key, fallback, params),
+            };
+        }
+
+        const localizedDefaultState = new Map();
+
+        function setText(selector, value) {
+            const node = document.querySelector(selector);
+            if (!node || typeof value !== 'string') return;
+            node.textContent = value;
+        }
+
+        function setHtml(selector, value) {
+            const node = document.querySelector(selector);
+            if (!node || typeof value !== 'string') return;
+            node.innerHTML = value;
+        }
+
+        function setPlaceholder(fieldId, value) {
+            const node = document.getElementById(fieldId);
+            if (!node || typeof value !== 'string') return;
+            if ('placeholder' in node) {
+                node.placeholder = value;
+            }
+        }
+
+        function getFieldRoot(fieldId) {
+            const node = document.getElementById(fieldId);
+            if (!node) return null;
+            return node.closest('.field');
+        }
+
+        function setFieldLabel(fieldId, value) {
+            const fieldRoot = getFieldRoot(fieldId);
+            const label = fieldRoot?.querySelector(':scope > label');
+            if (!label || typeof value !== 'string') return;
+            label.textContent = value;
+        }
+
+        function setFieldHint(fieldId, value, asHtml = false) {
+            const fieldRoot = getFieldRoot(fieldId);
+            const hint = fieldRoot?.querySelector(':scope > .hint');
+            if (!hint || typeof value !== 'string') return;
+            if (asHtml) {
+                hint.innerHTML = value;
+                return;
+            }
+            hint.textContent = value;
+        }
+
+        function setToggleLabel(toggleField, value) {
+            const toggle = document.querySelector(`.toggle[data-field="${toggleField}"]`);
+            const label = toggle?.closest('.toggle-row')?.querySelector('span');
+            if (!label || typeof value !== 'string') return;
+            label.textContent = value;
+        }
+
+        function setFilePickerButton(inputId, value) {
+            const button = document.querySelector(`label.file-picker-btn[for="${inputId}"]`);
+            if (!button || typeof value !== 'string') return;
+            button.textContent = value;
+        }
+
+        function setOnclickButtonText(onclickContains, value) {
+            const button = Array.from(document.querySelectorAll('button'))
+                .find((candidate) => (candidate.getAttribute('onclick') || '').includes(onclickContains));
+            if (!button || typeof value !== 'string') return;
+            button.textContent = value;
+        }
+
+        function localizeInfoItems() {
+            const items = document.querySelectorAll('#infoItems .dynamic-item');
+            items.forEach((item) => {
+                const iconLabel = item.querySelector('.infoIcon')?.closest('.field')?.querySelector(':scope > label');
+                const titleLabel = item.querySelector('.infoTitle')?.closest('.field')?.querySelector(':scope > label');
+                const descLabel = item.querySelector('.infoDesc')?.closest('.field')?.querySelector(':scope > label');
+                const removeButton = item.querySelector('.btn-remove');
+                const hintAnchor = item.querySelector('.infoIcon')?.closest('.field')?.querySelector('.hint a');
+
+                if (iconLabel) iconLabel.textContent = t('builder.fields.infoIcon', 'Icon');
+                if (titleLabel) titleLabel.textContent = t('builder.fields.infoTitle', 'Title');
+                if (descLabel) descLabel.textContent = t('builder.fields.infoDescription', 'Description');
+                if (removeButton) removeButton.textContent = t('builder.labels.remove', 'Remove');
+                if (hintAnchor) hintAnchor.textContent = t('builder.labels.viewIcons', 'View icons');
+            });
+        }
+
+        function applyInstructionCopy() {
+            setText('.instructions h3', t('builder.instructions.title', 'Instructions to publish your invitation'));
+
+            const items = document.querySelectorAll('.instructions > ol > li');
+            if (items[0]) {
+                items[0].innerHTML = t(
+                    'builder.instructions.item1',
+                    'If you still do not have a repo, go to the <a href="https://github.com/LucioB16/Altare" target="_blank">template repository</a> and click <strong>"Use this template"</strong> -> <strong>"Create a new repository"</strong>.'
+                );
+            }
+            if (items[1]) {
+                items[1].innerHTML = t(
+                    'builder.instructions.item2',
+                    'In your new repo, open <strong>Settings -> Pages</strong> and choose <strong>"GitHub Actions"</strong> as source.'
+                );
+            }
+            if (items[2]) {
+                items[2].innerHTML = t(
+                    'builder.instructions.item3',
+                    'Open <code>src/data/</code> -> click <code>wedding.yml</code> -> click the <strong>pencil</strong> -> select all -> paste your YAML -> <strong>"Commit changes"</strong>.'
+                );
+            }
+            if (items[3]) {
+                items[3].innerHTML = t(
+                    'builder.instructions.item4',
+                    '<strong>Upload your photos</strong> to the matching folders in GitHub:<ul style="margin-top:0.5rem; list-style: disc; padding-left:1.2rem;"><li><strong>Hero image:</strong> upload to <code>public/media/hero/</code></li><li><strong>Story photos:</strong> upload to <code>public/media/couple/</code></li><li><strong>Social share image:</strong> upload to <code>public/media/og/</code></li></ul>'
+                );
+            }
+            if (items[4]) {
+                items[4].innerHTML = t(
+                    'builder.instructions.item5',
+                    'Done! GitHub Actions will build and publish your site in a few minutes at <code>https://YOUR_USER.github.io/YOUR_REPO/</code>.'
+                );
+            }
+        }
+
+        function applyBuilderCopy() {
+            document.documentElement.lang = selectedLanguage;
+
+            setText('.header h1', t('builder.header.title', 'Wedding Config Builder'));
+            setText('.header p', t('builder.header.subtitle', 'Configure your wedding invitation in minutes'));
+
+            setText('#siteLanguageLabel', t('builder.language.label', 'Site language'));
+            setHtml('#siteLanguageHint', t('builder.language.hint', 'This language is saved in <code>site.language</code> and defines the final site language.'));
+
+            const langSelect = document.getElementById('siteLanguage');
+            if (langSelect) {
+                const optionEn = langSelect.querySelector('option[value="en"]');
+                const optionEs = langSelect.querySelector('option[value="es"]');
+                if (optionEn) optionEn.textContent = t('builder.language.en', 'English');
+                if (optionEs) optionEs.textContent = t('builder.language.es', 'Spanish');
+                langSelect.value = selectedLanguage;
+            }
+
+            const stepIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            stepIndexes.forEach((stepIndex) => {
+                const step = document.querySelector(`.step[data-step="${stepIndex}"]`);
+                if (!step) return;
+
+                const label = step.querySelector(':scope > .step-label');
+                const title = step.querySelector(':scope > h2');
+                const desc = step.querySelector(':scope > .desc');
+
+                if (label) label.textContent = t(`builder.steps.${stepIndex + 1}.label`, label.textContent || '');
+                if (title) title.textContent = t(`builder.steps.${stepIndex + 1}.title`, title.textContent || '');
+                if (desc) desc.textContent = t(`builder.steps.${stepIndex + 1}.desc`, desc.textContent || '');
+            });
+
+            const step1ThemeLabel = document.querySelector('.step[data-step="0"] p.step-label[style]');
+            const step1ThemeDesc = document.querySelector('.step[data-step="0"] p.desc[style]');
+            if (step1ThemeLabel) step1ThemeLabel.textContent = t('builder.labels.themeVisual', 'Visual theme');
+            if (step1ThemeDesc) step1ThemeDesc.textContent = t('builder.labels.themeVisualDesc', 'Choose your invitation visual style. It only changes colors, fonts and ornaments.');
+
+            setFieldLabel('p1Name', t('builder.fields.person1Name', 'Person 1 name'));
+            setFieldLabel('p2Name', t('builder.fields.person2Name', 'Person 2 name'));
+            setFieldLabel('displayName', t('builder.fields.displayName', 'Display name'));
+            setPlaceholder('p1Name', t('builder.placeholders.person1Name', 'Example: Maria'));
+            setPlaceholder('p2Name', t('builder.placeholders.person2Name', 'Example: Juan'));
+            setPlaceholder('displayName', t('builder.placeholders.displayName', 'Example: Maria & Juan'));
+            setFieldHint('displayName', t('builder.hints.displayName', 'This will appear in the hero section and footer.'));
+
+            setFieldLabel('heroTitle', t('builder.fields.heroTitle', 'Title'));
+            setFieldLabel('heroSubtitle', t('builder.fields.heroSubtitle', 'Subtitle (names)'));
+            setFieldLabel('heroDate', t('builder.fields.heroDate', 'Display date (free text)'));
+            setFieldLabel('heroCity', t('builder.fields.heroCity', 'City'));
+            setFieldLabel('heroBgFile', t('builder.fields.heroBackgroundImage', 'Background image'));
+            setFilePickerButton('heroBgFile', t('builder.labels.selectImage', 'Select image'));
+            setFieldHint('heroBgFile', t('builder.hints.heroBackgroundImage', 'Upload this file to <code>public/media/hero/</code> in your repository.'), true);
+            setPlaceholder('heroDate', t('builder.placeholders.heroDate', 'Example: March 15, 2026'));
+            setText('.hero-mock-header span', t('builder.labels.previewHero', 'Hero preview'));
+
+            setFieldLabel('eventTimezone', t('builder.fields.eventTimezone', 'Event timezone'));
+            setFieldHint('eventTimezone', t('builder.hints.eventTimezone', 'One option per UTC offset with a representative city.'));
+            setToggleLabel('religiousEnabled', t('builder.toggles.religiousEvent', 'Religious ceremony'));
+            setToggleLabel('ceremonyEnabled', t('builder.toggles.civilEvent', 'Civil ceremony'));
+            setToggleLabel('celebrationEnabled', t('builder.toggles.partyEvent', 'Party / Celebration'));
+            setFieldLabel('religiousLabel', t('builder.fields.eventType', 'Type'));
+            setFieldLabel('religiousDate', t('builder.fields.eventDate', 'Date'));
+            setFieldLabel('religiousTime', t('builder.fields.eventTime', 'Time'));
+            setFieldLabel('religiousVenue', t('builder.fields.eventVenueName', 'Venue name'));
+            setFieldLabel('religiousAddress', t('builder.fields.eventAddressLines', 'Address (one line per row)'));
+            setFieldLabel('religiousMaps', t('builder.fields.eventMapsUrl', 'Google Maps URL'));
+            setFieldLabel('ceremonyLabel', t('builder.fields.eventType', 'Type'));
+            setFieldLabel('ceremonyDate', t('builder.fields.eventDate', 'Date'));
+            setFieldLabel('ceremonyTime', t('builder.fields.eventTime', 'Time'));
+            setFieldLabel('ceremonyVenue', t('builder.fields.eventVenueName', 'Venue name'));
+            setFieldLabel('ceremonyAddress', t('builder.fields.eventAddressLines', 'Address (one line per row)'));
+            setFieldLabel('ceremonyMaps', t('builder.fields.eventMapsUrl', 'Google Maps URL'));
+            setFieldLabel('celebrationLabel', t('builder.fields.eventTypeParty', 'Event type'));
+            setFieldLabel('celebrationDate', t('builder.fields.eventDate', 'Date'));
+            setFieldLabel('celebrationTime', t('builder.fields.eventTime', 'Time'));
+            setFieldLabel('celebrationVenue', t('builder.fields.eventVenueName', 'Venue name'));
+            setFieldLabel('celebrationAddress', t('builder.fields.eventAddress', 'Address'));
+            setFieldLabel('celebrationMaps', t('builder.fields.eventMapsUrl', 'Google Maps URL'));
+            setHtml('.step[data-step="2"] > .hint[style*="margin-top:1rem"]', t('builder.hints.eventsEnabled', 'You must enable at least one event to continue. Calendar links will include 1, 2 or 3 events based on your selection.'));
+
+            setToggleLabel('storyEnabled', t('builder.toggles.showSection', 'Show section'));
+            setFieldLabel('storySubheading', t('builder.fields.storySubheading', 'Subheading'));
+            setFieldLabel('storyHeading', t('builder.fields.storyHeading', 'Title'));
+            setFieldLabel('storySentence', t('builder.fields.storyText', 'Text'));
+            const storyPhotosLabel = document.querySelector('.step[data-step="3"] #storyFields p.step-label[style]');
+            const storyPhotosHint = document.querySelector('.step[data-step="3"] #storyFields p.hint[style]');
+            if (storyPhotosLabel) storyPhotosLabel.textContent = t('builder.labels.storyPhotosTitle', 'Photos (1-4)');
+            if (storyPhotosHint) storyPhotosHint.innerHTML = t('builder.hints.storyPhotos', 'The first photo is required. Select your files to define names, then upload them to <code>public/media/couple/</code> using those same names.');
+            setFilePickerButton('photoFile01', t('builder.labels.selectPhoto', 'Select photo'));
+            setOnclickButtonText('addPhoto', t('builder.labels.photoAdd', '+ Add photo'));
+            setText('.story-mock-header span', t('builder.labels.previewLive', 'Live preview'));
+
+            setToggleLabel('giftsEnabled', t('builder.toggles.showGiftsSection', 'Show Gifts section'));
+            setToggleLabel('bankEnabled', t('builder.toggles.showBankData', 'Show bank details'));
+            setToggleLabel('dressCodeEnabled', t('builder.toggles.showDressCodeSection', 'Show Dress Code section'));
+            setToggleLabel('brideDisclaimerEnabled', t('builder.toggles.showBrideDisclaimer', 'Show bride color notice'));
+            setFieldLabel('giftsHeading', t('builder.fields.giftsTitle', 'Title'));
+            setFieldLabel('giftsBody', t('builder.fields.giftsText', 'Text'));
+            setFieldLabel('giftsButtonLabel', t('builder.fields.giftsButtonText', 'Button text'));
+            setFieldLabel('bankHolder', t('builder.fields.bankHolder', 'Account holder'));
+            setFieldLabel('bankName', t('builder.fields.bankName', 'Bank'));
+            setFieldLabel('bankAlias', t('builder.fields.bankAlias', 'Alias'));
+            setFieldLabel('bankCbu', t('builder.fields.bankCbu', 'CBU/CVU'));
+            setFieldLabel('bankCuit', t('builder.fields.bankCuit', 'Tax ID'));
+            setFieldLabel('dcTitle', t('builder.fields.dressCodeTitle', 'Title'));
+            setFieldLabel('dcTag', t('builder.fields.dressCodeTag', 'Tag'));
+            setFieldLabel('dcBody', t('builder.fields.dressCodeText', 'Text'));
+            setFieldLabel('brideDisclaimerText', t('builder.fields.brideDisclaimerText', 'Notice text'));
+
+            setToggleLabel('rsvpEnabled', t('builder.toggles.showRsvpSection', 'Show section'));
+            setToggleLabel('rsvpLinkEnabled', t('builder.toggles.showRsvpLink', 'Show confirmation link button'));
+            setFieldLabel('rsvpText', t('builder.fields.rsvpText', 'Text'));
+            setFieldLabel('rsvpDeadline', t('builder.fields.rsvpDeadline', 'Deadline'));
+            setFieldLabel('rsvpUrl', t('builder.fields.rsvpUrl', 'Link URL'));
+            setFieldLabel('rsvpLabel', t('builder.fields.rsvpButtonText', 'Button text'));
+            setPlaceholder('rsvpUrl', t('builder.placeholders.rsvpUrl', 'Form URL or WhatsApp link'));
+
+            setToggleLabel('socialsEnabled', t('builder.toggles.showSocialsSection', 'Show Social Media section'));
+            setToggleLabel('playlistEnabled', t('builder.toggles.showPlaylistSection', 'Show Playlist section'));
+            setToggleLabel('usefulInfoEnabled', t('builder.toggles.showUsefulInfoSection', 'Show Useful Info section'));
+            setFieldLabel('socialsBody', t('builder.fields.socialsText', 'Social media text'));
+            setFieldLabel('socialUrl', t('builder.fields.socialsInstagramUrl', 'Instagram URL'));
+            setFieldLabel('socialHandle', t('builder.fields.socialsHandle', 'Handle'));
+            setPlaceholder('socialHandle', t('builder.placeholders.socialHandle', 'Example: @mywedding'));
+            setFieldLabel('playlistHeading', t('builder.fields.playlistTitle', 'Playlist title'));
+            setFieldLabel('playlistBody', t('builder.fields.playlistText', 'Playlist text'));
+            setFieldLabel('playlistUrl', t('builder.fields.playlistUrl', 'Spotify playlist URL'));
+
+            const usefulInfoCardsLabel = document.querySelector('.step[data-step="6"] #usefulInfoFields p.step-label[style]');
+            const usefulInfoCardsDesc = document.querySelector('.step[data-step="6"] #usefulInfoFields p.desc[style]');
+            if (usefulInfoCardsLabel) usefulInfoCardsLabel.textContent = t('builder.labels.usefulInfoCardsTitle', 'Useful Info cards');
+            if (usefulInfoCardsDesc) usefulInfoCardsDesc.innerHTML = t('builder.hints.usefulInfoCards', 'Search icons in <a href="https://icon-sets.iconify.design/lucide/" target="_blank" style="color:var(--primary); font-weight:600;">Lucide Icons</a> and use names like <code>lucide:camera</code>.');
+            setOnclickButtonText('addInfoItem', t('builder.labels.cardAdd', '+ Add card'));
+            localizeInfoItems();
+
+            setFieldLabel('pageTitle', t('builder.fields.pageTitle', 'Link title'));
+            setFieldHint('pageTitle', t('builder.hints.pageTitle', 'This is also the browser tab title.'));
+            setFieldLabel('metaDesc', t('builder.fields.pageDescription', 'Short description'));
+            setFieldLabel('ogFile', t('builder.fields.ogImage', 'Social share image'));
+            setFilePickerButton('ogFile', t('builder.labels.selectImage', 'Select image'));
+            setFieldHint('ogFile', t('builder.hints.ogImage', 'Upload this file to <code>public/media/og/</code>. Recommended size: 1200x630.'), true);
+            setText('#ogMockDomain', t('builder.labels.ogDomainSample', 'youruser.github.io/your-repo'));
+
+            setText('#btnPrev', t('builder.buttons.prev', 'Previous'));
+            setText('#btnNext', t('builder.buttons.next', 'Next'));
+            setText('.btn-download', t('builder.buttons.download', 'Download wedding.yml'));
+            setText('.btn-copy', t('builder.buttons.copy', 'Copy to clipboard'));
+            applyInstructionCopy();
+
+            if (window.ThemeRuntime?.refreshUi) {
+                window.ThemeRuntime.refreshUi();
+            }
+        }
+
+        function applyLocalizedDefaults() {
+            const fields = [
+                ['pageTitle', contentDefault('site.pageTitle', 'Our Wedding | Julieta & Lucio')],
+                ['metaDesc', contentDefault('site.metaDescription', 'You are invited to celebrate this special moment with us.')],
+                ['heroTitle', contentDefault('hero.title', "We're getting married!")],
+                ['heroDate', contentDefault('hero.dateDisplay', 'June 21, 2026')],
+                ['heroCity', contentDefault('hero.city', 'Cordoba, Argentina')],
+                ['religiousLabel', contentDefault('events.religiousLabel', 'Religious Ceremony')],
+                ['ceremonyLabel', contentDefault('events.ceremonyLabel', 'Civil Ceremony')],
+                ['celebrationLabel', contentDefault('events.celebrationLabel', 'Party')],
+                ['storySubheading', contentDefault('story.subheading', 'Us')],
+                ['storyHeading', contentDefault('story.heading', 'Our story')],
+                ['storySentence', contentDefault('story.sentence', 'Tell your story here.')],
+                ['giftsHeading', contentDefault('gifts.heading', 'Gifts')],
+                ['giftsBody', contentDefault('gifts.body', 'Your presence is the most important thing, but if you want to give us a gift you can help us with our honeymoon.')],
+                ['giftsButtonLabel', contentDefault('gifts.buttonLabel', 'View bank details')],
+                ['dcTitle', contentDefault('dressCode.title', 'Dress Code')],
+                ['dcTag', contentDefault('dressCode.tag', 'Formal - Elegant')],
+                ['dcBody', contentDefault('dressCode.body', 'We are waiting for your best look to celebrate together.')],
+                ['brideDisclaimerText', contentDefault('dressCode.brideDisclaimer', 'By tradition, white or similar shades are reserved for the bride.')],
+                ['rsvpText', contentDefault('rsvp.text', 'Please confirm your attendance before May 1.')],
+                ['rsvpLabel', contentDefault('rsvp.buttonLabel', 'CONFIRM ATTENDANCE')],
+                ['socialsBody', contentDefault('socials.body', 'Before the wedding, you will receive a link to upload all your photos and videos.')],
+                ['playlistHeading', contentDefault('playlist.heading', "Let\'s build the playlist together")],
+                ['playlistBody', contentDefault('playlist.body', 'Add those songs that cannot be missing from the party.')],
+            ];
+
+            fields.forEach(([id, value]) => {
+                const input = document.getElementById(id);
+                if (!input || !('value' in input) || typeof value !== 'string') return;
+
+                const previousDefault = localizedDefaultState.get(id);
+                const currentValue = input.value;
+                const looksMojibake = /Ã|â|ðŸ/.test(currentValue);
+                const shouldReplace =
+                    currentValue === '' ||
+                    looksMojibake ||
+                    (typeof previousDefault === 'string' && currentValue === previousDefault);
+
+                if (shouldReplace) {
+                    input.value = value;
+                }
+
+                localizedDefaultState.set(id, value);
+            });
+        }
+
+        async function initializeBuilderLocale() {
+            await loadBuilderMessages(detectInitialBuilderLocale());
+            applyBuilderCopy();
+            applyLocalizedDefaults();
+        }
+
+        function onBuilderLanguageChange(nextLocale) {
+            const normalized = nextLocale === 'es' ? 'es' : 'en';
+            if (normalized === selectedLanguage) {
+                return;
+            }
+
+            loadBuilderMessages(normalized).then(() => {
+                applyBuilderCopy();
+                applyLocalizedDefaults();
+                initTimeZonePicker();
+                updateHeroPreview();
+                updateStoryPreview();
+                updateOgPreview();
+                generateYaml();
+            });
+        }
+
+        window.onBuilderLanguageChange = onBuilderLanguageChange;
 
         async function initThemePicker() {
             if (!window.ThemeRuntime) {
@@ -1551,7 +1974,7 @@ Ascochinga, Córdoba</textarea></div>
 
         function validateEventsSelection() {
             if (getEnabledEventCount() > 0) return true;
-            alert('Tenés que habilitar al menos un evento (religiosa, civil o fiesta) para continuar.');
+            alert(t('builder.alerts.enableOneEvent', 'You must enable at least one event (religious, civil or party) to continue.'));
             return false;
         }
 
@@ -1623,13 +2046,13 @@ Ascochinga, Córdoba</textarea></div>
         // File picker helpers
         function onFileSelected(input, displayId) {
             const name = input.files[0]?.name || '';
-            document.getElementById(displayId).textContent = name || 'Ningún archivo';
+            document.getElementById(displayId).textContent = name || t('builder.files.none', 'No file');
         }
 
         function onPhotoSelected(input) {
             const name = input.files[0]?.name || '';
             const nameEl = input.parentElement.querySelector('.photoFileName');
-            if (nameEl) nameEl.textContent = name || 'Sin archivo';
+            if (nameEl) nameEl.textContent = name || t('builder.files.nonePhoto', 'No file');
         }
 
         // Robust file-picker trigger: some browsers fail with hidden file inputs + label(for).
@@ -1668,13 +2091,17 @@ Ascochinga, Córdoba</textarea></div>
         }
 
         function addPhoto() {
-            if (document.querySelectorAll('#photoItems .dynamic-item').length >= 4) return alert('Máximo 4 fotos.');
+            if (document.querySelectorAll('#photoItems .dynamic-item').length >= 4) {
+                alert(t('builder.alerts.maxPhotos', 'Maximum 4 photos.'));
+                return;
+            }
+
             const item = document.createElement('div');
             item.className = 'dynamic-item';
             item.innerHTML = `
-        <button class="btn-remove" onclick="this.parentElement.remove(); reindexPhotos();">✕ Quitar</button>
+        <button class="btn-remove" onclick="this.parentElement.remove(); reindexPhotos();">${t('builder.labels.remove', 'Remove')}</button>
         <div class="file-picker">
-          <label class="file-picker-btn" for="temp">Seleccionar foto</label>
+          <label class="file-picker-btn" for="temp">${t('builder.labels.selectPhoto', 'Select photo')}</label>
           <input type="file" id="temp" accept="image/*" onchange="onPhotoSelected(this); updateStoryPreview();" style="display:none">
           <span class="file-picker-name photoFileName">temp.jpg</span>
         </div>`;
@@ -1682,19 +2109,22 @@ Ascochinga, Córdoba</textarea></div>
             reindexPhotos();
         }
 
+
         function addInfoItem() {
             const list = document.getElementById('infoItems');
             const item = document.createElement('div');
             item.className = 'dynamic-item';
             item.innerHTML = `
-        <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
+        <button class="btn-remove" onclick="this.parentElement.remove();">${t('builder.labels.remove', 'Remove')}</button>
         <div class="row">
-          <div class="field"><label>Ícono</label><input type="text" class="infoIcon" value="lucide:info"></div>
-          <div class="field"><label>Título</label><input type="text" class="infoTitle" value=""></div>
+          <div class="field"><label>${t('builder.fields.infoIcon', 'Icon')}</label><input type="text" class="infoIcon" value="lucide:info"></div>
+          <div class="field"><label>${t('builder.fields.infoTitle', 'Title')}</label><input type="text" class="infoTitle" value=""></div>
         </div>
-        <div class="field"><label>Descripción</label><input type="text" class="infoDesc" value=""></div>`;
+        <div class="field"><label>${t('builder.fields.infoDescription', 'Description')}</label><input type="text" class="infoDesc" value=""></div>`;
             list.appendChild(item);
+            localizeInfoItems();
         }
+
 
         function esc(s) { return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`; }
 
@@ -1736,7 +2166,7 @@ Ascochinga, Córdoba</textarea></div>
         }
 
         function formatZoneReference(zone) {
-            if (!zone || zone === 'UTC') return 'Tiempo Universal';
+            if (!zone || zone === 'UTC') return t('builder.timezone.universal', 'Universal Time');
 
             const parts = zone.split('/');
             if (parts.length >= 3) {
@@ -1773,7 +2203,7 @@ Ascochinga, Córdoba</textarea></div>
             const select = document.getElementById('eventTimezone');
             if (!select) return;
 
-            const configuredDefaultTz = select.dataset.defaultTz || 'America/Buenos_Aires';
+            const configuredDefaultTz = select.value || select.dataset.defaultTz || 'America/Buenos_Aires';
             const year = new Date().getUTCFullYear();
             const referenceDates = [
                 new Date(Date.UTC(year, 0, 15, 12, 0, 0)),
@@ -1827,45 +2257,7 @@ Ascochinga, Córdoba</textarea></div>
                 [780, 'Pacific/Tongatapu'],
                 [840, 'Pacific/Kiritimati'],
             ]);
-            const offsetReferences = new Map([
-                [-660, 'Pacífico Sur (Samoa)'],
-                [-600, 'US/Canada Hawai-Aleutian (Honolulu)'],
-                [-570, 'Polinesia Francesa (Marquesas)'],
-                [-540, 'US/Canada Alaska (Anchorage)'],
-                [-480, 'US/Canada Pacific (Los Ángeles/Vancouver)'],
-                [-420, 'US/Canada Mountain (Denver/Calgary)'],
-                [-360, 'US/Canada Central (Chicago/Winnipeg)'],
-                [-300, 'US/Canada Eastern (Nueva York/Toronto)'],
-                [-240, 'Sudamérica Norte (Caracas/La Paz)'],
-                [-210, 'Canadá Atlantic (Terranova)'],
-                [-180, 'Argentina/Uruguay (Buenos Aires/Montevideo)'],
-                [-120, 'Brasil (Noronha)'],
-                [-60, 'Atlántico (Azores)'],
-                [0, 'Europa Occidental (Londres/Lisboa)'],
-                [60, 'Europa Central (Madrid/París/Berlín)'],
-                [120, 'Europa Oriental (Atenas/Bucarest)'],
-                [180, 'Europa Oriental+ / Turquía (Estambul)'],
-                [210, 'Irán (Teherán)'],
-                [240, 'EAU (Dubái)'],
-                [270, 'Afganistán (Kabul)'],
-                [300, 'Pakistán (Karachi)'],
-                [330, 'India (Nueva Delhi)'],
-                [345, 'Nepal (Katmandú)'],
-                [360, 'Bangladés (Daca)'],
-                [390, 'Myanmar (Yangón)'],
-                [420, 'Tailandia (Bangkok)'],
-                [480, 'China (Shanghái)'],
-                [525, 'Australia (Eucla)'],
-                [540, 'Japón (Tokio)'],
-                [570, 'Australia (Darwin)'],
-                [600, 'Australia (Sídney)'],
-                [630, 'Australia (Lord Howe)'],
-                [660, 'Islas Salomón'],
-                [720, 'Nueva Zelanda (Auckland)'],
-                [765, 'Nueva Zelanda (Chatham)'],
-                [780, 'Tonga'],
-                [840, 'Kiribati (Kiritimati)'],
-            ]);
+            const offsetReferences = new Map();
 
             const pushOffset = (zone, date) => {
                 try {
@@ -1896,7 +2288,7 @@ Ascochinga, Córdoba</textarea></div>
                 const reference = offsetReferences.get(offset) || formatZoneReference(representativeZone);
 
                 option.value = representativeZone;
-                option.textContent = `UTC${formatOffset(offset)} — ${reference}`;
+                option.textContent = t('builder.timezone.utcLabel', 'UTC{{offset}} - {{reference}}', { offset: formatOffset(offset), reference });
                 option.title = representativeZone;
                 optionZoneByOffset.set(offset, representativeZone);
                 select.appendChild(option);
@@ -1946,12 +2338,14 @@ Ascochinga, Córdoba</textarea></div>
         }
 
         function buildTimeDisplay(timeId) {
-            return v(timeId) ? v(timeId).replace(/^0/, '') + ' hs' : '';
+            return v(timeId) ? (selectedLanguage === 'es' ? v(timeId).replace(/^0/, '') + ' hs' : v(timeId)) : '';
         }
 
         function updateOgPreview() {
-            document.getElementById('ogMockTitle').textContent = v('pageTitle') || 'Título de la invitación';
-            document.getElementById('ogMockDesc').textContent = v('metaDesc') || 'Descripción de la invitación';
+            const pageTitle = v('pageTitle') || contentDefault('site.pageTitle', 'Our Wedding | Julieta & Lucio');
+            const pageDescription = v('metaDesc') || contentDefault('site.metaDescription', 'You are invited to celebrate this special moment with us.');
+            document.getElementById('ogMockTitle').textContent = pageTitle;
+            document.getElementById('ogMockDesc').textContent = pageDescription;
 
             const fileInput = document.getElementById('ogFile');
             const mockImg = document.getElementById('ogMockImg');
@@ -1964,15 +2358,16 @@ Ascochinga, Córdoba</textarea></div>
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 mockImg.style.backgroundImage = 'none';
-                mockImg.textContent = 'Elegí una foto arriba 👆';
+                mockImg.textContent = t('builder.previews.ogImageFallback', 'Choose a photo above');
             }
         }
 
+
         function updateHeroPreview() {
-            document.getElementById('heroMockTitle').textContent = v('heroTitle') || 'Título';
-            document.getElementById('heroMockSubtitle').textContent = v('heroSubtitle') || 'Nombre de la pareja';
-            document.getElementById('heroMockDate').textContent = v('heroDate') || 'Fecha';
-            document.getElementById('heroMockCity').textContent = v('heroCity') || 'Ciudad';
+            document.getElementById('heroMockTitle').textContent = v('heroTitle') || t('builder.previews.heroTitleFallback', 'Title');
+            document.getElementById('heroMockSubtitle').textContent = v('heroSubtitle') || t('builder.previews.heroSubtitleFallback', 'Couple name');
+            document.getElementById('heroMockDate').textContent = v('heroDate') || t('builder.previews.heroDateFallback', 'Date');
+            document.getElementById('heroMockCity').textContent = v('heroCity') || t('builder.previews.heroCityFallback', 'City');
 
             const fileInput = document.getElementById('heroBgFile');
             const mockScreen = document.getElementById('heroMockScreen');
@@ -1992,10 +2387,11 @@ Ascochinga, Córdoba</textarea></div>
             }
         }
 
+
         function updateStoryPreview() {
-            document.getElementById('storyMockSubheading').textContent = v('storySubheading') || 'Subtítulo';
-            document.getElementById('storyMockHeading').textContent = v('storyHeading') || 'Título';
-            document.getElementById('storyMockText').textContent = v('storySentence') || 'Texto descriptivo...';
+            document.getElementById('storyMockSubheading').textContent = v('storySubheading') || t('builder.previews.storySubheadingFallback', 'Subheading');
+            document.getElementById('storyMockHeading').textContent = v('storyHeading') || t('builder.previews.storyHeadingFallback', 'Title');
+            document.getElementById('storyMockText').textContent = v('storySentence') || t('builder.previews.storyTextFallback', 'Descriptive text...');
 
             const gallery = document.getElementById('storyMockGallery');
             gallery.innerHTML = '';
@@ -2024,22 +2420,37 @@ Ascochinga, Córdoba</textarea></div>
             });
         }
 
+
         function generateYaml() {
-            const tz = v('eventTimezone');
+            const tz = v('eventTimezone') || 'UTC';
             const themeId = window.ThemeRuntime?.getSelectedThemeId?.() || selectedThemeId || 'jardin-clasico';
             const photoEls = document.querySelectorAll('#photoItems .dynamic-item');
             const infoItems = document.getElementById('infoItems').querySelectorAll('.dynamic-item');
+            const siteLanguage = selectedLanguage === 'es' ? 'es' : 'en';
+            const localeLanguageTag = contentDefault('locale.language', siteLanguage === 'es' ? 'es-AR' : 'en-US');
+            const noFileLabel = t('builder.files.none', 'No file');
+            const noPhotoLabel = t('builder.files.nonePhoto', 'No file');
+
+            const valueOrDefault = (fieldId, contentPath, fallback = '') => {
+                const current = v(fieldId);
+                if (current) {
+                    return current;
+                }
+                return contentDefault(contentPath, fallback);
+            };
 
             let y = '';
 
             const ogFileNameDisplay = document.getElementById('ogFileName').textContent?.trim();
-            const ogFileName = (!ogFileNameDisplay || ogFileNameDisplay === 'Ningún archivo')
+            const ogFileName = (!ogFileNameDisplay || ogFileNameDisplay === noFileLabel)
                 ? 'og.jpg'
                 : ogFileNameDisplay;
+
             y += `site:\n`;
-            y += `  pageTitle: ${esc(v('pageTitle'))}\n`;
+            y += `  language: "${siteLanguage}"\n`;
+            y += `  pageTitle: ${esc(valueOrDefault('pageTitle', 'site.pageTitle', 'Our Wedding | Julieta & Lucio'))}\n`;
             y += `  meta:\n`;
-            y += `    description: ${esc(v('metaDesc'))}\n`;
+            y += `    description: ${esc(valueOrDefault('metaDesc', 'site.metaDescription', 'You are invited to celebrate this special moment with us.'))}\n`;
             y += `    ogImage: "/media/og/${ogFileName}"\n\n`;
 
             y += `couple:\n`;
@@ -2047,7 +2458,7 @@ Ascochinga, Córdoba</textarea></div>
             y += `  person2:\n    name: ${esc(v('p2Name'))}\n`;
             y += `  displayName: ${esc(v('displayName'))}\n\n`;
 
-            y += `locale:\n  language: "es-AR"\n  timeZone: "${tz}"\n\n`;
+            y += `locale:\n  language: "${localeLanguageTag}"\n  timeZone: "${tz}"\n\n`;
             y += `theme:\n  id: "${themeId}"\n\n`;
 
             y += `sections:\n`;
@@ -2065,63 +2476,68 @@ Ascochinga, Córdoba</textarea></div>
 
             y += `hero:\n`;
             y += `  enabled: true\n`;
-            y += `  title: ${esc(v('heroTitle'))}\n`;
+            y += `  title: ${esc(valueOrDefault('heroTitle', 'hero.title', "We're getting married!"))}\n`;
             y += `  subtitle: ${esc(v('heroSubtitle'))}\n`;
-            y += `  dateDisplay: ${esc(v('heroDate'))}\n`;
-            y += `  city: ${esc(v('heroCity'))}\n`;
+            y += `  dateDisplay: ${esc(valueOrDefault('heroDate', 'hero.dateDisplay', 'June 21, 2026'))}\n`;
+            y += `  city: ${esc(valueOrDefault('heroCity', 'hero.city', 'Cordoba, Argentina'))}\n`;
 
-            const heroFileName = document.getElementById('heroBgName').textContent === 'Ningún archivo' ? 'bg.jpg' : document.getElementById('heroBgName').textContent;
+            const heroFileNameDisplay = document.getElementById('heroBgName').textContent?.trim();
+            const heroFileName = (!heroFileNameDisplay || heroFileNameDisplay === noFileLabel)
+                ? 'bg.jpg'
+                : heroFileNameDisplay;
             y += `  backgroundImage: "/media/hero/${heroFileName}"\n\n`;
 
             y += `countdown:\n`;
             y += `  target: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
-            y += `  heading: "Cuenta regresiva"\n`;
-            y += `  note: "¡Falta muy poco!"\n`;
+            y += `  heading: ${esc(contentDefault('countdown.heading', 'Countdown'))}\n`;
+            y += `  note: ${esc(contentDefault('countdown.note', 'We are almost there!'))}\n`;
             y += `  targetSource: "celebration"\n\n`;
 
             y += `events:\n`;
 
-            // Religious ceremony
             y += `  religiousCeremony:\n`;
             y += `    enabled: ${toggleState.religiousEnabled}\n`;
-            y += `    kindLabel: ${esc(v('religiousLabel') || 'Ceremonia Religiosa')}\n`;
+            y += `    kindLabel: ${esc(valueOrDefault('religiousLabel', 'events.religiousLabel', 'Religious Ceremony'))}\n`;
             y += `    datetime: "${buildDatetime('religiousDate', 'religiousTime')}"\n`;
             y += `    timeDisplay: "${buildTimeDisplay('religiousTime')}"\n`;
             y += `    venueName: ${esc(v('religiousVenue'))}\n`;
             y += `    addressLines:\n`;
-            (v('religiousAddress') || '').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            (v('religiousAddress') || '').split('\n').filter((line) => line.trim()).forEach((line) => {
+                y += `      - ${esc(line.trim())}\n`;
+            });
             y += `    mapsUrl: "${v('religiousMaps')}"\n`;
 
-            // Civil ceremony
             y += `  ceremony:\n`;
             y += `    enabled: ${toggleState.ceremonyEnabled}\n`;
-            y += `    kindLabel: ${esc(v('ceremonyLabel'))}\n`;
+            y += `    kindLabel: ${esc(valueOrDefault('ceremonyLabel', 'events.ceremonyLabel', 'Civil Ceremony'))}\n`;
             y += `    datetime: "${buildDatetime('ceremonyDate', 'ceremonyTime')}"\n`;
             y += `    timeDisplay: "${buildTimeDisplay('ceremonyTime')}"\n`;
             y += `    venueName: ${esc(v('ceremonyVenue'))}\n`;
             y += `    addressLines:\n`;
-            v('ceremonyAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            (v('ceremonyAddress') || '').split('\n').filter((line) => line.trim()).forEach((line) => {
+                y += `      - ${esc(line.trim())}\n`;
+            });
             y += `    mapsUrl: "${v('ceremonyMaps')}"\n`;
 
-            // Celebration
             y += `  celebration:\n`;
             y += `    enabled: ${toggleState.celebrationEnabled}\n`;
-            y += `    kindLabel: ${esc(v('celebrationLabel'))}\n`;
+            y += `    kindLabel: ${esc(valueOrDefault('celebrationLabel', 'events.celebrationLabel', 'Party'))}\n`;
             y += `    datetime: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
             y += `    timeDisplay: "${buildTimeDisplay('celebrationTime')}"\n`;
             y += `    venueName: ${esc(v('celebrationVenue'))}\n`;
             y += `    addressLines:\n`;
-            v('celebrationAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            (v('celebrationAddress') || '').split('\n').filter((line) => line.trim()).forEach((line) => {
+                y += `      - ${esc(line.trim())}\n`;
+            });
             y += `    mapsUrl: "${v('celebrationMaps')}"\n\n`;
 
             y += `story:\n`;
-            y += `  heading: ${esc(v('storyHeading'))}\n`;
-            y += `  subheading: ${esc(v('storySubheading'))}\n`;
-            // Handles multiline text
-            const storyText = v('storySentence');
+            y += `  heading: ${esc(valueOrDefault('storyHeading', 'story.heading', 'Our story'))}\n`;
+            y += `  subheading: ${esc(valueOrDefault('storySubheading', 'story.subheading', 'Us'))}\n`;
+            const storyText = valueOrDefault('storySentence', 'story.sentence', 'Tell your story here.');
             if (storyText.includes('\n')) {
                 y += `  sentence: |\n`;
-                storyText.split('\n').forEach(line => {
+                storyText.split('\n').forEach((line) => {
                     y += `    ${line}\n`;
                 });
             } else {
@@ -2131,48 +2547,77 @@ Ascochinga, Córdoba</textarea></div>
             y += `  photos:\n`;
             photoEls.forEach((el, i) => {
                 let fileName = el.querySelector('.photoFileName')?.textContent?.trim();
-                if (!fileName || fileName === 'Sin archivo') {
+                if (!fileName || fileName === noPhotoLabel || fileName === noFileLabel) {
                     fileName = `${String(i + 1).padStart(2, '0')}.jpg`;
                 }
+                const photoAlt = t('builder.yaml.photoAlt', 'Photo {{index}}', { index: i + 1 });
                 y += `    - src: "/media/couple/${fileName}"\n`;
-                y += `      alt: "Foto ${i + 1}"\n`;
+                y += `      alt: ${esc(photoAlt)}\n`;
             });
             y += `\n`;
 
-            y += `socials:\n  heading: "Redes Sociales"\n`;
-            y += `  body: ${esc(v('socialsBody'))}\n`;
-            y += `  items:\n    - label: "Instagram"\n      handle: ${esc(v('socialHandle'))}\n      url: "${v('socialUrl')}"\n\n`;
+            y += `socials:\n`;
+            y += `  heading: ${esc(contentDefault('socials.heading', 'Social Media'))}\n`;
+            y += `  body: ${esc(valueOrDefault('socialsBody', 'socials.body', ''))}\n`;
+            y += `  items:\n`;
+            y += `    - label: ${esc(contentDefault('socials.itemLabel', 'Instagram'))}\n`;
+            y += `      handle: ${esc(v('socialHandle'))}\n`;
+            y += `      url: "${v('socialUrl')}"\n\n`;
 
-            y += `gifts:\n  heading: ${esc(v('giftsHeading'))}\n  body: ${esc(v('giftsBody'))}\n`;
-            y += `  buttonLabel: ${esc(v('giftsButtonLabel'))}\n`;
-            y += `  bank:\n    enabled: ${toggleState.bankEnabled}\n`;
-            y += `    holderName: ${esc(v('bankHolder'))}\n    bankName: ${esc(v('bankName'))}\n`;
-            y += `    alias: ${esc(v('bankAlias'))}\n    cbu: "${v('bankCbu')}"\n    cuit: "${v('bankCuit')}"\n\n`;
+            y += `gifts:\n`;
+            y += `  heading: ${esc(valueOrDefault('giftsHeading', 'gifts.heading', 'Gifts'))}\n`;
+            y += `  body: ${esc(valueOrDefault('giftsBody', 'gifts.body', ''))}\n`;
+            y += `  buttonLabel: ${esc(valueOrDefault('giftsButtonLabel', 'gifts.buttonLabel', 'View bank details'))}\n`;
+            y += `  bank:\n`;
+            y += `    enabled: ${toggleState.bankEnabled}\n`;
+            y += `    holderName: ${esc(v('bankHolder'))}\n`;
+            y += `    bankName: ${esc(v('bankName'))}\n`;
+            y += `    alias: ${esc(v('bankAlias'))}\n`;
+            y += `    cbu: "${v('bankCbu')}"\n`;
+            y += `    cuit: "${v('bankCuit')}"\n\n`;
 
-            y += `dressCode:\n  title: ${esc(v('dcTitle'))}\n  tag: ${esc(v('dcTag'))}\n  body: ${esc(v('dcBody'))}\n`;
-            y += `  brideDisclaimer:\n    enabled: ${toggleState.brideDisclaimerEnabled}\n    text: ${esc(v('brideDisclaimerText'))}\n\n`;
+            y += `dressCode:\n`;
+            y += `  title: ${esc(valueOrDefault('dcTitle', 'dressCode.title', 'Dress Code'))}\n`;
+            y += `  tag: ${esc(valueOrDefault('dcTag', 'dressCode.tag', 'Formal - Elegant'))}\n`;
+            y += `  body: ${esc(valueOrDefault('dcBody', 'dressCode.body', ''))}\n`;
+            y += `  brideDisclaimer:\n`;
+            y += `    enabled: ${toggleState.brideDisclaimerEnabled}\n`;
+            y += `    text: ${esc(valueOrDefault('brideDisclaimerText', 'dressCode.brideDisclaimer', 'By tradition, white or similar shades are reserved for the bride.'))}\n\n`;
 
-            // RSVP text multiline support
-            const rsvpText = v('rsvpText');
+            const rsvpText = valueOrDefault('rsvpText', 'rsvp.text', '');
             if (rsvpText.includes('\n')) {
                 y += `rsvp:\n  text: |\n`;
-                rsvpText.split('\n').forEach(line => {
+                rsvpText.split('\n').forEach((line) => {
                     y += `    ${line}\n`;
                 });
             } else {
                 y += `rsvp:\n  text: ${esc(rsvpText)}\n`;
             }
             y += `  deadline: "${v('rsvpDeadline')}"\n`;
-            y += `  link:\n    enabled: ${toggleState.rsvpLinkEnabled}\n    url: "${v('rsvpUrl')}"\n    label: ${esc(v('rsvpLabel'))}\n\n`;
+            y += `  link:\n`;
+            y += `    enabled: ${toggleState.rsvpLinkEnabled}\n`;
+            y += `    url: "${v('rsvpUrl')}"\n`;
+            y += `    label: ${esc(valueOrDefault('rsvpLabel', 'rsvp.buttonLabel', 'CONFIRM ATTENDANCE'))}\n\n`;
 
             const calendarMode = getCalendarMode();
-            y += `calendar:\n  mode: "${calendarMode}"\n  googleCalendar:\n    enabled: true\n  ics:\n    enabled: true\n`;
-            y += `    fileNameSingle: "boda.ics"\n    fileNameReligiousCeremony: "ceremonia-religiosa.ics"\n    fileNameCeremony: "ceremonia.ics"\n    fileNameCelebration: "celebracion.ics"\n\n`;
+            y += `calendar:\n`;
+            y += `  mode: "${calendarMode}"\n`;
+            y += `  googleCalendar:\n    enabled: true\n`;
+            y += `  ics:\n    enabled: true\n`;
+            y += `    fileNameSingle: "${contentDefault('calendar.fileNameSingle', 'wedding.ics')}"\n`;
+            y += `    fileNameReligiousCeremony: "${contentDefault('calendar.fileNameReligiousCeremony', 'religious-ceremony.ics')}"\n`;
+            y += `    fileNameCeremony: "${contentDefault('calendar.fileNameCeremony', 'ceremony.ics')}"\n`;
+            y += `    fileNameCelebration: "${contentDefault('calendar.fileNameCelebration', 'celebration.ics')}"\n\n`;
 
-            y += `playlist:\n  heading: ${esc(v('playlistHeading'))}\n  body: ${esc(v('playlistBody'))}\n  spotifyUrl: "${v('playlistUrl')}"\n\n`;
+            y += `playlist:\n`;
+            y += `  heading: ${esc(valueOrDefault('playlistHeading', 'playlist.heading', "Let's build the playlist together"))}\n`;
+            y += `  body: ${esc(valueOrDefault('playlistBody', 'playlist.body', ''))}\n`;
+            y += `  spotifyUrl: "${v('playlistUrl')}"\n\n`;
 
-            y += `usefulInfo:\n  title: "Info útil"\n  items:\n`;
-            infoItems.forEach(item => {
+            y += `usefulInfo:\n`;
+            y += `  title: ${esc(contentDefault('usefulInfo.title', 'Useful info'))}\n`;
+            y += `  items:\n`;
+            infoItems.forEach((item) => {
                 y += `    - enabled: true\n`;
                 y += `      icon: "${item.querySelector('.infoIcon')?.value || 'lucide:info'}"\n`;
                 y += `      title: ${esc(item.querySelector('.infoTitle')?.value || '')}\n`;
@@ -2182,6 +2627,7 @@ Ascochinga, Córdoba</textarea></div>
             document.getElementById('yamlOutput').textContent = y;
             window._generatedYaml = y;
         }
+
 
         function downloadYaml() {
             const blob = new Blob([window._generatedYaml], { type: 'text/yaml' });
@@ -2194,22 +2640,45 @@ Ascochinga, Córdoba</textarea></div>
         function copyYaml() {
             navigator.clipboard.writeText(window._generatedYaml).then(() => {
                 const btn = document.querySelector('.btn-copy');
-                btn.textContent = '✓ ¡Copiado!';
-                setTimeout(() => { btn.textContent = '📋 Copiar al portapapeles'; }, 2000);
+                if (!btn) return;
+                btn.textContent = t('builder.buttons.copied', 'Copied!');
+                setTimeout(() => {
+                    btn.textContent = t('builder.buttons.copy', 'Copy to clipboard');
+                }, 2000);
             });
         }
 
+
         (async function bootstrapBuilder() {
+            await initializeBuilderLocale();
             initTimeZonePicker();
             await initThemePicker();
             updateHeroPreview();
             updateStoryPreview();
             updateOgPreview();
+            generateYaml();
+            updateUI();
         })();
     </script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -7,9 +7,13 @@ const __dirname = path.dirname(__filename);
 
 const root = path.resolve(__dirname, "..");
 const sourceThemesPath = path.join(root, "src", "theme", "themes.json");
+const sourceLocalesDir = path.join(root, "src", "i18n", "locales");
+
 const targetDir = path.join(root, "public", "config-builder");
 const targetThemesPath = path.join(targetDir, "themes.json");
 const targetThemeFontsCssPath = path.join(targetDir, "theme-fonts.css");
+const targetLocalesDir = path.join(targetDir, "i18n");
+const targetLocalesManifestPath = path.join(targetLocalesDir, "locales.json");
 
 const baseHostedFamilies = new Set(["Inter", "Playfair Display"]);
 
@@ -77,6 +81,38 @@ function buildThemeFontsCss(themes) {
     ].join("\n");
 }
 
+async function syncLocales() {
+    await mkdir(targetLocalesDir, { recursive: true });
+
+    const entries = await readdir(sourceLocalesDir, { withFileTypes: true });
+    const localeFiles = entries
+        .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
+        .map((entry) => entry.name)
+        .sort((a, b) => a.localeCompare(b));
+
+    const manifest = [];
+
+    for (const fileName of localeFiles) {
+        const sourcePath = path.join(sourceLocalesDir, fileName);
+        const targetPath = path.join(targetLocalesDir, fileName);
+        await copyFile(sourcePath, targetPath);
+
+        const localeCode = path.basename(fileName, ".json");
+        const payload = JSON.parse(await readFile(sourcePath, "utf8"));
+        const label =
+            payload?.builder?.language?.[localeCode] ||
+            payload?.builder?.language?.label ||
+            localeCode;
+
+        manifest.push({ code: localeCode, label });
+    }
+
+    await writeFile(targetLocalesManifestPath, JSON.stringify(manifest, null, 2), "utf8");
+
+    console.log(`Synced builder locales to ${targetLocalesDir}`);
+    console.log(`Synced locales manifest to ${targetLocalesManifestPath}`);
+}
+
 await mkdir(targetDir, { recursive: true });
 await copyFile(sourceThemesPath, targetThemesPath);
 
@@ -84,6 +120,8 @@ const themesRaw = await readFile(sourceThemesPath, "utf8");
 const themes = JSON.parse(themesRaw);
 const themeFontsCss = buildThemeFontsCss(themes);
 await writeFile(targetThemeFontsCssPath, themeFontsCss, "utf8");
+
+await syncLocales();
 
 console.log(`Synced themes to ${targetThemesPath}`);
 console.log(`Synced theme fonts to ${targetThemeFontsCssPath}`);

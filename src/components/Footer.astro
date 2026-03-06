@@ -1,7 +1,9 @@
 ---
 import { getWeddingData } from "../data/weddingData";
+import { getSiteI18n } from "../i18n/site";
 
 const { couple } = getWeddingData();
+const { t } = getSiteI18n(Astro.url);
 ---
 
 <footer
@@ -57,7 +59,7 @@ const { couple } = getWeddingData();
         class="text-4xl md:text-5xl lg:text-[64px] mb-8 font-normal tracking-wide"
         style="font-family: var(--font-display);"
     >
-        ¡Gracias por acompañarnos!
+        {t("site.footer.thanks")}
     </h2>
 
     <!-- Couple Name with solid white hearts -->
@@ -96,6 +98,6 @@ const { couple } = getWeddingData();
         class="uppercase tracking-[0.25em] text-sm md:text-base font-semibold text-current opacity-90 hover:opacity-100 transition-opacity"
         style="font-family: var(--font-sans);"
     >
-        Volver al inicio
+        {t("site.footer.backToTop")}
     </button>
 </footer>

@@ -3,6 +3,7 @@ import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
+import { getSiteI18n } from "../i18n/site";
 
 interface Props {
     eventKey: "ceremony" | "celebration" | "religiousCeremony";
@@ -13,6 +14,7 @@ interface Props {
 
 const { eventKey, dividerType = "flower", bgClass = "bg-surface", forceVisible = false } = Astro.props;
 const { events } = getWeddingData();
+const { t } = getSiteI18n(Astro.url);
 const event = events[eventKey];
 ---
 
@@ -25,7 +27,7 @@ const event = events[eventKey];
                     <SectionIcon name="ceremony" />
 
                     <p class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4">
-                        Dónde y cuándo
+                        {t("site.ceremony.kicker")}
                     </p>
 
                     <h2
@@ -61,7 +63,7 @@ const event = events[eventKey];
                             rel="noopener noreferrer"
                             class="theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors"
                         >
-                            CÓMO LLEGAR
+                            {t("site.ceremony.mapButton")}
                         </a>
                     </div>
                 </div>

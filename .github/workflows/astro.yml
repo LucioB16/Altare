@@ -109,23 +109,31 @@ jobs:
           ESCAPED_URL=$(printf '%s' "$URL" | sed 's|&|\\&|g')
           ESCAPED_BUILDER_URL=$(printf '%s' "$URL/config-builder/" | sed 's|&|\\&|g')
 
-          # Replace Config Builder URL first (specific path before root URL).
-          sed -i -E "s|https://luciob16\.github\.io/Altare/config-builder/?|$ESCAPED_BUILDER_URL|g" README.md
+          FILES=(README.md README.es.md)
 
-          # Replace demo/root URL.
-          sed -i -E "s|https://luciob16\.github\.io/Altare/?|$ESCAPED_URL/|g" README.md
+          for FILE in "${FILES[@]}"; do
+            if [ ! -f "$FILE" ]; then
+              continue
+            fi
 
-          # Backward compatibility for old README formats based only on badge text.
-          sed -i -E "s|(\[!\[[^]]*Demo[^]]*\]\([^)]+\)\])\([^)]+\)|\1($ESCAPED_URL/)|gi" README.md
-          sed -i -E "s|(\[!\[[^]]*Config Builder[^]]*\]\([^)]+\)\])\([^)]+\)|\1($ESCAPED_BUILDER_URL)|gi" README.md
-          
+            # Replace Config Builder URL first (specific path before root URL).
+            sed -i -E "s|https://luciob16\.github\.io/Altare/config-builder/?|$ESCAPED_BUILDER_URL|g" "$FILE"
+
+            # Replace demo/root URL.
+            sed -i -E "s|https://luciob16\.github\.io/Altare/?|$ESCAPED_URL/|g" "$FILE"
+
+            # Backward compatibility for old README formats based only on badge text.
+            sed -i -E "s|(\[!\[[^]]*Demo[^]]*\]\([^)]+\)\])\([^)]+\)|\1($ESCAPED_URL/)|gi" "$FILE"
+            sed -i -E "s|(\[!\[[^]]*Config Builder[^]]*\]\([^)]+\)\])\([^)]+\)|\1($ESCAPED_BUILDER_URL)|gi" "$FILE"
+          done
+
           # Check if there are changes
-          if git diff --quiet README.md; then
-            echo "No changes in README.md needed."
+          if git diff --quiet -- README.md README.es.md; then
+            echo "No README link changes needed."
           else
             git config --global user.name 'github-actions[bot]'
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-            git add README.md
+            git add README.md README.es.md
             git commit -m "chore: update README links to deployed site [skip ci]"
             git push
           fi
