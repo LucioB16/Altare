@@ -3,6 +3,7 @@ import weddingSource from "./wedding.yml?raw";
 
 export interface WeddingData {
   site: {
+    language?: string;
     pageTitle: string;
     baseUrl?: string;
     meta: {
@@ -16,7 +17,7 @@ export interface WeddingData {
     displayName: string;
   };
   locale: {
-    language: string;
+    language?: string;
     timeZone: string;
   };
   theme?: {
@@ -24,6 +25,7 @@ export interface WeddingData {
   };
   demo?: {
     themeSwitcher?: boolean;
+    locales?: string[];
   };
   sections: Record<string, { enabled: boolean }>;
   hero: {

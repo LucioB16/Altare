@@ -5,6 +5,7 @@ import DemoThemeSwitcher from "../components/DemoThemeSwitcher.astro";
 import { getWeddingData } from "../data/weddingData";
 import { themes, resolveTheme, toThemeCssVars, toThemeCssVarMap } from "../theme/themes";
 import { resolveAssetPath } from "../utils/resolveAssetPath";
+import { getSiteI18n } from "../i18n/site";
 
 const { title, description, ogImage } = Astro.props;
 
@@ -16,6 +17,7 @@ const ogImageUrl = ogImagePath
     : undefined;
 
 const data = getWeddingData();
+const { locale } = getSiteI18n(Astro.url);
 const activeTheme = resolveTheme(data.theme?.id);
 const themeStyle = toThemeCssVars(activeTheme);
 const demoThemeSwitcherEnabled = data.demo?.themeSwitcher === true;
@@ -28,7 +30,7 @@ const demoThemes = themes.map((theme) => ({
 ---
 
 <!doctype html>
-<html lang="es-AR">
+<html lang={locale}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />

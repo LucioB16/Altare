@@ -1,0 +1,340 @@
+{
+  "site": {
+    "ceremony": {
+      "kicker": "Where and when",
+      "mapButton": "HOW TO GET THERE"
+    },
+    "celebration": {
+      "kicker": "Let's celebrate",
+      "mapButton": "HOW TO GET THERE"
+    },
+    "socials": {
+      "kicker": "Share with us",
+      "defaultHeading": "Social Media",
+      "instagramButton": "VIEW ON INSTAGRAM"
+    },
+    "gifts": {
+      "kicker": "Your presence is our gift",
+      "bank": {
+        "holder": "Account holder",
+        "bank": "Bank",
+        "alias": "Alias",
+        "cbu": "CBU/CVU",
+        "cuit": "Tax ID"
+      }
+    },
+    "dressCode": {
+      "kicker": "What should I wear?",
+      "defaultDisclaimer": "By tradition, white (or similar shades) is reserved for the bride."
+    },
+    "rsvp": {
+      "kicker": "Will you join us?",
+      "heading": "RSVP",
+      "deadlinePrefix": "DEADLINE",
+      "defaultButton": "CONFIRM ATTENDANCE"
+    },
+    "playlist": {
+      "kicker": "Music",
+      "openSpotify": "OPEN IN SPOTIFY"
+    },
+    "calendar": {
+      "kicker": "Save the date",
+      "heading": "Calendars",
+      "singleLabel": "Our Wedding",
+      "singleTitle": "Our Wedding - {{couple}}",
+      "singleDescription": "We would love to celebrate with you.",
+      "eventDescription": "We will be waiting for you at {{venue}}.",
+      "googleSingle": "GOOGLE CALENDAR",
+      "googleMultiPrefix": "Google",
+      "icsSingle": "APPLE / OUTLOOK",
+      "icsMultiPrefix": "Apple / Outlook",
+      "noEvents": "There are no enabled events to add to the calendar.",
+      "icsProdidSuffix": "EN"
+    },
+    "countdown": {
+      "units": {
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
+      }
+    },
+    "footer": {
+      "thanks": "Thank you for celebrating with us!",
+      "backToTop": "Back to top"
+    },
+    "demoThemeSwitcher": {
+      "label": "Demo theme",
+      "ariaLabel": "Demo theme selector"
+    }
+  },
+  "builder": {
+    "language": {
+      "label": "Site language",
+      "hint": "This language is saved in <code>site.language</code> and defines the final site language.",
+      "en": "English",
+      "es": "Spanish"
+    },
+    "header": {
+      "title": "Wedding Config Builder",
+      "subtitle": "Configure your wedding invitation in minutes"
+    },
+    "buttons": {
+      "prev": "Previous",
+      "next": "Next",
+      "download": "Download wedding.yml",
+      "copy": "Copy to clipboard",
+      "copied": "Copied!"
+    },
+    "alerts": {
+      "enableOneEvent": "You must enable at least one event (religious, civil or party) to continue.",
+      "maxPhotos": "Maximum 4 photos."
+    },
+    "files": {
+      "none": "No file",
+      "nonePhoto": "No file"
+    },
+    "previews": {
+      "ogImageFallback": "Choose a photo above",
+      "heroTitleFallback": "Title",
+      "heroSubtitleFallback": "Couple name",
+      "heroDateFallback": "Date",
+      "heroCityFallback": "City",
+      "storySubheadingFallback": "Subheading",
+      "storyHeadingFallback": "Title",
+      "storyTextFallback": "Descriptive text..."
+    },
+    "themeRuntime": {
+      "selected": "Selected",
+      "preview": "Preview",
+      "selectedTheme": "Selected theme"
+    },
+    "steps": {
+      "1": {
+        "label": "Step 1 of 9",
+        "title": "The Couple",
+        "desc": "Basic information about the couple."
+      },
+      "2": {
+        "label": "Step 2 of 9",
+        "title": "Welcome screen",
+        "desc": "The first screen guests see when opening your invitation."
+      },
+      "3": {
+        "label": "Step 3 of 9",
+        "title": "Ceremonies and party",
+        "desc": "Event details. You can enable or disable each one."
+      },
+      "4": {
+        "label": "Step 4 of 9",
+        "title": "Our Story",
+        "desc": "Tell the story with text and up to 4 photos."
+      },
+      "5": {
+        "label": "Step 5 of 9",
+        "title": "Gifts and Dress Code",
+        "desc": "Bank details and dress code."
+      },
+      "6": {
+        "label": "Step 6 of 9",
+        "title": "RSVP",
+        "desc": "Set how guests confirm attendance."
+      },
+      "7": {
+        "label": "Step 7 of 9",
+        "title": "Extras",
+        "desc": "Social media, playlist and useful info."
+      },
+      "8": {
+        "label": "Step 8 of 9",
+        "title": "Share image",
+        "desc": "Set how your invitation link looks when shared."
+      },
+      "9": {
+        "label": "Step 9 of 9",
+        "title": "Done! Your configuration",
+        "desc": "Download the file and follow the instructions."
+      }
+    },
+    "labels": {
+      "themeVisual": "Visual theme",
+      "themeVisualDesc": "Choose the overall invitation style. It only changes visual style: colors, fonts and ornaments.",
+      "selectImage": "Select image",
+      "selectPhoto": "Select photo",
+      "photoAdd": "+ Add photo",
+      "cardAdd": "+ Add card",
+      "remove": "Remove",
+      "previewHero": "Hero preview",
+      "previewLive": "Live preview",
+      "usefulInfoCardsTitle": "Useful info cards",
+      "viewIcons": "View icons",
+      "storyPhotosTitle": "Photos (1-4)",
+      "ogDomainSample": "youruser.github.io/your-repo"
+    },
+    "fields": {
+      "person1Name": "Person 1 name",
+      "person2Name": "Person 2 name",
+      "displayName": "Display name",
+      "heroTitle": "Title",
+      "heroSubtitle": "Subtitle (names)",
+      "heroDate": "Display date (free text)",
+      "heroCity": "City",
+      "heroBackgroundImage": "Background image",
+      "eventTimezone": "Event timezone",
+      "eventType": "Type",
+      "eventTypeParty": "Event type",
+      "eventDate": "Date",
+      "eventTime": "Time",
+      "eventVenueName": "Venue name",
+      "eventAddressLines": "Address (one line per row)",
+      "eventAddress": "Address",
+      "eventMapsUrl": "Google Maps URL",
+      "storySubheading": "Subheading",
+      "storyHeading": "Title",
+      "storyText": "Text",
+      "giftsTitle": "Title",
+      "giftsText": "Text",
+      "giftsButtonText": "Button text",
+      "bankHolder": "Account holder",
+      "bankName": "Bank",
+      "bankAlias": "Alias",
+      "bankCbu": "CBU/CVU",
+      "bankCuit": "Tax ID",
+      "dressCodeTitle": "Title",
+      "dressCodeTag": "Tag",
+      "dressCodeText": "Text",
+      "brideDisclaimerText": "Notice text",
+      "rsvpText": "Text",
+      "rsvpDeadline": "Deadline",
+      "rsvpUrl": "Link URL",
+      "rsvpButtonText": "Button text",
+      "socialsText": "Social media text",
+      "socialsInstagramUrl": "Instagram URL",
+      "socialsHandle": "Handle",
+      "playlistTitle": "Playlist title",
+      "playlistText": "Playlist text",
+      "playlistUrl": "Spotify playlist URL",
+      "infoIcon": "Icon",
+      "infoTitle": "Title",
+      "infoDescription": "Description",
+      "pageTitle": "Link title",
+      "pageDescription": "Short description",
+      "ogImage": "Social share image"
+    },
+    "placeholders": {
+      "person1Name": "Example: Maria",
+      "person2Name": "Example: Juan",
+      "displayName": "Example: Maria & Juan",
+      "heroDate": "Example: March 15, 2026",
+      "rsvpUrl": "Form URL or WhatsApp link",
+      "socialHandle": "Example: @mywedding"
+    },
+    "hints": {
+      "displayName": "This will appear in the hero section and footer.",
+      "heroBackgroundImage": "Upload this file to <code>public/media/hero/</code> in your repository.",
+      "eventTimezone": "One option per UTC offset with a representative city.",
+      "eventsEnabled": "You must enable at least one event to continue. Calendar links will include 1, 2 or 3 events based on your selection.",
+      "storyPhotos": "The first photo is required. Select your files to define names, then upload them to <code>public/media/couple/</code> using those same names.",
+      "usefulInfoCards": "Search icons in <a href=\"https://icon-sets.iconify.design/lucide/\" target=\"_blank\" style=\"color:var(--primary); font-weight:600;\">Lucide Icons</a> and use names like <code>lucide:camera</code>.",
+      "pageTitle": "This is also the browser tab title.",
+      "ogImage": "Upload this file to <code>public/media/og/</code>. Recommended size: 1200x630."
+    },
+    "toggles": {
+      "religiousEvent": "Religious ceremony",
+      "civilEvent": "Civil ceremony",
+      "partyEvent": "Party / Celebration",
+      "showSection": "Show section",
+      "showGiftsSection": "Show Gifts section",
+      "showBankData": "Show bank details",
+      "showDressCodeSection": "Show Dress Code section",
+      "showBrideDisclaimer": "Show bride color notice",
+      "showRsvpSection": "Show section",
+      "showRsvpLink": "Show confirmation link button",
+      "showSocialsSection": "Show Social Media section",
+      "showPlaylistSection": "Show Playlist section",
+      "showUsefulInfoSection": "Show Useful Info section"
+    },
+    "instructions": {
+      "title": "Instructions to publish your invitation",
+      "item1": "If you still do not have a repo, go to the <a href=\"https://github.com/LucioB16/Altare\" target=\"_blank\">template repository</a> and click <strong>\"Use this template\"</strong> -> <strong>\"Create a new repository\"</strong>.",
+      "item2": "In your new repo, open <strong>Settings -> Pages</strong> and choose <strong>\"GitHub Actions\"</strong> as source.",
+      "item3": "Open <code>src/data/</code> -> click <code>wedding.yml</code> -> click the <strong>pencil</strong> -> select all -> paste your YAML -> <strong>\"Commit changes\"</strong>.",
+      "item4": "<strong>Upload your photos</strong> to the matching folders in GitHub:<ul style=\"margin-top:0.5rem; list-style: disc; padding-left:1.2rem;\"><li><strong>Hero image:</strong> upload to <code>public/media/hero/</code></li><li><strong>Story photos:</strong> upload to <code>public/media/couple/</code></li><li><strong>Social share image:</strong> upload to <code>public/media/og/</code></li></ul>",
+      "item5": "Done! GitHub Actions will build and publish your site in a few minutes at <code>https://YOUR_USER.github.io/YOUR_REPO/</code>."
+    },
+    "time": {
+      "timeSuffix": ""
+    },
+    "timezone": {
+      "utcLabel": "UTC{{offset}} - {{reference}}",
+      "universal": "Universal Time"
+    },
+    "yaml": {
+      "photoAlt": "Photo {{index}}"
+    }
+  },
+  "contentDefaults": {
+    "site": {
+      "pageTitle": "Our Wedding | Julieta & Lucio",
+      "metaDescription": "You are invited to celebrate this special moment with us."
+    },
+    "locale": {
+      "language": "en-US"
+    },
+    "hero": {
+      "title": "We're getting married!",
+      "dateDisplay": "June 21, 2026",
+      "city": "Cordoba, Argentina"
+    },
+    "countdown": {
+      "heading": "Countdown",
+      "note": "We are almost there!"
+    },
+    "events": {
+      "religiousLabel": "Religious Ceremony",
+      "ceremonyLabel": "Civil Ceremony",
+      "celebrationLabel": "Party"
+    },
+    "story": {
+      "heading": "Our story",
+      "subheading": "Us",
+      "sentence": "Five years ago we met on that trip and knew we wanted to walk together forever."
+    },
+    "socials": {
+      "heading": "Social Media",
+      "itemLabel": "Instagram",
+      "body": "Before the wedding, you will receive a link to upload all your photos and videos."
+    },
+    "gifts": {
+      "heading": "Gifts",
+      "body": "Your presence is the most important thing, but if you would like to give us a gift you can help us with our honeymoon.",
+      "buttonLabel": "View bank details"
+    },
+    "dressCode": {
+      "title": "Dress Code",
+      "tag": "Formal - Elegant",
+      "body": "We are waiting for your best look to celebrate together.",
+      "brideDisclaimer": "By tradition, white or similar shades are reserved for the bride."
+    },
+    "rsvp": {
+      "text": "Please confirm your attendance before May 1.",
+      "buttonLabel": "CONFIRM ATTENDANCE"
+    },
+    "calendar": {
+      "fileNameSingle": "wedding.ics",
+      "fileNameReligiousCeremony": "religious-ceremony.ics",
+      "fileNameCeremony": "ceremony.ics",
+      "fileNameCelebration": "celebration.ics"
+    },
+    "playlist": {
+      "heading": "Let's build the playlist together",
+      "body": "Add those songs that cannot be missing from the party."
+    },
+    "usefulInfo": {
+      "title": "Useful info"
+    }
+  }
+}
+
+
+

@@ -38,6 +38,20 @@
     let selectedThemeId = FALLBACK_THEME_ID;
     let onThemeChange = null;
 
+    const t = (key, fallback) => {
+        const translate = window.BuilderI18n?.t;
+        if (typeof translate !== "function") {
+            return fallback;
+        }
+
+        const value = translate(key);
+        if (!value || value === key) {
+            return fallback;
+        }
+
+        return value;
+    };
+
     const getThemeById = (id) => themes.find((theme) => theme.id === id);
 
     const getSelectedTheme = () => getThemeById(selectedThemeId) || fallbackTheme;
@@ -111,11 +125,11 @@
                         <p class="theme-card__name">${theme.name}</p>
                         <p class="theme-card__concept">${theme.concept}</p>
                     </div>
-                    ${isSelected ? '<span class="theme-card__status" aria-hidden="true">Seleccionado</span>' : ""}
+                    ${isSelected ? `<span class="theme-card__status" aria-hidden="true">${t("builder.themeRuntime.selected", "Selected")}</span>` : ""}
                 </div>
 
                 <div class="theme-card__preview">
-                    <p class="theme-card__preview-kicker">Preview</p>
+                    <p class="theme-card__preview-kicker">${t("builder.themeRuntime.preview", "Preview")}</p>
                     <p class="theme-card__preview-title">Julieta & Lucio</p>
                     <p class="theme-card__preview-meta">21 JUN 2026 / CORDOBA</p>
                     <div class="theme-card__preview-ornament">
@@ -165,7 +179,7 @@
 
         const theme = getSelectedTheme();
         meta.innerHTML = `
-            <p class="theme-meta__name">Tema seleccionado: ${theme.name}</p>
+            <p class="theme-meta__name">${t("builder.themeRuntime.selectedTheme", "Selected theme")}: ${theme.name}</p>
             <p class="theme-meta__keywords">${theme.keywords.join(" / ")}</p>
         `;
     };
@@ -226,9 +240,15 @@
         }
     };
 
+    const refreshUi = () => {
+        renderThemeGrid();
+        renderThemeMeta();
+    };
+
     window.ThemeRuntime = {
         init,
         selectTheme,
+        refreshUi,
         getThemes: () => themes,
         getSelectedThemeId: () => selectedThemeId,
         getSelectedTheme,

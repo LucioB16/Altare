@@ -1,0 +1,71 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getWeddingData } from "../../data/weddingData";
+import Hero from "../../components/Hero.astro";
+import Story from "../../components/Story.astro";
+import Count from "../../components/Count.astro";
+import Ceremony from "../../components/Ceremony.astro";
+import Celebration from "../../components/Celebration.astro";
+import Socials from "../../components/Socials.astro";
+import Gifts from "../../components/Gifts.astro";
+import DressCode from "../../components/DressCode.astro";
+import RSVP from "../../components/RSVP.astro";
+import Calendar from "../../components/Calendar.astro";
+import Playlist from "../../components/Playlist.astro";
+import UsefulInfo from "../../components/UsefulInfo.astro";
+import { resolveDemoLocales, resolveSiteLocale } from "../../i18n/config";
+
+export function getStaticPaths() {
+  const data = getWeddingData();
+  const baseLocale = resolveSiteLocale(data);
+  const locales = resolveDemoLocales(data).filter((locale) => locale !== baseLocale);
+
+  return locales.map((locale) => ({
+    params: { locale },
+  }));
+}
+
+const data = getWeddingData();
+const showAllSectionsInDemo = data.demo?.themeSwitcher === true;
+const showReligiousCeremony = Boolean(
+  data.events.religiousCeremony &&
+    (data.events.religiousCeremony.enabled || showAllSectionsInDemo)
+);
+---
+
+<Layout
+  title={data.site.pageTitle}
+  description={data.site.meta.description}
+  ogImage={data.site.meta.ogImage}
+>
+  {data.hero.enabled && <Hero />}
+  {data.sections.countdown.enabled && <Count />}
+  {
+    showReligiousCeremony && (
+      <Ceremony
+        eventKey="religiousCeremony"
+        dividerType="flower"
+        bgClass="bg-surface"
+        forceVisible={showAllSectionsInDemo}
+      />
+    )
+  }
+  {
+    data.events.ceremony.enabled && (
+      <Ceremony
+        eventKey="ceremony"
+        dividerType="small"
+        bgClass="bg-surface-alt"
+      />
+    )
+  }
+  {data.events.celebration.enabled && <Celebration />}
+  {data.sections.story.enabled && <Story />}
+  {data.sections.socials.enabled && <Socials />}
+  {data.sections.gifts.enabled && <Gifts />}
+  {data.sections.dressCode.enabled && <DressCode />}
+  {data.sections.rsvp.enabled && <RSVP />}
+  {data.sections.calendar.enabled && <Calendar />}
+  {data.sections.playlist.enabled && <Playlist />}
+  {data.sections.usefulInfo.enabled && <UsefulInfo />}
+</Layout>
