@@ -20,6 +20,8 @@ const googleFamilyQueryByName = new Map([
     ["Source Sans 3", "family=Source+Sans+3:wght@400;500;600;700"],
     ["Fraunces", "family=Fraunces:opsz,wght@9..144,400;500;600"],
     ["DM Sans", "family=DM+Sans:wght@400;500;700"],
+    ["Nunito Sans", "family=Nunito+Sans:wght@400;500;600;700"],
+    ["Space Grotesk", "family=Space+Grotesk:wght@400;500;600;700"],
     ["Instrument Serif", "family=Instrument+Serif:ital@0;1"],
 ]);
 

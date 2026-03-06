@@ -119,7 +119,7 @@
     ],
     "fonts": {
       "display": "\"Fraunces\", serif",
-      "sans": "\"DM Sans\", system-ui, sans-serif"
+      "sans": "\"Nunito Sans\", system-ui, sans-serif"
     },
     "colors": {
       "primary": "#7A5C52",
@@ -155,7 +155,7 @@
     ],
     "fonts": {
       "display": "\"Instrument Serif\", serif",
-      "sans": "\"Inter\", system-ui, sans-serif"
+      "sans": "\"Space Grotesk\", system-ui, sans-serif"
     },
     "colors": {
       "primary": "#1F1F1C",

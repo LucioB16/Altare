@@ -8,15 +8,16 @@ interface Props {
     eventKey: "ceremony" | "celebration" | "religiousCeremony";
     dividerType?: "flower" | "small" | "large";
     bgClass?: string;
+    forceVisible?: boolean;
 }
 
-const { eventKey, dividerType = "flower", bgClass = "bg-surface" } = Astro.props;
+const { eventKey, dividerType = "flower", bgClass = "bg-surface", forceVisible = false } = Astro.props;
 const { events } = getWeddingData();
 const event = events[eventKey];
 ---
 
 {
-    event && event.enabled && (
+    event && (event.enabled || forceVisible) && (
         <>
             <Divider type={dividerType} />
             <section class={`section py-24 ${bgClass}`}>

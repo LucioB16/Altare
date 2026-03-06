@@ -136,6 +136,46 @@
         background: color-mix(in srgb, var(--color-spotify), black 10%);
     }
 
+    .theme-ornament svg {
+        transition:
+            transform 220ms ease,
+            filter 220ms ease,
+            opacity 220ms ease;
+    }
+
+    body[data-theme="marfil-editorial"] .theme-ornament svg {
+        transform: scale(0.94);
+        filter: saturate(0.86);
+    }
+
+    body[data-theme="marfil-editorial"] .theme-ornament path[stroke] {
+        stroke-linecap: square;
+        stroke-linejoin: miter;
+    }
+
+    body[data-theme="botanica-nocturna"] .theme-ornament svg {
+        transform: scale(1.02);
+        filter: saturate(1.18) contrast(1.1);
+    }
+
+    body[data-theme="botanica-nocturna"] .theme-ornament [fill]:not([fill="none"]) {
+        opacity: 0.85 !important;
+    }
+
+    body[data-theme="rosa-antiguo"] .theme-ornament svg {
+        transform: rotate(-1.2deg) scale(1.03);
+        filter: saturate(0.92);
+    }
+
+    body[data-theme="galeria-moderna"] .theme-ornament svg {
+        transform: scale(0.95) rotate(0.8deg);
+    }
+
+    body[data-theme="galeria-moderna"] .theme-ornament path[stroke] {
+        stroke-linecap: square;
+        stroke-linejoin: miter;
+    }
+
     .card {
         border: 1px solid color-mix(in srgb, var(--color-accent), transparent 40%);
         box-shadow: var(--shadow-card);
@@ -174,3 +214,6 @@
         color: color-mix(in srgb, var(--color-primary) 70%, var(--color-text-light) 30%);
     }
 }
+
+
+
