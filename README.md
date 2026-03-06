@@ -32,16 +32,17 @@ Usá nuestro **Config Builder** para generar tu archivo de configuración sin to
 
 El Config Builder te guía paso a paso para configurar:
 - 👫 Nombres de la pareja
-- 📅 Fechas y horarios con selectores visuales
-- ⛪ Ceremonia religiosa (opcional) y civil
-- 🎉 Fiesta / celebración
+- 🎭 Tema visual (5 temas con preview en vivo)
+- 📅 Fechas y horarios con selectores visuales + zona horaria
+- ⛪ Ceremonia religiosa, civil y fiesta (cada una con toggle)
 - 📸 Fotos de portada e historia (1–4 fotos)
+- 🖼️ Imagen para compartir en WhatsApp/redes (Open Graph)
 - 🎁 Regalos y datos bancarios (con opción de ocultar)
-- 👔 Código de vestimenta (con aviso colores novia configurable)
-- ✉️ Confirmación de asistencia con link opcional
-- 🎵 Link a playlist de Spotify
-- 📱 Redes sociales
-- ℹ️ Cards de información útil (agregar cuantas quieras)
+- 👔 Código de vestimenta (con aviso de novia configurable)
+- ✉️ Confirmación de asistencia (fecha límite + link opcional)
+- 🎵 Playlist de Spotify (opcional)
+- 📱 Redes sociales (opcional)
+- ℹ️ Cards de información útil (podés dejar solo una o agregar varias)
 
 Al final genera un archivo `wedding.yml` que descargás o copiás.
 
