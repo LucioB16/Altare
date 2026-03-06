@@ -103,8 +103,18 @@ async function syncLocales() {
             payload?.builder?.language?.[localeCode] ||
             payload?.builder?.language?.label ||
             localeCode;
+        const localeLanguageTagValue = payload?.contentDefaults?.locale?.language;
+        const localeLanguageTag =
+            typeof localeLanguageTagValue === "string" &&
+            localeLanguageTagValue.trim().length > 0
+                ? localeLanguageTagValue.trim()
+                : undefined;
 
-        manifest.push({ code: localeCode, label });
+        manifest.push(
+            localeLanguageTag
+                ? { code: localeCode, label, localeLanguageTag }
+                : { code: localeCode, label },
+        );
     }
 
     await writeFile(targetLocalesManifestPath, JSON.stringify(manifest, null, 2), "utf8");

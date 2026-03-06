@@ -1514,10 +1514,17 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         const BUILDER_LOCALE_STORAGE_KEY = "altare_builder_locale";
         const FALLBACK_BUILDER_LOCALE = "en";
 
+        const FALLBACK_LOCALE_LANGUAGE_TAG = "en-US";
+        const DEFAULT_BUILDER_LOCALES = [
+            { code: "en", label: "English", localeLanguageTag: "en-US" },
+            { code: "es", label: "Spanish", localeLanguageTag: "es-AR" },
+        ];
+
         let currentStep = 0;
         let selectedThemeId = "jardin-clasico";
         let selectedLanguage = FALLBACK_BUILDER_LOCALE;
         let builderMessages = null;
+        let availableBuilderLocales = [...DEFAULT_BUILDER_LOCALES];
 
         const toggleState = {
             religiousEnabled: false,
@@ -1562,14 +1569,135 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
             return t(`contentDefaults.${path}`, fallback);
         }
 
+        function normalizeBuilderLocale(localeCode) {
+            const candidate = String(localeCode || '').trim().toLowerCase().replace(/_/g, '-');
+            if (!candidate) {
+                return FALLBACK_BUILDER_LOCALE;
+            }
+
+            const localeCodes = new Set(availableBuilderLocales.map((locale) => locale.code));
+            if (localeCodes.has(candidate)) {
+                return candidate;
+            }
+
+            const languageOnly = candidate.split('-')[0];
+            if (localeCodes.has(languageOnly)) {
+                return languageOnly;
+            }
+
+            return FALLBACK_BUILDER_LOCALE;
+        }
+
+        function getBuilderLocaleMeta(localeCode) {
+            const normalized = normalizeBuilderLocale(localeCode);
+            return (
+                availableBuilderLocales.find((locale) => locale.code === normalized) ||
+                availableBuilderLocales.find((locale) => locale.code === FALLBACK_BUILDER_LOCALE) ||
+                DEFAULT_BUILDER_LOCALES[0]
+            );
+        }
+
+        function getLocaleLanguageTagForBuilderLocale(localeCode) {
+            const localeMeta = getBuilderLocaleMeta(localeCode);
+            if (
+                localeMeta &&
+                typeof localeMeta.localeLanguageTag === 'string' &&
+                localeMeta.localeLanguageTag.trim().length > 0
+            ) {
+                return localeMeta.localeLanguageTag.trim();
+            }
+
+            return contentDefault('locale.language', FALLBACK_LOCALE_LANGUAGE_TAG);
+        }
+
+        function refreshBuilderLocaleSelect() {
+            const langSelect = document.getElementById('siteLanguage');
+            if (!langSelect) {
+                return;
+            }
+
+            langSelect.innerHTML = '';
+            availableBuilderLocales.forEach((localeMeta) => {
+                const option = document.createElement('option');
+                option.value = localeMeta.code;
+                option.dataset.fallbackLabel = localeMeta.label;
+                option.textContent = t(`builder.language.${localeMeta.code}`, localeMeta.label);
+                langSelect.appendChild(option);
+            });
+
+            langSelect.value = normalizeBuilderLocale(selectedLanguage);
+        }
+
+        async function loadBuilderLocalesManifest() {
+            try {
+                const response = await fetch('./i18n/locales.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`Locales manifest fetch failed: ${response.status}`);
+                }
+
+                const payload = await response.json();
+                if (Array.isArray(payload) && payload.length > 0) {
+                    const uniqueCodes = new Set();
+                    const parsedLocales = payload
+                        .map((entry) => {
+                            const code = String(entry?.code || '')
+                                .trim()
+                                .toLowerCase()
+                                .replace(/_/g, '-');
+                            if (!code) {
+                                return null;
+                            }
+
+                            const label =
+                                typeof entry?.label === 'string' && entry.label.trim().length > 0
+                                    ? entry.label.trim()
+                                    : code.toUpperCase();
+                            const localeLanguageTag =
+                                typeof entry?.localeLanguageTag === 'string' &&
+                                entry.localeLanguageTag.trim().length > 0
+                                    ? entry.localeLanguageTag.trim()
+                                    : '';
+
+                            return { code, label, localeLanguageTag };
+                        })
+                        .filter((entry) => {
+                            if (!entry || uniqueCodes.has(entry.code)) {
+                                return false;
+                            }
+
+                            uniqueCodes.add(entry.code);
+                            return true;
+                        });
+
+                    if (parsedLocales.length > 0) {
+                        availableBuilderLocales = parsedLocales;
+                    }
+                }
+            } catch (_) {
+                availableBuilderLocales = [...DEFAULT_BUILDER_LOCALES];
+            }
+
+            if (!availableBuilderLocales.some((locale) => locale.code === FALLBACK_BUILDER_LOCALE)) {
+                const fallbackLocale =
+                    DEFAULT_BUILDER_LOCALES.find((locale) => locale.code === FALLBACK_BUILDER_LOCALE) ||
+                    {
+                        code: FALLBACK_BUILDER_LOCALE,
+                        label: 'English',
+                        localeLanguageTag: FALLBACK_LOCALE_LANGUAGE_TAG,
+                    };
+
+                availableBuilderLocales = [fallbackLocale, ...availableBuilderLocales];
+            }
+        }
+
         function detectInitialBuilderLocale() {
             const fromQuery = new URLSearchParams(window.location.search).get('lang');
             const fromStorage = localStorage.getItem(BUILDER_LOCALE_STORAGE_KEY);
-            return (fromQuery || fromStorage || FALLBACK_BUILDER_LOCALE).toLowerCase();
+            return normalizeBuilderLocale(fromQuery || fromStorage || FALLBACK_BUILDER_LOCALE);
         }
 
         async function loadBuilderMessages(localeCode) {
-            const normalized = localeCode === 'es' ? 'es' : 'en';
+            const normalized = normalizeBuilderLocale(localeCode);
             try {
                 const response = await fetch(`./i18n/${normalized}.json`, { cache: 'no-store' });
                 if (!response.ok) {
@@ -1588,10 +1716,7 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
             }
 
             localStorage.setItem(BUILDER_LOCALE_STORAGE_KEY, selectedLanguage);
-            const langSelect = document.getElementById('siteLanguage');
-            if (langSelect) {
-                langSelect.value = selectedLanguage;
-            }
+            refreshBuilderLocaleSelect();
 
             window.BuilderI18n = {
                 t: (key, fallback, params) => t(key, fallback, params),
@@ -1726,14 +1851,7 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
             setText('#siteLanguageLabel', t('builder.language.label', 'Site language'));
             setHtml('#siteLanguageHint', t('builder.language.hint', 'This language is saved in <code>site.language</code> and defines the final site language.'));
 
-            const langSelect = document.getElementById('siteLanguage');
-            if (langSelect) {
-                const optionEn = langSelect.querySelector('option[value="en"]');
-                const optionEs = langSelect.querySelector('option[value="es"]');
-                if (optionEn) optionEn.textContent = t('builder.language.en', 'English');
-                if (optionEs) optionEs.textContent = t('builder.language.es', 'Spanish');
-                langSelect.value = selectedLanguage;
-            }
+            refreshBuilderLocaleSelect();
 
             const stepIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
             stepIndexes.forEach((stepIndex) => {
@@ -1919,13 +2037,14 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         }
 
         async function initializeBuilderLocale() {
+            await loadBuilderLocalesManifest();
             await loadBuilderMessages(detectInitialBuilderLocale());
             applyBuilderCopy();
             applyLocalizedDefaults();
         }
 
         function onBuilderLanguageChange(nextLocale) {
-            const normalized = nextLocale === 'es' ? 'es' : 'en';
+            const normalized = normalizeBuilderLocale(nextLocale);
             if (normalized === selectedLanguage) {
                 return;
             }
@@ -2338,7 +2457,15 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         }
 
         function buildTimeDisplay(timeId) {
-            return v(timeId) ? (selectedLanguage === 'es' ? v(timeId).replace(/^0/, '') + ' hs' : v(timeId)) : '';
+            const rawTime = v(timeId);
+            if (!rawTime) {
+                return '';
+            }
+
+            const formattedTime = selectedLanguage === 'es' ? rawTime.replace(/^0/, '') : rawTime;
+            const localizedSuffix = t('builder.time.timeSuffix', selectedLanguage === 'es' ? ' hs' : '');
+
+            return `${formattedTime}${localizedSuffix}`;
         }
 
         function updateOgPreview() {
@@ -2426,8 +2553,8 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
             const themeId = window.ThemeRuntime?.getSelectedThemeId?.() || selectedThemeId || 'jardin-clasico';
             const photoEls = document.querySelectorAll('#photoItems .dynamic-item');
             const infoItems = document.getElementById('infoItems').querySelectorAll('.dynamic-item');
-            const siteLanguage = selectedLanguage === 'es' ? 'es' : 'en';
-            const localeLanguageTag = contentDefault('locale.language', siteLanguage === 'es' ? 'es-AR' : 'en-US');
+            const siteLanguage = normalizeBuilderLocale(selectedLanguage);
+            const localeLanguageTag = getLocaleLanguageTagForBuilderLocale(siteLanguage);
             const noFileLabel = t('builder.files.none', 'No file');
             const noPhotoLabel = t('builder.files.nonePhoto', 'No file');
 
@@ -2663,34 +2790,4 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -262,6 +262,9 @@
       "item4": "<strong>Subi tus fotos</strong> a las carpetas correspondientes en GitHub:<ul style=\"margin-top:0.5rem; list-style: disc; padding-left:1.2rem;\"><li><strong>Foto de bienvenida:</strong> subi a <code>public/media/hero/</code></li><li><strong>Fotos de historia:</strong> subi a <code>public/media/couple/</code></li><li><strong>Imagen para redes:</strong> subi a <code>public/media/og/</code></li></ul>",
       "item5": "Listo! GitHub Actions va a buildar y publicar tu sitio en unos minutos en <code>https://TU_USUARIO.github.io/TU_REPO/</code>."
     },
+    "time": {
+      "timeSuffix": " hs"
+    },
     "timezone": {
       "utcLabel": "UTC{{offset}} - {{reference}}",
       "universal": "Tiempo Universal"
@@ -332,3 +335,6 @@
     }
   }
 }
+
+
+

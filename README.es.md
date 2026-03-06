@@ -11,7 +11,7 @@ Template estatico de invitacion de boda con Astro + Tailwind v4 y builder visual
 
 1. Hace click en **Use this template** en GitHub y crea tu repositorio.
 2. En tu repo, entra a **Settings -> Pages** y selecciona **GitHub Actions**.
-3. Abri el Config Builder, elegi idioma del sitio (`en` o `es`) y completa los pasos.
+3. Abri el Config Builder, elegi el idioma del sitio y completa los pasos.
 4. Reemplaza `src/data/wedding.yml` con el YAML generado y subi tus imagenes a:
    - `public/media/hero/`
    - `public/media/couple/`
@@ -23,7 +23,7 @@ Tu sitio se publica en:
 ## Comportamiento de Idioma
 
 - El builder guarda el idioma elegido como `site.language` en `wedding.yml`.
-- Idiomas soportados: `en` (default) y `es`.
+- Los idiomas soportados se detectan automaticamente desde `src/i18n/locales/*.json` (`en` es default; este repo incluye `en` y `es`).
 - Compatibilidad hacia atras:
   - Si falta `site.language`, se usa `locale.language`.
   - Si faltan ambos o son invalidos, se usa `en`.
@@ -73,8 +73,18 @@ scripts/
   sync-themes.mjs
 ```
 
+## Agregar un Idioma Nuevo (Rapido)
+
+1. Duplica `src/i18n/locales/en.json` como `src/i18n/locales/<codigo>.json` (por ejemplo `fr.json`).
+2. Traduce ese archivo y define `contentDefaults.locale.language` (por ejemplo `fr-FR`).
+3. Ejecuta `bun run sync:themes` y luego `bun run build`.
+
+Con eso, el selector de idioma del builder y la resolucion de idioma del sitio toman el nuevo locale automaticamente.
+Si queres demo bilingue, agrega el locale en `demo.locales` dentro de `src/data/wedding.yml`.
+
 ## Licencia y Creditos
 
 Basado en [SaidYes](https://github.com/roicort/saidyes) por [@roicort](https://github.com/roicort), bajo licencia AGPL-3.0.
 
 Este fork mantiene la misma licencia AGPL-3.0. Ver [LICENSE](./LICENSE).
+

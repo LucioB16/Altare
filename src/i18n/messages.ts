@@ -1,23 +1,23 @@
 import type { WeddingData } from "../data/weddingData";
 import {
     DEFAULT_LOCALE,
+    SUPPORTED_LOCALES,
     getLocaleFromPathname,
     resolveSiteLocale,
     type SupportedLocale,
 } from "./config";
 
-import enRaw from "./locales/en.json?raw";
-import esRaw from "./locales/es.json?raw";
-
 export type MessageCatalog = Record<string, unknown>;
 
-const enCatalog = JSON.parse(enRaw) as MessageCatalog;
-const esCatalog = JSON.parse(esRaw) as MessageCatalog;
+const localeModules = import.meta.glob<{ default: MessageCatalog }>(
+    "./locales/*.json",
+    { eager: true },
+);
 
-const catalogs: Record<SupportedLocale, MessageCatalog> = {
-    en: enCatalog,
-    es: esCatalog,
-};
+function getLocaleCodeFromPath(filePath: string): string | undefined {
+    const match = filePath.match(/\/([a-z0-9-]+)\.json$/i);
+    return match?.[1]?.toLowerCase();
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
     return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -47,12 +47,33 @@ function getByPath(obj: MessageCatalog, path: string): unknown {
     }, obj);
 }
 
+const supportedLocaleSet = new Set<string>(SUPPORTED_LOCALES);
+const catalogs = SUPPORTED_LOCALES.reduce(
+    (acc, locale) => {
+        acc[locale] = {};
+        return acc;
+    },
+    {} as Record<SupportedLocale, MessageCatalog>,
+);
+
+Object.entries(localeModules).forEach(([filePath, module]) => {
+    const localeCode = getLocaleCodeFromPath(filePath);
+    if (!localeCode || !supportedLocaleSet.has(localeCode)) return;
+
+    const payload = module.default;
+    if (!isRecord(payload)) return;
+
+    catalogs[localeCode] = payload;
+});
+
+const defaultCatalog = catalogs[DEFAULT_LOCALE] ?? {};
+
 export function getMessages(locale: SupportedLocale): MessageCatalog {
     if (locale === DEFAULT_LOCALE) {
-        return catalogs.en;
+        return defaultCatalog;
     }
 
-    return deepMerge(catalogs.en, catalogs[locale]);
+    return deepMerge(defaultCatalog, catalogs[locale] ?? {});
 }
 
 export function createTranslator(messages: MessageCatalog) {
