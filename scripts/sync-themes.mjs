@@ -23,6 +23,10 @@ const googleFamilyQueryByName = new Map([
     ["Nunito Sans", "family=Nunito+Sans:wght@400;500;600;700"],
     ["Space Grotesk", "family=Space+Grotesk:wght@400;500;600;700"],
     ["Instrument Serif", "family=Instrument+Serif:ital@0;1"],
+    ["Prata", "family=Prata"],
+    ["Cinzel Decorative", "family=Cinzel+Decorative:wght@400;700;900"],
+    ["Gloock", "family=Gloock"],
+    ["Italiana", "family=Italiana"],
 ]);
 
 function firstFamilyFromStack(stack) {

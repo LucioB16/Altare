@@ -1440,7 +1440,7 @@ Ascochinga, Córdoba</textarea></div>
                     <div class="og-mock-title" id="ogMockTitle">Nuestra Boda | Juli & Lucio</div>
                     <div class="og-mock-desc" id="ogMockDesc">Estás invitado a celebrar con nosotros este momento tan
                         especial.</div>
-                    <div class="og-mock-domain" id="ogMockDomain">luciob16.github.io</div>
+                    <div class="og-mock-domain" id="ogMockDomain">tuusuario.github.io/tu-repo</div>
                 </div>
             </div>
         </div>
@@ -1631,6 +1631,21 @@ Ascochinga, Córdoba</textarea></div>
             const nameEl = input.parentElement.querySelector('.photoFileName');
             if (nameEl) nameEl.textContent = name || 'Sin archivo';
         }
+
+        // Robust file-picker trigger: some browsers fail with hidden file inputs + label(for).
+        document.addEventListener('click', (event) => {
+            const pickerButton = event.target.closest('.file-picker-btn');
+            if (!pickerButton) return;
+
+            const inputId = pickerButton.getAttribute('for');
+            if (!inputId) return;
+
+            const fileInput = document.getElementById(inputId);
+            if (!fileInput || fileInput.tagName !== 'INPUT' || fileInput.type !== 'file') return;
+
+            event.preventDefault();
+            fileInput.click();
+        });
 
         function reindexPhotos() {
             const items = document.querySelectorAll('#photoItems .dynamic-item');

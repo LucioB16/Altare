@@ -46,7 +46,7 @@
       "quiet-luxury"
     ],
     "fonts": {
-      "display": "\"Cormorant Garamond\", serif",
+      "display": "\"Prata\", serif",
       "sans": "\"Manrope\", system-ui, sans-serif"
     },
     "colors": {
@@ -82,7 +82,7 @@
       "premium"
     ],
     "fonts": {
-      "display": "\"Bodoni Moda\", serif",
+      "display": "\"Cinzel Decorative\", serif",
       "sans": "\"Source Sans 3\", system-ui, sans-serif"
     },
     "colors": {
@@ -118,7 +118,7 @@
       "calido"
     ],
     "fonts": {
-      "display": "\"Fraunces\", serif",
+      "display": "\"Gloock\", serif",
       "sans": "\"Nunito Sans\", system-ui, sans-serif"
     },
     "colors": {
@@ -154,7 +154,7 @@
       "urbano"
     ],
     "fonts": {
-      "display": "\"Instrument Serif\", serif",
+      "display": "\"Italiana\", serif",
       "sans": "\"Space Grotesk\", system-ui, sans-serif"
     },
     "colors": {

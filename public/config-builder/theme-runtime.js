@@ -105,7 +105,7 @@
             .join(";");
 
         return `
-            <button type="button" class="theme-card${isSelected ? " is-active" : ""}" data-theme-id="${theme.id}" style="${cardStyle}">
+            <button type="button" class="theme-card${isSelected ? " is-active" : ""}" data-theme-id="${theme.id}" style='${cardStyle}'>
                 <div class="theme-card__header">
                     <div>
                         <p class="theme-card__name">${theme.name}</p>
