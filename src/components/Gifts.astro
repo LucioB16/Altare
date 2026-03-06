@@ -1,6 +1,5 @@
 ---
 import { getWeddingData } from "../data/weddingData";
-import Icon from "./Icon.astro";
 
 const { gifts } = getWeddingData();
 import Divider from "./Divider.astro";
@@ -8,7 +7,7 @@ import SectionIcon from "./SectionIcon.astro";
 ---
 
 <Divider type="flower" />
-<section class="section py-24 bg-[#F8F7F4]">
+<section class="section py-24 bg-surface-soft">
   <div class="section__inner container mx-auto px-6 text-center max-w-5xl">
 
     <SectionIcon name="gifts" />
@@ -21,8 +20,8 @@ import SectionIcon from "./SectionIcon.astro";
         {gifts.heading}
     </h2>
 
-    <div class="border border-gray-200 bg-white p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center">
-        <p class="text-gray-600 leading-relaxed font-sans mb-10">
+    <div class="theme-panel p-8 md:p-12 max-w-3xl mx-auto flex flex-col items-center">
+        <p class="text-text-muted leading-relaxed font-sans mb-10">
             {gifts.body}
         </p>
         
@@ -30,10 +29,10 @@ import SectionIcon from "./SectionIcon.astro";
             <div class="w-full flex inset-0 justify-center">
                 <!-- Using a simple details/summary tag instead of AlpineJS to keep it vanilla HTML and easy -->
                 <details class="w-full max-w-md cursor-pointer group">
-                    <summary class="bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors list-none text-center">
+                    <summary class="theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors list-none text-center">
                         {gifts.buttonLabel}
                     </summary>
-                    <div class="mt-6 bg-[#F8F7F4] p-6 text-left border border-gray-100 text-sm text-gray-700">
+                    <div class="mt-6 bg-surface-soft p-6 text-left border border-border text-sm text-text-muted">
                         <p class="mb-3"><span class="font-semibold text-primary">Titular:</span> {gifts.bank.holderName}</p>
                         <p class="mb-3"><span class="font-semibold text-primary">Banco:</span> {gifts.bank.bankName}</p>
                         <p class="mb-3"><span class="font-semibold text-primary">Alias:</span> {gifts.bank.alias}</p>
@@ -46,3 +45,7 @@ import SectionIcon from "./SectionIcon.astro";
     </div>
   </div>
 </section>
+
+
+
+

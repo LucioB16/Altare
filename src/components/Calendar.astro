@@ -269,7 +269,7 @@ const icsLinks: LinkItem[] = calendar.ics.enabled
 ---
 
 <Divider type="small" />
-<section class="section py-24 bg-white">
+<section class="section py-24 bg-surface">
     <div class="section__inner container mx-auto px-6 text-center max-w-5xl">
         <SectionIcon name="calendar" />
 
@@ -287,7 +287,7 @@ const icsLinks: LinkItem[] = calendar.ics.enabled
         </h2>
 
         <div
-            class="border border-gray-200 bg-[#F8F7F4] p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center"
+            class="theme-panel bg-surface-soft p-8 md:p-12 max-w-3xl mx-auto flex flex-col items-center"
         >
             <div class="flex flex-col sm:flex-row gap-4 justify-center w-full">
                 {
@@ -296,7 +296,7 @@ const icsLinks: LinkItem[] = calendar.ics.enabled
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="flex items-center justify-center gap-3 bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors w-full sm:w-auto"
+                            class="flex items-center justify-center gap-3 theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors w-full sm:w-auto"
                         >
                             <Icon
                                 name="lucide:calendar-check"
@@ -312,7 +312,7 @@ const icsLinks: LinkItem[] = calendar.ics.enabled
                         <a
                             href={link.href}
                             download={link.fileName}
-                            class="flex items-center justify-center gap-3 border border-primary text-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-primary hover:text-white transition-colors w-full sm:w-auto"
+                            class="flex items-center justify-center gap-3 theme-button-secondary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors w-full sm:w-auto"
                         >
                             <Icon name="lucide:apple" class="text-lg" />
                             <span>{link.label}</span>
@@ -322,7 +322,7 @@ const icsLinks: LinkItem[] = calendar.ics.enabled
             </div>
             {
                 googleLinks.length === 0 && icsLinks.length === 0 && (
-                    <p class="text-sm text-gray-600 mt-4">
+                    <p class="text-sm text-text-muted mt-4">
                         No hay eventos habilitados para agregar al calendario.
                     </p>
                 )
@@ -330,3 +330,7 @@ const icsLinks: LinkItem[] = calendar.ics.enabled
         </div>
     </div>
 </section>
+
+
+
+

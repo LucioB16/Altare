@@ -15,6 +15,11 @@ locale:
   language: "es-AR"
   timeZone: "America/Buenos_Aires"
 
+theme:
+  id: "jardin-clasico"
+
+demo:
+  themeSwitcher: true
 sections:
   countdown:
     enabled: true
@@ -121,7 +126,7 @@ gifts:
 
 dressCode:
   title: "Dress Code"
-  tag: "Formal – Elegante"
+  tag: "Formal - Elegante"
   body: "Te esperamos con tu mejor look para celebrar juntos."
   brideDisclaimer:
     enabled: true
@@ -162,3 +167,4 @@ usefulInfo:
       icon: "lucide:parking-circle"
       title: "Estacionamiento"
       description: "Hay estacionamiento privado y vigilado gratuito en el lugar."
+

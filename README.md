@@ -32,16 +32,17 @@ Usá nuestro **Config Builder** para generar tu archivo de configuración sin to
 
 El Config Builder te guía paso a paso para configurar:
 - 👫 Nombres de la pareja
-- 📅 Fechas y horarios con selectores visuales
-- ⛪ Ceremonia religiosa (opcional) y civil
-- 🎉 Fiesta / celebración
+- 🎭 Tema visual (5 temas con preview en vivo)
+- 📅 Fechas y horarios con selectores visuales + zona horaria
+- ⛪ Ceremonia religiosa, civil y fiesta (cada una con toggle)
 - 📸 Fotos de portada e historia (1–4 fotos)
+- 🖼️ Imagen para compartir en WhatsApp/redes (Open Graph)
 - 🎁 Regalos y datos bancarios (con opción de ocultar)
-- 👔 Código de vestimenta (con aviso colores novia configurable)
-- ✉️ Confirmación de asistencia con link opcional
-- 🎵 Link a playlist de Spotify
-- 📱 Redes sociales
-- ℹ️ Cards de información útil (agregar cuantas quieras)
+- 👔 Código de vestimenta (con aviso de novia configurable)
+- ✉️ Confirmación de asistencia (fecha límite + link opcional)
+- 🎵 Playlist de Spotify (opcional)
+- 📱 Redes sociales (opcional)
+- ℹ️ Cards de información útil (podés dejar solo una o agregar varias)
 
 Al final genera un archivo `wedding.yml` que descargás o copiás.
 
@@ -88,6 +89,18 @@ Al final genera un archivo `wedding.yml` que descargás o copiás.
 - 📊 **Cuenta regresiva** — Actualización en tiempo real
 - 🔧 **Config Builder** — Herramienta visual para generar la configuración sin código
 
+
+## Novedades de theming
+
+- Nuevo sistema de temas visuales por tokens compartidos entre sitio y builder.
+- Temas disponibles: `jardin-clasico` (default), `marfil-editorial`, `botanica-nocturna`, `rosa-antiguo`, `galeria-moderna`.
+- Selector de tema en el Config Builder con cards de preview (paleta, tipografia y look visual).
+- `theme.id` en `wedding.yml` es opcional; si falta se usa `jardin-clasico` para mantener compatibilidad.
+- El cambio de tema solo modifica estetica (colores, tipografias, iconografia y ornamentos), sin cambiar layout ni orden de secciones.
+- Demo con switcher de tema en vivo solo cuando `demo.themeSwitcher: true`.
+- Preview de OG/WhatsApp con dominio generico (`tuusuario.github.io/tu-repo`) para evitar referencias hardcodeadas.
+- File pickers del builder reforzados para Hero, Story y OG/WhatsApp.
+
 ---
 
 ## 🛠️ Desarrollo local
@@ -108,6 +121,7 @@ Todos los comandos se ejecutan desde la raíz del proyecto:
 | Comando                   | Acción                                           |
 | :------------------------ | :----------------------------------------------- |
 | `bun install`             | Instala las dependencias                         |
+| `bun run sync:themes`     | Sincroniza catalogo de temas y fuentes del builder |
 | `bun dev`                 | Inicia el servidor de desarrollo en `localhost:4321` |
 | `bun build`               | Genera el sitio de producción en `./dist/`       |
 | `bun preview`             | Previsualiza el build localmente antes de deployar |
@@ -122,6 +136,7 @@ src/
 ├── data/
 │   ├── wedding.yml  # ← Tu configuración va acá
 │   └── weddingData.ts
+├── theme/           # Catalogo de temas y tokens
 ├── layouts/
 ├── pages/
 └── styles/
@@ -130,12 +145,14 @@ public/
 │   ├── hero/        # Foto de bienvenida (nombre configurable)
 │   ├── couple/      # Fotos historia (01.jpg, 02.jpg, ...)
 │   └── og/          # Imagen para redes sociales (nombre configurable)
-└── config-builder/  # Herramienta de configuración visual
+└── config-builder/  # Herramienta de configuracion visual (+ themes.json/theme-fonts.css)
+scripts/
+└── sync-themes.mjs  # Sincroniza temas entre app y builder
 ```
 
 ---
 
-## � Créditos y licencia
+## 📜 Créditos y licencia
 
 Este proyecto está basado en [**SaidYes**](https://github.com/roicort/saidyes) por [@roicort](https://github.com/roicort), distribuido bajo la licencia **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 

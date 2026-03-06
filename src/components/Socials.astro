@@ -8,7 +8,7 @@ import SectionIcon from "./SectionIcon.astro";
 ---
 
 <Divider type="small" />
-<section class="section py-24 bg-[#F8F7F4]">
+<section class="section py-24 bg-surface-soft">
     <div class="section__inner container mx-auto px-6 text-center max-w-5xl">
         <SectionIcon name="info" />
 
@@ -26,11 +26,11 @@ import SectionIcon from "./SectionIcon.astro";
         </h2>
 
         <div
-            class="border border-gray-200 bg-white p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center"
+            class="theme-panel p-8 md:p-12 max-w-3xl mx-auto flex flex-col items-center"
         >
             {
                 socials.body && (
-                    <p class="text-gray-600 font-sans italic mb-8">
+                    <p class="text-text-muted font-sans italic mb-8">
                         {socials.body}
                     </p>
                 )
@@ -42,7 +42,7 @@ import SectionIcon from "./SectionIcon.astro";
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="w-full sm:w-auto flex items-center justify-center gap-3 bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors"
+                            class="w-full sm:w-auto flex items-center justify-center gap-3 theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors"
                         >
                             <Icon name="lucide:instagram" class="text-xl" />
                             <span>VER EN INSTAGRAM</span>
@@ -53,3 +53,6 @@ import SectionIcon from "./SectionIcon.astro";
         </div>
     </div>
 </section>
+
+
+

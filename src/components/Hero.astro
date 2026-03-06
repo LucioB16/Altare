@@ -11,7 +11,7 @@ const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
     class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center text-center px-6"
     style={`
         scroll-snap-align: start;
-        ${backgroundImageUrl ? `background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.6)), url("${backgroundImageUrl}");` : ""}
+        ${backgroundImageUrl ? `background-image: linear-gradient(var(--color-overlay-from), var(--color-overlay-to)), url("${backgroundImageUrl}");` : ""}
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -23,7 +23,7 @@ const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
         class="hero-content z-10 flex flex-col items-center justify-center space-y-6 md:space-y-8 mt-12 opacity-0"
     >
         <p
-            class="text-sm md:text-base tracking-[0.4em] font-sans uppercase text-gray-700"
+            class="text-sm md:text-base tracking-[0.4em] font-sans uppercase text-text-muted"
         >
             {hero.title}
         </p>
@@ -36,7 +36,7 @@ const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
             {hero.subtitle}
         </h1>
 
-        <div class="space-y-3 mt-4 text-gray-700">
+        <div class="space-y-3 mt-4 text-text-muted">
             <p
                 class="text-xl md:text-2xl"
                 style="font-family: var(--font-display);"
@@ -57,7 +57,7 @@ const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
     >
         <Icon
             name="lucide:arrow-down"
-            class="text-2xl text-gray-600 opacity-70"
+            class="text-2xl text-text-subtle opacity-70"
         />
     </div>
 </section>
@@ -83,3 +83,6 @@ const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
         });
     });
 </script>
+
+
+

@@ -8,15 +8,16 @@ interface Props {
     eventKey: "ceremony" | "celebration" | "religiousCeremony";
     dividerType?: "flower" | "small" | "large";
     bgClass?: string;
+    forceVisible?: boolean;
 }
 
-const { eventKey, dividerType = "flower", bgClass = "bg-white" } = Astro.props;
+const { eventKey, dividerType = "flower", bgClass = "bg-surface", forceVisible = false } = Astro.props;
 const { events } = getWeddingData();
 const event = events[eventKey];
 ---
 
 {
-    event && event.enabled && (
+    event && (event.enabled || forceVisible) && (
         <>
             <Divider type={dividerType} />
             <section class={`section py-24 ${bgClass}`}>
@@ -34,7 +35,7 @@ const event = events[eventKey];
                         {event.kindLabel}
                     </h2>
 
-                    <div class="border border-gray-200 bg-[#F8F7F4] p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center">
+                    <div class="theme-panel bg-surface-soft p-8 md:p-12 max-w-3xl mx-auto flex flex-col items-center">
                         <div class="text-3xl text-primary mb-4">
                             <Icon name="lucide:map-pin" />
                         </div>
@@ -45,7 +46,7 @@ const event = events[eventKey];
                             {event.timeDisplay}
                         </div>
 
-                        <div class="mb-8 font-sans text-gray-600">
+                        <div class="mb-8 font-sans text-text-muted">
                             <h3 class="text-lg font-bold text-primary mb-2 uppercase tracking-wide">
                                 {event.venueName}
                             </h3>
@@ -58,7 +59,7 @@ const event = events[eventKey];
                             href={event.mapsUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors"
+                            class="theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors"
                         >
                             CÓMO LLEGAR
                         </a>

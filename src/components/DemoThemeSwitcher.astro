@@ -1,0 +1,170 @@
+---
+interface ThemeOption {
+    id: string;
+    name: string;
+    concept: string;
+    vars: Record<string, string>;
+}
+
+interface Props {
+    enabled?: boolean;
+    activeThemeId: string;
+    themes: ThemeOption[];
+}
+
+const { enabled = false, activeThemeId, themes } = Astro.props as Props;
+const serializedThemes = JSON.stringify(themes);
+---
+
+{
+    enabled && (
+        <>
+            <div
+                id="demo-theme-switcher"
+                class="demo-theme-switcher"
+                data-default-theme={activeThemeId}
+                hidden
+            >
+                <label for="demo-theme-select" class="demo-theme-switcher__label">
+                    Tema demo
+                </label>
+                <select id="demo-theme-select" class="demo-theme-switcher__select" aria-label="Selector de tema demo">
+                    {
+                        themes.map((theme) => (
+                            <option value={theme.id}>{theme.name}</option>
+                        ))
+                    }
+                </select>
+                <p id="demo-theme-switcher-concept" class="demo-theme-switcher__concept"></p>
+            </div>
+
+            <script id="demo-theme-data" type="application/json" set:html={serializedThemes}></script>
+
+            <script is:inline>
+                (() => {
+                    const root = document.getElementById("demo-theme-switcher");
+                    if (!root) return;
+
+                    const body = document.body;
+                    const shouldEnable = body?.dataset?.demoThemeSwitcher === "true";
+                    if (!shouldEnable) return;
+
+                    const host = window.location.hostname.toLowerCase();
+                    const pathname = window.location.pathname.toLowerCase();
+                    const params = new URLSearchParams(window.location.search);
+                    const isLocal = host === "localhost" || host === "127.0.0.1";
+                    const isOfficialDemo = host === "luciob16.github.io" && pathname.includes("/altare");
+                    const isForced = params.get("demoThemeSwitcher") === "1";
+
+                    if (!(isLocal || isOfficialDemo || isForced)) {
+                        return;
+                    }
+
+                    const select = document.getElementById("demo-theme-select");
+                    const concept = document.getElementById("demo-theme-switcher-concept");
+                    const dataNode = document.getElementById("demo-theme-data");
+                    if (!(select instanceof HTMLSelectElement) || !dataNode) {
+                        return;
+                    }
+
+                    let parsedThemes = [];
+                    try {
+                        parsedThemes = JSON.parse(dataNode.textContent || "[]");
+                    } catch {
+                        parsedThemes = [];
+                    }
+
+                    if (!Array.isArray(parsedThemes) || parsedThemes.length === 0) {
+                        return;
+                    }
+
+                    const storageKey = "altare_demo_theme_id";
+
+                    const findTheme = (themeId) => parsedThemes.find((theme) => theme.id === themeId);
+
+                    const applyTheme = (themeId, persist = true) => {
+                        const theme = findTheme(themeId);
+                        if (!theme) {
+                            return;
+                        }
+
+                        const vars = theme.vars || {};
+                        for (const [key, value] of Object.entries(vars)) {
+                            body.style.setProperty(key, String(value));
+                        }
+
+                        body.dataset.theme = theme.id;
+                        select.value = theme.id;
+                        if (concept) {
+                            concept.textContent = theme.concept || "";
+                        }
+
+                        if (persist) {
+                            localStorage.setItem(storageKey, theme.id);
+                        }
+                    };
+
+                    const savedThemeId = localStorage.getItem(storageKey);
+                    const defaultThemeId = root.getAttribute("data-default-theme") || "";
+                    const initialThemeId = findTheme(savedThemeId || "")
+                        ? savedThemeId
+                        : findTheme(defaultThemeId)
+                          ? defaultThemeId
+                          : parsedThemes[0].id;
+
+                    applyTheme(initialThemeId, false);
+
+                    select.addEventListener("change", () => {
+                        applyTheme(select.value, true);
+                    });
+
+                    root.hidden = false;
+                })();
+            </script>
+
+            <style>
+                .demo-theme-switcher {
+                    position: fixed;
+                    right: 1rem;
+                    bottom: 1rem;
+                    z-index: 1200;
+                    width: min(22rem, calc(100vw - 2rem));
+                    border: 1px solid color-mix(in srgb, var(--color-primary), transparent 65%);
+                    background: color-mix(in srgb, var(--color-surface), transparent 6%);
+                    backdrop-filter: blur(10px);
+                    box-shadow: 0 12px 28px color-mix(in srgb, var(--color-primary), transparent 82%);
+                    padding: 0.75rem;
+                }
+
+                .demo-theme-switcher__label {
+                    display: block;
+                    margin-bottom: 0.45rem;
+                    font-size: 0.68rem;
+                    letter-spacing: 0.14em;
+                    text-transform: uppercase;
+                    font-family: var(--font-sans);
+                    color: var(--color-text-subtle);
+                }
+
+                .demo-theme-switcher__select {
+                    width: 100%;
+                    border: 1px solid var(--color-border);
+                    background: var(--color-surface);
+                    color: var(--color-text);
+                    padding: 0.55rem 0.65rem;
+                    font-size: 0.95rem;
+                    font-family: var(--font-display);
+                }
+
+                .demo-theme-switcher__concept {
+                    margin-top: 0.45rem;
+                    margin-bottom: 0;
+                    font-size: 0.76rem;
+                    line-height: 1.35;
+                    color: var(--color-text-muted);
+                    font-family: var(--font-sans);
+                }
+            </style>
+        </>
+    )
+}

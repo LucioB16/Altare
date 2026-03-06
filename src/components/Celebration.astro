@@ -9,7 +9,7 @@ import SectionIcon from "./SectionIcon.astro";
 ---
 
 <Divider type="small" />
-<section class="section py-24 bg-[#EEF0EC]">
+<section class="section py-24 bg-surface-alt">
   <div class="section__inner container mx-auto px-6 text-center max-w-5xl">
 
     <SectionIcon name="celebration" />
@@ -22,7 +22,7 @@ import SectionIcon from "./SectionIcon.astro";
         {celebration.kindLabel}
     </h2>
 
-    <div class="border border-gray-200 bg-white p-8 md:p-12 max-w-3xl mx-auto shadow-sm flex flex-col items-center">
+    <div class="theme-panel p-8 md:p-12 max-w-3xl mx-auto flex flex-col items-center">
         
         <div class="text-3xl text-primary mb-4">
             <Icon name="lucide:glass-water" />
@@ -31,7 +31,7 @@ import SectionIcon from "./SectionIcon.astro";
             {celebration.timeDisplay}
         </div>
         
-        <div class="mb-8 font-sans text-gray-600">
+        <div class="mb-8 font-sans text-text-muted">
             <h3 class="text-lg font-bold text-primary mb-2 uppercase tracking-wide">{celebration.venueName}</h3>
             {celebration.addressLines.map(line => (
                 <p>{line}</p>
@@ -42,7 +42,7 @@ import SectionIcon from "./SectionIcon.astro";
             href={celebration.mapsUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            class="bg-primary text-white tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 hover:bg-opacity-90 transition-colors"
+            class="theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors"
         >
             CÓMO LLEGAR
         </a>

@@ -15,6 +15,11 @@ import Playlist from "../components/Playlist.astro";
 import UsefulInfo from "../components/UsefulInfo.astro";
 
 const data = getWeddingData();
+const showAllSectionsInDemo = data.demo?.themeSwitcher === true;
+const showReligiousCeremony = Boolean(
+  data.events.religiousCeremony &&
+    (data.events.religiousCeremony.enabled || showAllSectionsInDemo)
+);
 ---
 
 <Layout
@@ -25,11 +30,12 @@ const data = getWeddingData();
   {data.hero.enabled && <Hero />}
   {data.sections.countdown.enabled && <Count />}
   {
-    data.events.religiousCeremony?.enabled && (
+    showReligiousCeremony && (
       <Ceremony
         eventKey="religiousCeremony"
         dividerType="flower"
-        bgClass="bg-white"
+        bgClass="bg-surface"
+        forceVisible={showAllSectionsInDemo}
       />
     )
   }
@@ -38,7 +44,7 @@ const data = getWeddingData();
       <Ceremony
         eventKey="ceremony"
         dividerType="small"
-        bgClass="bg-[#EEF0EC]"
+        bgClass="bg-surface-alt"
       />
     )
   }

@@ -10,7 +10,7 @@ const photoCount = Math.min(photos.length, 4);
 ---
 
 <Divider type="large" />
-<section class="section py-24 bg-white">
+<section class="section py-24 bg-surface">
     <div class="section__inner container mx-auto px-6 max-w-5xl text-center">
         <SectionIcon name="story" />
 
@@ -48,7 +48,7 @@ const photoCount = Math.min(photos.length, 4);
         {
             story.sentence && (
                 <p
-                    class="text-gray-600 leading-relaxed font-sans mt-10 max-w-2xl mx-auto italic"
+                    class="text-text-muted leading-relaxed font-sans mt-10 max-w-2xl mx-auto italic"
                     style="font-family: var(--font-display);"
                 >
                     {story.sentence}
@@ -106,3 +106,5 @@ const photoCount = Math.min(photos.length, 4);
         grid-template-columns: 1fr 1fr;
     }
 </style>
+
+

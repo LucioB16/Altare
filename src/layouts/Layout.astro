@@ -1,7 +1,11 @@
 ---
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
+import DemoThemeSwitcher from "../components/DemoThemeSwitcher.astro";
+import { getWeddingData } from "../data/weddingData";
+import { themes, resolveTheme, toThemeCssVars, toThemeCssVarMap } from "../theme/themes";
 import { resolveAssetPath } from "../utils/resolveAssetPath";
+
 const { title, description, ogImage } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
@@ -10,6 +14,17 @@ const ogImagePath = resolveAssetPath(ogImage, base);
 const ogImageUrl = ogImagePath
     ? new URL(ogImagePath, Astro.site || Astro.url).toString()
     : undefined;
+
+const data = getWeddingData();
+const activeTheme = resolveTheme(data.theme?.id);
+const themeStyle = toThemeCssVars(activeTheme);
+const demoThemeSwitcherEnabled = data.demo?.themeSwitcher === true;
+const demoThemes = themes.map((theme) => ({
+    id: theme.id,
+    name: theme.name,
+    concept: theme.concept,
+    vars: toThemeCssVarMap(theme),
+}));
 ---
 
 <!doctype html>
@@ -17,6 +32,12 @@ const ogImageUrl = ogImagePath
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href={cleanBase + "config-builder/theme-fonts.css"}
+        />
         <link
             rel="icon"
             type="image/svg+xml"
@@ -30,7 +51,7 @@ const ogImageUrl = ogImagePath
             src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
         ></script>
     </head>
-    <body>
+    <body data-theme={activeTheme.id} data-demo-theme-switcher={demoThemeSwitcherEnabled ? "true" : "false"} style={themeStyle}>
         <noscript>
             <style>
                 /* When JS is disabled, reveal section content immediately so the page is usable. */
@@ -45,6 +66,11 @@ const ogImageUrl = ogImagePath
         </noscript>
         <slot />
         <Footer />
+        <DemoThemeSwitcher
+            enabled={demoThemeSwitcherEnabled}
+            activeThemeId={activeTheme.id}
+            themes={demoThemes}
+        />
 
         <script>
             import { gsap } from "gsap";

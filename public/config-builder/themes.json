@@ -1,0 +1,182 @@
+[
+  {
+    "id": "jardin-clasico",
+    "name": "Jardin Clasico",
+    "concept": "Elegancia botanica suave y romantica",
+    "keywords": [
+      "botanico",
+      "elegante",
+      "organico",
+      "clasico"
+    ],
+    "fonts": {
+      "display": "\"Playfair Display\", serif",
+      "sans": "\"Inter\", system-ui, sans-serif"
+    },
+    "colors": {
+      "primary": "#5A7156",
+      "secondary": "#F4F1E1",
+      "accent": "#BDA588",
+      "background": "#FAF9F6",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#EEF0EC",
+      "surfaceSoft": "#F8F7F4",
+      "text": "#333333",
+      "textMuted": "#58615A",
+      "textSubtle": "#6C746F",
+      "border": "#D8DED1",
+      "overlayFrom": "rgba(255,255,255,0.30)",
+      "overlayTo": "rgba(255,255,255,0.60)",
+      "spotifyButtonBg": "#1DB954",
+      "spotifyButtonText": "#102D26",
+      "ornament1": "#6B8E6B",
+      "ornament2": "#7A9E7A",
+      "ornament3": "#8BAE8B",
+      "ornamentFooter": "#FFFFFF"
+    }
+  },
+  {
+    "id": "marfil-editorial",
+    "name": "Marfil Editorial",
+    "concept": "Minimalismo editorial con lujo silencioso",
+    "keywords": [
+      "editorial",
+      "minimal",
+      "timeless",
+      "quiet-luxury"
+    ],
+    "fonts": {
+      "display": "\"Prata\", serif",
+      "sans": "\"Manrope\", system-ui, sans-serif"
+    },
+    "colors": {
+      "primary": "#2D2A28",
+      "secondary": "#F6F1E8",
+      "accent": "#C9B08A",
+      "background": "#F6F1E8",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#EDE5D8",
+      "surfaceSoft": "#F3ECE1",
+      "text": "#2D2A28",
+      "textMuted": "#57514C",
+      "textSubtle": "#736B63",
+      "border": "#D6CCBE",
+      "overlayFrom": "rgba(246,241,232,0.32)",
+      "overlayTo": "rgba(246,241,232,0.68)",
+      "spotifyButtonBg": "#806E58",
+      "spotifyButtonText": "#FFFFFF",
+      "ornament1": "#8C7A63",
+      "ornament2": "#B39C7D",
+      "ornament3": "#C9B08A",
+      "ornamentFooter": "#F6F1E8"
+    }
+  },
+  {
+    "id": "botanica-nocturna",
+    "name": "Botanica Nocturna",
+    "concept": "Romance dramatico en verde profundo",
+    "keywords": [
+      "dramatico",
+      "nocturno",
+      "romantico",
+      "premium"
+    ],
+    "fonts": {
+      "display": "\"Cinzel Decorative\", serif",
+      "sans": "\"Source Sans 3\", system-ui, sans-serif"
+    },
+    "colors": {
+      "primary": "#E9E1D3",
+      "secondary": "#102D26",
+      "accent": "#B8946A",
+      "background": "#102D26",
+      "surface": "#1A3A33",
+      "surfaceAlt": "#23473F",
+      "surfaceSoft": "#18342E",
+      "text": "#E9E1D3",
+      "textMuted": "#C9BEAD",
+      "textSubtle": "#A89B88",
+      "border": "#3A5B54",
+      "overlayFrom": "rgba(9,24,20,0.40)",
+      "overlayTo": "rgba(9,24,20,0.70)",
+      "spotifyButtonBg": "#B8946A",
+      "spotifyButtonText": "#102D26",
+      "ornament1": "#6E8F7B",
+      "ornament2": "#90A995",
+      "ornament3": "#B7C6B7",
+      "ornamentFooter": "#E9E1D3"
+    }
+  },
+  {
+    "id": "rosa-antiguo",
+    "name": "Rosa Antiguo",
+    "concept": "Clasico romantico con tonos empolvados",
+    "keywords": [
+      "romantico",
+      "porcelana",
+      "soft-classic",
+      "calido"
+    ],
+    "fonts": {
+      "display": "\"Gloock\", serif",
+      "sans": "\"Nunito Sans\", system-ui, sans-serif"
+    },
+    "colors": {
+      "primary": "#7A5C52",
+      "secondary": "#F8F2EF",
+      "accent": "#C9A58F",
+      "background": "#F8F2EF",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#F1E3DD",
+      "surfaceSoft": "#F5EBE7",
+      "text": "#4C3A34",
+      "textMuted": "#6E5850",
+      "textSubtle": "#8A736A",
+      "border": "#DEC9BF",
+      "overlayFrom": "rgba(248,242,239,0.34)",
+      "overlayTo": "rgba(248,242,239,0.70)",
+      "spotifyButtonBg": "#C9A58F",
+      "spotifyButtonText": "#3C2C27",
+      "ornament1": "#A67E73",
+      "ornament2": "#BC9488",
+      "ornament3": "#D4B4A8",
+      "ornamentFooter": "#F8F2EF"
+    }
+  },
+  {
+    "id": "galeria-moderna",
+    "name": "Galeria Moderna",
+    "concept": "Contemporaneo artistico con acento expresivo",
+    "keywords": [
+      "moderno",
+      "artistico",
+      "clean",
+      "urbano"
+    ],
+    "fonts": {
+      "display": "\"Italiana\", serif",
+      "sans": "\"Space Grotesk\", system-ui, sans-serif"
+    },
+    "colors": {
+      "primary": "#1F1F1C",
+      "secondary": "#FAFAF7",
+      "accent": "#A8624B",
+      "background": "#FAFAF7",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#EDEBE4",
+      "surfaceSoft": "#F2F1EB",
+      "text": "#1F1F1C",
+      "textMuted": "#4D4C46",
+      "textSubtle": "#6C6A63",
+      "border": "#DAD7CC",
+      "overlayFrom": "rgba(250,250,247,0.34)",
+      "overlayTo": "rgba(250,250,247,0.74)",
+      "spotifyButtonBg": "#A8624B",
+      "spotifyButtonText": "#FFFFFF",
+      "ornament1": "#7E8B79",
+      "ornament2": "#9AA597",
+      "ornament3": "#B8C0B4",
+      "ornamentFooter": "#FAFAF7"
+    }
+  }
+]
