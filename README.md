@@ -2,7 +2,7 @@
 
 English | [Español](./README.es.md)
 
-Elegant, static wedding invitation template powered by Astro + Tailwind v4, with a visual config builder.
+Elegant, 100% configurable digital wedding invitation, deployable in minutes with GitHub Pages.
 
 [![Use this template](https://img.shields.io/badge/Use_this_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
 [![Live demo](https://img.shields.io/badge/Live_demo-5A7156?style=for-the-badge)](https://luciob16.github.io/Altare/)
@@ -15,6 +15,8 @@ Elegant, static wedding invitation template powered by Astro + Tailwind v4, with
 ### Step 1: Create your repository
 
 Click **Use this template** and create your own GitHub repository.
+
+[![Use this template](https://img.shields.io/badge/Use_this_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
 
 Important: your final invitation URL is based on your GitHub user + repo name.
 Example: `https://mariaj.github.io/my-wedding/`

@@ -16,6 +16,8 @@ Invitación digital de boda, elegante y 100% configurable, desplegable en minuto
 
 Hacé click en **Use this template** y creá tu repo en GitHub.
 
+[![Usar este template](https://img.shields.io/badge/Usar_este_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
+
 Importante: la URL final depende de tu usuario + nombre del repo.
 Ejemplo: `https://mariaj.github.io/mi-boda/`
 
