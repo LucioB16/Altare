@@ -1,7 +1,8 @@
 site:
-  pageTitle: "Nuestra Boda | Juli & Lucio"
+  language: "en"
+  pageTitle: "Our Wedding | Juli & Lucio"
   meta:
-    description: "Estás invitado a celebrar con nosotros este momento tan especial."
+    description: "You are invited to celebrate this special moment with us."
     ogImage: "/media/og/og.jpg"
 
 couple:
@@ -12,7 +13,7 @@ couple:
   displayName: "Julieta & Lucio"
 
 locale:
-  language: "es-AR"
+  language: "en-US"
   timeZone: "America/Buenos_Aires"
 
 theme:
@@ -20,6 +21,9 @@ theme:
 
 demo:
   themeSwitcher: true
+  locales:
+    - "es"
+
 sections:
   countdown:
     enabled: true
@@ -46,76 +50,76 @@ sections:
 
 hero:
   enabled: true
-  title: "¡Nos casamos!"
+  title: "We're getting married!"
   subtitle: "Julieta & Lucio"
-  dateDisplay: "21 de Junio de 2026"
-  city: "Córdoba, Argentina"
+  dateDisplay: "June 21, 2026"
+  city: "Cordoba, Argentina"
   backgroundImage: "/media/hero/bg.jpg"
 
 countdown:
   target: "2026-06-21T21:00:00-03:00"
-  heading: "Cuenta regresiva"
-  note: "¡Falta muy poco!"
+  heading: "Countdown"
+  note: "We're almost there!"
   targetSource: "celebration"
 
 events:
   religiousCeremony:
     enabled: false
-    kindLabel: "Ceremonia Religiosa"
+    kindLabel: "Religious Ceremony"
     datetime: "2026-06-21T17:00:00-03:00"
-    timeDisplay: "17:00 hs"
-    venueName: "Parroquia Sagrado Corazón"
+    timeDisplay: "17:00"
+    venueName: "Sacred Heart Parish"
     addressLines:
-      - "Av. Hipólito Yrigoyen 100"
-      - "Córdoba Capital"
+      - "Av. Hipolito Yrigoyen 100"
+      - "Cordoba Capital"
     mapsUrl: "https://maps.app.goo.gl/"
   ceremony:
     enabled: true
-    kindLabel: "Ceremonia Civil"
+    kindLabel: "Civil Ceremony"
     datetime: "2026-06-21T18:00:00-03:00"
-    timeDisplay: "18:00 hs"
-    venueName: "Registro Civil Central"
+    timeDisplay: "18:00"
+    venueName: "Central Civil Registry"
     addressLines:
       - "Chacabuco 737"
-      - "Nueva Córdoba"
+      - "Nueva Cordoba"
     mapsUrl: "https://maps.app.goo.gl/"
   celebration:
     enabled: true
-    kindLabel: "Fiesta"
+    kindLabel: "Party"
     datetime: "2026-06-21T21:00:00-03:00"
-    timeDisplay: "21:00 hs"
+    timeDisplay: "21:00"
     venueName: "Estancia La Paz"
     addressLines:
       - "Ruta E66 Km 41"
-      - "Ascochinga, Córdoba"
+      - "Ascochinga, Cordoba"
     mapsUrl: "https://maps.app.goo.gl/"
 
 story:
-  heading: "Nuestra historia"
-  subheading: "Nosotros"
-  sentence: "Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre. Las risas, los viajes y los mates compartidos nos trajeron hasta acá."
+  heading: "Our story"
+  subheading: "Us"
+  sentence: "Five years ago we crossed paths for the first time on that trip, and from that day on we knew we wanted to walk together forever. Laughter, travels and shared moments brought us here."
   photos:
     - src: "/media/couple/01.jpg"
-      alt: "Foto juntos 1"
+      alt: "Couple photo 1"
     - src: "/media/couple/02.jpg"
-      alt: "Foto juntos 2"
+      alt: "Couple photo 2"
     - src: "/media/couple/03.jpg"
-      alt: "Foto juntos 3"
+      alt: "Couple photo 3"
     - src: "/media/couple/04.jpg"
-      alt: "Foto juntos 4"
+      alt: "Couple photo 4"
 
 socials:
-  heading: "Redes Sociales"
-  body: "Además, antes del casamiento, recibirás un link donde podrás subir todas tus fotos y videos del evento para compartirlos con nosotros y no perdernos nada de ese día."
+  heading: "Social Media"
+  body: "Before the wedding, you will receive a link to upload all your photos and videos so we do not miss a thing from that day."
   items:
     - label: "Instagram"
       handle: "@juliylucio_boda"
       url: "https://instagram.com"
 
 gifts:
-  heading: "Regalos"
-  body: "Lo más importante es tu presencia, pero si deseás hacernos un regalo podés ayudarnos con nuestra luna de miel."
-  buttonLabel: "Ver datos bancarios"
+  heading: "Gifts"
+  body: "Your presence is the most important thing, but if you would like to give us a gift, you can help us with our honeymoon."
+  buttonLabel: "View bank details"
   bank:
     enabled: true
     holderName: "LUCIO PEREZ"
@@ -126,19 +130,19 @@ gifts:
 
 dressCode:
   title: "Dress Code"
-  tag: "Formal - Elegante"
-  body: "Te esperamos con tu mejor look para celebrar juntos."
+  tag: "Formal - Elegant"
+  body: "We are looking forward to celebrating with your best look."
   brideDisclaimer:
     enabled: true
-    text: "Como es tradición, los colores blancos, o similares, estarán reservados para la novia."
+    text: "By tradition, white or similar shades are reserved for the bride."
 
 rsvp:
-  text: "Por favor confirmá tu asistencia antes del 1 de Mayo."
+  text: "Please confirm your attendance before May 1."
   deadline: "2026-05-01"
   link:
     enabled: false
     url: "https://wa.me/123456789"
-    label: "CONFIRMAR ASISTENCIA"
+    label: "CONFIRM ATTENDANCE"
 
 calendar:
   mode: "single" # "single" | "two" | "three"
@@ -146,25 +150,24 @@ calendar:
     enabled: true
   ics:
     enabled: true
-    fileNameSingle: "boda.ics"
-    fileNameReligiousCeremony: "ceremonia-religiosa.ics"
-    fileNameCeremony: "ceremonia.ics"
-    fileNameCelebration: "celebracion.ics"
+    fileNameSingle: "wedding.ics"
+    fileNameReligiousCeremony: "religious-ceremony.ics"
+    fileNameCeremony: "ceremony.ics"
+    fileNameCelebration: "celebration.ics"
 
 playlist:
-  heading: "Armemos la playlist juntos"
-  body: "Agregá esas canciones que no pueden faltar en la fiesta."
+  heading: "Let's build the playlist together"
+  body: "Add those songs that cannot be missing from the party."
   spotifyUrl: "https://open.spotify.com/playlist/"
 
 usefulInfo:
-  title: "Info útil"
+  title: "Useful info"
   items:
     - enabled: true
       icon: "lucide:clock"
-      title: "Duración"
-      description: "La fiesta se extenderá hasta el amanecer."
+      title: "Duration"
+      description: "The party will continue until sunrise."
     - enabled: true
       icon: "lucide:parking-circle"
-      title: "Estacionamiento"
-      description: "Hay estacionamiento privado y vigilado gratuito en el lugar."
-
+      title: "Parking"
+      description: "There is free private guarded parking at the venue."

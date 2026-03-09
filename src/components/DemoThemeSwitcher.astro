@@ -14,6 +14,9 @@ interface Props {
 
 const { enabled = false, activeThemeId, themes } = Astro.props as Props;
 const serializedThemes = JSON.stringify(themes);
+
+import { getSiteI18n } from "../i18n/site";
+const { t } = getSiteI18n(Astro.url);
 ---
 
 {
@@ -26,9 +29,9 @@ const serializedThemes = JSON.stringify(themes);
                 hidden
             >
                 <label for="demo-theme-select" class="demo-theme-switcher__label">
-                    Tema demo
+                    {t("site.demoThemeSwitcher.label")}
                 </label>
-                <select id="demo-theme-select" class="demo-theme-switcher__select" aria-label="Selector de tema demo">
+                <select id="demo-theme-select" class="demo-theme-switcher__select" aria-label={t("site.demoThemeSwitcher.ariaLabel")}>
                     {
                         themes.map((theme) => (
                             <option value={theme.id}>{theme.name}</option>

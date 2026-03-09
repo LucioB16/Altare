@@ -1,11 +1,15 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 
-const { events } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { events } = data;
 const celebration = events.celebration;
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
+import { getSiteI18n } from "../i18n/site";
+
+const { t } = getSiteI18n(Astro.url);
 ---
 
 <Divider type="small" />
@@ -15,7 +19,7 @@ import SectionIcon from "./SectionIcon.astro";
     <SectionIcon name="celebration" />
 
     <p class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4">
-        A festejar
+        {t("site.celebration.kicker")}
     </p>
 
     <h2 class="text-4xl md:text-5xl font-display text-primary tracking-wide mb-10" style="font-family: var(--font-display);">
@@ -44,7 +48,7 @@ import SectionIcon from "./SectionIcon.astro";
             rel="noopener noreferrer"
             class="theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors"
         >
-            CÓMO LLEGAR
+            {t("site.celebration.mapButton")}
         </a>
     </div>
   </div>

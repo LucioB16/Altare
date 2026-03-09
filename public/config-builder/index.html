@@ -1024,6 +1024,15 @@
                         <h2>La Pareja</h2>
             <p class="desc">Los datos básicos de los novios.</p>
 
+            <div class="field">
+                <label id="siteLanguageLabel">Idioma del sitio</label>
+                <select id="siteLanguage" onchange="onBuilderLanguageChange(this.value)">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                </select>
+                <p class="hint" id="siteLanguageHint">Este idioma se guarda en <code>site.language</code> y define el idioma final del sitio.</p>
+            </div>
+
             <p class="step-label" style="margin-top:1rem">Tema visual</p>
             <p class="desc" style="margin-bottom:1rem">Elegí la estética general de tu invitación. Solo cambia estilo visual: colores, tipografías y ornamentos.</p>
             <div id="themeGrid" class="theme-grid"></div>
@@ -1502,8 +1511,21 @@ Ascochinga, Córdoba</textarea></div>
     <script src="./theme-runtime.js"></script>
     <script>
         const TOTAL_STEPS = 9;
+        const BUILDER_LOCALE_STORAGE_KEY = "altare_builder_locale";
+        const FALLBACK_BUILDER_LOCALE = "en";
+
+        const FALLBACK_LOCALE_LANGUAGE_TAG = "en-US";
+        const DEFAULT_BUILDER_LOCALES = [
+            { code: "en", label: "English", localeLanguageTag: "en-US" },
+            { code: "es", label: "Spanish", localeLanguageTag: "es-AR" },
+        ];
+
         let currentStep = 0;
         let selectedThemeId = "jardin-clasico";
+        let selectedLanguage = FALLBACK_BUILDER_LOCALE;
+        let builderMessages = null;
+        let availableBuilderLocales = [...DEFAULT_BUILDER_LOCALES];
+
         const toggleState = {
             religiousEnabled: false,
             ceremonyEnabled: true,
@@ -1519,6 +1541,584 @@ Ascochinga, Córdoba</textarea></div>
             playlistEnabled: true,
             usefulInfoEnabled: true,
         };
+
+        function getByPath(obj, path) {
+            return path.split('.').reduce((acc, segment) => {
+                if (!acc || typeof acc !== 'object') return undefined;
+                return acc[segment];
+            }, obj);
+        }
+
+        function interpolate(template, params) {
+            if (typeof template !== 'string' || !params) return template;
+            return template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+                const value = params[key];
+                return value === undefined ? '' : String(value);
+            });
+        }
+
+        function t(key, fallback = key, params) {
+            const value = builderMessages ? getByPath(builderMessages, key) : undefined;
+            if (typeof value !== 'string') {
+                return interpolate(fallback, params);
+            }
+            return interpolate(value, params);
+        }
+
+        function contentDefault(path, fallback = '') {
+            const value = builderMessages ? getByPath(builderMessages, `contentDefaults.${path}`) : undefined;
+            return value === undefined ? fallback : value;
+        }
+
+        function normalizeBuilderLocale(localeCode) {
+            const candidate = String(localeCode || '').trim().toLowerCase().replace(/_/g, '-');
+            if (!candidate) {
+                return FALLBACK_BUILDER_LOCALE;
+            }
+
+            const localeCodes = new Set(availableBuilderLocales.map((locale) => locale.code));
+            if (localeCodes.has(candidate)) {
+                return candidate;
+            }
+
+            const languageOnly = candidate.split('-')[0];
+            if (localeCodes.has(languageOnly)) {
+                return languageOnly;
+            }
+
+            return FALLBACK_BUILDER_LOCALE;
+        }
+
+        function getBuilderLocaleMeta(localeCode) {
+            const normalized = normalizeBuilderLocale(localeCode);
+            return (
+                availableBuilderLocales.find((locale) => locale.code === normalized) ||
+                availableBuilderLocales.find((locale) => locale.code === FALLBACK_BUILDER_LOCALE) ||
+                DEFAULT_BUILDER_LOCALES[0]
+            );
+        }
+
+        function getLocaleLanguageTagForBuilderLocale(localeCode) {
+            const localeMeta = getBuilderLocaleMeta(localeCode);
+            if (
+                localeMeta &&
+                typeof localeMeta.localeLanguageTag === 'string' &&
+                localeMeta.localeLanguageTag.trim().length > 0
+            ) {
+                return localeMeta.localeLanguageTag.trim();
+            }
+
+            return contentDefault('locale.language', FALLBACK_LOCALE_LANGUAGE_TAG);
+        }
+
+        function refreshBuilderLocaleSelect() {
+            const langSelect = document.getElementById('siteLanguage');
+            if (!langSelect) {
+                return;
+            }
+
+            langSelect.innerHTML = '';
+            availableBuilderLocales.forEach((localeMeta) => {
+                const option = document.createElement('option');
+                option.value = localeMeta.code;
+                option.dataset.fallbackLabel = localeMeta.label;
+                option.textContent = t(`builder.language.${localeMeta.code}`, localeMeta.label);
+                langSelect.appendChild(option);
+            });
+
+            langSelect.value = normalizeBuilderLocale(selectedLanguage);
+        }
+
+        async function loadBuilderLocalesManifest() {
+            try {
+                const response = await fetch('./i18n/locales.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`Locales manifest fetch failed: ${response.status}`);
+                }
+
+                const payload = await response.json();
+                if (Array.isArray(payload) && payload.length > 0) {
+                    const uniqueCodes = new Set();
+                    const parsedLocales = payload
+                        .map((entry) => {
+                            const code = String(entry?.code || '')
+                                .trim()
+                                .toLowerCase()
+                                .replace(/_/g, '-');
+                            if (!code) {
+                                return null;
+                            }
+
+                            const label =
+                                typeof entry?.label === 'string' && entry.label.trim().length > 0
+                                    ? entry.label.trim()
+                                    : code.toUpperCase();
+                            const localeLanguageTag =
+                                typeof entry?.localeLanguageTag === 'string' &&
+                                entry.localeLanguageTag.trim().length > 0
+                                    ? entry.localeLanguageTag.trim()
+                                    : '';
+
+                            return { code, label, localeLanguageTag };
+                        })
+                        .filter((entry) => {
+                            if (!entry || uniqueCodes.has(entry.code)) {
+                                return false;
+                            }
+
+                            uniqueCodes.add(entry.code);
+                            return true;
+                        });
+
+                    if (parsedLocales.length > 0) {
+                        availableBuilderLocales = parsedLocales;
+                    }
+                }
+            } catch (_) {
+                availableBuilderLocales = [...DEFAULT_BUILDER_LOCALES];
+            }
+
+            if (!availableBuilderLocales.some((locale) => locale.code === FALLBACK_BUILDER_LOCALE)) {
+                const fallbackLocale =
+                    DEFAULT_BUILDER_LOCALES.find((locale) => locale.code === FALLBACK_BUILDER_LOCALE) ||
+                    {
+                        code: FALLBACK_BUILDER_LOCALE,
+                        label: 'English',
+                        localeLanguageTag: FALLBACK_LOCALE_LANGUAGE_TAG,
+                    };
+
+                availableBuilderLocales = [fallbackLocale, ...availableBuilderLocales];
+            }
+        }
+
+        function detectInitialBuilderLocale() {
+            const fromQuery = new URLSearchParams(window.location.search).get('lang');
+            const fromStorage = localStorage.getItem(BUILDER_LOCALE_STORAGE_KEY);
+            return normalizeBuilderLocale(fromQuery || fromStorage || FALLBACK_BUILDER_LOCALE);
+        }
+
+        async function loadBuilderMessages(localeCode) {
+            const normalized = normalizeBuilderLocale(localeCode);
+            try {
+                const response = await fetch(`./i18n/${normalized}.json`, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`Locale fetch failed: ${response.status}`);
+                }
+
+                builderMessages = await response.json();
+                selectedLanguage = normalized;
+            } catch (_) {
+                if (normalized !== FALLBACK_BUILDER_LOCALE) {
+                    return loadBuilderMessages(FALLBACK_BUILDER_LOCALE);
+                }
+
+                builderMessages = null;
+                selectedLanguage = FALLBACK_BUILDER_LOCALE;
+            }
+
+            localStorage.setItem(BUILDER_LOCALE_STORAGE_KEY, selectedLanguage);
+            refreshBuilderLocaleSelect();
+
+            window.BuilderI18n = {
+                t: (key, fallback, params) => t(key, fallback, params),
+            };
+        }
+
+        const localizedDefaultState = new Map();
+        const builderInitialValueState = new Map();
+
+        function shouldReplaceLocalizedValue(key, currentValue, previousDefault) {
+            const initialValue = builderInitialValueState.has(key)
+                ? builderInitialValueState.get(key)
+                : currentValue;
+
+            if (!builderInitialValueState.has(key)) {
+                builderInitialValueState.set(key, currentValue);
+            }
+
+            return (
+                currentValue === '' ||
+                /[\u00C2\u00C3\u00E2\u00F0\uFFFD]/.test(currentValue) ||
+                currentValue === initialValue ||
+                (typeof previousDefault === 'string' && currentValue === previousDefault)
+            );
+        }
+
+        function setText(selector, value) {
+            const node = document.querySelector(selector);
+            if (!node || typeof value !== 'string') return;
+            node.textContent = value;
+        }
+
+        function setHtml(selector, value) {
+            const node = document.querySelector(selector);
+            if (!node || typeof value !== 'string') return;
+            node.innerHTML = value;
+        }
+
+        function setPlaceholder(fieldId, value) {
+            const node = document.getElementById(fieldId);
+            if (!node || typeof value !== 'string') return;
+            if ('placeholder' in node) {
+                node.placeholder = value;
+            }
+        }
+
+        function getFieldRoot(fieldId) {
+            const node = document.getElementById(fieldId);
+            if (!node) return null;
+            return node.closest('.field');
+        }
+
+        function setFieldLabel(fieldId, value) {
+            const fieldRoot = getFieldRoot(fieldId);
+            const label = fieldRoot?.querySelector(':scope > label');
+            if (!label || typeof value !== 'string') return;
+            label.textContent = value;
+        }
+
+        function setFieldHint(fieldId, value, asHtml = false) {
+            const fieldRoot = getFieldRoot(fieldId);
+            const hint = fieldRoot?.querySelector(':scope > .hint');
+            if (!hint || typeof value !== 'string') return;
+            if (asHtml) {
+                hint.innerHTML = value;
+                return;
+            }
+            hint.textContent = value;
+        }
+
+        function setToggleLabel(toggleField, value) {
+            const toggle = document.querySelector(`.toggle[data-field="${toggleField}"]`);
+            const label = toggle?.closest('.toggle-row')?.querySelector('span');
+            if (!label || typeof value !== 'string') return;
+            label.textContent = value;
+        }
+
+        function setFilePickerButton(inputId, value) {
+            const button = document.querySelector(`label.file-picker-btn[for="${inputId}"]`);
+            if (!button || typeof value !== 'string') return;
+            button.textContent = value;
+        }
+
+        function setOnclickButtonText(onclickContains, value) {
+            const button = Array.from(document.querySelectorAll('button'))
+                .find((candidate) => (candidate.getAttribute('onclick') || '').includes(onclickContains));
+            if (!button || typeof value !== 'string') return;
+            button.textContent = value;
+        }
+
+        function localizeInfoItems() {
+            const items = document.querySelectorAll('#infoItems .dynamic-item');
+            items.forEach((item) => {
+                const iconLabel = item.querySelector('.infoIcon')?.closest('.field')?.querySelector(':scope > label');
+                const titleLabel = item.querySelector('.infoTitle')?.closest('.field')?.querySelector(':scope > label');
+                const descLabel = item.querySelector('.infoDesc')?.closest('.field')?.querySelector(':scope > label');
+                const removeButton = item.querySelector('.btn-remove');
+                const hintAnchor = item.querySelector('.infoIcon')?.closest('.field')?.querySelector('.hint a');
+
+                if (iconLabel) iconLabel.textContent = t('builder.fields.infoIcon', 'Icon');
+                if (titleLabel) titleLabel.textContent = t('builder.fields.infoTitle', 'Title');
+                if (descLabel) descLabel.textContent = t('builder.fields.infoDescription', 'Description');
+                if (removeButton) removeButton.textContent = t('builder.labels.remove', 'Remove');
+                if (hintAnchor) hintAnchor.textContent = t('builder.labels.viewIcons', 'View icons');
+            });
+        }
+
+        function applyInstructionCopy() {
+            setText('.instructions h3', t('builder.instructions.title', 'Instructions to publish your invitation'));
+
+            const items = document.querySelectorAll('.instructions > ol > li');
+            if (items[0]) {
+                items[0].innerHTML = t(
+                    'builder.instructions.item1',
+                    'If you still do not have a repo, go to the <a href="https://github.com/LucioB16/Altare" target="_blank">template repository</a> and click <strong>"Use this template"</strong> -> <strong>"Create a new repository"</strong>.'
+                );
+            }
+            if (items[1]) {
+                items[1].innerHTML = t(
+                    'builder.instructions.item2',
+                    'In your new repo, open <strong>Settings -> Pages</strong> and choose <strong>"GitHub Actions"</strong> as source.'
+                );
+            }
+            if (items[2]) {
+                items[2].innerHTML = t(
+                    'builder.instructions.item3',
+                    'Open <code>src/data/</code> -> click <code>wedding.yml</code> -> click the <strong>pencil</strong> -> select all -> paste your YAML -> <strong>"Commit changes"</strong>.'
+                );
+            }
+            if (items[3]) {
+                items[3].innerHTML = t(
+                    'builder.instructions.item4',
+                    '<strong>Upload your photos</strong> to the matching folders in GitHub:<ul style="margin-top:0.5rem; list-style: disc; padding-left:1.2rem;"><li><strong>Hero image:</strong> upload to <code>public/media/hero/</code></li><li><strong>Story photos:</strong> upload to <code>public/media/couple/</code></li><li><strong>Social share image:</strong> upload to <code>public/media/og/</code></li></ul>'
+                );
+            }
+            if (items[4]) {
+                items[4].innerHTML = t(
+                    'builder.instructions.item5',
+                    'Done! GitHub Actions will build and publish your site in a few minutes at <code>https://YOUR_USER.github.io/YOUR_REPO/</code>.'
+                );
+            }
+        }
+
+        function applyBuilderCopy() {
+            document.documentElement.lang = selectedLanguage;
+
+            setText('.header h1', t('builder.header.title', 'Wedding Config Builder'));
+            setText('.header p', t('builder.header.subtitle', 'Configure your wedding invitation in minutes'));
+
+            setText('#siteLanguageLabel', t('builder.language.label', 'Site language'));
+            setHtml('#siteLanguageHint', t('builder.language.hint', 'This language is saved in <code>site.language</code> and defines the final site language.'));
+
+            refreshBuilderLocaleSelect();
+
+            const stepIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            stepIndexes.forEach((stepIndex) => {
+                const step = document.querySelector(`.step[data-step="${stepIndex}"]`);
+                if (!step) return;
+
+                const label = step.querySelector(':scope > .step-label');
+                const title = step.querySelector(':scope > h2');
+                const desc = step.querySelector(':scope > .desc');
+
+                if (label) label.textContent = t(`builder.steps.${stepIndex + 1}.label`, label.textContent || '');
+                if (title) title.textContent = t(`builder.steps.${stepIndex + 1}.title`, title.textContent || '');
+                if (desc) desc.textContent = t(`builder.steps.${stepIndex + 1}.desc`, desc.textContent || '');
+            });
+
+            const step1ThemeLabel = document.querySelector('.step[data-step="0"] p.step-label[style]');
+            const step1ThemeDesc = document.querySelector('.step[data-step="0"] p.desc[style]');
+            if (step1ThemeLabel) step1ThemeLabel.textContent = t('builder.labels.themeVisual', 'Visual theme');
+            if (step1ThemeDesc) step1ThemeDesc.textContent = t('builder.labels.themeVisualDesc', 'Choose your invitation visual style. It only changes colors, fonts and ornaments.');
+
+            setFieldLabel('p1Name', t('builder.fields.person1Name', 'Person 1 name'));
+            setFieldLabel('p2Name', t('builder.fields.person2Name', 'Person 2 name'));
+            setFieldLabel('displayName', t('builder.fields.displayName', 'Display name'));
+            setPlaceholder('p1Name', t('builder.placeholders.person1Name', 'Example: Maria'));
+            setPlaceholder('p2Name', t('builder.placeholders.person2Name', 'Example: Juan'));
+            setPlaceholder('displayName', t('builder.placeholders.displayName', 'Example: Maria & Juan'));
+            setFieldHint('displayName', t('builder.hints.displayName', 'This will appear in the hero section and footer.'));
+
+            setFieldLabel('heroTitle', t('builder.fields.heroTitle', 'Title'));
+            setFieldLabel('heroSubtitle', t('builder.fields.heroSubtitle', 'Subtitle (names)'));
+            setFieldLabel('heroDate', t('builder.fields.heroDate', 'Display date (free text)'));
+            setFieldLabel('heroCity', t('builder.fields.heroCity', 'City'));
+            setFieldLabel('heroBgFile', t('builder.fields.heroBackgroundImage', 'Background image'));
+            setFilePickerButton('heroBgFile', t('builder.labels.selectImage', 'Select image'));
+            setFieldHint('heroBgFile', t('builder.hints.heroBackgroundImage', 'Upload this file to <code>public/media/hero/</code> in your repository.'), true);
+            setPlaceholder('heroDate', t('builder.placeholders.heroDate', 'Example: March 15, 2026'));
+            setText('.hero-mock-header span', t('builder.labels.previewHero', 'Hero preview'));
+
+            setFieldLabel('eventTimezone', t('builder.fields.eventTimezone', 'Event timezone'));
+            setFieldHint('eventTimezone', t('builder.hints.eventTimezone', 'One option per UTC offset with a representative city.'));
+            setToggleLabel('religiousEnabled', t('builder.toggles.religiousEvent', 'Religious ceremony'));
+            setToggleLabel('ceremonyEnabled', t('builder.toggles.civilEvent', 'Civil ceremony'));
+            setToggleLabel('celebrationEnabled', t('builder.toggles.partyEvent', 'Party / Celebration'));
+            setFieldLabel('religiousLabel', t('builder.fields.eventType', 'Type'));
+            setFieldLabel('religiousDate', t('builder.fields.eventDate', 'Date'));
+            setFieldLabel('religiousTime', t('builder.fields.eventTime', 'Time'));
+            setFieldLabel('religiousVenue', t('builder.fields.eventVenueName', 'Venue name'));
+            setFieldLabel('religiousAddress', t('builder.fields.eventAddressLines', 'Address (one line per row)'));
+            setFieldLabel('religiousMaps', t('builder.fields.eventMapsUrl', 'Google Maps URL'));
+            setFieldLabel('ceremonyLabel', t('builder.fields.eventType', 'Type'));
+            setFieldLabel('ceremonyDate', t('builder.fields.eventDate', 'Date'));
+            setFieldLabel('ceremonyTime', t('builder.fields.eventTime', 'Time'));
+            setFieldLabel('ceremonyVenue', t('builder.fields.eventVenueName', 'Venue name'));
+            setFieldLabel('ceremonyAddress', t('builder.fields.eventAddressLines', 'Address (one line per row)'));
+            setFieldLabel('ceremonyMaps', t('builder.fields.eventMapsUrl', 'Google Maps URL'));
+            setFieldLabel('celebrationLabel', t('builder.fields.eventTypeParty', 'Event type'));
+            setFieldLabel('celebrationDate', t('builder.fields.eventDate', 'Date'));
+            setFieldLabel('celebrationTime', t('builder.fields.eventTime', 'Time'));
+            setFieldLabel('celebrationVenue', t('builder.fields.eventVenueName', 'Venue name'));
+            setFieldLabel('celebrationAddress', t('builder.fields.eventAddress', 'Address'));
+            setFieldLabel('celebrationMaps', t('builder.fields.eventMapsUrl', 'Google Maps URL'));
+            setHtml('.step[data-step="2"] > .hint[style*="margin-top:1rem"]', t('builder.hints.eventsEnabled', 'You must enable at least one event to continue. Calendar links will include 1, 2 or 3 events based on your selection.'));
+
+            setToggleLabel('storyEnabled', t('builder.toggles.showSection', 'Show section'));
+            setFieldLabel('storySubheading', t('builder.fields.storySubheading', 'Subheading'));
+            setFieldLabel('storyHeading', t('builder.fields.storyHeading', 'Title'));
+            setFieldLabel('storySentence', t('builder.fields.storyText', 'Text'));
+            const storyPhotosLabel = document.querySelector('.step[data-step="3"] #storyFields p.step-label[style]');
+            const storyPhotosHint = document.querySelector('.step[data-step="3"] #storyFields p.hint[style]');
+            if (storyPhotosLabel) storyPhotosLabel.textContent = t('builder.labels.storyPhotosTitle', 'Photos (1-4)');
+            if (storyPhotosHint) storyPhotosHint.innerHTML = t('builder.hints.storyPhotos', 'The first photo is required. Select your files to define names, then upload them to <code>public/media/couple/</code> using those same names.');
+            setFilePickerButton('photoFile01', t('builder.labels.selectPhoto', 'Select photo'));
+            setOnclickButtonText('addPhoto', t('builder.labels.photoAdd', '+ Add photo'));
+            setText('.story-mock-header span', t('builder.labels.previewLive', 'Live preview'));
+
+            setToggleLabel('giftsEnabled', t('builder.toggles.showGiftsSection', 'Show Gifts section'));
+            setToggleLabel('bankEnabled', t('builder.toggles.showBankData', 'Show bank details'));
+            setToggleLabel('dressCodeEnabled', t('builder.toggles.showDressCodeSection', 'Show Dress Code section'));
+            setToggleLabel('brideDisclaimerEnabled', t('builder.toggles.showBrideDisclaimer', 'Show bride color notice'));
+            setFieldLabel('giftsHeading', t('builder.fields.giftsTitle', 'Title'));
+            setFieldLabel('giftsBody', t('builder.fields.giftsText', 'Text'));
+            setFieldLabel('giftsButtonLabel', t('builder.fields.giftsButtonText', 'Button text'));
+            setFieldLabel('bankHolder', t('builder.fields.bankHolder', 'Account holder'));
+            setFieldLabel('bankName', t('builder.fields.bankName', 'Bank'));
+            setFieldLabel('bankAlias', t('builder.fields.bankAlias', 'Alias'));
+            setFieldLabel('bankCbu', t('builder.fields.bankCbu', 'CBU/CVU'));
+            setFieldLabel('bankCuit', t('builder.fields.bankCuit', 'Tax ID'));
+            setFieldLabel('dcTitle', t('builder.fields.dressCodeTitle', 'Title'));
+            setFieldLabel('dcTag', t('builder.fields.dressCodeTag', 'Tag'));
+            setFieldLabel('dcBody', t('builder.fields.dressCodeText', 'Text'));
+            setFieldLabel('brideDisclaimerText', t('builder.fields.brideDisclaimerText', 'Notice text'));
+
+            setToggleLabel('rsvpEnabled', t('builder.toggles.showRsvpSection', 'Show section'));
+            setToggleLabel('rsvpLinkEnabled', t('builder.toggles.showRsvpLink', 'Show confirmation link button'));
+            setFieldLabel('rsvpText', t('builder.fields.rsvpText', 'Text'));
+            setFieldLabel('rsvpDeadline', t('builder.fields.rsvpDeadline', 'Deadline'));
+            setFieldLabel('rsvpUrl', t('builder.fields.rsvpUrl', 'Link URL'));
+            setFieldLabel('rsvpLabel', t('builder.fields.rsvpButtonText', 'Button text'));
+            setPlaceholder('rsvpUrl', t('builder.placeholders.rsvpUrl', 'Form URL or WhatsApp link'));
+
+            setToggleLabel('socialsEnabled', t('builder.toggles.showSocialsSection', 'Show Social Media section'));
+            setToggleLabel('playlistEnabled', t('builder.toggles.showPlaylistSection', 'Show Playlist section'));
+            setToggleLabel('usefulInfoEnabled', t('builder.toggles.showUsefulInfoSection', 'Show Useful Info section'));
+            setFieldLabel('socialsBody', t('builder.fields.socialsText', 'Social media text'));
+            setFieldLabel('socialUrl', t('builder.fields.socialsInstagramUrl', 'Instagram URL'));
+            setFieldLabel('socialHandle', t('builder.fields.socialsHandle', 'Handle'));
+            setPlaceholder('socialHandle', t('builder.placeholders.socialHandle', 'Example: @mywedding'));
+            setFieldLabel('playlistHeading', t('builder.fields.playlistTitle', 'Playlist title'));
+            setFieldLabel('playlistBody', t('builder.fields.playlistText', 'Playlist text'));
+            setFieldLabel('playlistUrl', t('builder.fields.playlistUrl', 'Spotify playlist URL'));
+
+            const usefulInfoCardsLabel = document.querySelector('.step[data-step="6"] #usefulInfoFields p.step-label[style]');
+            const usefulInfoCardsDesc = document.querySelector('.step[data-step="6"] #usefulInfoFields p.desc[style]');
+            if (usefulInfoCardsLabel) usefulInfoCardsLabel.textContent = t('builder.labels.usefulInfoCardsTitle', 'Useful Info cards');
+            if (usefulInfoCardsDesc) usefulInfoCardsDesc.innerHTML = t('builder.hints.usefulInfoCards', 'Search icons in <a href="https://icon-sets.iconify.design/lucide/" target="_blank" style="color:var(--primary); font-weight:600;">Lucide Icons</a> and use names like <code>lucide:camera</code>.');
+            setOnclickButtonText('addInfoItem', t('builder.labels.cardAdd', '+ Add card'));
+            localizeInfoItems();
+
+            setFieldLabel('pageTitle', t('builder.fields.pageTitle', 'Link title'));
+            setFieldHint('pageTitle', t('builder.hints.pageTitle', 'This is also the browser tab title.'));
+            setFieldLabel('metaDesc', t('builder.fields.pageDescription', 'Short description'));
+            setFieldLabel('ogFile', t('builder.fields.ogImage', 'Social share image'));
+            setFilePickerButton('ogFile', t('builder.labels.selectImage', 'Select image'));
+            setFieldHint('ogFile', t('builder.hints.ogImage', 'Upload this file to <code>public/media/og/</code>. Recommended size: 1200x630.'), true);
+            setText('#ogMockDomain', t('builder.labels.ogDomainSample', 'youruser.github.io/your-repo'));
+
+            setText('#btnPrev', t('builder.buttons.prev', 'Previous'));
+            setText('#btnNext', t('builder.buttons.next', 'Next'));
+            setText('.btn-download', t('builder.buttons.download', 'Download wedding.yml'));
+            setText('.btn-copy', t('builder.buttons.copy', 'Copy to clipboard'));
+            applyInstructionCopy();
+
+            if (window.ThemeRuntime?.refreshUi) {
+                window.ThemeRuntime.refreshUi();
+            }
+        }
+
+        function applyLocalizedDefaults() {
+            const fields = [
+                ['pageTitle', contentDefault('site.pageTitle', 'Our Wedding | Julieta & Lucio')],
+                ['metaDesc', contentDefault('site.metaDescription', 'You are invited to celebrate this special moment with us.')],
+                ['heroTitle', contentDefault('hero.title', "We're getting married!")],
+                ['heroDate', contentDefault('hero.dateDisplay', 'June 21, 2026')],
+                ['heroCity', contentDefault('hero.city', 'Cordoba, Argentina')],
+                ['religiousLabel', contentDefault('events.religiousLabel', 'Religious Ceremony')],
+                ['religiousVenue', contentDefault('events.religiousVenue', 'Sacred Heart Parish')],
+                ['religiousAddress', contentDefault('events.religiousAddress', 'Av. Hipolito Yrigoyen 100\nCordoba Capital')],
+                ['ceremonyLabel', contentDefault('events.ceremonyLabel', 'Civil Ceremony')],
+                ['ceremonyVenue', contentDefault('events.ceremonyVenue', 'Central Civil Registry')],
+                ['ceremonyAddress', contentDefault('events.ceremonyAddress', 'Chacabuco 737\nNueva Cordoba')],
+                ['celebrationLabel', contentDefault('events.celebrationLabel', 'Party')],
+                ['celebrationVenue', contentDefault('events.celebrationVenue', 'Estancia La Paz')],
+                ['celebrationAddress', contentDefault('events.celebrationAddress', 'Ruta E66 Km 41\nAscochinga, Cordoba')],
+                ['storySubheading', contentDefault('story.subheading', 'Us')],
+                ['storyHeading', contentDefault('story.heading', 'Our story')],
+                ['storySentence', contentDefault('story.sentence', 'Tell your story here.')],
+                ['giftsHeading', contentDefault('gifts.heading', 'Gifts')],
+                ['giftsBody', contentDefault('gifts.body', 'Your presence is the most important thing, but if you want to give us a gift you can help us with our honeymoon.')],
+                ['giftsButtonLabel', contentDefault('gifts.buttonLabel', 'View bank details')],
+                ['dcTitle', contentDefault('dressCode.title', 'Dress Code')],
+                ['dcTag', contentDefault('dressCode.tag', 'Formal - Elegant')],
+                ['dcBody', contentDefault('dressCode.body', 'We are waiting for your best look to celebrate together.')],
+                ['brideDisclaimerText', contentDefault('dressCode.brideDisclaimer', 'By tradition, white or similar shades are reserved for the bride.')],
+                ['rsvpText', contentDefault('rsvp.text', 'Please confirm your attendance before May 1.')],
+                ['rsvpLabel', contentDefault('rsvp.buttonLabel', 'CONFIRM ATTENDANCE')],
+                ['socialsBody', contentDefault('socials.body', 'Before the wedding, you will receive a link to upload all your photos and videos.')],
+                ['playlistHeading', contentDefault('playlist.heading', "Let\'s build the playlist together")],
+                ['playlistBody', contentDefault('playlist.body', 'Add those songs that cannot be missing from the party.')],
+            ];
+
+            fields.forEach(([id, value]) => {
+                const input = document.getElementById(id);
+                if (!input || !('value' in input) || typeof value !== 'string') return;
+
+                const previousDefault = localizedDefaultState.get(id);
+                const currentValue = input.value;
+                const shouldReplace = shouldReplaceLocalizedValue(id, currentValue, previousDefault);
+
+                if (shouldReplace) {
+                    input.value = value;
+                }
+
+                localizedDefaultState.set(id, value);
+            });
+
+            const usefulInfoItems = contentDefault('usefulInfo.items', []);
+            if (Array.isArray(usefulInfoItems)) {
+                document.querySelectorAll('#infoItems .dynamic-item').forEach((item, index) => {
+                    const localizedItem = usefulInfoItems[index];
+                    if (!localizedItem || typeof localizedItem !== 'object') return;
+
+                    const titleInput = item.querySelector('.infoTitle');
+                    const descInput = item.querySelector('.infoDesc');
+
+                    if (titleInput && 'value' in titleInput && typeof localizedItem.title === 'string') {
+                        const currentValue = titleInput.value;
+                        const key = `infoTitle:${index}`;
+                        const previousDefault = localizedDefaultState.get(key);
+                        const shouldReplace = shouldReplaceLocalizedValue(key, currentValue, previousDefault);
+
+                        if (shouldReplace) {
+                            titleInput.value = localizedItem.title;
+                        }
+
+                        localizedDefaultState.set(key, localizedItem.title);
+                    }
+
+                    if (descInput && 'value' in descInput && typeof localizedItem.description === 'string') {
+                        const currentValue = descInput.value;
+                        const key = `infoDesc:${index}`;
+                        const previousDefault = localizedDefaultState.get(key);
+                        const shouldReplace = shouldReplaceLocalizedValue(key, currentValue, previousDefault);
+
+                        if (shouldReplace) {
+                            descInput.value = localizedItem.description;
+                        }
+
+                        localizedDefaultState.set(key, localizedItem.description);
+                    }
+                });
+            }
+        }
+
+        async function initializeBuilderLocale() {
+            await loadBuilderLocalesManifest();
+            await loadBuilderMessages(detectInitialBuilderLocale());
+            applyBuilderCopy();
+            applyLocalizedDefaults();
+        }
+
+        function onBuilderLanguageChange(nextLocale) {
+            const normalized = normalizeBuilderLocale(nextLocale);
+            if (normalized === selectedLanguage) {
+                return;
+            }
+
+            loadBuilderMessages(normalized).then(() => {
+                applyBuilderCopy();
+                applyLocalizedDefaults();
+                initTimeZonePicker();
+                updateHeroPreview();
+                updateStoryPreview();
+                updateOgPreview();
+                generateYaml();
+            });
+        }
+
+        window.onBuilderLanguageChange = onBuilderLanguageChange;
 
         async function initThemePicker() {
             if (!window.ThemeRuntime) {
@@ -1551,7 +2151,7 @@ Ascochinga, Córdoba</textarea></div>
 
         function validateEventsSelection() {
             if (getEnabledEventCount() > 0) return true;
-            alert('Tenés que habilitar al menos un evento (religiosa, civil o fiesta) para continuar.');
+            alert(t('builder.alerts.enableOneEvent', 'You must enable at least one event (religious, civil or party) to continue.'));
             return false;
         }
 
@@ -1623,13 +2223,13 @@ Ascochinga, Córdoba</textarea></div>
         // File picker helpers
         function onFileSelected(input, displayId) {
             const name = input.files[0]?.name || '';
-            document.getElementById(displayId).textContent = name || 'Ningún archivo';
+            document.getElementById(displayId).textContent = name || t('builder.files.none', 'No file');
         }
 
         function onPhotoSelected(input) {
             const name = input.files[0]?.name || '';
             const nameEl = input.parentElement.querySelector('.photoFileName');
-            if (nameEl) nameEl.textContent = name || 'Sin archivo';
+            if (nameEl) nameEl.textContent = name || t('builder.files.nonePhoto', 'No file');
         }
 
         // Robust file-picker trigger: some browsers fail with hidden file inputs + label(for).
@@ -1668,13 +2268,17 @@ Ascochinga, Córdoba</textarea></div>
         }
 
         function addPhoto() {
-            if (document.querySelectorAll('#photoItems .dynamic-item').length >= 4) return alert('Máximo 4 fotos.');
+            if (document.querySelectorAll('#photoItems .dynamic-item').length >= 4) {
+                alert(t('builder.alerts.maxPhotos', 'Maximum 4 photos.'));
+                return;
+            }
+
             const item = document.createElement('div');
             item.className = 'dynamic-item';
             item.innerHTML = `
-        <button class="btn-remove" onclick="this.parentElement.remove(); reindexPhotos();">✕ Quitar</button>
+        <button class="btn-remove" onclick="this.parentElement.remove(); reindexPhotos();">${t('builder.labels.remove', 'Remove')}</button>
         <div class="file-picker">
-          <label class="file-picker-btn" for="temp">Seleccionar foto</label>
+          <label class="file-picker-btn" for="temp">${t('builder.labels.selectPhoto', 'Select photo')}</label>
           <input type="file" id="temp" accept="image/*" onchange="onPhotoSelected(this); updateStoryPreview();" style="display:none">
           <span class="file-picker-name photoFileName">temp.jpg</span>
         </div>`;
@@ -1682,19 +2286,22 @@ Ascochinga, Córdoba</textarea></div>
             reindexPhotos();
         }
 
+
         function addInfoItem() {
             const list = document.getElementById('infoItems');
             const item = document.createElement('div');
             item.className = 'dynamic-item';
             item.innerHTML = `
-        <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
+        <button class="btn-remove" onclick="this.parentElement.remove();">${t('builder.labels.remove', 'Remove')}</button>
         <div class="row">
-          <div class="field"><label>Ícono</label><input type="text" class="infoIcon" value="lucide:info"></div>
-          <div class="field"><label>Título</label><input type="text" class="infoTitle" value=""></div>
+          <div class="field"><label>${t('builder.fields.infoIcon', 'Icon')}</label><input type="text" class="infoIcon" value="lucide:info"></div>
+          <div class="field"><label>${t('builder.fields.infoTitle', 'Title')}</label><input type="text" class="infoTitle" value=""></div>
         </div>
-        <div class="field"><label>Descripción</label><input type="text" class="infoDesc" value=""></div>`;
+        <div class="field"><label>${t('builder.fields.infoDescription', 'Description')}</label><input type="text" class="infoDesc" value=""></div>`;
             list.appendChild(item);
+            localizeInfoItems();
         }
+
 
         function esc(s) { return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`; }
 
@@ -1736,7 +2343,7 @@ Ascochinga, Córdoba</textarea></div>
         }
 
         function formatZoneReference(zone) {
-            if (!zone || zone === 'UTC') return 'Tiempo Universal';
+            if (!zone || zone === 'UTC') return t('builder.timezone.universal', 'Universal Time');
 
             const parts = zone.split('/');
             if (parts.length >= 3) {
@@ -1773,7 +2380,7 @@ Ascochinga, Córdoba</textarea></div>
             const select = document.getElementById('eventTimezone');
             if (!select) return;
 
-            const configuredDefaultTz = select.dataset.defaultTz || 'America/Buenos_Aires';
+            const configuredDefaultTz = select.value || select.dataset.defaultTz || 'America/Buenos_Aires';
             const year = new Date().getUTCFullYear();
             const referenceDates = [
                 new Date(Date.UTC(year, 0, 15, 12, 0, 0)),
@@ -1827,45 +2434,7 @@ Ascochinga, Córdoba</textarea></div>
                 [780, 'Pacific/Tongatapu'],
                 [840, 'Pacific/Kiritimati'],
             ]);
-            const offsetReferences = new Map([
-                [-660, 'Pacífico Sur (Samoa)'],
-                [-600, 'US/Canada Hawai-Aleutian (Honolulu)'],
-                [-570, 'Polinesia Francesa (Marquesas)'],
-                [-540, 'US/Canada Alaska (Anchorage)'],
-                [-480, 'US/Canada Pacific (Los Ángeles/Vancouver)'],
-                [-420, 'US/Canada Mountain (Denver/Calgary)'],
-                [-360, 'US/Canada Central (Chicago/Winnipeg)'],
-                [-300, 'US/Canada Eastern (Nueva York/Toronto)'],
-                [-240, 'Sudamérica Norte (Caracas/La Paz)'],
-                [-210, 'Canadá Atlantic (Terranova)'],
-                [-180, 'Argentina/Uruguay (Buenos Aires/Montevideo)'],
-                [-120, 'Brasil (Noronha)'],
-                [-60, 'Atlántico (Azores)'],
-                [0, 'Europa Occidental (Londres/Lisboa)'],
-                [60, 'Europa Central (Madrid/París/Berlín)'],
-                [120, 'Europa Oriental (Atenas/Bucarest)'],
-                [180, 'Europa Oriental+ / Turquía (Estambul)'],
-                [210, 'Irán (Teherán)'],
-                [240, 'EAU (Dubái)'],
-                [270, 'Afganistán (Kabul)'],
-                [300, 'Pakistán (Karachi)'],
-                [330, 'India (Nueva Delhi)'],
-                [345, 'Nepal (Katmandú)'],
-                [360, 'Bangladés (Daca)'],
-                [390, 'Myanmar (Yangón)'],
-                [420, 'Tailandia (Bangkok)'],
-                [480, 'China (Shanghái)'],
-                [525, 'Australia (Eucla)'],
-                [540, 'Japón (Tokio)'],
-                [570, 'Australia (Darwin)'],
-                [600, 'Australia (Sídney)'],
-                [630, 'Australia (Lord Howe)'],
-                [660, 'Islas Salomón'],
-                [720, 'Nueva Zelanda (Auckland)'],
-                [765, 'Nueva Zelanda (Chatham)'],
-                [780, 'Tonga'],
-                [840, 'Kiribati (Kiritimati)'],
-            ]);
+            const offsetReferences = new Map();
 
             const pushOffset = (zone, date) => {
                 try {
@@ -1896,7 +2465,7 @@ Ascochinga, Córdoba</textarea></div>
                 const reference = offsetReferences.get(offset) || formatZoneReference(representativeZone);
 
                 option.value = representativeZone;
-                option.textContent = `UTC${formatOffset(offset)} — ${reference}`;
+                option.textContent = t('builder.timezone.utcLabel', 'UTC{{offset}} - {{reference}}', { offset: formatOffset(offset), reference });
                 option.title = representativeZone;
                 optionZoneByOffset.set(offset, representativeZone);
                 select.appendChild(option);
@@ -1946,12 +2515,22 @@ Ascochinga, Córdoba</textarea></div>
         }
 
         function buildTimeDisplay(timeId) {
-            return v(timeId) ? v(timeId).replace(/^0/, '') + ' hs' : '';
+            const rawTime = v(timeId);
+            if (!rawTime) {
+                return '';
+            }
+
+            const formattedTime = selectedLanguage === 'es' ? rawTime.replace(/^0/, '') : rawTime;
+            const localizedSuffix = t('builder.time.timeSuffix', selectedLanguage === 'es' ? ' hs' : '');
+
+            return `${formattedTime}${localizedSuffix}`;
         }
 
         function updateOgPreview() {
-            document.getElementById('ogMockTitle').textContent = v('pageTitle') || 'Título de la invitación';
-            document.getElementById('ogMockDesc').textContent = v('metaDesc') || 'Descripción de la invitación';
+            const pageTitle = v('pageTitle') || contentDefault('site.pageTitle', 'Our Wedding | Julieta & Lucio');
+            const pageDescription = v('metaDesc') || contentDefault('site.metaDescription', 'You are invited to celebrate this special moment with us.');
+            document.getElementById('ogMockTitle').textContent = pageTitle;
+            document.getElementById('ogMockDesc').textContent = pageDescription;
 
             const fileInput = document.getElementById('ogFile');
             const mockImg = document.getElementById('ogMockImg');
@@ -1964,15 +2543,16 @@ Ascochinga, Córdoba</textarea></div>
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 mockImg.style.backgroundImage = 'none';
-                mockImg.textContent = 'Elegí una foto arriba 👆';
+                mockImg.textContent = t('builder.previews.ogImageFallback', 'Choose a photo above');
             }
         }
 
+
         function updateHeroPreview() {
-            document.getElementById('heroMockTitle').textContent = v('heroTitle') || 'Título';
-            document.getElementById('heroMockSubtitle').textContent = v('heroSubtitle') || 'Nombre de la pareja';
-            document.getElementById('heroMockDate').textContent = v('heroDate') || 'Fecha';
-            document.getElementById('heroMockCity').textContent = v('heroCity') || 'Ciudad';
+            document.getElementById('heroMockTitle').textContent = v('heroTitle') || t('builder.previews.heroTitleFallback', 'Title');
+            document.getElementById('heroMockSubtitle').textContent = v('heroSubtitle') || t('builder.previews.heroSubtitleFallback', 'Couple name');
+            document.getElementById('heroMockDate').textContent = v('heroDate') || t('builder.previews.heroDateFallback', 'Date');
+            document.getElementById('heroMockCity').textContent = v('heroCity') || t('builder.previews.heroCityFallback', 'City');
 
             const fileInput = document.getElementById('heroBgFile');
             const mockScreen = document.getElementById('heroMockScreen');
@@ -1992,10 +2572,11 @@ Ascochinga, Córdoba</textarea></div>
             }
         }
 
+
         function updateStoryPreview() {
-            document.getElementById('storyMockSubheading').textContent = v('storySubheading') || 'Subtítulo';
-            document.getElementById('storyMockHeading').textContent = v('storyHeading') || 'Título';
-            document.getElementById('storyMockText').textContent = v('storySentence') || 'Texto descriptivo...';
+            document.getElementById('storyMockSubheading').textContent = v('storySubheading') || t('builder.previews.storySubheadingFallback', 'Subheading');
+            document.getElementById('storyMockHeading').textContent = v('storyHeading') || t('builder.previews.storyHeadingFallback', 'Title');
+            document.getElementById('storyMockText').textContent = v('storySentence') || t('builder.previews.storyTextFallback', 'Descriptive text...');
 
             const gallery = document.getElementById('storyMockGallery');
             gallery.innerHTML = '';
@@ -2024,22 +2605,37 @@ Ascochinga, Córdoba</textarea></div>
             });
         }
 
+
         function generateYaml() {
-            const tz = v('eventTimezone');
+            const tz = v('eventTimezone') || 'UTC';
             const themeId = window.ThemeRuntime?.getSelectedThemeId?.() || selectedThemeId || 'jardin-clasico';
             const photoEls = document.querySelectorAll('#photoItems .dynamic-item');
             const infoItems = document.getElementById('infoItems').querySelectorAll('.dynamic-item');
+            const siteLanguage = normalizeBuilderLocale(selectedLanguage);
+            const localeLanguageTag = getLocaleLanguageTagForBuilderLocale(siteLanguage);
+            const noFileLabel = t('builder.files.none', 'No file');
+            const noPhotoLabel = t('builder.files.nonePhoto', 'No file');
+
+            const valueOrDefault = (fieldId, contentPath, fallback = '') => {
+                const current = v(fieldId);
+                if (current) {
+                    return current;
+                }
+                return contentDefault(contentPath, fallback);
+            };
 
             let y = '';
 
             const ogFileNameDisplay = document.getElementById('ogFileName').textContent?.trim();
-            const ogFileName = (!ogFileNameDisplay || ogFileNameDisplay === 'Ningún archivo')
+            const ogFileName = (!ogFileNameDisplay || ogFileNameDisplay === noFileLabel)
                 ? 'og.jpg'
                 : ogFileNameDisplay;
+
             y += `site:\n`;
-            y += `  pageTitle: ${esc(v('pageTitle'))}\n`;
+            y += `  language: "${siteLanguage}"\n`;
+            y += `  pageTitle: ${esc(valueOrDefault('pageTitle', 'site.pageTitle', 'Our Wedding | Julieta & Lucio'))}\n`;
             y += `  meta:\n`;
-            y += `    description: ${esc(v('metaDesc'))}\n`;
+            y += `    description: ${esc(valueOrDefault('metaDesc', 'site.metaDescription', 'You are invited to celebrate this special moment with us.'))}\n`;
             y += `    ogImage: "/media/og/${ogFileName}"\n\n`;
 
             y += `couple:\n`;
@@ -2047,7 +2643,7 @@ Ascochinga, Córdoba</textarea></div>
             y += `  person2:\n    name: ${esc(v('p2Name'))}\n`;
             y += `  displayName: ${esc(v('displayName'))}\n\n`;
 
-            y += `locale:\n  language: "es-AR"\n  timeZone: "${tz}"\n\n`;
+            y += `locale:\n  language: "${localeLanguageTag}"\n  timeZone: "${tz}"\n\n`;
             y += `theme:\n  id: "${themeId}"\n\n`;
 
             y += `sections:\n`;
@@ -2065,63 +2661,68 @@ Ascochinga, Córdoba</textarea></div>
 
             y += `hero:\n`;
             y += `  enabled: true\n`;
-            y += `  title: ${esc(v('heroTitle'))}\n`;
+            y += `  title: ${esc(valueOrDefault('heroTitle', 'hero.title', "We're getting married!"))}\n`;
             y += `  subtitle: ${esc(v('heroSubtitle'))}\n`;
-            y += `  dateDisplay: ${esc(v('heroDate'))}\n`;
-            y += `  city: ${esc(v('heroCity'))}\n`;
+            y += `  dateDisplay: ${esc(valueOrDefault('heroDate', 'hero.dateDisplay', 'June 21, 2026'))}\n`;
+            y += `  city: ${esc(valueOrDefault('heroCity', 'hero.city', 'Cordoba, Argentina'))}\n`;
 
-            const heroFileName = document.getElementById('heroBgName').textContent === 'Ningún archivo' ? 'bg.jpg' : document.getElementById('heroBgName').textContent;
+            const heroFileNameDisplay = document.getElementById('heroBgName').textContent?.trim();
+            const heroFileName = (!heroFileNameDisplay || heroFileNameDisplay === noFileLabel)
+                ? 'bg.jpg'
+                : heroFileNameDisplay;
             y += `  backgroundImage: "/media/hero/${heroFileName}"\n\n`;
 
             y += `countdown:\n`;
             y += `  target: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
-            y += `  heading: "Cuenta regresiva"\n`;
-            y += `  note: "¡Falta muy poco!"\n`;
+            y += `  heading: ${esc(contentDefault('countdown.heading', 'Countdown'))}\n`;
+            y += `  note: ${esc(contentDefault('countdown.note', 'We are almost there!'))}\n`;
             y += `  targetSource: "celebration"\n\n`;
 
             y += `events:\n`;
 
-            // Religious ceremony
             y += `  religiousCeremony:\n`;
             y += `    enabled: ${toggleState.religiousEnabled}\n`;
-            y += `    kindLabel: ${esc(v('religiousLabel') || 'Ceremonia Religiosa')}\n`;
+            y += `    kindLabel: ${esc(valueOrDefault('religiousLabel', 'events.religiousLabel', 'Religious Ceremony'))}\n`;
             y += `    datetime: "${buildDatetime('religiousDate', 'religiousTime')}"\n`;
             y += `    timeDisplay: "${buildTimeDisplay('religiousTime')}"\n`;
             y += `    venueName: ${esc(v('religiousVenue'))}\n`;
             y += `    addressLines:\n`;
-            (v('religiousAddress') || '').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            (v('religiousAddress') || '').split('\n').filter((line) => line.trim()).forEach((line) => {
+                y += `      - ${esc(line.trim())}\n`;
+            });
             y += `    mapsUrl: "${v('religiousMaps')}"\n`;
 
-            // Civil ceremony
             y += `  ceremony:\n`;
             y += `    enabled: ${toggleState.ceremonyEnabled}\n`;
-            y += `    kindLabel: ${esc(v('ceremonyLabel'))}\n`;
+            y += `    kindLabel: ${esc(valueOrDefault('ceremonyLabel', 'events.ceremonyLabel', 'Civil Ceremony'))}\n`;
             y += `    datetime: "${buildDatetime('ceremonyDate', 'ceremonyTime')}"\n`;
             y += `    timeDisplay: "${buildTimeDisplay('ceremonyTime')}"\n`;
             y += `    venueName: ${esc(v('ceremonyVenue'))}\n`;
             y += `    addressLines:\n`;
-            v('ceremonyAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            (v('ceremonyAddress') || '').split('\n').filter((line) => line.trim()).forEach((line) => {
+                y += `      - ${esc(line.trim())}\n`;
+            });
             y += `    mapsUrl: "${v('ceremonyMaps')}"\n`;
 
-            // Celebration
             y += `  celebration:\n`;
             y += `    enabled: ${toggleState.celebrationEnabled}\n`;
-            y += `    kindLabel: ${esc(v('celebrationLabel'))}\n`;
+            y += `    kindLabel: ${esc(valueOrDefault('celebrationLabel', 'events.celebrationLabel', 'Party'))}\n`;
             y += `    datetime: "${buildDatetime('celebrationDate', 'celebrationTime')}"\n`;
             y += `    timeDisplay: "${buildTimeDisplay('celebrationTime')}"\n`;
             y += `    venueName: ${esc(v('celebrationVenue'))}\n`;
             y += `    addressLines:\n`;
-            v('celebrationAddress').split('\n').filter(l => l.trim()).forEach(l => { y += `      - ${esc(l.trim())}\n`; });
+            (v('celebrationAddress') || '').split('\n').filter((line) => line.trim()).forEach((line) => {
+                y += `      - ${esc(line.trim())}\n`;
+            });
             y += `    mapsUrl: "${v('celebrationMaps')}"\n\n`;
 
             y += `story:\n`;
-            y += `  heading: ${esc(v('storyHeading'))}\n`;
-            y += `  subheading: ${esc(v('storySubheading'))}\n`;
-            // Handles multiline text
-            const storyText = v('storySentence');
+            y += `  heading: ${esc(valueOrDefault('storyHeading', 'story.heading', 'Our story'))}\n`;
+            y += `  subheading: ${esc(valueOrDefault('storySubheading', 'story.subheading', 'Us'))}\n`;
+            const storyText = valueOrDefault('storySentence', 'story.sentence', 'Tell your story here.');
             if (storyText.includes('\n')) {
                 y += `  sentence: |\n`;
-                storyText.split('\n').forEach(line => {
+                storyText.split('\n').forEach((line) => {
                     y += `    ${line}\n`;
                 });
             } else {
@@ -2131,48 +2732,77 @@ Ascochinga, Córdoba</textarea></div>
             y += `  photos:\n`;
             photoEls.forEach((el, i) => {
                 let fileName = el.querySelector('.photoFileName')?.textContent?.trim();
-                if (!fileName || fileName === 'Sin archivo') {
+                if (!fileName || fileName === noPhotoLabel || fileName === noFileLabel) {
                     fileName = `${String(i + 1).padStart(2, '0')}.jpg`;
                 }
+                const photoAlt = t('builder.yaml.photoAlt', 'Photo {{index}}', { index: i + 1 });
                 y += `    - src: "/media/couple/${fileName}"\n`;
-                y += `      alt: "Foto ${i + 1}"\n`;
+                y += `      alt: ${esc(photoAlt)}\n`;
             });
             y += `\n`;
 
-            y += `socials:\n  heading: "Redes Sociales"\n`;
-            y += `  body: ${esc(v('socialsBody'))}\n`;
-            y += `  items:\n    - label: "Instagram"\n      handle: ${esc(v('socialHandle'))}\n      url: "${v('socialUrl')}"\n\n`;
+            y += `socials:\n`;
+            y += `  heading: ${esc(contentDefault('socials.heading', 'Social Media'))}\n`;
+            y += `  body: ${esc(valueOrDefault('socialsBody', 'socials.body', ''))}\n`;
+            y += `  items:\n`;
+            y += `    - label: ${esc(contentDefault('socials.itemLabel', 'Instagram'))}\n`;
+            y += `      handle: ${esc(v('socialHandle'))}\n`;
+            y += `      url: "${v('socialUrl')}"\n\n`;
 
-            y += `gifts:\n  heading: ${esc(v('giftsHeading'))}\n  body: ${esc(v('giftsBody'))}\n`;
-            y += `  buttonLabel: ${esc(v('giftsButtonLabel'))}\n`;
-            y += `  bank:\n    enabled: ${toggleState.bankEnabled}\n`;
-            y += `    holderName: ${esc(v('bankHolder'))}\n    bankName: ${esc(v('bankName'))}\n`;
-            y += `    alias: ${esc(v('bankAlias'))}\n    cbu: "${v('bankCbu')}"\n    cuit: "${v('bankCuit')}"\n\n`;
+            y += `gifts:\n`;
+            y += `  heading: ${esc(valueOrDefault('giftsHeading', 'gifts.heading', 'Gifts'))}\n`;
+            y += `  body: ${esc(valueOrDefault('giftsBody', 'gifts.body', ''))}\n`;
+            y += `  buttonLabel: ${esc(valueOrDefault('giftsButtonLabel', 'gifts.buttonLabel', 'View bank details'))}\n`;
+            y += `  bank:\n`;
+            y += `    enabled: ${toggleState.bankEnabled}\n`;
+            y += `    holderName: ${esc(v('bankHolder'))}\n`;
+            y += `    bankName: ${esc(v('bankName'))}\n`;
+            y += `    alias: ${esc(v('bankAlias'))}\n`;
+            y += `    cbu: "${v('bankCbu')}"\n`;
+            y += `    cuit: "${v('bankCuit')}"\n\n`;
 
-            y += `dressCode:\n  title: ${esc(v('dcTitle'))}\n  tag: ${esc(v('dcTag'))}\n  body: ${esc(v('dcBody'))}\n`;
-            y += `  brideDisclaimer:\n    enabled: ${toggleState.brideDisclaimerEnabled}\n    text: ${esc(v('brideDisclaimerText'))}\n\n`;
+            y += `dressCode:\n`;
+            y += `  title: ${esc(valueOrDefault('dcTitle', 'dressCode.title', 'Dress Code'))}\n`;
+            y += `  tag: ${esc(valueOrDefault('dcTag', 'dressCode.tag', 'Formal - Elegant'))}\n`;
+            y += `  body: ${esc(valueOrDefault('dcBody', 'dressCode.body', ''))}\n`;
+            y += `  brideDisclaimer:\n`;
+            y += `    enabled: ${toggleState.brideDisclaimerEnabled}\n`;
+            y += `    text: ${esc(valueOrDefault('brideDisclaimerText', 'dressCode.brideDisclaimer', 'By tradition, white or similar shades are reserved for the bride.'))}\n\n`;
 
-            // RSVP text multiline support
-            const rsvpText = v('rsvpText');
+            const rsvpText = valueOrDefault('rsvpText', 'rsvp.text', '');
             if (rsvpText.includes('\n')) {
                 y += `rsvp:\n  text: |\n`;
-                rsvpText.split('\n').forEach(line => {
+                rsvpText.split('\n').forEach((line) => {
                     y += `    ${line}\n`;
                 });
             } else {
                 y += `rsvp:\n  text: ${esc(rsvpText)}\n`;
             }
             y += `  deadline: "${v('rsvpDeadline')}"\n`;
-            y += `  link:\n    enabled: ${toggleState.rsvpLinkEnabled}\n    url: "${v('rsvpUrl')}"\n    label: ${esc(v('rsvpLabel'))}\n\n`;
+            y += `  link:\n`;
+            y += `    enabled: ${toggleState.rsvpLinkEnabled}\n`;
+            y += `    url: "${v('rsvpUrl')}"\n`;
+            y += `    label: ${esc(valueOrDefault('rsvpLabel', 'rsvp.buttonLabel', 'CONFIRM ATTENDANCE'))}\n\n`;
 
             const calendarMode = getCalendarMode();
-            y += `calendar:\n  mode: "${calendarMode}"\n  googleCalendar:\n    enabled: true\n  ics:\n    enabled: true\n`;
-            y += `    fileNameSingle: "boda.ics"\n    fileNameReligiousCeremony: "ceremonia-religiosa.ics"\n    fileNameCeremony: "ceremonia.ics"\n    fileNameCelebration: "celebracion.ics"\n\n`;
+            y += `calendar:\n`;
+            y += `  mode: "${calendarMode}"\n`;
+            y += `  googleCalendar:\n    enabled: true\n`;
+            y += `  ics:\n    enabled: true\n`;
+            y += `    fileNameSingle: "${contentDefault('calendar.fileNameSingle', 'wedding.ics')}"\n`;
+            y += `    fileNameReligiousCeremony: "${contentDefault('calendar.fileNameReligiousCeremony', 'religious-ceremony.ics')}"\n`;
+            y += `    fileNameCeremony: "${contentDefault('calendar.fileNameCeremony', 'ceremony.ics')}"\n`;
+            y += `    fileNameCelebration: "${contentDefault('calendar.fileNameCelebration', 'celebration.ics')}"\n\n`;
 
-            y += `playlist:\n  heading: ${esc(v('playlistHeading'))}\n  body: ${esc(v('playlistBody'))}\n  spotifyUrl: "${v('playlistUrl')}"\n\n`;
+            y += `playlist:\n`;
+            y += `  heading: ${esc(valueOrDefault('playlistHeading', 'playlist.heading', "Let's build the playlist together"))}\n`;
+            y += `  body: ${esc(valueOrDefault('playlistBody', 'playlist.body', ''))}\n`;
+            y += `  spotifyUrl: "${v('playlistUrl')}"\n\n`;
 
-            y += `usefulInfo:\n  title: "Info útil"\n  items:\n`;
-            infoItems.forEach(item => {
+            y += `usefulInfo:\n`;
+            y += `  title: ${esc(contentDefault('usefulInfo.title', 'Useful info'))}\n`;
+            y += `  items:\n`;
+            infoItems.forEach((item) => {
                 y += `    - enabled: true\n`;
                 y += `      icon: "${item.querySelector('.infoIcon')?.value || 'lucide:info'}"\n`;
                 y += `      title: ${esc(item.querySelector('.infoTitle')?.value || '')}\n`;
@@ -2182,6 +2812,7 @@ Ascochinga, Córdoba</textarea></div>
             document.getElementById('yamlOutput').textContent = y;
             window._generatedYaml = y;
         }
+
 
         function downloadYaml() {
             const blob = new Blob([window._generatedYaml], { type: 'text/yaml' });
@@ -2194,34 +2825,27 @@ Ascochinga, Córdoba</textarea></div>
         function copyYaml() {
             navigator.clipboard.writeText(window._generatedYaml).then(() => {
                 const btn = document.querySelector('.btn-copy');
-                btn.textContent = '✓ ¡Copiado!';
-                setTimeout(() => { btn.textContent = '📋 Copiar al portapapeles'; }, 2000);
+                if (!btn) return;
+                btn.textContent = t('builder.buttons.copied', 'Copied!');
+                setTimeout(() => {
+                    btn.textContent = t('builder.buttons.copy', 'Copy to clipboard');
+                }, 2000);
             });
         }
 
+
         (async function bootstrapBuilder() {
+            await initializeBuilderLocale();
             initTimeZonePicker();
             await initThemePicker();
             updateHeroPreview();
             updateStoryPreview();
             updateOgPreview();
+            generateYaml();
+            updateUI();
         })();
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

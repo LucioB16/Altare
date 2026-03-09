@@ -1,20 +1,31 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 
-const { rsvp } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { rsvp } = data;
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
+import { getSiteI18n } from "../i18n/site";
+import { LOCALE_LANGUAGE_TAG } from "../i18n/config";
 
-const formatDateDDMMYYYY = (value?: string) => {
+const { locale, t } = getSiteI18n(Astro.url);
+
+const formatDate = (value?: string) => {
     if (!value) return "";
 
-    const isoDateMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value.trim());
-    if (!isoDateMatch) return value;
+    const parsed = new Date(`${value}T00:00:00`);
+    if (Number.isNaN(parsed.getTime())) {
+        return value;
+    }
 
-    return `${isoDateMatch[3]}/${isoDateMatch[2]}/${isoDateMatch[1]}`;
+    return new Intl.DateTimeFormat(LOCALE_LANGUAGE_TAG[locale], {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    }).format(parsed);
 };
 
-const formattedDeadline = formatDateDDMMYYYY(rsvp.deadline);
+const formattedDeadline = formatDate(rsvp.deadline);
 ---
 
 <Divider type="large" />
@@ -25,14 +36,14 @@ const formattedDeadline = formatDateDDMMYYYY(rsvp.deadline);
         <p
             class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4"
         >
-            ¿Nos acompañas?
+            {t("site.rsvp.kicker")}
         </p>
 
         <h2
             class="text-4xl md:text-5xl font-display text-primary tracking-wide mb-10"
             style="font-family: var(--font-display);"
         >
-            Confirmación de asistencia
+            {t("site.rsvp.heading")}
         </h2>
 
         <div
@@ -45,7 +56,7 @@ const formattedDeadline = formatDateDDMMYYYY(rsvp.deadline);
             {
                 rsvp.deadline && (
                     <p class="text-sm font-semibold text-primary mb-8 tracking-[0.2em] uppercase">
-                        FECHA LÍMITE: {formattedDeadline}
+                        {t("site.rsvp.deadlinePrefix")}: {formattedDeadline}
                     </p>
                 )
             }
@@ -58,7 +69,7 @@ const formattedDeadline = formatDateDDMMYYYY(rsvp.deadline);
                         rel="noopener noreferrer"
                         class="theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors w-full sm:w-auto"
                     >
-                        {rsvp.link.label || "CONFIRMAR ASISTENCIA"}
+                        {rsvp.link.label || t("site.rsvp.defaultButton")}
                     </a>
                 )
             }

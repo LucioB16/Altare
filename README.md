@@ -1,167 +1,202 @@
-# 💍 Invitación de Boda — Template
+# Altare - Wedding Invitation Template
 
-Una invitación de boda digital, elegante y 100% configurable. Desplegá tu propio sitio en minutos, sin saber programar.
+English | [Español](./README.es.md)
 
-🔗 **[Ver demo en vivo](https://luciob16.github.io/Altare/)**
+Elegant, 100% configurable digital wedding invitation, deployable in minutes with GitHub Pages.
 
----
-
-## 🚀 Crear tu invitación en 4 pasos
-
-### Paso 1: Crear tu repositorio
-
-Hacé click en el botón de abajo para crear una copia del template en tu cuenta de GitHub:
-
-[![Use this template](https://img.shields.io/badge/Usar_este_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
-
-> 💡 **Nota importante:** El nombre que le pongas al repositorio determinará el link (URL) final de tu invitación. 
-> Por ejemplo, si tu usuario de GitHub es `mariaj` y elegís el nombre `mi-boda` para el repo, tu invitación quedará en: `https://mariaj.github.io/mi-boda/`
-> 
-> Elegí un nombre corto y sin espacios como `mi-boda` o `boda-maria-y-juan`. Dejá el repo como **público**.
-
-### Paso 2: Activar GitHub Pages
-
-1. Andá a **Settings** → **Pages** en tu repositorio
-2. En **"Source"**, elegí **"GitHub Actions"**
-
-### Paso 3: Configurar tu invitación
-
-Usá nuestro **Config Builder** para generar tu archivo de configuración sin tocar código:
-
-[![Abrir Config Builder](https://img.shields.io/badge/🔧_Abrir_Config_Builder-5A7156?style=for-the-badge&logoColor=white)](https://luciob16.github.io/Altare/config-builder/)
-
-El Config Builder te guía paso a paso para configurar:
-- 👫 Nombres de la pareja
-- 🎭 Tema visual (5 temas con preview en vivo)
-- 📅 Fechas y horarios con selectores visuales + zona horaria
-- ⛪ Ceremonia religiosa, civil y fiesta (cada una con toggle)
-- 📸 Fotos de portada e historia (1–4 fotos)
-- 🖼️ Imagen para compartir en WhatsApp/redes (Open Graph)
-- 🎁 Regalos y datos bancarios (con opción de ocultar)
-- 👔 Código de vestimenta (con aviso de novia configurable)
-- ✉️ Confirmación de asistencia (fecha límite + link opcional)
-- 🎵 Playlist de Spotify (opcional)
-- 📱 Redes sociales (opcional)
-- ℹ️ Cards de información útil (podés dejar solo una o agregar varias)
-
-Al final genera un archivo `wedding.yml` que descargás o copiás.
-
-### Paso 4: Subir la configuración y las fotos
-
-> 💡 **Importante:** cuando creás tu repo con **Use this template**, este mismo instructivo también queda en tu repo.
-
-**Accesos rápidos (hacé click desde tu repo):**
-- [Abrir `wedding.yml`](./src/data/wedding.yml)
-- [Abrir carpeta de portada (`public/media/hero/`)](./public/media/hero/)
-- [Abrir carpeta de historia (`public/media/couple/`)](./public/media/couple/)
-- [Abrir carpeta de imagen para WhatsApp/redes (`public/media/og/`)](./public/media/og/)
-
-**Configuración (`wedding.yml`):**
-1. Entrá al link de `wedding.yml` de arriba.
-2. Hacé click en el **lápiz ✏️**.
-3. Reemplazá el contenido con el YAML que te generó el Config Builder.
-4. Hacé click en **Commit changes**.
-5. Si GitHub no te deja commit directo por reglas, elegí **Create a new branch** y después **Create pull request**.
-
-**Fotos (arrastrá los archivos en GitHub):**
-- `public/media/hero/` → subí la foto de portada que seleccionaste en el Config Builder
-- `public/media/couple/` → subí las fotos de historia con los mismos nombres que seleccionaste en el Config Builder
-- `public/media/og/` → subí la imagen para WhatsApp/redes que seleccionaste en el Config Builder (1200×630px recomendado)
-
-> 💡 **Tip:** Podés arrastrar archivos directamente a la carpeta en GitHub para subirlos sin necesidad de usar Git.
-
-¡Listo! En unos minutos tu sitio estará disponible en `https://TU_USUARIO.github.io/TU_REPO/`
-
-> 💡 La URL de tu invitación se forma con tu **nombre de usuario de GitHub** + el **nombre del repositorio** que elegiste al hacer click en "Use this template". Por ejemplo, si tu usuario es `mariaj` y nombraste tu repo `mi-boda`, tu invitación va a estar en `https://mariaj.github.io/mi-boda/`.
+[![Use this template](https://img.shields.io/badge/Use_this_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
+[![Live demo](https://img.shields.io/badge/Live_demo-5A7156?style=for-the-badge)](https://luciob16.github.io/Altare/)
+[![Config Builder](https://img.shields.io/badge/Config_Builder-3C5A7A?style=for-the-badge)](https://luciob16.github.io/Altare/config-builder/)
 
 ---
 
-## ✨ Features
+## Create Your Invitation in 4 Steps
 
-- 📱 **Responsive** — Se ve perfecto en celular, tablet y desktop
-- 🎨 **Diseño premium** — Tipografía elegante, SVGs artesanales, scroll-snap entre secciones
-- ⚙️ **100% configurable** — Todo se edita desde un solo archivo YAML
-- 🔒 **Sin servidor** — Se despliega gratis en GitHub Pages
-- 🧩 **Secciones modulares** — Activá o desactivá cualquier sección
-- ⛪ **Ceremonia religiosa** — Sección opcional, idéntica en formato a la civil
-- 🖼️ **Galería inteligente** — 1 a 4 fotos con layout automático
-- 🏦 **Datos bancarios** — Con toggle para mostrar/ocultar
-- 📊 **Cuenta regresiva** — Actualización en tiempo real
-- 🔧 **Config Builder** — Herramienta visual para generar la configuración sin código
+### Step 1: Create your repository
 
+Click **Use this template** and create your own GitHub repository.
 
-## Novedades de theming
+[![Use this template](https://img.shields.io/badge/Use_this_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
 
-- Nuevo sistema de temas visuales por tokens compartidos entre sitio y builder.
-- Temas disponibles: `jardin-clasico` (default), `marfil-editorial`, `botanica-nocturna`, `rosa-antiguo`, `galeria-moderna`.
-- Selector de tema en el Config Builder con cards de preview (paleta, tipografia y look visual).
-- `theme.id` en `wedding.yml` es opcional; si falta se usa `jardin-clasico` para mantener compatibilidad.
-- El cambio de tema solo modifica estetica (colores, tipografias, iconografia y ornamentos), sin cambiar layout ni orden de secciones.
-- Demo con switcher de tema en vivo solo cuando `demo.themeSwitcher: true`.
-- Preview de OG/WhatsApp con dominio generico (`tuusuario.github.io/tu-repo`) para evitar referencias hardcodeadas.
-- File pickers del builder reforzados para Hero, Story y OG/WhatsApp.
+Important: your final invitation URL is based on your GitHub user + repo name.
+Example: `https://mariaj.github.io/my-wedding/`
+
+### Step 2: Enable GitHub Pages
+
+1. Open **Settings -> Pages** in your repository.
+2. In **Source**, choose **GitHub Actions**.
+
+### Step 3: Configure your invitation
+
+Use the visual Config Builder:
+
+[![Open Config Builder](https://img.shields.io/badge/Open_Config_Builder-5A7156?style=for-the-badge)](https://luciob16.github.io/Altare/config-builder/)
+
+The Config Builder guides you step by step to configure:
+
+- 👫 Couple names
+- 🎭 Visual theme (5 themes with live preview)
+- 📅 Dates and times with visual pickers + timezone
+- ⛪ Religious ceremony, civil ceremony, and celebration (each with its own toggle)
+- 📸 Hero and story photos (1-4 photos)
+- 🖼️ WhatsApp/social sharing image (Open Graph)
+- 🎁 Gifts and bank details (with hide/show option)
+- 👔 Dress code (with configurable bride notice)
+- ✉️ RSVP (deadline + optional link)
+- 🎵 Spotify playlist (optional)
+- 📱 Social media (optional)
+- ℹ️ Useful info cards (you can keep one or add multiple)
+
+At the end, it generates a `wedding.yml` file that you can download or copy.
+
+### Step 4: Upload YAML and photos
+
+Quick links (inside your repo):
+
+- [Open `wedding.yml`](./src/data/wedding.yml)
+- [Open hero folder (`public/media/hero/`)](./public/media/hero/)
+- [Open story folder (`public/media/couple/`)](./public/media/couple/)
+- [Open social image folder for WhatsApp/socials (`public/media/og/`)](./public/media/og/)
+
+`wedding.yml`:
+
+1. Open `wedding.yml`.
+2. Click the pencil icon.
+3. Replace content with your generated YAML.
+4. Click **Commit changes**.
+5. If direct commit is blocked by rules, choose **Create a new branch** and then **Create pull request**.
+
+Photos:
+
+1. Enter each folder (`hero`, `couple`, `og`).
+2. Click **Add file** (top-right).
+3. Choose **Upload files**.
+4. Select your files and click **Commit changes**.
+
+- `public/media/hero/` -> upload selected hero photo.
+- `public/media/couple/` -> upload story photos with the exact selected filenames.
+- `public/media/og/` -> upload share image (recommended 1200x630).
+
+Tip: you can also drag files directly into an open GitHub folder.
+
+Your site will be published at:
+`https://YOUR_USER.github.io/YOUR_REPO/`
+
+Your invitation URL is built using your GitHub username + repository name.
+Example: if your username is `mariaj` and your repo is `my-wedding`, your URL will be `https://mariaj.github.io/my-wedding/`.
 
 ---
 
-## 🛠️ Desarrollo local
+## Language and i18n
 
-Si sos desarrollador y querés personalizar el diseño:
+- The builder saves selected language as `site.language`.
+- Supported locales are auto-discovered from `src/i18n/locales/*.json`.
+- Default locale is `en`.
+- Backward compatibility:
+  - If `site.language` is missing, fallback is `locale.language`.
+  - If both are missing/unknown, fallback is `en`.
+- Generated user repos are monolingual by default.
+- Demo repos can expose extra locale routes through `demo.locales`.
+
+### Add a New Language (Quick)
+
+1. Duplicate `src/i18n/locales/en.json` to `src/i18n/locales/<code>.json` (example: `fr.json`).
+2. Translate keys and set `contentDefaults.locale.language` (example: `fr-FR`).
+3. Run:
 
 ```bash
-git clone https://github.com/TU_USUARIO/TU_REPO.git
-cd TU_REPO
+bun run sync:themes
+bun run build
+```
+
+The builder locale selector and site locale resolution will pick the new locale automatically.
+
+---
+
+## Features
+
+- 📱 **Responsive** — Looks great on mobile, tablet, and desktop
+- 🎨 **Premium design** — Elegant typography, crafted SVG details, polished section flow
+- ⚙️ **100% configurable** — Everything is controlled from one YAML file
+- 🔒 **Serverless** — Free deployment on GitHub Pages
+- 🧩 **Modular sections** — Enable or disable each section independently
+- ⛪ **Religious ceremony** — Optional section with the same structure as civil ceremony
+- 🖼️ **Smart gallery** — 1 to 4 photos with automatic layout
+- 🏦 **Bank details** — Toggle on/off when needed
+- 📊 **Countdown** — Real-time countdown update
+- 🔧 **Config Builder** — Visual tool to generate config without coding
+- 🌐 **Scalable i18n** — Builder-selected locale + `en` fallback + easy new locale onboarding
+
+## Theming
+
+- Shared token-based theme system for site and builder.
+- Available themes:
+  - `jardin-clasico` (default)
+  - `marfil-editorial`
+  - `botanica-nocturna`
+  - `rosa-antiguo`
+  - `galeria-moderna`
+- `theme.id` is optional; fallback is `jardin-clasico`.
+- Theme changes aesthetics only (colors, fonts, ornaments), without changing layout logic.
+
+---
+
+## Local Development
+
+```bash
 bun install
-bun dev
+bun run dev
 ```
 
-### 🧞 Comandos
+### Commands
 
-Todos los comandos se ejecutan desde la raíz del proyecto:
+| Command | Action |
+| :-- | :-- |
+| `bun install` | Install dependencies |
+| `bun run sync:themes` | Sync themes, fonts, and locales to builder assets |
+| `bun run dev` | Start Astro dev server |
+| `bun run build` | Build production output to `dist/` |
+| `bun run preview` | Preview production build locally |
+| `bun astro ...` | Run Astro CLI commands |
 
-| Comando                   | Acción                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Instala las dependencias                         |
-| `bun run sync:themes`     | Sincroniza catalogo de temas y fuentes del builder |
-| `bun dev`                 | Inicia el servidor de desarrollo en `localhost:4321` |
-| `bun build`               | Genera el sitio de producción en `./dist/`       |
-| `bun preview`             | Previsualiza el build localmente antes de deployar |
-| `bun astro ...`           | Ejecuta comandos del CLI como `astro add`, `astro check` |
-| `bun astro -- --help`     | Muestra la ayuda del CLI de Astro                |
+### Project Structure
 
-### Estructura del proyecto
-
-```
+```text
 src/
-├── components/      # Componentes Astro (Hero, Ceremony, RSVP, etc.)
-├── data/
-│   ├── wedding.yml  # ← Tu configuración va acá
-│   └── weddingData.ts
-├── theme/           # Catalogo de temas y tokens
-├── layouts/
-├── pages/
-└── styles/
+  components/
+  data/
+    wedding.yml
+    weddingData.ts
+  i18n/
+    config.ts
+    messages.ts
+    site.ts
+    locales/
+  theme/
+  layouts/
+  pages/
+  styles/
 public/
-├── media/
-│   ├── hero/        # Foto de bienvenida (nombre configurable)
-│   ├── couple/      # Fotos historia (01.jpg, 02.jpg, ...)
-│   └── og/          # Imagen para redes sociales (nombre configurable)
-└── config-builder/  # Herramienta de configuracion visual (+ themes.json/theme-fonts.css)
+  media/
+    hero/
+    couple/
+    og/
+  config-builder/
 scripts/
-└── sync-themes.mjs  # Sincroniza temas entre app y builder
+  sync-themes.mjs
 ```
 
 ---
 
-## 📜 Créditos y licencia
+## Credits and License
 
-Este proyecto está basado en [**SaidYes**](https://github.com/roicort/saidyes) por [@roicort](https://github.com/roicort), distribuido bajo la licencia **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+This project is based on [**SaidYes**](https://github.com/roicort/saidyes) by [@roicort](https://github.com/roicort), distributed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 
-Este fork mantiene la misma licencia. Podés usar, modificar y distribuir este código siempre que:
-- Mantengas la atribución al proyecto original
-- Distribuyas tus modificaciones bajo la misma licencia AGPL-3.0
+This fork keeps the same license. You can use, modify, and distribute this code as long as you:
 
-📄 Ver [LICENSE](LICENSE) para más detalles.
+- Keep attribution to the original project
+- Distribute your modifications under the same AGPL-3.0 license
 
----
+See [LICENSE](./LICENSE) for more details.
 
-Hecho con ❤️ para que tu día especial sea aún más especial.
+Made with ❤️ so your special day feels even more special.

@@ -1,9 +1,13 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 
-const { dressCode } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { dressCode } = data;
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
+import { getSiteI18n } from "../i18n/site";
+
+const { t } = getSiteI18n(Astro.url);
 ---
 
 <Divider type="small" />
@@ -14,7 +18,7 @@ import SectionIcon from "./SectionIcon.astro";
         <p
             class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4"
         >
-            ¿Qué me pongo?
+            {t("site.dressCode.kicker")}
         </p>
 
         <h2
@@ -41,14 +45,10 @@ import SectionIcon from "./SectionIcon.astro";
                 dressCode.brideDisclaimer?.enabled && (
                     <div class="bg-surface-soft px-6 py-4 text-sm text-text-subtle w-full">
                         {dressCode.brideDisclaimer.text ||
-                            "Como es tradición, los colores blancos, o similares, estarán reservados para la novia."}
+                            t("site.dressCode.defaultDisclaimer")}
                     </div>
                 )
             }
         </div>
     </div>
 </section>
-
-
-
-

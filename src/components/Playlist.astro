@@ -1,10 +1,14 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 
-const { playlist } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { playlist } = data;
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
+import { getSiteI18n } from "../i18n/site";
+
+const { t } = getSiteI18n(Astro.url);
 ---
 
 <Divider type="flower" />
@@ -15,7 +19,7 @@ import SectionIcon from "./SectionIcon.astro";
         <p
             class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4"
         >
-            Música
+            {t("site.playlist.kicker")}
         </p>
 
         <h2
@@ -39,12 +43,8 @@ import SectionIcon from "./SectionIcon.astro";
                 class="theme-button-spotify flex items-center justify-center gap-3 tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-opacity w-full sm:w-auto"
             >
                 <Icon name="lucide:headphones" class="text-xl" />
-                <span>ABRIR EN SPOTIFY</span>
+                <span>{t("site.playlist.openSpotify")}</span>
             </a>
         </div>
     </div>
 </section>
-
-
-
-

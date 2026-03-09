@@ -1,0 +1,380 @@
+{
+  "site": {
+    "ceremony": {
+      "kicker": "Dónde y cuándo",
+      "mapButton": "CÓMO LLEGAR"
+    },
+    "celebration": {
+      "kicker": "A festejar",
+      "mapButton": "CÓMO LLEGAR"
+    },
+    "socials": {
+      "kicker": "Compartí con nosotros",
+      "defaultHeading": "Redes Sociales",
+      "instagramButton": "VER EN INSTAGRAM"
+    },
+    "gifts": {
+      "kicker": "Tu presencia es nuestro regalo",
+      "bank": {
+        "holder": "Titular",
+        "bank": "Banco",
+        "alias": "Alias",
+        "cbu": "CBU/CVU",
+        "cuit": "CUIT/CUIL"
+      }
+    },
+    "dressCode": {
+      "kicker": "¿Qué me pongo?",
+      "defaultDisclaimer": "Como es tradición, los colores blancos o similares estarán reservados para la novia."
+    },
+    "rsvp": {
+      "kicker": "¿Nos acompañás?",
+      "heading": "Confirmación de asistencia",
+      "deadlinePrefix": "FECHA LÍMITE",
+      "defaultButton": "CONFIRMAR ASISTENCIA"
+    },
+    "playlist": {
+      "kicker": "Música",
+      "openSpotify": "ABRIR EN SPOTIFY"
+    },
+    "calendar": {
+      "kicker": "Agenda la fecha",
+      "heading": "Calendarios",
+      "singleLabel": "Nuestra Boda",
+      "singleTitle": "Nuestra Boda - {{couple}}",
+      "singleDescription": "Los esperamos para celebrar.",
+      "eventDescription": "Te esperamos en {{venue}}.",
+      "googleSingle": "GOOGLE CALENDAR",
+      "googleMultiPrefix": "Google",
+      "icsSingle": "APPLE / OUTLOOK",
+      "icsMultiPrefix": "Apple / Outlook",
+      "noEvents": "No hay eventos habilitados para agregar al calendario.",
+      "icsProdidSuffix": "ES"
+    },
+    "countdown": {
+      "units": {
+        "days": "Días",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos"
+      }
+    },
+    "footer": {
+      "thanks": "¡Gracias por acompañarnos!",
+      "backToTop": "Volver al inicio"
+    },
+    "demoThemeSwitcher": {
+      "label": "Tema demo",
+      "ariaLabel": "Selector de tema demo"
+    }
+  },
+  "builder": {
+    "language": {
+      "label": "Idioma del sitio",
+      "hint": "Este idioma se guarda en <code>site.language</code> y define el idioma final del sitio.",
+      "en": "Inglés",
+      "es": "Español"
+    },
+    "header": {
+      "title": "Wedding Config Builder",
+      "subtitle": "Configurá tu invitación de boda en minutos"
+    },
+    "buttons": {
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "download": "Descargar wedding.yml",
+      "copy": "Copiar al portapapeles",
+      "copied": "¡Copiado!"
+    },
+    "alerts": {
+      "enableOneEvent": "Tenés que habilitar al menos un evento (religiosa, civil o fiesta) para continuar.",
+      "maxPhotos": "Máximo 4 fotos."
+    },
+    "files": {
+      "none": "Ningún archivo",
+      "nonePhoto": "Sin archivo"
+    },
+    "previews": {
+      "ogImageFallback": "Elegí una foto arriba",
+      "heroTitleFallback": "Título",
+      "heroSubtitleFallback": "Nombre de la pareja",
+      "heroDateFallback": "Fecha",
+      "heroCityFallback": "Ciudad",
+      "storySubheadingFallback": "Subtítulo",
+      "storyHeadingFallback": "Título",
+      "storyTextFallback": "Texto descriptivo..."
+    },
+    "themeRuntime": {
+      "selected": "Seleccionado",
+      "preview": "Preview",
+      "selectedTheme": "Tema seleccionado"
+    },
+    "steps": {
+      "1": {
+        "label": "Paso 1 de 9",
+        "title": "La Pareja",
+        "desc": "Los datos básicos de los novios."
+      },
+      "2": {
+        "label": "Paso 2 de 9",
+        "title": "Pantalla de bienvenida",
+        "desc": "La primera pantalla que verán los invitados al abrir la invitación."
+      },
+      "3": {
+        "label": "Paso 3 de 9",
+        "title": "Ceremonias y Fiesta",
+        "desc": "Los detalles de los eventos. Podés activar o desactivar cada uno."
+      },
+      "4": {
+        "label": "Paso 4 de 9",
+        "title": "Nuestra Historia",
+        "desc": "Contá la historia de la pareja con texto y hasta 4 fotos."
+      },
+      "5": {
+        "label": "Paso 5 de 9",
+        "title": "Regalos y Dress Code",
+        "desc": "Datos bancarios y código de vestimenta."
+      },
+      "6": {
+        "label": "Paso 6 de 9",
+        "title": "Confirmación de asistencia",
+        "desc": "Configurá cómo los invitados confirman."
+      },
+      "7": {
+        "label": "Paso 7 de 9",
+        "title": "Extras",
+        "desc": "Redes sociales, playlist e info útil."
+      },
+      "8": {
+        "label": "Paso 8 de 9",
+        "title": "Imagen para compartir",
+        "desc": "Configurá cómo se verá el link de tu invitación al compartirlo."
+      },
+      "9": {
+        "label": "Paso 9 de 9",
+        "title": "¡Listo! Tu configuración",
+        "desc": "Descargá el archivo y seguí las instrucciones."
+      }
+    },
+    "labels": {
+      "themeVisual": "Tema visual",
+      "themeVisualDesc": "Elegí la estética general de tu invitación. Solo cambia el estilo visual: colores, tipografías y ornamentos.",
+      "selectImage": "Seleccionar imagen",
+      "selectPhoto": "Seleccionar foto",
+      "photoAdd": "+ Agregar foto",
+      "cardAdd": "+ Agregar card",
+      "remove": "Quitar",
+      "previewHero": "Preview portada",
+      "previewLive": "Preview en vivo",
+      "usefulInfoCardsTitle": "Cards de info útil",
+      "viewIcons": "Ver íconos",
+      "storyPhotosTitle": "Fotos (1-4)",
+      "ogDomainSample": "tuusuario.github.io/tu-repo"
+    },
+    "fields": {
+      "person1Name": "Nombre Persona 1",
+      "person2Name": "Nombre Persona 2",
+      "displayName": "Nombre para mostrar",
+      "heroTitle": "Título",
+      "heroSubtitle": "Subtítulo (nombres)",
+      "heroDate": "Fecha para mostrar (texto libre)",
+      "heroCity": "Ciudad",
+      "heroBackgroundImage": "Foto de fondo",
+      "eventTimezone": "Zona horaria de los eventos",
+      "eventType": "Tipo",
+      "eventTypeParty": "Tipo de evento",
+      "eventDate": "Fecha",
+      "eventTime": "Hora",
+      "eventVenueName": "Nombre del lugar",
+      "eventAddressLines": "Dirección (una línea por renglón)",
+      "eventAddress": "Dirección",
+      "eventMapsUrl": "URL Google Maps",
+      "storySubheading": "Subtítulo",
+      "storyHeading": "Título",
+      "storyText": "Texto",
+      "giftsTitle": "Título",
+      "giftsText": "Texto",
+      "giftsButtonText": "Texto del botón",
+      "bankHolder": "Titular",
+      "bankName": "Banco",
+      "bankAlias": "Alias",
+      "bankCbu": "CBU/CVU",
+      "bankCuit": "CUIT/CUIL",
+      "dressCodeTitle": "Título",
+      "dressCodeTag": "Etiqueta",
+      "dressCodeText": "Texto",
+      "brideDisclaimerText": "Texto del aviso",
+      "rsvpText": "Texto",
+      "rsvpDeadline": "Fecha límite",
+      "rsvpUrl": "URL del enlace",
+      "rsvpButtonText": "Texto del botón",
+      "socialsText": "Texto redes",
+      "socialsInstagramUrl": "URL Instagram",
+      "socialsHandle": "Handle",
+      "playlistTitle": "Título playlist",
+      "playlistText": "Texto playlist",
+      "playlistUrl": "URL Spotify Playlist",
+      "infoIcon": "Ícono",
+      "infoTitle": "Título",
+      "infoDescription": "Descripción",
+      "pageTitle": "Título del link",
+      "pageDescription": "Descripción corta",
+      "ogImage": "Imagen para redes / WhatsApp"
+    },
+    "placeholders": {
+      "person1Name": "Ej: María",
+      "person2Name": "Ej: Juan",
+      "displayName": "Ej: María & Juan",
+      "heroDate": "Ej: 15 de marzo de 2026",
+      "rsvpUrl": "URL de formulario o WhatsApp",
+      "socialHandle": "Ej: @miboda2026"
+    },
+    "hints": {
+      "displayName": "Así aparecerá en la portada y el footer.",
+      "heroBackgroundImage": "Subí este archivo a <code>public/media/hero/</code> en tu repositorio.",
+      "eventTimezone": "Mostramos una opción por huso horario (UTC) con una ciudad de referencia.",
+      "eventsEnabled": "Debés habilitar al menos un evento para continuar. Los links de calendario incluirán 1, 2 o 3 eventos según tu selección.",
+      "storyPhotos": "La primera foto es obligatoria. Seleccioná tus fotos para definir los nombres y después subilas a <code>public/media/couple/</code> con esos mismos nombres.",
+      "usefulInfoCards": "Para cambiar el ícono, buscá en <a href=\"https://icon-sets.iconify.design/lucide/\" target=\"_blank\" style=\"color:var(--primary); font-weight:600;\">Lucide Icons</a> y usá nombres como <code>lucide:camera</code>.",
+      "pageTitle": "También será el nombre de la pestaña del navegador.",
+      "ogImage": "Subí este archivo a <code>public/media/og/</code>. Tamaño recomendado: 1200x630."
+    },
+    "toggles": {
+      "religiousEvent": "Ceremonia Religiosa",
+      "civilEvent": "Ceremonia Civil",
+      "partyEvent": "Fiesta / Celebración",
+      "showSection": "Mostrar sección",
+      "showGiftsSection": "Mostrar sección Regalos",
+      "showBankData": "Mostrar datos bancarios",
+      "showDressCodeSection": "Mostrar sección Dress Code",
+      "showBrideDisclaimer": "Mostrar aviso colores novia",
+      "showRsvpSection": "Mostrar sección",
+      "showRsvpLink": "Mostrar botón con link de confirmación",
+      "showSocialsSection": "Mostrar sección Redes Sociales",
+      "showPlaylistSection": "Mostrar sección Playlist",
+      "showUsefulInfoSection": "Mostrar sección Info útil"
+    },
+    "instructions": {
+      "title": "Instrucciones para publicar tu invitación",
+      "item1": "Si todavía no creaste tu repo, andá al <a href=\"https://github.com/LucioB16/Altare\" target=\"_blank\">repositorio template</a> y hacé click en <strong>\"Use this template\"</strong> -> <strong>\"Create a new repository\"</strong>.",
+      "item2": "En tu nuevo repo, entrá a <strong>Settings -> Pages</strong> y en Source elegí <strong>\"GitHub Actions\"</strong>.",
+      "item3": "Abrí <code>src/data/</code> -> click en <code>wedding.yml</code> -> click en el <strong>lápiz</strong> -> seleccioná todo -> pegá tu YAML -> <strong>\"Commit changes\"</strong>.",
+      "item4": "<strong>Subí tus fotos</strong> a las carpetas correspondientes en GitHub usando <strong>Add file -> Upload files</strong>:<ul style=\"margin-top:0.5rem; list-style: disc; padding-left:1.2rem;\"><li><strong>Foto de bienvenida:</strong> subila a <code>public/media/hero/</code></li><li><strong>Fotos de historia:</strong> subilas a <code>public/media/couple/</code></li><li><strong>Imagen para redes:</strong> subila a <code>public/media/og/</code></li></ul>",
+      "item5": "¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos minutos en <code>https://TU_USUARIO.github.io/TU_REPO/</code>."
+    },
+    "time": {
+      "timeSuffix": " hs"
+    },
+    "timezone": {
+      "utcLabel": "UTC{{offset}} - {{reference}}",
+      "universal": "Tiempo Universal"
+    },
+    "yaml": {
+      "photoAlt": "Foto {{index}}"
+    }
+  },
+  "contentDefaults": {
+    "site": {
+      "pageTitle": "Nuestra Boda | Julieta & Lucio",
+      "metaDescription": "Estás invitado a celebrar con nosotros este momento tan especial."
+    },
+    "locale": {
+      "language": "es-AR"
+    },
+    "hero": {
+      "title": "¡Nos casamos!",
+      "dateDisplay": "21 de junio de 2026",
+      "city": "Córdoba, Argentina"
+    },
+    "countdown": {
+      "heading": "Cuenta regresiva",
+      "note": "¡Falta muy poco!"
+    },
+    "events": {
+      "religiousLabel": "Ceremonia Religiosa",
+      "religiousVenue": "Parroquia Sagrado Corazón",
+      "religiousAddress": "Av. Hipólito Yrigoyen 100\nCórdoba Capital",
+      "ceremonyLabel": "Ceremonia Civil",
+      "ceremonyVenue": "Registro Civil Central",
+      "ceremonyAddress": "Chacabuco 737\nNueva Córdoba",
+      "celebrationLabel": "Fiesta",
+      "celebrationVenue": "Estancia La Paz",
+      "celebrationAddress": "Ruta E66 Km 41\nAscochinga, Córdoba"
+    },
+    "story": {
+      "heading": "Nuestra historia",
+      "subheading": "Nosotros",
+      "sentence": "Hace cinco años nos cruzamos por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre. Entre risas, viajes y momentos compartidos llegamos hasta acá."
+    },
+    "socials": {
+      "heading": "Redes Sociales",
+      "itemLabel": "Instagram",
+      "body": "Antes del casamiento vas a recibir un link donde vas a poder subir todas tus fotos y videos para que no nos perdamos nada de ese día."
+    },
+    "gifts": {
+      "heading": "Regalos",
+      "body": "Lo más importante es tu presencia, pero si querés hacernos un regalo podés ayudarnos con nuestra luna de miel.",
+      "buttonLabel": "Ver datos bancarios"
+    },
+    "dressCode": {
+      "title": "Dress Code",
+      "tag": "Formal - Elegante",
+      "body": "Te esperamos con tu mejor look para celebrar juntos.",
+      "brideDisclaimer": "Como es tradición, los colores blancos o similares estarán reservados para la novia."
+    },
+    "rsvp": {
+      "text": "Por favor confirmá tu asistencia antes del 1 de mayo.",
+      "buttonLabel": "CONFIRMAR ASISTENCIA"
+    },
+    "calendar": {
+      "fileNameSingle": "boda.ics",
+      "fileNameReligiousCeremony": "ceremonia-religiosa.ics",
+      "fileNameCeremony": "ceremonia.ics",
+      "fileNameCelebration": "celebracion.ics"
+    },
+    "playlist": {
+      "heading": "Armemos la playlist juntos",
+      "body": "Agregá esas canciones que no pueden faltar en la fiesta."
+    },
+    "usefulInfo": {
+      "title": "Info útil",
+      "items": [
+        {
+          "title": "Duración",
+          "description": "La fiesta seguirá hasta el amanecer."
+        },
+        {
+          "title": "Estacionamiento",
+          "description": "Hay estacionamiento privado gratuito y vigilado en el lugar."
+        }
+      ]
+    }
+  },
+  "themes": {
+    "jardin-clasico": {
+      "name": "Jardín Clásico",
+      "concept": "Elegancia botánica suave y romántica",
+      "keywordsLabel": "botánico / elegante"
+    },
+    "marfil-editorial": {
+      "name": "Marfil Editorial",
+      "concept": "Minimalismo editorial con lujo silencioso",
+      "keywordsLabel": "editorial / minimal"
+    },
+    "botanica-nocturna": {
+      "name": "Botánica Nocturna",
+      "concept": "Romance dramático en verde profundo",
+      "keywordsLabel": "dramático / nocturno"
+    },
+    "rosa-antiguo": {
+      "name": "Rosa Antigua",
+      "concept": "Clásico romántico con tonos empolvados",
+      "keywordsLabel": "romántico / porcelana"
+    },
+    "galeria-moderna": {
+      "name": "Galería Moderna",
+      "concept": "Contemporáneo artístico con acento expresivo",
+      "keywordsLabel": "moderno / artístico"
+    }
+  }
+}

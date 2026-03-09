@@ -1,10 +1,14 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 
-const { socials } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { socials } = data;
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
+import { getSiteI18n } from "../i18n/site";
+
+const { t } = getSiteI18n(Astro.url);
 ---
 
 <Divider type="small" />
@@ -15,14 +19,14 @@ import SectionIcon from "./SectionIcon.astro";
         <p
             class="text-xs md:text-sm tracking-[0.4em] font-sans uppercase text-primary opacity-80 mb-4"
         >
-            Compartí con nosotros
+            {t("site.socials.kicker")}
         </p>
 
         <h2
             class="text-4xl md:text-5xl font-display text-primary tracking-wide mb-10"
             style="font-family: var(--font-display);"
         >
-            {socials.heading || "Redes Sociales"}
+            {socials.heading || t("site.socials.defaultHeading")}
         </h2>
 
         <div
@@ -45,7 +49,7 @@ import SectionIcon from "./SectionIcon.astro";
                             class="w-full sm:w-auto flex items-center justify-center gap-3 theme-button-primary tracking-[0.2em] uppercase text-sm font-semibold py-4 px-8 transition-colors"
                         >
                             <Icon name="lucide:instagram" class="text-xl" />
-                            <span>VER EN INSTAGRAM</span>
+                            <span>{t("site.socials.instagramButton")}</span>
                         </a>
                     ))
                 }
@@ -53,6 +57,3 @@ import SectionIcon from "./SectionIcon.astro";
         </div>
     </div>
 </section>
-
-
-
