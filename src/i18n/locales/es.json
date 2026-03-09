@@ -1,15 +1,15 @@
 {
   "site": {
     "ceremony": {
-      "kicker": "Donde y cuando",
-      "mapButton": "COMO LLEGAR"
+      "kicker": "Dónde y cuándo",
+      "mapButton": "CÓMO LLEGAR"
     },
     "celebration": {
       "kicker": "A festejar",
-      "mapButton": "COMO LLEGAR"
+      "mapButton": "CÓMO LLEGAR"
     },
     "socials": {
-      "kicker": "Comparti con nosotros",
+      "kicker": "Compartí con nosotros",
       "defaultHeading": "Redes Sociales",
       "instagramButton": "VER EN INSTAGRAM"
     },
@@ -24,17 +24,17 @@
       }
     },
     "dressCode": {
-      "kicker": "Que me pongo?",
-      "defaultDisclaimer": "Como es tradicion, los colores blancos o similares estaran reservados para la novia."
+      "kicker": "¿Qué me pongo?",
+      "defaultDisclaimer": "Como es tradición, los colores blancos o similares estarán reservados para la novia."
     },
     "rsvp": {
-      "kicker": "Nos acompanas?",
-      "heading": "Confirmacion de asistencia",
-      "deadlinePrefix": "FECHA LIMITE",
+      "kicker": "¿Nos acompañás?",
+      "heading": "Confirmación de asistencia",
+      "deadlinePrefix": "FECHA LÍMITE",
       "defaultButton": "CONFIRMAR ASISTENCIA"
     },
     "playlist": {
-      "kicker": "Musica",
+      "kicker": "Música",
       "openSpotify": "ABRIR EN SPOTIFY"
     },
     "calendar": {
@@ -53,14 +53,14 @@
     },
     "countdown": {
       "units": {
-        "days": "Dias",
+        "days": "Días",
         "hours": "Horas",
         "minutes": "Minutos",
         "seconds": "Segundos"
       }
     },
     "footer": {
-      "thanks": "Gracias por acompanarnos!",
+      "thanks": "¡Gracias por acompañarnos!",
       "backToTop": "Volver al inicio"
     },
     "demoThemeSwitcher": {
@@ -72,36 +72,36 @@
     "language": {
       "label": "Idioma del sitio",
       "hint": "Este idioma se guarda en <code>site.language</code> y define el idioma final del sitio.",
-      "en": "Ingles",
-      "es": "Espanol"
+      "en": "Inglés",
+      "es": "Español"
     },
     "header": {
       "title": "Wedding Config Builder",
-      "subtitle": "Configura tu invitacion de boda en minutos"
+      "subtitle": "Configurá tu invitación de boda en minutos"
     },
     "buttons": {
       "prev": "Anterior",
       "next": "Siguiente",
       "download": "Descargar wedding.yml",
       "copy": "Copiar al portapapeles",
-      "copied": "Copiado!"
+      "copied": "¡Copiado!"
     },
     "alerts": {
-      "enableOneEvent": "Tenes que habilitar al menos un evento (religiosa, civil o fiesta) para continuar.",
-      "maxPhotos": "Maximo 4 fotos."
+      "enableOneEvent": "Tenés que habilitar al menos un evento (religiosa, civil o fiesta) para continuar.",
+      "maxPhotos": "Máximo 4 fotos."
     },
     "files": {
-      "none": "Ningun archivo",
+      "none": "Ningún archivo",
       "nonePhoto": "Sin archivo"
     },
     "previews": {
-      "ogImageFallback": "Elegi una foto arriba",
-      "heroTitleFallback": "Titulo",
+      "ogImageFallback": "Elegí una foto arriba",
+      "heroTitleFallback": "Título",
       "heroSubtitleFallback": "Nombre de la pareja",
       "heroDateFallback": "Fecha",
       "heroCityFallback": "Ciudad",
-      "storySubheadingFallback": "Subtitulo",
-      "storyHeadingFallback": "Titulo",
+      "storySubheadingFallback": "Subtítulo",
+      "storyHeadingFallback": "Título",
       "storyTextFallback": "Texto descriptivo..."
     },
     "themeRuntime": {
@@ -113,52 +113,52 @@
       "1": {
         "label": "Paso 1 de 9",
         "title": "La Pareja",
-        "desc": "Los datos basicos de los novios."
+        "desc": "Los datos básicos de los novios."
       },
       "2": {
         "label": "Paso 2 de 9",
         "title": "Pantalla de bienvenida",
-        "desc": "La primera pantalla que veran los invitados al abrir la invitacion."
+        "desc": "La primera pantalla que verán los invitados al abrir la invitación."
       },
       "3": {
         "label": "Paso 3 de 9",
         "title": "Ceremonias y Fiesta",
-        "desc": "Los detalles de los eventos. Podes activar o desactivar cada uno."
+        "desc": "Los detalles de los eventos. Podés activar o desactivar cada uno."
       },
       "4": {
         "label": "Paso 4 de 9",
         "title": "Nuestra Historia",
-        "desc": "Conta la historia de la pareja con texto y hasta 4 fotos."
+        "desc": "Contá la historia de la pareja con texto y hasta 4 fotos."
       },
       "5": {
         "label": "Paso 5 de 9",
         "title": "Regalos y Dress Code",
-        "desc": "Datos bancarios y codigo de vestimenta."
+        "desc": "Datos bancarios y código de vestimenta."
       },
       "6": {
         "label": "Paso 6 de 9",
-        "title": "Confirmacion de asistencia",
-        "desc": "Configura como los invitados confirman."
+        "title": "Confirmación de asistencia",
+        "desc": "Configurá cómo los invitados confirman."
       },
       "7": {
         "label": "Paso 7 de 9",
         "title": "Extras",
-        "desc": "Redes sociales, playlist e info util."
+        "desc": "Redes sociales, playlist e info útil."
       },
       "8": {
         "label": "Paso 8 de 9",
         "title": "Imagen para compartir",
-        "desc": "Configura como se vera el link de tu invitacion al compartirlo."
+        "desc": "Configurá cómo se verá el link de tu invitación al compartirlo."
       },
       "9": {
         "label": "Paso 9 de 9",
-        "title": "Listo! Tu configuracion",
-        "desc": "Descarga el archivo y segui las instrucciones."
+        "title": "¡Listo! Tu configuración",
+        "desc": "Descargá el archivo y seguí las instrucciones."
       }
     },
     "labels": {
       "themeVisual": "Tema visual",
-      "themeVisualDesc": "Elegi la estetica general de tu invitacion. Solo cambia estilo visual: colores, tipografias y ornamentos.",
+      "themeVisualDesc": "Elegí la estética general de tu invitación. Solo cambia el estilo visual: colores, tipografías y ornamentos.",
       "selectImage": "Seleccionar imagen",
       "selectPhoto": "Seleccionar foto",
       "photoAdd": "+ Agregar foto",
@@ -166,8 +166,8 @@
       "remove": "Quitar",
       "previewHero": "Preview portada",
       "previewLive": "Preview en vivo",
-      "usefulInfoCardsTitle": "Cards de info util",
-      "viewIcons": "Ver iconos",
+      "usefulInfoCardsTitle": "Cards de info útil",
+      "viewIcons": "Ver íconos",
       "storyPhotosTitle": "Fotos (1-4)",
       "ogDomainSample": "tuusuario.github.io/tu-repo"
     },
@@ -175,8 +175,8 @@
       "person1Name": "Nombre Persona 1",
       "person2Name": "Nombre Persona 2",
       "displayName": "Nombre para mostrar",
-      "heroTitle": "Titulo",
-      "heroSubtitle": "Subtitulo (nombres)",
+      "heroTitle": "Título",
+      "heroSubtitle": "Subtítulo (nombres)",
       "heroDate": "Fecha para mostrar (texto libre)",
       "heroCity": "Ciudad",
       "heroBackgroundImage": "Foto de fondo",
@@ -186,81 +186,81 @@
       "eventDate": "Fecha",
       "eventTime": "Hora",
       "eventVenueName": "Nombre del lugar",
-      "eventAddressLines": "Direccion (una linea por renglon)",
-      "eventAddress": "Direccion",
+      "eventAddressLines": "Dirección (una línea por renglón)",
+      "eventAddress": "Dirección",
       "eventMapsUrl": "URL Google Maps",
-      "storySubheading": "Subtitulo",
-      "storyHeading": "Titulo",
+      "storySubheading": "Subtítulo",
+      "storyHeading": "Título",
       "storyText": "Texto",
-      "giftsTitle": "Titulo",
+      "giftsTitle": "Título",
       "giftsText": "Texto",
-      "giftsButtonText": "Texto del boton",
+      "giftsButtonText": "Texto del botón",
       "bankHolder": "Titular",
       "bankName": "Banco",
       "bankAlias": "Alias",
       "bankCbu": "CBU/CVU",
       "bankCuit": "CUIT/CUIL",
-      "dressCodeTitle": "Titulo",
+      "dressCodeTitle": "Título",
       "dressCodeTag": "Etiqueta",
       "dressCodeText": "Texto",
       "brideDisclaimerText": "Texto del aviso",
       "rsvpText": "Texto",
-      "rsvpDeadline": "Fecha limite",
+      "rsvpDeadline": "Fecha límite",
       "rsvpUrl": "URL del enlace",
-      "rsvpButtonText": "Texto del boton",
+      "rsvpButtonText": "Texto del botón",
       "socialsText": "Texto redes",
       "socialsInstagramUrl": "URL Instagram",
       "socialsHandle": "Handle",
-      "playlistTitle": "Titulo playlist",
+      "playlistTitle": "Título playlist",
       "playlistText": "Texto playlist",
       "playlistUrl": "URL Spotify Playlist",
-      "infoIcon": "Icono",
-      "infoTitle": "Titulo",
-      "infoDescription": "Descripcion",
-      "pageTitle": "Titulo del link",
-      "pageDescription": "Descripcion corta",
+      "infoIcon": "Ícono",
+      "infoTitle": "Título",
+      "infoDescription": "Descripción",
+      "pageTitle": "Título del link",
+      "pageDescription": "Descripción corta",
       "ogImage": "Imagen para redes / WhatsApp"
     },
     "placeholders": {
-      "person1Name": "Ej: Maria",
+      "person1Name": "Ej: María",
       "person2Name": "Ej: Juan",
-      "displayName": "Ej: Maria & Juan",
-      "heroDate": "Ej: 15 de Marzo de 2026",
+      "displayName": "Ej: María & Juan",
+      "heroDate": "Ej: 15 de marzo de 2026",
       "rsvpUrl": "URL de formulario o WhatsApp",
       "socialHandle": "Ej: @miboda2026"
     },
     "hints": {
-      "displayName": "Asi aparecera en la portada y el footer.",
-      "heroBackgroundImage": "Subi este archivo a <code>public/media/hero/</code> en tu repositorio.",
-      "eventTimezone": "Mostramos una opcion por huso horario (UTC) con una ciudad de referencia.",
-      "eventsEnabled": "Debes habilitar al menos un evento para continuar. Los links de calendario incluiran 1, 2 o 3 eventos segun tu seleccion.",
-      "storyPhotos": "La primera foto es obligatoria. Selecciona tus fotos para definir los nombres y luego subelas a <code>public/media/couple/</code> con esos mismos nombres.",
-      "usefulInfoCards": "Para cambiar el icono, busca en <a href=\"https://icon-sets.iconify.design/lucide/\" target=\"_blank\" style=\"color:var(--primary); font-weight:600;\">Lucide Icons</a> y usa nombres como <code>lucide:camera</code>.",
-      "pageTitle": "Tambien sera el nombre de la pestana del navegador.",
-      "ogImage": "Subi este archivo a <code>public/media/og/</code>. Tamano recomendado: 1200x630."
+      "displayName": "Así aparecerá en la portada y el footer.",
+      "heroBackgroundImage": "Subí este archivo a <code>public/media/hero/</code> en tu repositorio.",
+      "eventTimezone": "Mostramos una opción por huso horario (UTC) con una ciudad de referencia.",
+      "eventsEnabled": "Debés habilitar al menos un evento para continuar. Los links de calendario incluirán 1, 2 o 3 eventos según tu selección.",
+      "storyPhotos": "La primera foto es obligatoria. Seleccioná tus fotos para definir los nombres y después subilas a <code>public/media/couple/</code> con esos mismos nombres.",
+      "usefulInfoCards": "Para cambiar el ícono, buscá en <a href=\"https://icon-sets.iconify.design/lucide/\" target=\"_blank\" style=\"color:var(--primary); font-weight:600;\">Lucide Icons</a> y usá nombres como <code>lucide:camera</code>.",
+      "pageTitle": "También será el nombre de la pestaña del navegador.",
+      "ogImage": "Subí este archivo a <code>public/media/og/</code>. Tamaño recomendado: 1200x630."
     },
     "toggles": {
       "religiousEvent": "Ceremonia Religiosa",
       "civilEvent": "Ceremonia Civil",
-      "partyEvent": "Fiesta / Celebracion",
-      "showSection": "Mostrar seccion",
-      "showGiftsSection": "Mostrar seccion Regalos",
+      "partyEvent": "Fiesta / Celebración",
+      "showSection": "Mostrar sección",
+      "showGiftsSection": "Mostrar sección Regalos",
       "showBankData": "Mostrar datos bancarios",
-      "showDressCodeSection": "Mostrar seccion Dress Code",
+      "showDressCodeSection": "Mostrar sección Dress Code",
       "showBrideDisclaimer": "Mostrar aviso colores novia",
-      "showRsvpSection": "Mostrar seccion",
-      "showRsvpLink": "Mostrar boton con link de confirmacion",
-      "showSocialsSection": "Mostrar seccion Redes Sociales",
-      "showPlaylistSection": "Mostrar seccion Playlist",
-      "showUsefulInfoSection": "Mostrar seccion Info Util"
+      "showRsvpSection": "Mostrar sección",
+      "showRsvpLink": "Mostrar botón con link de confirmación",
+      "showSocialsSection": "Mostrar sección Redes Sociales",
+      "showPlaylistSection": "Mostrar sección Playlist",
+      "showUsefulInfoSection": "Mostrar sección Info útil"
     },
     "instructions": {
-      "title": "Instrucciones para publicar tu invitacion",
-      "item1": "Si todavia no creaste tu repo, anda al <a href=\"https://github.com/LucioB16/Altare\" target=\"_blank\">repositorio template</a> y hace click en <strong>\"Use this template\"</strong> -> <strong>\"Create a new repository\"</strong>.",
-      "item2": "En tu nuevo repo, entra a <strong>Settings -> Pages</strong> y en Source elige <strong>\"GitHub Actions\"</strong>.",
-      "item3": "Abri <code>src/data/</code> -> click en <code>wedding.yml</code> -> click en el <strong>lapiz</strong> -> selecciona todo -> pega tu YAML -> <strong>\"Commit changes\"</strong>.",
-      "item4": "<strong>Subi tus fotos</strong> a las carpetas correspondientes en GitHub:<ul style=\"margin-top:0.5rem; list-style: disc; padding-left:1.2rem;\"><li><strong>Foto de bienvenida:</strong> subi a <code>public/media/hero/</code></li><li><strong>Fotos de historia:</strong> subi a <code>public/media/couple/</code></li><li><strong>Imagen para redes:</strong> subi a <code>public/media/og/</code></li></ul>",
-      "item5": "Listo! GitHub Actions va a buildar y publicar tu sitio en unos minutos en <code>https://TU_USUARIO.github.io/TU_REPO/</code>."
+      "title": "Instrucciones para publicar tu invitación",
+      "item1": "Si todavía no creaste tu repo, andá al <a href=\"https://github.com/LucioB16/Altare\" target=\"_blank\">repositorio template</a> y hacé click en <strong>\"Use this template\"</strong> -> <strong>\"Create a new repository\"</strong>.",
+      "item2": "En tu nuevo repo, entrá a <strong>Settings -> Pages</strong> y en Source elegí <strong>\"GitHub Actions\"</strong>.",
+      "item3": "Abrí <code>src/data/</code> -> click en <code>wedding.yml</code> -> click en el <strong>lápiz</strong> -> seleccioná todo -> pegá tu YAML -> <strong>\"Commit changes\"</strong>.",
+      "item4": "<strong>Subí tus fotos</strong> a las carpetas correspondientes en GitHub usando <strong>Add file -> Upload files</strong>:<ul style=\"margin-top:0.5rem; list-style: disc; padding-left:1.2rem;\"><li><strong>Foto de bienvenida:</strong> subila a <code>public/media/hero/</code></li><li><strong>Fotos de historia:</strong> subilas a <code>public/media/couple/</code></li><li><strong>Imagen para redes:</strong> subila a <code>public/media/og/</code></li></ul>",
+      "item5": "¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos minutos en <code>https://TU_USUARIO.github.io/TU_REPO/</code>."
     },
     "time": {
       "timeSuffix": " hs"
@@ -276,48 +276,54 @@
   "contentDefaults": {
     "site": {
       "pageTitle": "Nuestra Boda | Julieta & Lucio",
-      "metaDescription": "Estas invitado a celebrar con nosotros este momento tan especial."
+      "metaDescription": "Estás invitado a celebrar con nosotros este momento tan especial."
     },
     "locale": {
       "language": "es-AR"
     },
     "hero": {
-      "title": "Nos casamos!",
-      "dateDisplay": "21 de Junio de 2026",
-      "city": "Cordoba, Argentina"
+      "title": "¡Nos casamos!",
+      "dateDisplay": "21 de junio de 2026",
+      "city": "Córdoba, Argentina"
     },
     "countdown": {
       "heading": "Cuenta regresiva",
-      "note": "Falta muy poco!"
+      "note": "¡Falta muy poco!"
     },
     "events": {
       "religiousLabel": "Ceremonia Religiosa",
+      "religiousVenue": "Parroquia Sagrado Corazón",
+      "religiousAddress": "Av. Hipólito Yrigoyen 100\nCórdoba Capital",
       "ceremonyLabel": "Ceremonia Civil",
-      "celebrationLabel": "Fiesta"
+      "ceremonyVenue": "Registro Civil Central",
+      "ceremonyAddress": "Chacabuco 737\nNueva Córdoba",
+      "celebrationLabel": "Fiesta",
+      "celebrationVenue": "Estancia La Paz",
+      "celebrationAddress": "Ruta E66 Km 41\nAscochinga, Córdoba"
     },
     "story": {
       "heading": "Nuestra historia",
       "subheading": "Nosotros",
-      "sentence": "Hace 5 anos nos cruzamos por primera vez en aquel viaje y supimos que queriamos caminar juntos para siempre."
+      "sentence": "Hace cinco años nos cruzamos por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre. Entre risas, viajes y momentos compartidos llegamos hasta acá."
     },
     "socials": {
       "heading": "Redes Sociales",
       "itemLabel": "Instagram",
-      "body": "Antes del casamiento vas a recibir un link para subir todas tus fotos y videos."
+      "body": "Antes del casamiento vas a recibir un link donde vas a poder subir todas tus fotos y videos para que no nos perdamos nada de ese día."
     },
     "gifts": {
       "heading": "Regalos",
-      "body": "Lo mas importante es tu presencia, pero si queres hacernos un regalo podes ayudarnos con nuestra luna de miel.",
+      "body": "Lo más importante es tu presencia, pero si querés hacernos un regalo podés ayudarnos con nuestra luna de miel.",
       "buttonLabel": "Ver datos bancarios"
     },
     "dressCode": {
       "title": "Dress Code",
       "tag": "Formal - Elegante",
       "body": "Te esperamos con tu mejor look para celebrar juntos.",
-      "brideDisclaimer": "Como es tradicion, los colores blancos o similares estaran reservados para la novia."
+      "brideDisclaimer": "Como es tradición, los colores blancos o similares estarán reservados para la novia."
     },
     "rsvp": {
-      "text": "Por favor confirma tu asistencia antes del 1 de Mayo.",
+      "text": "Por favor confirmá tu asistencia antes del 1 de mayo.",
       "buttonLabel": "CONFIRMAR ASISTENCIA"
     },
     "calendar": {
@@ -328,13 +334,47 @@
     },
     "playlist": {
       "heading": "Armemos la playlist juntos",
-      "body": "Agrega esas canciones que no pueden faltar en la fiesta."
+      "body": "Agregá esas canciones que no pueden faltar en la fiesta."
     },
     "usefulInfo": {
-      "title": "Info util"
+      "title": "Info útil",
+      "items": [
+        {
+          "title": "Duración",
+          "description": "La fiesta seguirá hasta el amanecer."
+        },
+        {
+          "title": "Estacionamiento",
+          "description": "Hay estacionamiento privado gratuito y vigilado en el lugar."
+        }
+      ]
+    }
+  },
+  "themes": {
+    "jardin-clasico": {
+      "name": "Jardín Clásico",
+      "concept": "Elegancia botánica suave y romántica",
+      "keywordsLabel": "botánico / elegante"
+    },
+    "marfil-editorial": {
+      "name": "Marfil Editorial",
+      "concept": "Minimalismo editorial con lujo silencioso",
+      "keywordsLabel": "editorial / minimal"
+    },
+    "botanica-nocturna": {
+      "name": "Botánica Nocturna",
+      "concept": "Romance dramático en verde profundo",
+      "keywordsLabel": "dramático / nocturno"
+    },
+    "rosa-antiguo": {
+      "name": "Rosa Antigua",
+      "concept": "Clásico romántico con tonos empolvados",
+      "keywordsLabel": "romántico / porcelana"
+    },
+    "galeria-moderna": {
+      "name": "Galería Moderna",
+      "concept": "Contemporáneo artístico con acento expresivo",
+      "keywordsLabel": "moderno / artístico"
     }
   }
 }
-
-
-

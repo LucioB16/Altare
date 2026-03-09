@@ -1,6 +1,6 @@
-﻿# Altare - Wedding Invitation Template
+# Altare - Wedding Invitation Template
 
-English | [Espanol](./README.es.md)
+English | [Español](./README.es.md)
 
 Elegant, static wedding invitation template powered by Astro + Tailwind v4, with a visual config builder.
 

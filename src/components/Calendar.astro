@@ -1,11 +1,12 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
 import { getSiteI18n } from "../i18n/site";
 
-const { calendar, events, locale: localeConfig, couple } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { calendar, events, locale: localeConfig, couple } = data;
 const { t } = getSiteI18n(Astro.url);
 
 const TIMEZONE_ALIASES: Record<string, string> = {

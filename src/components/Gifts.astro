@@ -1,7 +1,8 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 
-const { gifts } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { gifts } = data;
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
 import { getSiteI18n } from "../i18n/site";

@@ -1,8 +1,9 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import { getSiteI18n } from "../i18n/site";
 
-const { couple } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { couple } = data;
 const { t } = getSiteI18n(Astro.url);
 ---
 

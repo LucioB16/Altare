@@ -1012,8 +1012,8 @@
 
 <body>
     <div class="header">
-        <h1>Ã°Å¸â€™Â Wedding Config Builder</h1>
-        <p>ConfigurÃƒÂ¡ tu invitaciÃƒÂ³n de boda en minutos</p>
+        <h1>💍 Wedding Config Builder</h1>
+        <p>Configurá tu invitación de boda en minutos</p>
     </div>
     <div class="progress-bar" id="progressBar"></div>
     <div class="container">
@@ -1022,33 +1022,33 @@
         <div class="step active" data-step="0">
             <p class="step-label">Paso 1 de 9</p>
                         <h2>La Pareja</h2>
-            <p class="desc">Los datos bÃƒÂ¡sicos de los novios.</p>
+            <p class="desc">Los datos básicos de los novios.</p>
 
             <div class="field">
                 <label id="siteLanguageLabel">Idioma del sitio</label>
                 <select id="siteLanguage" onchange="onBuilderLanguageChange(this.value)">
                     <option value="en">English</option>
-                    <option value="es">EspaÃƒÂ±ol</option>
+                    <option value="es">Español</option>
                 </select>
                 <p class="hint" id="siteLanguageHint">Este idioma se guarda en <code>site.language</code> y define el idioma final del sitio.</p>
             </div>
 
             <p class="step-label" style="margin-top:1rem">Tema visual</p>
-            <p class="desc" style="margin-bottom:1rem">ElegÃƒÂ­ la estÃƒÂ©tica general de tu invitaciÃƒÂ³n. Solo cambia estilo visual: colores, tipografÃƒÂ­as y ornamentos.</p>
+            <p class="desc" style="margin-bottom:1rem">Elegí la estética general de tu invitación. Solo cambia estilo visual: colores, tipografías y ornamentos.</p>
             <div id="themeGrid" class="theme-grid"></div>
             <div id="themeMeta" class="theme-meta"></div>
             <hr class="separator">
 
             <div class="row">
                 <div class="field"><label>Nombre Persona 1</label><input type="text" id="p1Name" value="Julieta"
-                        placeholder="Ej: MarÃƒÂ­a"></div>
+                        placeholder="Ej: María"></div>
                 <div class="field"><label>Nombre Persona 2</label><input type="text" id="p2Name" value="Lucio"
                         placeholder="Ej: Juan"></div>
             </div>
             <div class="field">
                 <label>Nombre para mostrar</label>
-                <input type="text" id="displayName" value="Julieta & Lucio" placeholder="Ej: MarÃƒÂ­a & Juan">
-                <p class="hint">AsÃƒÂ­ aparecerÃƒÂ¡ en la portada y el footer.</p>
+                <input type="text" id="displayName" value="Julieta & Lucio" placeholder="Ej: María & Juan">
+                <p class="hint">Así aparecerá en la portada y el footer.</p>
             </div>
         </div>
 
@@ -1056,15 +1056,15 @@
         <div class="step" data-step="1">
             <p class="step-label">Paso 2 de 9</p>
             <h2>Pantalla de bienvenida</h2>
-            <p class="desc">La primera pantalla que verÃƒÂ¡n los invitados al abrir la invitaciÃƒÂ³n.</p>
-            <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="heroTitle" value="Ã‚Â¡Nos casamos!"
+            <p class="desc">La primera pantalla que verán los invitados al abrir la invitación.</p>
+            <div class="field"><label>Título</label><input type="text" id="heroTitle" value="¡Nos casamos!"
                     oninput="updateHeroPreview()"></div>
-            <div class="field"><label>SubtÃƒÂ­tulo (nombres)</label><input type="text" id="heroSubtitle"
+            <div class="field"><label>Subtítulo (nombres)</label><input type="text" id="heroSubtitle"
                     value="Julieta & Lucio" oninput="updateHeroPreview()"></div>
             <div class="field"><label>Fecha para mostrar (texto libre)</label><input type="text" id="heroDate"
                     value="21 de Junio de 2026" placeholder="Ej: 15 de Marzo de 2025"
                     oninput="updateHeroPreview()"></div>
-            <div class="field"><label>Ciudad</label><input type="text" id="heroCity" value="CÃƒÂ³rdoba, Argentina"
+            <div class="field"><label>Ciudad</label><input type="text" id="heroCity" value="Córdoba, Argentina"
                     oninput="updateHeroPreview()"></div>
             <div class="field">
                 <label>Foto de fondo</label>
@@ -1074,7 +1074,7 @@
                         onchange="onFileSelected(this, 'heroBgName'); updateHeroPreview();">
                     <span class="file-picker-name" id="heroBgName">bg.jpg</span>
                 </div>
-                <p class="hint">SubÃƒÂ­ a esta carpeta el archivo que seleccionaste en el Config Builder.
+                <p class="hint">Subí a esta carpeta el archivo que seleccionaste en el Config Builder.
                 </p>
             </div>
             <div class="hero-mock">
@@ -1084,14 +1084,14 @@
                 <div class="hero-mock-body">
                     <div class="hero-mock-screen" id="heroMockScreen">
                         <div class="hero-mock-content">
-                            <div class="hero-mock-title" id="heroMockTitle">Ã‚Â¡Nos casamos!</div>
+                            <div class="hero-mock-title" id="heroMockTitle">¡Nos casamos!</div>
                             <div class="hero-mock-subtitle" id="heroMockSubtitle">Julieta & Lucio</div>
                             <div class="hero-mock-meta">
                                 <div class="hero-mock-date" id="heroMockDate">21 de Junio de 2026</div>
-                                <div class="hero-mock-city" id="heroMockCity">CÃƒÂ³rdoba, Argentina</div>
+                                <div class="hero-mock-city" id="heroMockCity">Córdoba, Argentina</div>
                             </div>
                         </div>
-                        <div class="hero-mock-scroll">Ã¢â€ â€œ</div>
+                        <div class="hero-mock-scroll">↓</div>
                     </div>
                 </div>
             </div>
@@ -1101,15 +1101,15 @@
         <div class="step" data-step="2">
             <p class="step-label">Paso 3 de 9</p>
             <h2>Ceremonias y Fiesta</h2>
-            <p class="desc">Los detalles de los eventos. PodÃƒÂ©s activar o desactivar cada uno.</p>
+            <p class="desc">Los detalles de los eventos. Podés activar o desactivar cada uno.</p>
 
             <!-- Zona horaria -->
             <div class="field">
                 <label>Zona horaria de los eventos</label>
                 <select id="eventTimezone" class="tz-select" data-default-tz="America/Buenos_Aires">
-                    <option value="America/Buenos_Aires">Cargando zonas horariasÃ¢â‚¬Â¦</option>
+                    <option value="America/Buenos_Aires">Cargando zonas horarias…</option>
                 </select>
-                <p class="hint">Mostramos una opciÃƒÂ³n por huso horario (UTC) con una regiÃƒÂ³n/ciudad de referencia.</p>
+                <p class="hint">Mostramos una opción por huso horario (UTC) con una región/ciudad de referencia.</p>
             </div>
 
             <hr class="separator">
@@ -1128,9 +1128,9 @@
                     <div class="field"><label>Hora</label><input type="time" id="religiousTime" value="17:00"></div>
                 </div>
                 <div class="field"><label>Nombre del lugar</label><input type="text" id="religiousVenue"
-                        value="Parroquia Sagrado CorazÃƒÂ³n"></div>
-                <div class="field"><label>DirecciÃƒÂ³n (una lÃƒÂ­nea por renglÃƒÂ³n)</label><textarea id="religiousAddress">Av. HipÃƒÂ³lito Yrigoyen 100
-CÃƒÂ³rdoba Capital</textarea></div>
+                        value="Parroquia Sagrado Corazón"></div>
+                <div class="field"><label>Dirección (una línea por renglón)</label><textarea id="religiousAddress">Av. Hipólito Yrigoyen 100
+Córdoba Capital</textarea></div>
                 <div class="field"><label>URL Google Maps</label><input type="text" id="religiousMaps"
                         value="https://maps.app.goo.gl/"></div>
             </div>
@@ -1152,8 +1152,8 @@ CÃƒÂ³rdoba Capital</textarea></div>
                 </div>
                 <div class="field"><label>Nombre del lugar</label><input type="text" id="ceremonyVenue"
                         value="Registro Civil Central"></div>
-                <div class="field"><label>DirecciÃƒÂ³n (una lÃƒÂ­nea por renglÃƒÂ³n)</label><textarea id="ceremonyAddress">Chacabuco 737
-Nueva CÃƒÂ³rdoba</textarea></div>
+                <div class="field"><label>Dirección (una línea por renglón)</label><textarea id="ceremonyAddress">Chacabuco 737
+Nueva Córdoba</textarea></div>
                 <div class="field"><label>URL Google Maps</label><input type="text" id="ceremonyMaps"
                         value="https://maps.app.goo.gl/"></div>
             </div>
@@ -1162,7 +1162,7 @@ Nueva CÃƒÂ³rdoba</textarea></div>
 
             <!-- Celebration -->
             <div class="toggle-row">
-                <span>Fiesta / CelebraciÃƒÂ³n</span>
+                <span>Fiesta / Celebración</span>
                 <div class="toggle on" data-field="celebrationEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="celebrationFields">
@@ -1175,38 +1175,38 @@ Nueva CÃƒÂ³rdoba</textarea></div>
                 </div>
                 <div class="field"><label>Nombre del lugar</label><input type="text" id="celebrationVenue"
                         value="Estancia La Paz"></div>
-                <div class="field"><label>DirecciÃƒÂ³n</label><textarea id="celebrationAddress">Ruta E66 Km 41
-Ascochinga, CÃƒÂ³rdoba</textarea></div>
+                <div class="field"><label>Dirección</label><textarea id="celebrationAddress">Ruta E66 Km 41
+Ascochinga, Córdoba</textarea></div>
                 <div class="field"><label>URL Google Maps</label><input type="text" id="celebrationMaps"
                         value="https://maps.app.goo.gl/"></div>
             </div>
-            <p class="hint" style="margin-top:1rem">DebÃƒÂ©s habilitar al menos un evento para continuar.
-                En la pÃƒÂ¡gina generada, la descarga para Google Calendar, Outlook o iOS va a crear 1, 2 o 3 archivos
-                segÃƒÂºn cuÃƒÂ¡ntos eventos tengas habilitados.</p>
+            <p class="hint" style="margin-top:1rem">Debés habilitar al menos un evento para continuar.
+                En la página generada, la descarga para Google Calendar, Outlook o iOS va a crear 1, 2 o 3 archivos
+                según cuántos eventos tengas habilitados.</p>
         </div>
 
         <!-- ============ STEP 4: Story ============ -->
         <div class="step" data-step="3">
             <p class="step-label">Paso 4 de 9</p>
             <h2>Nuestra Historia</h2>
-            <p class="desc">ContÃƒÂ¡ la historia de la pareja con texto y hasta 4 fotos.</p>
+            <p class="desc">Contá la historia de la pareja con texto y hasta 4 fotos.</p>
             <div class="toggle-row">
-                <span>Mostrar secciÃƒÂ³n</span>
+                <span>Mostrar sección</span>
                 <div class="toggle on" data-field="storyEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="storyFields">
-                <div class="field"><label>SubtÃƒÂ­tulo</label><input type="text" id="storySubheading" value="Nosotros"
+                <div class="field"><label>Subtítulo</label><input type="text" id="storySubheading" value="Nosotros"
                         oninput="updateStoryPreview()"></div>
-                <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="storyHeading" value="Nuestra historia"
+                <div class="field"><label>Título</label><input type="text" id="storyHeading" value="Nuestra historia"
                         oninput="updateStoryPreview()"></div>
                 <div class="field"><label>Texto</label><textarea id="storySentence" oninput="updateStoryPreview()"
-                        rows="3">Hace 5 aÃƒÂ±os cruzamos miradas por primera vez en aquel viaje, y desde ese dÃƒÂ­a supimos que querÃƒÂ­amos caminar juntos para siempre.</textarea>
+                        rows="3">Hace 5 años cruzamos miradas por primera vez en aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</textarea>
                 </div>
 
-                <p class="step-label" style="margin-top:1rem">Fotos (1Ã¢â‚¬â€œ4)</p>
+                <p class="step-label" style="margin-top:1rem">Fotos (1–4)</p>
                 <p class="hint" style="margin-bottom:1rem">La primera foto es obligatoria. Las otras son opcionales.
-                    SeleccionÃƒÂ¡ tus fotos para establecer los nombres de archivo.
-                    DespuÃƒÂ©s subÃƒÂ­ las fotos a la carpeta <code>public/media/couple/</code> en tu repositorio con esos
+                    Seleccioná tus fotos para establecer los nombres de archivo.
+                    Después subí las fotos a la carpeta <code>public/media/couple/</code> en tu repositorio con esos
                     mismos
                     nombres.</p>
                 <div class="dynamic-list" id="photoItems">
@@ -1247,8 +1247,8 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
                         <div class="story-mock-gallery count-1" id="storyMockGallery">
                             <div class="story-mock-img" id="storyMockImg1">01.jpg</div>
                         </div>
-                        <div class="story-mock-text" id="storyMockText">Hace 5 aÃƒÂ±os cruzamos miradas por primera vez en
-                            aquel viaje, y desde ese dÃƒÂ­a supimos que querÃƒÂ­amos caminar juntos para siempre.</div>
+                        <div class="story-mock-text" id="storyMockText">Hace 5 años cruzamos miradas por primera vez en
+                            aquel viaje, y desde ese día supimos que queríamos caminar juntos para siempre.</div>
                     </div>
                 </div>
 
@@ -1259,22 +1259,22 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         <div class="step" data-step="4">
             <p class="step-label">Paso 5 de 9</p>
             <h2>Regalos y Dress Code</h2>
-            <p class="desc">Datos bancarios y cÃƒÂ³digo de vestimenta.</p>
+            <p class="desc">Datos bancarios y código de vestimenta.</p>
 
-            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Regalos</span>
+            <div class="toggle-row"><span>Mostrar sección Regalos</span>
                 <div class="toggle on" data-field="giftsEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="giftsFields">
-                <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="giftsHeading" value="Regalos"></div>
+                <div class="field"><label>Título</label><input type="text" id="giftsHeading" value="Regalos"></div>
                 <div class="field"><label>Texto</label><textarea
-                        id="giftsBody">Lo mÃƒÂ¡s importante es tu presencia, pero si deseÃƒÂ¡s hacernos un regalo podÃƒÂ©s ayudarnos con nuestra luna de miel.</textarea>
+                        id="giftsBody">Lo más importante es tu presencia, pero si deseás hacernos un regalo podés ayudarnos con nuestra luna de miel.</textarea>
                 </div>
             </div>
             <div class="toggle-row"><span>Mostrar datos bancarios</span>
                 <div class="toggle on" data-field="bankEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="bankFields">
-                <div class="field"><label>Texto del botÃƒÂ³n</label><input type="text" id="giftsButtonLabel"
+                <div class="field"><label>Texto del botón</label><input type="text" id="giftsButtonLabel"
                         value="Ver datos bancarios"></div>
                 <div class="row">
                     <div class="field"><label>Titular</label><input type="text" id="bankHolder" value="NOMBRE APELLIDO">
@@ -1292,12 +1292,12 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
 
             <hr class="separator">
 
-            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Dress Code</span>
+            <div class="toggle-row"><span>Mostrar sección Dress Code</span>
                 <div class="toggle on" data-field="dressCodeEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="dressCodeFields">
-                <div class="field"><label>TÃƒÂ­tulo</label><input type="text" id="dcTitle" value="Dress Code"></div>
-                <div class="field"><label>Etiqueta</label><input type="text" id="dcTag" value="Formal Ã¢â‚¬â€œ Elegante"></div>
+                <div class="field"><label>Título</label><input type="text" id="dcTitle" value="Dress Code"></div>
+                <div class="field"><label>Etiqueta</label><input type="text" id="dcTag" value="Formal – Elegante"></div>
                 <div class="field"><label>Texto</label><input type="text" id="dcBody"
                         value="Te esperamos con tu mejor look para celebrar juntos."></div>
             </div>
@@ -1306,7 +1306,7 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
             </div>
             <div id="brideDisclaimerFields">
                 <div class="field"><label>Texto del aviso</label><input type="text" id="brideDisclaimerText"
-                        value="Como es tradiciÃƒÂ³n, los colores blancos, o similares, estarÃƒÂ¡n reservados para la novia.">
+                        value="Como es tradición, los colores blancos, o similares, estarán reservados para la novia.">
                 </div>
             </div>
         </div>
@@ -1314,23 +1314,23 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         <!-- ============ STEP 6: RSVP ============ -->
         <div class="step" data-step="5">
             <p class="step-label">Paso 6 de 9</p>
-            <h2>ConfirmaciÃƒÂ³n de asistencia</h2>
-            <p class="desc">ConfigurÃƒÂ¡ cÃƒÂ³mo los invitados confirman.</p>
-            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n</span>
+            <h2>Confirmación de asistencia</h2>
+            <p class="desc">Configurá cómo los invitados confirman.</p>
+            <div class="toggle-row"><span>Mostrar sección</span>
                 <div class="toggle on" data-field="rsvpEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="rsvpFields">
                 <div class="field"><label>Texto</label><textarea
-                        id="rsvpText">Por favor confirmÃƒÂ¡ tu asistencia antes del 1 de Mayo.</textarea></div>
-                <div class="field"><label>Fecha lÃƒÂ­mite</label><input type="date" id="rsvpDeadline" value="2026-05-01">
+                        id="rsvpText">Por favor confirmá tu asistencia antes del 1 de Mayo.</textarea></div>
+                <div class="field"><label>Fecha límite</label><input type="date" id="rsvpDeadline" value="2026-05-01">
                 </div>
-                <div class="toggle-row"><span>Mostrar botÃƒÂ³n con link de confirmaciÃƒÂ³n</span>
+                <div class="toggle-row"><span>Mostrar botón con link de confirmación</span>
                     <div class="toggle" data-field="rsvpLinkEnabled" onclick="toggleSwitch(this)"></div>
                 </div>
                 <div id="rsvpLinkFields" style="display:none">
                     <div class="field"><label>URL del enlace</label><input type="text" id="rsvpUrl"
                             value="https://wa.me/123456789" placeholder="URL de formulario o WhatsApp"></div>
-                    <div class="field"><label>Texto del botÃƒÂ³n</label><input type="text" id="rsvpLabel"
+                    <div class="field"><label>Texto del botón</label><input type="text" id="rsvpLabel"
                             value="CONFIRMAR ASISTENCIA"></div>
                 </div>
             </div>
@@ -1340,14 +1340,14 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         <div class="step" data-step="6">
             <p class="step-label">Paso 7 de 9</p>
             <h2>Extras</h2>
-            <p class="desc">Redes sociales, playlist e info ÃƒÂºtil.</p>
+            <p class="desc">Redes sociales, playlist e info útil.</p>
 
-            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Redes Sociales</span>
+            <div class="toggle-row"><span>Mostrar sección Redes Sociales</span>
                 <div class="toggle on" data-field="socialsEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="socialsFields">
                 <div class="field"><label>Texto redes</label><textarea
-                        id="socialsBody">AdemÃƒÂ¡s, antes del casamiento, recibirÃƒÂ¡s un link donde podrÃƒÂ¡s subir todas tus fotos y videos.</textarea>
+                        id="socialsBody">Además, antes del casamiento, recibirás un link donde podrás subir todas tus fotos y videos.</textarea>
                 </div>
                 <div class="field"><label>URL Instagram</label><input type="text" id="socialUrl"
                         value="https://instagram.com"></div>
@@ -1357,55 +1357,55 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
 
             <hr class="separator">
 
-            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Playlist</span>
+            <div class="toggle-row"><span>Mostrar sección Playlist</span>
                 <div class="toggle on" data-field="playlistEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="playlistFields">
-                <div class="field"><label>TÃƒÂ­tulo playlist</label><input type="text" id="playlistHeading"
+                <div class="field"><label>Título playlist</label><input type="text" id="playlistHeading"
                         value="Armemos la playlist juntos"></div>
                 <div class="field"><label>Texto playlist</label><input type="text" id="playlistBody"
-                        value="AgregÃƒÂ¡ esas canciones que no pueden faltar en la fiesta."></div>
+                        value="Agregá esas canciones que no pueden faltar en la fiesta."></div>
                 <div class="field"><label>URL Spotify Playlist</label><input type="text" id="playlistUrl"
                         value="https://open.spotify.com/playlist/"></div>
             </div>
 
             <hr class="separator">
 
-            <div class="toggle-row"><span>Mostrar secciÃƒÂ³n Info ÃƒÅ¡til</span>
+            <div class="toggle-row"><span>Mostrar sección Info Útil</span>
                 <div class="toggle on" data-field="usefulInfoEnabled" onclick="toggleSwitch(this)"></div>
             </div>
             <div id="usefulInfoFields">
-                <p class="step-label" style="margin-top:1rem">Cards de Info ÃƒÅ¡til</p>
-                <p class="desc" style="margin-bottom:1rem">Para cambiar el ÃƒÂ­cono, buscÃƒÂ¡ en <a
+                <p class="step-label" style="margin-top:1rem">Cards de Info Útil</p>
+                <p class="desc" style="margin-bottom:1rem">Para cambiar el ícono, buscá en <a
                         href="https://icon-sets.iconify.design/lucide/" target="_blank"
-                        style="color:var(--primary); font-weight:600;">Lucide Icons</a> y copiÃƒÂ¡ el nombre. Asegurate de
-                    anteponerle "lucide:". Ejemplo: si el ÃƒÂ­cono se llama "camera", escribÃƒÂ­ <code>lucide:camera</code>.
+                        style="color:var(--primary); font-weight:600;">Lucide Icons</a> y copiá el nombre. Asegurate de
+                    anteponerle "lucide:". Ejemplo: si el ícono se llama "camera", escribí <code>lucide:camera</code>.
                 </p>
                 <div class="dynamic-list" id="infoItems">
                     <div class="dynamic-item">
                         <div class="row">
-                            <div class="field"><label>ÃƒÂcono</label><input type="text" class="infoIcon"
+                            <div class="field"><label>Ícono</label><input type="text" class="infoIcon"
                                     value="lucide:clock">
                                 <p class="hint"><a href="https://icon-sets.iconify.design/" target="_blank">Ver
-                                        ÃƒÂ­conos</a>
+                                        íconos</a>
                                 </p>
                             </div>
-                            <div class="field"><label>TÃƒÂ­tulo</label><input type="text" class="infoTitle"
-                                    value="DuraciÃƒÂ³n">
+                            <div class="field"><label>Título</label><input type="text" class="infoTitle"
+                                    value="Duración">
                             </div>
                         </div>
-                        <div class="field"><label>DescripciÃƒÂ³n</label><input type="text" class="infoDesc"
-                                value="La fiesta se extenderÃƒÂ¡ hasta el amanecer."></div>
+                        <div class="field"><label>Descripción</label><input type="text" class="infoDesc"
+                                value="La fiesta se extenderá hasta el amanecer."></div>
                     </div>
                     <div class="dynamic-item">
-                        <button class="btn-remove" onclick="this.parentElement.remove()">Ã¢Å“â€¢ Quitar</button>
+                        <button class="btn-remove" onclick="this.parentElement.remove()">✕ Quitar</button>
                         <div class="row">
-                            <div class="field"><label>ÃƒÂcono</label><input type="text" class="infoIcon"
+                            <div class="field"><label>Ícono</label><input type="text" class="infoIcon"
                                     value="lucide:parking-circle"></div>
-                            <div class="field"><label>TÃƒÂ­tulo</label><input type="text" class="infoTitle"
+                            <div class="field"><label>Título</label><input type="text" class="infoTitle"
                                     value="Estacionamiento"></div>
                         </div>
-                        <div class="field"><label>DescripciÃƒÂ³n</label><input type="text" class="infoDesc"
+                        <div class="field"><label>Descripción</label><input type="text" class="infoDesc"
                                 value="Hay estacionamiento privado y vigilado gratuito en el lugar."></div>
                     </div>
                 </div>
@@ -1418,15 +1418,15 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         <div class="step" data-step="7">
             <p class="step-label">Paso 8 de 9</p>
             <h2>Imagen para compartir</h2>
-            <p class="desc">ConfigurÃƒÂ¡ cÃƒÂ³mo se va a ver el link de tu invitaciÃƒÂ³n cuando lo compartas por WhatsApp u otras
+            <p class="desc">Configurá cómo se va a ver el link de tu invitación cuando lo compartas por WhatsApp u otras
                 redes.</p>
 
-            <div class="field"><label>TÃƒÂ­tulo del link</label><input type="text" id="pageTitle"
+            <div class="field"><label>Título del link</label><input type="text" id="pageTitle"
                     value="Nuestra Boda | Juli & Lucio" oninput="updateOgPreview()">
-                <p class="hint">TambiÃƒÂ©n serÃƒÂ¡ el nombre de la pestaÃƒÂ±a en el navegador.</p>
+                <p class="hint">También será el nombre de la pestaña en el navegador.</p>
             </div>
-            <div class="field"><label>DescripciÃƒÂ³n corta</label><input type="text" id="metaDesc"
-                    value="EstÃƒÂ¡s invitado a celebrar con nosotros este momento tan especial."
+            <div class="field"><label>Descripción corta</label><input type="text" id="metaDesc"
+                    value="Estás invitado a celebrar con nosotros este momento tan especial."
                     oninput="updateOgPreview()"></div>
 
             <div class="field">
@@ -1437,8 +1437,8 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
                         onchange="onFileSelected(this, 'ogFileName'); updateOgPreview();">
                     <span class="file-picker-name" id="ogFileName">og.jpg</span>
                 </div>
-                <p class="hint">SubÃƒÂ­ a esta carpeta el archivo que seleccionaste en el Config Builder.
-                    TamaÃƒÂ±o recomendado: 1200Ãƒâ€”630px.</p>
+                <p class="hint">Subí a esta carpeta el archivo que seleccionaste en el Config Builder.
+                    Tamaño recomendado: 1200×630px.</p>
             </div>
 
             <div class="og-mock">
@@ -1447,7 +1447,7 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
                 </div>
                 <div class="og-mock-content">
                     <div class="og-mock-title" id="ogMockTitle">Nuestra Boda | Juli & Lucio</div>
-                    <div class="og-mock-desc" id="ogMockDesc">EstÃƒÂ¡s invitado a celebrar con nosotros este momento tan
+                    <div class="og-mock-desc" id="ogMockDesc">Estás invitado a celebrar con nosotros este momento tan
                         especial.</div>
                     <div class="og-mock-domain" id="ogMockDomain">tuusuario.github.io/tu-repo</div>
                 </div>
@@ -1457,43 +1457,43 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         <!-- ============ STEP 9: Output ============ -->
         <div class="step" data-step="8">
             <p class="step-label">Paso 9 de 9</p>
-            <h2>Ã‚Â¡Listo! Tu configuraciÃƒÂ³n</h2>
-            <p class="desc">DescargÃƒÂ¡ el archivo y seguÃƒÂ­ las instrucciones.</p>
+            <h2>¡Listo! Tu configuración</h2>
+            <p class="desc">Descargá el archivo y seguí las instrucciones.</p>
 
             <div class="output-area" id="yamlOutput"></div>
             <div class="output-actions">
-                <button class="btn-download" onclick="downloadYaml()">Ã¢Â¬â€¡ Descargar wedding.yml</button>
-                <button class="btn-copy" onclick="copyYaml()">Ã°Å¸â€œâ€¹ Copiar al portapapeles</button>
+                <button class="btn-download" onclick="downloadYaml()">⬇ Descargar wedding.yml</button>
+                <button class="btn-copy" onclick="copyYaml()">📋 Copiar al portapapeles</button>
             </div>
 
             <div class="instructions">
-                <h3>Ã°Å¸â€œâ€¹ Instrucciones para publicar tu invitaciÃƒÂ³n</h3>
+                <h3>📋 Instrucciones para publicar tu invitación</h3>
                 <ol>
-                    <li>Si todavÃƒÂ­a no creaste tu repo, andÃƒÂ¡ al <a href="https://github.com/LucioB16/Altare"
+                    <li>Si todavía no creaste tu repo, andá al <a href="https://github.com/LucioB16/Altare"
                             target="_blank">repositorio
-                            template</a> y hacÃƒÂ© click en <strong>"Use this template"</strong> Ã¢â€ â€™ <strong>"Create a new
+                            template</a> y hacé click en <strong>"Use this template"</strong> → <strong>"Create a new
                             repository"</strong>.</li>
-                    <li>En tu nuevo repo, andÃƒÂ¡ a <strong>Settings Ã¢â€ â€™ Pages</strong> y en "Source" elegÃƒÂ­ <strong>"GitHub
+                    <li>En tu nuevo repo, andá a <strong>Settings → Pages</strong> y en "Source" elegí <strong>"GitHub
                             Actions"</strong>.</li>
-                    <li>NavegÃƒÂ¡ a <code>src/data/</code> Ã¢â€ â€™ click en <code>wedding.yml</code> Ã¢â€ â€™ click en el <strong>lÃƒÂ¡piz
-                            Ã¢Å“ÂÃ¯Â¸Â</strong> Ã¢â€ â€™ SeleccionÃƒÂ¡ todo (Ctrl+A) Ã¢â€ â€™ PegÃƒÂ¡ tu YAML Ã¢â€ â€™ <strong>"Commit changes"</strong>.
+                    <li>Navegá a <code>src/data/</code> → click en <code>wedding.yml</code> → click en el <strong>lápiz
+                            ✏️</strong> → Seleccioná todo (Ctrl+A) → Pegá tu YAML → <strong>"Commit changes"</strong>.
                     </li>
-                    <li><strong>SubÃƒÂ­ tus fotos</strong> arrastrÃƒÂ¡ndolas a las carpetas correspondientes en GitHub:
+                    <li><strong>Subí tus fotos</strong> arrastrándolas a las carpetas correspondientes en GitHub:
                         <ul style="margin-top:0.5rem; list-style: disc; padding-left:1.2rem;">
-                            <li><strong>Foto de bienvenida:</strong> subÃƒÂ­ el archivo que seleccionaste en el Config Builder a
+                            <li><strong>Foto de bienvenida:</strong> subí el archivo que seleccionaste en el Config Builder a
                                 <code>public/media/hero/</code>
                             </li>
-                            <li><strong>Fotos de historia:</strong> subÃƒÂ­ tus fotos con los nombres indicados a
+                            <li><strong>Fotos de historia:</strong> subí tus fotos con los nombres indicados a
                                 <code>public/media/couple/</code>
                             </li>
-                            <li><strong>Imagen para redes:</strong> subÃƒÂ­ el archivo que seleccionaste en el Config Builder a
+                            <li><strong>Imagen para redes:</strong> subí el archivo que seleccionaste en el Config Builder a
                                 <code>public/media/og/</code>
                             </li>
                         </ul>
                     </li>
-                    <li style="margin-top:0.5rem;">Ã‚Â¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos
+                    <li style="margin-top:0.5rem;">¡Listo! GitHub Actions va a buildear y publicar tu sitio en unos
                         minutos en
-                        <code>https://TU_USUARIO.github.io/TU_REPO/</code> Ã°Å¸Å½â€°<br>
+                        <code>https://TU_USUARIO.github.io/TU_REPO/</code> 🎉<br>
                         <em>Nota: la URL final se forma con tu usuario y el nombre que le pusiste al repositorio. El
                             nombre para mostrar de la pareja no cambia esa URL.</em>
                     </li>
@@ -1503,8 +1503,8 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
 
         <!-- Navigation -->
         <div class="nav">
-            <button class="btn btn-prev" id="btnPrev" onclick="prevStep()" style="display:none">Ã¢â€ Â Anterior</button>
-            <button class="btn btn-next" id="btnNext" onclick="nextStep()">Siguiente Ã¢â€ â€™</button>
+            <button class="btn btn-prev" id="btnPrev" onclick="prevStep()" style="display:none">← Anterior</button>
+            <button class="btn btn-next" id="btnNext" onclick="nextStep()">Siguiente →</button>
         </div>
     </div>
 
@@ -1566,7 +1566,8 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         }
 
         function contentDefault(path, fallback = '') {
-            return t(`contentDefaults.${path}`, fallback);
+            const value = builderMessages ? getByPath(builderMessages, `contentDefaults.${path}`) : undefined;
+            return value === undefined ? fallback : value;
         }
 
         function normalizeBuilderLocale(localeCode) {
@@ -1724,6 +1725,24 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
         }
 
         const localizedDefaultState = new Map();
+        const builderInitialValueState = new Map();
+
+        function shouldReplaceLocalizedValue(key, currentValue, previousDefault) {
+            const initialValue = builderInitialValueState.has(key)
+                ? builderInitialValueState.get(key)
+                : currentValue;
+
+            if (!builderInitialValueState.has(key)) {
+                builderInitialValueState.set(key, currentValue);
+            }
+
+            return (
+                currentValue === '' ||
+                /[\u00C2\u00C3\u00E2\u00F0\uFFFD]/.test(currentValue) ||
+                currentValue === initialValue ||
+                (typeof previousDefault === 'string' && currentValue === previousDefault)
+            );
+        }
 
         function setText(selector, value) {
             const node = document.querySelector(selector);
@@ -1997,8 +2016,14 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
                 ['heroDate', contentDefault('hero.dateDisplay', 'June 21, 2026')],
                 ['heroCity', contentDefault('hero.city', 'Cordoba, Argentina')],
                 ['religiousLabel', contentDefault('events.religiousLabel', 'Religious Ceremony')],
+                ['religiousVenue', contentDefault('events.religiousVenue', 'Sacred Heart Parish')],
+                ['religiousAddress', contentDefault('events.religiousAddress', 'Av. Hipolito Yrigoyen 100\nCordoba Capital')],
                 ['ceremonyLabel', contentDefault('events.ceremonyLabel', 'Civil Ceremony')],
+                ['ceremonyVenue', contentDefault('events.ceremonyVenue', 'Central Civil Registry')],
+                ['ceremonyAddress', contentDefault('events.ceremonyAddress', 'Chacabuco 737\nNueva Cordoba')],
                 ['celebrationLabel', contentDefault('events.celebrationLabel', 'Party')],
+                ['celebrationVenue', contentDefault('events.celebrationVenue', 'Estancia La Paz')],
+                ['celebrationAddress', contentDefault('events.celebrationAddress', 'Ruta E66 Km 41\nAscochinga, Cordoba')],
                 ['storySubheading', contentDefault('story.subheading', 'Us')],
                 ['storyHeading', contentDefault('story.heading', 'Our story')],
                 ['storySentence', contentDefault('story.sentence', 'Tell your story here.')],
@@ -2022,11 +2047,7 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
 
                 const previousDefault = localizedDefaultState.get(id);
                 const currentValue = input.value;
-                const looksMojibake = /Ã|â|ðŸ/.test(currentValue);
-                const shouldReplace =
-                    currentValue === '' ||
-                    looksMojibake ||
-                    (typeof previousDefault === 'string' && currentValue === previousDefault);
+                const shouldReplace = shouldReplaceLocalizedValue(id, currentValue, previousDefault);
 
                 if (shouldReplace) {
                     input.value = value;
@@ -2034,6 +2055,43 @@ Ascochinga, CÃƒÂ³rdoba</textarea></div>
 
                 localizedDefaultState.set(id, value);
             });
+
+            const usefulInfoItems = contentDefault('usefulInfo.items', []);
+            if (Array.isArray(usefulInfoItems)) {
+                document.querySelectorAll('#infoItems .dynamic-item').forEach((item, index) => {
+                    const localizedItem = usefulInfoItems[index];
+                    if (!localizedItem || typeof localizedItem !== 'object') return;
+
+                    const titleInput = item.querySelector('.infoTitle');
+                    const descInput = item.querySelector('.infoDesc');
+
+                    if (titleInput && 'value' in titleInput && typeof localizedItem.title === 'string') {
+                        const currentValue = titleInput.value;
+                        const key = `infoTitle:${index}`;
+                        const previousDefault = localizedDefaultState.get(key);
+                        const shouldReplace = shouldReplaceLocalizedValue(key, currentValue, previousDefault);
+
+                        if (shouldReplace) {
+                            titleInput.value = localizedItem.title;
+                        }
+
+                        localizedDefaultState.set(key, localizedItem.title);
+                    }
+
+                    if (descInput && 'value' in descInput && typeof localizedItem.description === 'string') {
+                        const currentValue = descInput.value;
+                        const key = `infoDesc:${index}`;
+                        const previousDefault = localizedDefaultState.get(key);
+                        const shouldReplace = shouldReplaceLocalizedValue(key, currentValue, previousDefault);
+
+                        if (shouldReplace) {
+                            descInput.value = localizedItem.description;
+                        }
+
+                        localizedDefaultState.set(key, localizedItem.description);
+                    }
+                });
+            }
         }
 
         async function initializeBuilderLocale() {

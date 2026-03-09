@@ -56,6 +56,16 @@
 
     const getSelectedTheme = () => getThemeById(selectedThemeId) || fallbackTheme;
 
+    const getLocalizedTheme = (theme) => ({
+        ...theme,
+        name: t(`themes.${theme.id}.name`, theme.name),
+        concept: t(`themes.${theme.id}.concept`, theme.concept),
+        keywordsLabel: t(
+            `themes.${theme.id}.keywordsLabel`,
+            Array.isArray(theme.keywords) ? theme.keywords.slice(0, 2).join(" / ") : ""
+        ),
+    });
+
     const cssVarsFromTheme = (theme) => ({
         "--font-sans": theme.fonts.sans,
         "--font-display": theme.fonts.display,
@@ -92,6 +102,7 @@
     };
 
     const themeCard = (theme, isSelected) => {
+        const localizedTheme = getLocalizedTheme(theme);
         const swatches = [
             theme.colors.background,
             theme.colors.primary,
@@ -122,8 +133,8 @@
             <button type="button" class="theme-card${isSelected ? " is-active" : ""}" data-theme-id="${theme.id}" style='${cardStyle}'>
                 <div class="theme-card__header">
                     <div>
-                        <p class="theme-card__name">${theme.name}</p>
-                        <p class="theme-card__concept">${theme.concept}</p>
+                        <p class="theme-card__name">${localizedTheme.name}</p>
+                        <p class="theme-card__concept">${localizedTheme.concept}</p>
                     </div>
                     ${isSelected ? `<span class="theme-card__status" aria-hidden="true">${t("builder.themeRuntime.selected", "Selected")}</span>` : ""}
                 </div>
@@ -144,7 +155,7 @@
                 </div>
                 <div class="theme-card__sample">
                     <span class="theme-card__sample-display">Aa</span>
-                    <span class="theme-card__sample-sans">${theme.keywords.slice(0, 2).join(" / ")}</span>
+                    <span class="theme-card__sample-sans">${localizedTheme.keywordsLabel}</span>
                 </div>
             </button>
         `;
@@ -178,9 +189,10 @@
         }
 
         const theme = getSelectedTheme();
+        const localizedTheme = getLocalizedTheme(theme);
         meta.innerHTML = `
-            <p class="theme-meta__name">${t("builder.themeRuntime.selectedTheme", "Selected theme")}: ${theme.name}</p>
-            <p class="theme-meta__keywords">${theme.keywords.join(" / ")}</p>
+            <p class="theme-meta__name">${t("builder.themeRuntime.selectedTheme", "Selected theme")}: ${localizedTheme.name}</p>
+            <p class="theme-meta__keywords">${localizedTheme.keywordsLabel}</p>
         `;
     };
 

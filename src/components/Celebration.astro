@@ -1,8 +1,9 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
 
-const { events } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { events } = data;
 const celebration = events.celebration;
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";

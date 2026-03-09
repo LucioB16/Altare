@@ -1,8 +1,9 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import { getSiteI18n } from "../i18n/site";
 
-const { countdown } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { countdown } = data;
 const { t } = getSiteI18n(Astro.url);
 const eventDate = countdown.target;
 const eventHeading = countdown.heading;

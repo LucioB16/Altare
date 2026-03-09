@@ -26,9 +26,10 @@ const showReligiousCeremony = Boolean(
   title={data.site.pageTitle}
   description={data.site.meta.description}
   ogImage={data.site.meta.ogImage}
+  data={data}
 >
-  {data.hero.enabled && <Hero />}
-  {data.sections.countdown.enabled && <Count />}
+  {data.hero.enabled && <Hero data={data} />}
+  {data.sections.countdown.enabled && <Count data={data} />}
   {
     showReligiousCeremony && (
       <Ceremony
@@ -36,6 +37,7 @@ const showReligiousCeremony = Boolean(
         dividerType="flower"
         bgClass="bg-surface"
         forceVisible={showAllSectionsInDemo}
+        data={data}
       />
     )
   }
@@ -45,16 +47,17 @@ const showReligiousCeremony = Boolean(
         eventKey="ceremony"
         dividerType="small"
         bgClass="bg-surface-alt"
+        data={data}
       />
     )
   }
-  {data.events.celebration.enabled && <Celebration />}
-  {data.sections.story.enabled && <Story />}
-  {data.sections.socials.enabled && <Socials />}
-  {data.sections.gifts.enabled && <Gifts />}
-  {data.sections.dressCode.enabled && <DressCode />}
-  {data.sections.rsvp.enabled && <RSVP />}
-  {data.sections.calendar.enabled && <Calendar />}
-  {data.sections.playlist.enabled && <Playlist />}
-  {data.sections.usefulInfo.enabled && <UsefulInfo />}
+  {data.events.celebration.enabled && <Celebration data={data} />}
+  {data.sections.story.enabled && <Story data={data} />}
+  {data.sections.socials.enabled && <Socials data={data} />}
+  {data.sections.gifts.enabled && <Gifts data={data} />}
+  {data.sections.dressCode.enabled && <DressCode data={data} />}
+  {data.sections.rsvp.enabled && <RSVP data={data} />}
+  {data.sections.calendar.enabled && <Calendar data={data} />}
+  {data.sections.playlist.enabled && <Playlist data={data} />}
+  {data.sections.usefulInfo.enabled && <UsefulInfo data={data} />}
 </Layout>

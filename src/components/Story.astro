@@ -1,10 +1,11 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import { resolveAssetPath } from "../utils/resolveAssetPath";
 import Divider from "./Divider.astro";
 import SectionIcon from "./SectionIcon.astro";
 
-const { story } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { story } = data;
 const photos = story.photos || [];
 const photoCount = Math.min(photos.length, 4);
 ---
@@ -106,5 +107,6 @@ const photoCount = Math.min(photos.length, 4);
         grid-template-columns: 1fr 1fr;
     }
 </style>
+
 
 

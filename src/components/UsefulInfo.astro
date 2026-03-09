@@ -1,7 +1,7 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import Icon from "./Icon.astro";
-const data = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
 const info = data.usefulInfo;
 const enabledItems = info.items.filter((i) => i.enabled);
 import Divider from "./Divider.astro";
@@ -50,5 +50,6 @@ import SectionIcon from "./SectionIcon.astro";
     </div>
   </div>
 </section>
+
 
 

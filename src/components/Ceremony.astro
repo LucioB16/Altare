@@ -10,10 +10,17 @@ interface Props {
     dividerType?: "flower" | "small" | "large";
     bgClass?: string;
     forceVisible?: boolean;
+    data?: ReturnType<typeof getWeddingData>;
 }
 
-const { eventKey, dividerType = "flower", bgClass = "bg-surface", forceVisible = false } = Astro.props;
-const { events } = getWeddingData();
+const {
+    eventKey,
+    dividerType = "flower",
+    bgClass = "bg-surface",
+    forceVisible = false,
+    data = getWeddingData(),
+} = Astro.props as Props;
+const { events } = data;
 const { t } = getSiteI18n(Astro.url);
 const event = events[eventKey];
 ---

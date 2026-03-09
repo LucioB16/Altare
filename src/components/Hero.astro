@@ -1,8 +1,9 @@
----
+﻿---
 import { getWeddingData } from "../data/weddingData";
 import { resolveAssetPath } from "../utils/resolveAssetPath";
 import Icon from "./Icon.astro";
-const { hero } = getWeddingData();
+const data = Astro.props.data ?? getWeddingData();
+const { hero } = data;
 const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
 ---
 
@@ -83,6 +84,7 @@ const backgroundImageUrl = resolveAssetPath(hero.backgroundImage);
         });
     });
 </script>
+
 
 
 

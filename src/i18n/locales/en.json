@@ -73,7 +73,7 @@
       "label": "Site language",
       "hint": "This language is saved in <code>site.language</code> and defines the final site language.",
       "en": "English",
-      "es": "Spanish"
+      "es": "Español"
     },
     "header": {
       "title": "Wedding Config Builder",
@@ -292,8 +292,14 @@
     },
     "events": {
       "religiousLabel": "Religious Ceremony",
+      "religiousVenue": "Sacred Heart Parish",
+      "religiousAddress": "Av. Hipolito Yrigoyen 100\nCordoba Capital",
       "ceremonyLabel": "Civil Ceremony",
-      "celebrationLabel": "Party"
+      "ceremonyVenue": "Central Civil Registry",
+      "ceremonyAddress": "Chacabuco 737\nNueva Cordoba",
+      "celebrationLabel": "Party",
+      "celebrationVenue": "Estancia La Paz",
+      "celebrationAddress": "Ruta E66 Km 41\nAscochinga, Cordoba"
     },
     "story": {
       "heading": "Our story",
@@ -331,10 +337,44 @@
       "body": "Add those songs that cannot be missing from the party."
     },
     "usefulInfo": {
-      "title": "Useful info"
+      "title": "Useful info",
+      "items": [
+        {
+          "title": "Duration",
+          "description": "The party will continue until sunrise."
+        },
+        {
+          "title": "Parking",
+          "description": "There is free private guarded parking at the venue."
+        }
+      ]
+    }
+  },
+  "themes": {
+    "jardin-clasico": {
+      "name": "Classic Garden",
+      "concept": "Soft romantic botanical elegance",
+      "keywordsLabel": "botanical / elegant"
+    },
+    "marfil-editorial": {
+      "name": "Editorial Ivory",
+      "concept": "Editorial minimalism with quiet luxury",
+      "keywordsLabel": "editorial / minimal"
+    },
+    "botanica-nocturna": {
+      "name": "Nocturnal Botanica",
+      "concept": "Dramatic romance in deep green",
+      "keywordsLabel": "dramatic / nocturnal"
+    },
+    "rosa-antiguo": {
+      "name": "Antique Rose",
+      "concept": "Classic romance with powdery tones",
+      "keywordsLabel": "romantic / porcelain"
+    },
+    "galeria-moderna": {
+      "name": "Modern Gallery",
+      "concept": "Artful contemporary style with an expressive accent",
+      "keywordsLabel": "modern / artful"
     }
   }
 }
-
-
-
