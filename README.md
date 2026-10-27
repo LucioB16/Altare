@@ -1,22 +1,27 @@
-# Altare - Wedding Invitation Template
+# Altare
 
-English | [Español](./README.es.md)
+**An invitation that feels like yours—without building a website from scratch.**
 
-Elegant, 100% configurable digital wedding invitation, deployable in minutes with GitHub Pages.
+Altare is an [Astro](https://astro.build/) wedding-invitation template with five visual themes, configurable sections, multiple languages and a visual Config Builder that exports your `wedding.yml`. Publish your invitation through GitHub Pages.
 
-[![Use this template](https://img.shields.io/badge/Use_this_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
-[![Live demo](https://img.shields.io/badge/Live_demo-5A7156?style=for-the-badge)](https://luciob16.github.io/Altare/)
-[![Config Builder](https://img.shields.io/badge/Config_Builder-3C5A7A?style=for-the-badge)](https://luciob16.github.io/Altare/config-builder/)
+**[Explore the live invitation](https://luciob16.github.io/Altare/)** · **[Open the Config Builder](https://luciob16.github.io/Altare/config-builder/)** · **[Use this template](https://github.com/LucioB16/Altare/generate)**
 
----
+English · [Español](./README.es.md)
 
-## Create Your Invitation in 4 Steps
+| Personalize | Share | Celebrate |
+| :-- | :-- | :-- |
+| Choose a theme, language, photos and the sections you need. | Host on GitHub Pages and configure your social-sharing image. | Add ceremony information, RSVP, countdown, playlist and more. |
+
+> [!TIP]
+> Start with the [live demo](https://luciob16.github.io/Altare/) to explore the layout, then use the [Config Builder](https://luciob16.github.io/Altare/config-builder/) to prepare your own invitation.
+
+## Create your invitation in four steps
 
 ### Step 1: Create your repository
 
 Click **Use this template** and create your own GitHub repository.
 
-[![Use this template](https://img.shields.io/badge/Use_this_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LucioB16/Altare/generate)
+[Use this template on GitHub](https://github.com/LucioB16/Altare/generate)
 
 Important: your final invitation URL is based on your GitHub user + repo name.
 Example: `https://mariaj.github.io/my-wedding/`
@@ -30,7 +35,7 @@ Example: `https://mariaj.github.io/my-wedding/`
 
 Use the visual Config Builder:
 
-[![Open Config Builder](https://img.shields.io/badge/Open_Config_Builder-5A7156?style=for-the-badge)](https://luciob16.github.io/Altare/config-builder/)
+[Open the visual Config Builder](https://luciob16.github.io/Altare/config-builder/)
 
 The Config Builder guides you step by step to configure:
 
@@ -87,7 +92,35 @@ Example: if your username is `mariaj` and your repo is `my-wedding`, your URL wi
 
 ---
 
-## Language and i18n
+## What you can customize
+
+- **Responsive** — Looks great on mobile, tablet, and desktop
+- **Design** — Elegant typography, crafted SVG details, polished section flow
+- **YAML configuration** — Everything is controlled from one YAML file
+- **Serverless hosting** — Free deployment on GitHub Pages
+- **Modular sections** — Enable or disable each section independently
+- **Religious ceremony** — Optional section with the same structure as civil ceremony
+- **Photo gallery** — 1 to 4 photos with automatic layout
+- **Bank details** — Toggle on/off when needed
+- **Countdown** — Real-time countdown update
+- **Config Builder** — Visual tool to generate config without coding
+- **Languages** — Builder-selected locale + `en` fallback + easy new locale onboarding
+
+## Visual themes
+
+- Shared token-based theme system for site and builder.
+- Available themes:
+  - `jardin-clasico` (default)
+  - `marfil-editorial`
+  - `botanica-nocturna`
+  - `rosa-antiguo`
+  - `galeria-moderna`
+- `theme.id` is optional; fallback is `jardin-clasico`.
+- Theme changes aesthetics only (colors, fonts, ornaments), without changing layout logic.
+
+---
+
+## Languages and localization
 
 - The builder saves selected language as `site.language`.
 - Supported locales are auto-discovered from `src/i18n/locales/*.json`.
@@ -113,35 +146,7 @@ The builder locale selector and site locale resolution will pick the new locale 
 
 ---
 
-## Features
-
-- 📱 **Responsive** — Looks great on mobile, tablet, and desktop
-- 🎨 **Premium design** — Elegant typography, crafted SVG details, polished section flow
-- ⚙️ **100% configurable** — Everything is controlled from one YAML file
-- 🔒 **Serverless** — Free deployment on GitHub Pages
-- 🧩 **Modular sections** — Enable or disable each section independently
-- ⛪ **Religious ceremony** — Optional section with the same structure as civil ceremony
-- 🖼️ **Smart gallery** — 1 to 4 photos with automatic layout
-- 🏦 **Bank details** — Toggle on/off when needed
-- 📊 **Countdown** — Real-time countdown update
-- 🔧 **Config Builder** — Visual tool to generate config without coding
-- 🌐 **Scalable i18n** — Builder-selected locale + `en` fallback + easy new locale onboarding
-
-## Theming
-
-- Shared token-based theme system for site and builder.
-- Available themes:
-  - `jardin-clasico` (default)
-  - `marfil-editorial`
-  - `botanica-nocturna`
-  - `rosa-antiguo`
-  - `galeria-moderna`
-- `theme.id` is optional; fallback is `jardin-clasico`.
-- Theme changes aesthetics only (colors, fonts, ornaments), without changing layout logic.
-
----
-
-## Local Development
+## Local development
 
 ```bash
 bun install
@@ -188,7 +193,7 @@ scripts/
 
 ---
 
-## Credits and License
+## Credits and license
 
 This project is based on [**SaidYes**](https://github.com/roicort/saidyes) by [@roicort](https://github.com/roicort), distributed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 
